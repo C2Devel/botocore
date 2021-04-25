@@ -341,6 +341,21 @@
       ],
       "documentation":"<p>Disassociates an identity provider configuration from a cluster. If you disassociate an identity provider from your cluster, users included in the provider can no longer access the cluster. However, you can still access the cluster with Amazon Web Services IAM users.</p>"
     },
+    "GetClusterKubeconfig":{
+      "name":"GetClusterKubeconfig",
+      "http":{
+        "method":"GET",
+        "requestUri":"/clusters/{name}/kubeconfig"
+      },
+      "input":{"shape":"GetClusterKubeconfigRequest"},
+      "output":{"shape":"GetClusterKubeconfigResponse"},
+      "errors":[
+        {"shape":"ClusterNotReady"},
+        {"shape":"ClientException"},
+        {"shape":"ServerException"},
+        {"shape":"ServiceUnavailableException"}
+      ]
+    },
     "ListAddons":{
       "name":"ListAddons",
       "http":{
@@ -473,6 +488,20 @@
         {"shape":"ResourcePropagationDelayException"}
       ],
       "documentation":"<p>Connects a Kubernetes cluster to the Amazon EKS control plane. </p> <p>Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes. </p> <p>Cluster connection requires two steps. First, send a <code> <a>RegisterClusterRequest</a> </code> to add it to the Amazon EKS control plane.</p> <p>Second, a <a href=\"https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml\">Manifest</a> containing the <code>activationID</code> and <code>activationCode</code> must be applied to the Kubernetes cluster through it's native provider to provide visibility.</p> <p>After the Manifest is updated and applied, then the connected cluster is visible to the Amazon EKS control plane. If the Manifest is not applied within three days, then the connected cluster will no longer be visible and must be deregistered. See <a>DeregisterCluster</a>.</p>"
+    },
+    "ResizeCluster":{
+      "name":"ResizeCluster",
+      "http":{
+        "method":"POST",
+        "requestUri":"/clusters/{name}/resize"
+      },
+      "input":{"shape":"ResizeClusterRequest"},
+      "output":{"shape":"ResizeClusterResponse"},
+      "errors":[
+        {"shape":"ClientException"},
+        {"shape":"ServerException"},
+        {"shape":"ServiceUnavailableException"}
+      ]
     },
     "TagResource":{
       "name":"TagResource",
@@ -904,76 +933,37 @@
     "Cluster":{
       "type":"structure",
       "members":{
-        "name":{
-          "shape":"String",
-          "documentation":"<p>The name of the cluster.</p>"
-        },
-        "arn":{
-          "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the cluster.</p>"
-        },
-        "createdAt":{
-          "shape":"Timestamp",
-          "documentation":"<p>The Unix epoch timestamp in seconds for when the cluster was created.</p>"
-        },
-        "version":{
-          "shape":"String",
-          "documentation":"<p>The Kubernetes server version for the cluster.</p>"
-        },
-        "endpoint":{
-          "shape":"String",
-          "documentation":"<p>The endpoint for your Kubernetes API server.</p>"
-        },
-        "roleArn":{
-          "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf.</p>"
-        },
-        "resourcesVpcConfig":{
-          "shape":"VpcConfigResponse",
-          "documentation":"<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
-        },
-        "kubernetesNetworkConfig":{
-          "shape":"KubernetesNetworkConfigResponse",
-          "documentation":"<p>The Kubernetes network configuration for the cluster.</p>"
-        },
-        "logging":{
-          "shape":"Logging",
-          "documentation":"<p>The logging configuration for your cluster.</p>"
-        },
-        "identity":{
-          "shape":"Identity",
-          "documentation":"<p>The identity provider information for the cluster.</p>"
-        },
-        "status":{
-          "shape":"ClusterStatus",
-          "documentation":"<p>The current status of the cluster.</p>"
-        },
-        "certificateAuthority":{
-          "shape":"Certificate",
-          "documentation":"<p>The <code>certificate-authority-data</code> for your cluster.</p>"
-        },
-        "clientRequestToken":{
-          "shape":"String",
-          "documentation":"<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
-        },
-        "platformVersion":{
-          "shape":"String",
-          "documentation":"<p>The platform version of your Amazon EKS cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html\">Platform Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
-        },
-        "tags":{
-          "shape":"TagMap",
-          "documentation":"<p>The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value. You define both. Cluster tags do not propagate to any other resources associated with the cluster.</p>"
-        },
-        "encryptionConfig":{
-          "shape":"EncryptionConfigList",
-          "documentation":"<p>The encryption configuration for the cluster.</p>"
-        },
-        "connectorConfig":{
-          "shape":"ConnectorConfigResponse",
-          "documentation":"<p>The configuration used to connect to a cluster for registration.</p>"
-        }
-      },
-      "documentation":"<p>An object representing an Amazon EKS cluster.</p>"
+        "Name":{"shape":"String"},
+        "Version":{"shape":"String"},
+        "MastersQuantity":{"shape":"String"},
+        "WorkersQuantity":{"shape":"String"},
+        "MastersInstanceType":{"shape":"String"},
+        "WorkersInstanceType":{"shape":"String"},
+        "MastersVolumeType":{"shape":"String"},
+        "WorkersVolumeType":{"shape":"String"},
+        "MastersVolumeSize":{"shape":"String"},
+        "WorkersVolumeSize":{"shape":"String"},
+        "MastersVolumeIops":{"shape":"String"},
+        "WorkersVolumeIops":{"shape":"String"},
+        "SecurityGroups":{"shape":"String"},
+        "Instances":{"shape":"StringList"},
+        "SubnetId":{"shape":"String"},
+        "SshKeyName":{"shape":"String"},
+        "Status":{"shape":"String"},
+        "Health":{"shape":"String"},
+        "DashboardToken":{"shape":"String"},
+        "DockerRegistry":{"shape":"String"},
+        "Ingress":{"shape":"String"},
+        "ApiServer":{"shape":"String"},
+        "ErrorCode":{"shape":"String"},
+        "ErrorDescription":{"shape":"String"},
+        "UsePlacementGroups":{"shape":"String"},
+        "UserData":{"shape":"String"},
+        "UserDataContentType":{"shape":"String"},
+        "HasNewWarnings":{"shape":"String"},
+        "TotalCPUCount":{"shape":"String"},
+        "TotalMemory":{"shape":"String"}
+      }
     },
     "ClusterName":{
       "type":"string",
@@ -1122,47 +1112,45 @@
       "type":"structure",
       "required":[
         "name",
-        "roleArn",
-        "resourcesVpcConfig"
+        "version",
+        "masters_quantity",
+        "workers_quantity",
+        "masters_instance_type",
+        "workers_instance_type",
+        "masters_volume_type",
+        "workers_volume_type",
+        "masters_volume_size",
+        "workers_volume_size",
+        "subnet_id"
       ],
       "members":{
-        "name":{
-          "shape":"ClusterName",
-          "documentation":"<p>The unique name to give to your cluster.</p>"
-        },
-        "version":{
-          "shape":"String",
-          "documentation":"<p>The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.</p>"
-        },
-        "roleArn":{
-          "shape":"String",
-          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html\">Amazon EKS Service IAM Role</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
-        },
-        "resourcesVpcConfig":{
-          "shape":"VpcConfigRequest",
-          "documentation":"<p>The VPC configuration that's used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You can specify up to five security groups. However, we recommend that you use a dedicated security group for your cluster control plane.</p>"
-        },
-        "kubernetesNetworkConfig":{
-          "shape":"KubernetesNetworkConfigRequest",
-          "documentation":"<p>The Kubernetes network configuration for the cluster.</p>"
-        },
-        "logging":{
-          "shape":"Logging",
-          "documentation":"<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster control plane logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch Pricing</a>.</p> </note>"
-        },
-        "clientRequestToken":{
-          "shape":"String",
-          "documentation":"<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
-          "idempotencyToken":true
-        },
-        "tags":{
-          "shape":"TagMap",
-          "documentation":"<p>The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value. You define both.</p>"
-        },
-        "encryptionConfig":{
-          "shape":"EncryptionConfigList",
-          "documentation":"<p>The encryption configuration for the cluster.</p>"
-        }
+        "name":{"shape":"String"},
+        "version":{"shape":"String"},
+        "masters_quantity":{"shape":"Integer"},
+        "workers_quantity":{"shape":"Integer"},
+        "masters_instance_type":{"shape":"String"},
+        "workers_instance_type":{"shape":"String"},
+        "masters_volume_type":{"shape":"String"},
+        "workers_volume_type":{"shape":"String"},
+        "masters_volume_size":{"shape":"Integer"},
+        "workers_volume_size":{"shape":"Integer"},
+        "subnet_id":{"shape":"String"},
+        "masters_volume_iops":{"shape":"Integer"},
+        "workers_volume_iops":{"shape":"Integer"},
+        "master_public_ip_required":{"shape":"Boolean"},
+        "security_groups":{"shape":"StringList"},
+        "public_key_name":{"shape":"String"},
+        "docker_registry_required":{"shape":"Boolean"},
+        "docker_registry_volume_type":{"shape":"String"},
+        "docker_registry_volume_size":{"shape":"Integer"},
+        "docker_registry_volume_iops":{"shape":"Integer"},
+        "ingress_required":{"shape":"Integer"},
+        "ingress_public_ip_required":{"shape":"Boolean"},
+        "ebs_provider_required":{"shape":"Boolean"},
+        "ebs_user":{"shape":"String"},
+        "use_placement_groups":{"shape":"Boolean"},
+        "user_data":{"shape":"String"},
+        "user_data_content_type":{"shape":"String"}
       }
     },
     "CreateClusterResponse":{
@@ -1851,6 +1839,32 @@
       "max":100,
       "min":1
     },
+    "GetClusterKubeconfigRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the cluster to describe.</p>",
+          "location":"uri",
+          "locationName":"name"
+        }
+      }
+    },
+    "GetClusterKubeconfigResponse":{
+      "type":"structure",
+      "members":{
+        "kubeconfig":{"shape":"String"}
+      }
+    },
+    "ClusterNotReady":{
+      "type":"structure",
+      "members":{
+        "Message": {"shape": "String"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "Identity":{
       "type":"structure",
       "members":{
@@ -1893,10 +1907,7 @@
       "type":"list",
       "member":{"shape":"IdentityProviderConfig"}
     },
-    "IncludeClustersList":{
-      "type":"list",
-      "member":{"shape":"String"}
-    },
+    "Integer":{"type":"integer"},
     "InvalidParameterException":{
       "type":"structure",
       "members":{
@@ -2714,6 +2725,26 @@
         }
       },
       "documentation":"<p>An object representing the remote access configuration for the managed node group.</p>"
+    },
+    "ResizeClusterRequest":{
+      "type":"structure",
+      "required":[
+        "name",
+        "workers_quantity"],
+      "members":{
+        "name":{
+          "shape":"String",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "workers_quantity":{"shape":"Integer"}
+      }
+    },
+    "ResizeClusterResponse":{
+      "type":"structure",
+      "members":{
+        "cluster":{"shape":"Cluster"}
+      }
     },
     "ResolveConflicts":{
       "type":"string",
