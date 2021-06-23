@@ -632,7 +632,7 @@
         "workers_volume_iops":{"shape":"Integer"},
         "master_public_ip_required":{"shape":"Boolean"},
         "security_groups":{"shape":"StringList"},
-        "public_key_name":{"shape":"String"},
+        "ssh_key_name":{"shape":"String"},
         "docker_registry_required":{"shape":"Boolean"},
         "docker_registry_volume_type":{"shape":"String"},
         "docker_registry_volume_size":{"shape":"Integer"},
