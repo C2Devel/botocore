@@ -600,7 +600,7 @@
         "docker_registry_volume_type":{"shape":"String"},
         "docker_registry_volume_size":{"shape":"Integer"},
         "docker_registry_volume_iops":{"shape":"Integer"},
-        "ingress_required":{"shape":"Bool"},
+        "ingress_required":{"shape":"Boolean"},
         "ingress_public_ip_required":{"shape":"Boolean"},
         "ingress_instance_type":{"shape":"String"},
         "ingress_volume_type":{"shape":"String"},
