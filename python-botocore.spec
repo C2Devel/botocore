@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC2%{?buildid}%{?dist}
+Release:        CROC3%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -67,7 +67,11 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Fri Jul 02 2021 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC3
+- eks: fix shape name typo Bool -> Boolean
+
 * Mon Jun 28 2021 Max Kotov <makotov@croc.ru> - 1.20.14-CROC2
 - Introduce KS Public API
+
 * Wed Feb 24 2021 Alexander Chernev <achernev@croc.ru> - 1.20.14-CROC1
 - Update to latest botocore - 1.20.14
