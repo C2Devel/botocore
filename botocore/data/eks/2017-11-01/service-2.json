@@ -342,7 +342,7 @@
       "members":{
         "Name":{"shape":"String"},
         "Version":{"shape":"String"},
-        "MastersQuantity":{"shape":"String"},
+        "HighAvailability":{"shape":"Boolean"},
         "WorkersQuantity":{"shape":"String"},
         "MastersInstanceType":{"shape":"String"},
         "WorkersInstanceType":{"shape":"String"},
@@ -358,7 +358,7 @@
         "IngressVolumeIops":{"shape":"String"},
         "SecurityGroups":{"shape":"String"},
         "Instances":{"shape":"StringList"},
-        "SubnetId":{"shape":"String"},
+        "SubnetIds":{"shape":"StringList"},
         "SshKeyName":{"shape":"String"},
         "Status":{"shape":"String"},
         "Health":{"shape":"String"},
@@ -465,7 +465,7 @@
       "required":[
         "name",
         "version",
-        "masters_quantity",
+        "high_availability",
         "workers_quantity",
         "masters_instance_type",
         "workers_instance_type",
@@ -473,12 +473,12 @@
         "workers_volume_type",
         "masters_volume_size",
         "workers_volume_size",
-        "subnet_id"
+        "subnet_ids"
       ],
       "members":{
         "name":{"shape":"String"},
         "version":{"shape":"String"},
-        "masters_quantity":{"shape":"Integer"},
+        "high_availability":{"shape":"Boolean"},
         "workers_quantity":{"shape":"Integer"},
         "masters_instance_type":{"shape":"String"},
         "workers_instance_type":{"shape":"String"},
@@ -486,7 +486,7 @@
         "workers_volume_type":{"shape":"String"},
         "masters_volume_size":{"shape":"Integer"},
         "workers_volume_size":{"shape":"Integer"},
-        "subnet_id":{"shape":"String"},
+        "subnet_ids":{"shape":"StringList"},
         "masters_volume_iops":{"shape":"Integer"},
         "workers_volume_iops":{"shape":"Integer"},
         "master_public_ip_required":{"shape":"Boolean"},
