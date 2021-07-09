@@ -473,7 +473,8 @@
         "workers_volume_type",
         "masters_volume_size",
         "workers_volume_size",
-        "subnet_id"
+        "subnet_id",
+        "security_groups"
       ],
       "members":{
         "name":{"shape":"String"},
