@@ -428,7 +428,8 @@
         "UserDataContentType":{"shape":"String"},
         "HasNewWarnings":{"shape":"String"},
         "TotalCPUCount":{"shape":"String"},
-        "TotalMemory":{"shape":"String"}
+        "TotalMemory":{"shape":"String"},
+        "EbsUser":{"shape":"String"}
       }
     },
     "ClusterName":{
