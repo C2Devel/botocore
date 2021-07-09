@@ -373,7 +373,8 @@
         "UserDataContentType":{"shape":"String"},
         "HasNewWarnings":{"shape":"String"},
         "TotalCPUCount":{"shape":"String"},
-        "TotalMemory":{"shape":"String"}
+        "TotalMemory":{"shape":"String"},
+        "EbsUser":{"shape":"String"}
       }
     },
     "ClusterName":{
@@ -473,7 +474,8 @@
         "workers_volume_type",
         "masters_volume_size",
         "workers_volume_size",
-        "subnet_id"
+        "subnet_id",
+        "security_groups"
       ],
       "members":{
         "name":{"shape":"String"},
