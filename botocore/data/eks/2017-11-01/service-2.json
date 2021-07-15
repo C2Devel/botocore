@@ -72,6 +72,16 @@
       "input":{"shape":"ResizeClusterRequest"},
       "output":{"shape":"ResizeClusterResponse"},
       "documentation":"<p>Resizes Kubernetes clusters.</p>"
+    },
+    "ModifySecurityGroups":{
+      "name":"ModifySecurityGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/clusters/{name}/modify_security_groups"
+      },
+      "input":{"shape":"ModifySecurityGroupsRequest"},
+      "output":{"shape":"ModifySecurityGroupsResponse"},
+      "documentation":"<p>Modify Kubernetes clusters.</p>"
     }
   },
   "shapes":{
@@ -2198,6 +2208,30 @@
           "locationName":"name"
         },
         "workers_quantity":{"shape":"Integer"}
+      }
+    },
+    "ModifySecurityGroupsRequest":{
+      "type":"structure",
+      "required":[
+        "name",
+        "security_group_ids"
+      ],
+      "members":{
+        "name":{
+          "shape":"String",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "security_group_ids":{"shape":"StringList"}
+      }
+    },
+    "ModifySecurityGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "cluster":{
+          "shape":"Cluster",
+          "documentation":"<p>The full description of your modified cluster.</p>"
+        }
       }
     },
     "ResizeClusterResponse":{
