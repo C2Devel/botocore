@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC3%{?buildid}%{?dist}
+Release:        CROC4%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -67,6 +67,12 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Mon Aug 23 2021 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC4
+- eks: deploying a high availability cluster in multiple AZ
+- eks: add ModifySecurityGroups operations
+- eks: add shapes Instance and InstanceList
+- eks: use SecurityGroupIds instead of SecurityGroups
+
 * Fri Jul 02 2021 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC3
 - eks: fix shape name typo Bool -> Boolean
 
