@@ -35,6 +35,7 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 Provides:       python%{python3_pkgversion}-%{pkgname}
 Requires:       python%{python3_pkgversion}-jmespath >= 0.7.1
 Requires:       python%{python3_pkgversion}-dateutil >= 2.1
+Requires:       python%{python3_pkgversion}-urllib3 >= 1.25.6
 
 %description -n python%{python3_pkgversion}-%{pkgname}
 A low-level interface to a growing number of Amazon Web Services. The
