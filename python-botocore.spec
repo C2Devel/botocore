@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC5%{?buildid}%{?dist}
+Release:        CROC6%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -48,6 +48,10 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Tue Oct 26 2021 Alex Rudenko <arudenko@croc.ru> - 1.20.14-CROC6
+- spec: add urllib3 1.90 to dependencies
+- spec: remove build for py2
+
 * Wed Oct 20 2021 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC5
 - eks: use an already allocated public ip address
 - eks: show EbsUserr field
