@@ -82,6 +82,16 @@
       "input":{"shape":"ModifySecurityGroupsRequest"},
       "output":{"shape":"ModifySecurityGroupsResponse"},
       "documentation":"<p>Modify Kubernetes clusters.</p>"
+    },
+    "ModifyUserData": {
+      "name": "ModifyUserData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/clusters/{name}/modify_user_data"
+      },
+      "input": {"shape": "ModifyUserDataRequest"},
+      "output": {"shape": "ModifyUserDataResponse"},
+      "documentation": "<p>Modify Kubernetes clusters.</p>"
     }
   },
   "shapes":{
@@ -2266,6 +2276,30 @@
         "cluster":{
           "shape":"Cluster",
           "documentation":"<p>The full description of your modified cluster.</p>"
+        }
+      }
+    },
+    "ModifyUserDataRequest":{
+      "type": "structure",
+      "required":[
+        "name"
+      ],
+      "members":{
+        "name":{
+          "shape": "String",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "user_data":{"shape":"String"},
+        "user_data_content_type":{"shape":"String"}
+      }
+    },
+    "ModifyUserDataResponse":{
+      "type": "structure",
+      "members":{
+        "cluster":{
+          "shape": "Cluster",
+          "documentation": "<p>The full description of your modified cluster.</p>"
         }
       }
     },
