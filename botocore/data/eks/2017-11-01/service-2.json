@@ -92,6 +92,20 @@
       "input": {"shape": "ModifyUserDataRequest"},
       "output": {"shape": "ModifyUserDataResponse"},
       "documentation": "<p>Modify Kubernetes clusters.</p>"
+    },
+    "ModifyWorkersInstanceType": {
+      "name": "ModifyWorkersInstanceType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/clusters/{name}/modify_workers_type"
+      },
+      "input": {
+        "shape": "ModifyWorkersInstanceTypeRequest"
+      },
+      "output": {
+        "shape": "ModifyWorkersInstanceTypeResponse"
+      },
+      "documentation": "<p>Modify Kubernetes clusters.</p>"
     }
   },
   "shapes":{
@@ -2298,6 +2312,30 @@
       "type": "structure",
       "members":{
         "cluster":{
+          "shape": "Cluster",
+          "documentation": "<p>The full description of your modified cluster.</p>"
+        }
+      }
+    },
+    "ModifyWorkersInstanceTypeRequest": {
+      "type": "structure",
+      "required": [
+        "name",
+        "workers_instance_type"
+      ],
+      "members":{
+        "name":{
+          "shape": "String",
+          "location": "uri",
+          "locationName": "name"
+        },
+        "workers_instance_type":{"shape": "String"}
+      }
+    },
+    "ModifyWorkersInstanceTypeResponse": {
+      "type": "structure",
+      "members": {
+        "cluster": {
           "shape": "Cluster",
           "documentation": "<p>The full description of your modified cluster.</p>"
         }
