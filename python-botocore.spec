@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC4%{?buildid}%{?dist}
+Release:        CROC5%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -67,6 +67,11 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Wed Oct 20 2021 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC5
+- eks: use an already allocated public ip address
+- eks: show EbsUserr field
+- eks: add Pod and Service Subnet CIDR to cluster model
+
 * Mon Aug 23 2021 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC4
 - eks: deploying a high availability cluster in multiple AZ
 - eks: add ModifySecurityGroups operations
