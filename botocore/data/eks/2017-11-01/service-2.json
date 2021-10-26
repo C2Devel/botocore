@@ -502,7 +502,22 @@
         },
         "Status":{
           "shape":"String"
+        },
+        "Type": {
+          "shape": "InstanceType"
+        },
+        "Ghost": {
+          "shape": "Boolean"
         }
+      }
+    },
+    "InstanceType":{
+      "type": "structure",
+      "members":{
+        "ccus":{"shape":"String"},
+        "cpu":{"shape":"Integer"},
+        "memory":{"shape":"Integer"},
+        "name":{"shape":"String"}
       }
     },
     "Compatibilities":{
