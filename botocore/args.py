@@ -103,6 +103,7 @@ class ClientArgsCreator:
         scoped_config,
         client_config,
         endpoint_bridge,
+        aws_sudo_id,
         auth_token=None,
         endpoints_ruleset_data=None,
         partition_data=None,
@@ -115,6 +116,7 @@ class ClientArgsCreator:
             endpoint_url,
             is_secure,
             scoped_config,
+            aws_sudo_id,
         )
 
         service_name = final_args['service_name']  # noqa
@@ -208,6 +210,7 @@ class ClientArgsCreator:
         endpoint_url,
         is_secure,
         scoped_config,
+        aws_sudo_id,
     ):
         service_name = service_model.endpoint_prefix
         protocol = service_model.metadata['protocol']
@@ -313,6 +316,7 @@ class ClientArgsCreator:
             'socket_options': self._compute_socket_options(
                 scoped_config, client_config
             ),
+            'aws_sudo_id': aws_sudo_id,
         }
 
     def _compute_configured_endpoint_url(self, client_config, endpoint_url):

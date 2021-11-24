@@ -123,6 +123,7 @@ class ClientCreator:
         scoped_config=None,
         api_version=None,
         client_config=None,
+        aws_sudo_id=None,
         auth_token=None,
     ):
         responses = self._event_emitter.emit(
@@ -144,7 +145,7 @@ class ClientCreator:
                 service_name,
             )
 
-        cls = self._create_client_class(service_name, service_model)
+        cls = self._create_client_class(service_name, service_model, aws_sudo_id)
         region_name, client_config = self._normalize_fips_region(
             region_name, client_config
         )
@@ -172,6 +173,7 @@ class ClientCreator:
             scoped_config,
             client_config,
             endpoint_bridge,
+            aws_sudo_id,
             auth_token,
             endpoints_ruleset_data,
             partition_data,
@@ -192,14 +194,15 @@ class ClientCreator:
         )
         return service_client
 
-    def create_client_class(self, service_name, api_version=None):
+    def create_client_class(self, service_name, api_version=None, aws_sudo_id=None):
         service_model = self._load_service_model(service_name, api_version)
-        return self._create_client_class(service_name, service_model)
+        return self._create_client_class(service_name, service_model, aws_sudo_id)
 
-    def _create_client_class(self, service_name, service_model):
+    def _create_client_class(self, service_name, service_model, aws_sudo_id):
         class_attributes = self._create_methods(service_model)
         py_name_to_operation_name = self._create_name_mapping(service_model)
         class_attributes['_PY_TO_OP_NAME'] = py_name_to_operation_name
+        class_attributes["aws_sudo_id"] = aws_sudo_id
         bases = [BaseClient]
         service_id = service_model.service_id.hyphenize()
         self._event_emitter.emit(
@@ -508,6 +511,7 @@ class ClientCreator:
         scoped_config,
         client_config,
         endpoint_bridge,
+        aws_sudo_id,
         auth_token,
         endpoints_ruleset_data,
         partition_data,
@@ -531,6 +535,7 @@ class ClientCreator:
             scoped_config,
             client_config,
             endpoint_bridge,
+            aws_sudo_id,
             auth_token,
             endpoints_ruleset_data,
             partition_data,
@@ -959,6 +964,7 @@ class BaseClient:
             'has_streaming_input': operation_model.has_streaming_input,
             'auth_type': operation_model.resolved_auth_type,
             'unsigned_payload': operation_model.unsigned_payload,
+            'aws_sudo_id': self.aws_sudo_id,
         }
 
         api_params = self._emit_api_params(
@@ -1045,8 +1051,7 @@ class BaseClient:
         set_user_agent_header=True,
     ):
         request_dict = self._serializer.serialize_to_request(
-            api_params, operation_model
-        )
+            api_params, operation_model, context)
         if not self._client_config.inject_host_prefix:
             request_dict.pop('host_prefix', None)
         if headers is not None:

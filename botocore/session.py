@@ -841,6 +841,7 @@ class Session:
         aws_secret_access_key=None,
         aws_session_token=None,
         config=None,
+        aws_sudo_id=None,
     ):
         """Create a botocore client.
 
@@ -1005,6 +1006,7 @@ class Session:
             client_config=config,
             api_version=api_version,
             auth_token=auth_token,
+            aws_sudo_id=aws_sudo_id,
         )
         monitor = self._get_internal_component('monitor')
         if monitor is not None:
