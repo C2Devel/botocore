@@ -743,7 +743,7 @@ class Session(object):
     def create_client(self, service_name, region_name=None, api_version=None,
                       use_ssl=True, verify=None, endpoint_url=None,
                       aws_access_key_id=None, aws_secret_access_key=None,
-                      aws_session_token=None, config=None):
+                      aws_session_token=None, config=None, aws_sudo_id=None):
         """Create a botocore client.
 
         :type service_name: string
@@ -871,7 +871,7 @@ class Session(object):
             service_name=service_name, region_name=region_name,
             is_secure=use_ssl, endpoint_url=endpoint_url, verify=verify,
             credentials=credentials, scoped_config=self.get_scoped_config(),
-            client_config=config, api_version=api_version)
+            client_config=config, api_version=api_version, aws_sudo_id=aws_sudo_id)
         monitor = self._get_internal_component('monitor')
         if monitor is not None:
             monitor.register(client.meta.events)

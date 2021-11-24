@@ -68,10 +68,10 @@ class ClientArgsCreator(object):
 
     def get_client_args(self, service_model, region_name, is_secure,
                         endpoint_url, verify, credentials, scoped_config,
-                        client_config, endpoint_bridge):
+                        client_config, endpoint_bridge, aws_sudo_id):
         final_args = self.compute_client_args(
             service_model, client_config, endpoint_bridge, region_name,
-            endpoint_url, is_secure, scoped_config)
+            endpoint_url, is_secure, scoped_config, aws_sudo_id)
 
         service_name = final_args['service_name'] # noqa
         parameter_validation = final_args['parameter_validation']
@@ -126,7 +126,7 @@ class ClientArgsCreator(object):
 
     def compute_client_args(self, service_model, client_config,
                             endpoint_bridge, region_name, endpoint_url,
-                            is_secure, scoped_config):
+                            is_secure, scoped_config, aws_sudo_id):
         service_name = service_model.endpoint_prefix
         protocol = service_model.metadata['protocol']
         parameter_validation = True
@@ -196,7 +196,8 @@ class ClientArgsCreator(object):
             'protocol': protocol,
             'config_kwargs': config_kwargs,
             's3_config': s3_config,
-            'socket_options': self._compute_socket_options(scoped_config)
+            'socket_options': self._compute_socket_options(scoped_config),
+            'aws_sudo_id': aws_sudo_id
         }
 
     def compute_s3_config(self, client_config):

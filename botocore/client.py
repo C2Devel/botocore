@@ -80,12 +80,13 @@ class ClientCreator(object):
                       endpoint_url=None, verify=None,
                       credentials=None, scoped_config=None,
                       api_version=None,
-                      client_config=None):
+                      client_config=None,
+                      aws_sudo_id=None):
         responses = self._event_emitter.emit(
             'choose-service-name', service_name=service_name)
         service_name = first_non_none_response(responses, default=service_name)
         service_model = self._load_service_model(service_name, api_version)
-        cls = self._create_client_class(service_name, service_model)
+        cls = self._create_client_class(service_name, service_model, aws_sudo_id)
         region_name, client_config = self._normalize_fips_region(
             region_name, client_config)
         endpoint_bridge = ClientEndpointBridge(
@@ -94,7 +95,8 @@ class ClientCreator(object):
             config_store=self._config_store)
         client_args = self._get_client_args(
             service_model, region_name, is_secure, endpoint_url,
-            verify, credentials, scoped_config, client_config, endpoint_bridge)
+            verify, credentials, scoped_config, client_config, endpoint_bridge,
+            aws_sudo_id)
         service_client = cls(**client_args)
         self._register_retries(service_client)
         self._register_s3_events(
@@ -108,14 +110,15 @@ class ClientCreator(object):
         )
         return service_client
 
-    def create_client_class(self, service_name, api_version=None):
+    def create_client_class(self, service_name, api_version=None, aws_sudo_id=None):
         service_model = self._load_service_model(service_name, api_version)
-        return self._create_client_class(service_name, service_model)
+        return self._create_client_class(service_name, service_model, aws_sudo_id)
 
-    def _create_client_class(self, service_name, service_model):
+    def _create_client_class(self, service_name, service_model, aws_sudo_id):
         class_attributes = self._create_methods(service_model)
         py_name_to_operation_name = self._create_name_mapping(service_model)
         class_attributes['_PY_TO_OP_NAME'] = py_name_to_operation_name
+        class_attributes["aws_sudo_id"] = aws_sudo_id
         bases = [BaseClient]
         service_id = service_model.service_id.hyphenize()
         self._event_emitter.emit(
@@ -356,14 +359,16 @@ class ClientCreator(object):
 
     def _get_client_args(self, service_model, region_name, is_secure,
                          endpoint_url, verify, credentials,
-                         scoped_config, client_config, endpoint_bridge):
+                         scoped_config, client_config, endpoint_bridge,
+                         aws_sudo_id):
         args_creator = ClientArgsCreator(
             self._event_emitter, self._user_agent,
             self._response_parser_factory, self._loader,
             self._exceptions_factory, config_store=self._config_store)
         return args_creator.get_client_args(
             service_model, region_name, is_secure, endpoint_url,
-            verify, credentials, scoped_config, client_config, endpoint_bridge)
+            verify, credentials, scoped_config, client_config, endpoint_bridge,
+            aws_sudo_id)
 
     def _create_methods(self, service_model):
         op_dict = {}
@@ -691,6 +696,7 @@ class BaseClient(object):
             'client_config': self.meta.config,
             'has_streaming_input': operation_model.has_streaming_input,
             'auth_type': operation_model.auth_type,
+            'aws_sudo_id': self.aws_sudo_id,
         }
         request_dict = self._convert_to_request_dict(
             api_params, operation_model, context=request_context)
@@ -743,7 +749,7 @@ class BaseClient(object):
         api_params = self._emit_api_params(
             api_params, operation_model, context)
         request_dict = self._serializer.serialize_to_request(
-            api_params, operation_model)
+            api_params, operation_model, context)
         if not self._client_config.inject_host_prefix:
             request_dict.pop('host_prefix', None)
         prepare_request_dict(request_dict, endpoint_url=self._endpoint.host,

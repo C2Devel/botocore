@@ -351,7 +351,7 @@ class ParamValidationDecorator(object):
         self._param_validator = param_validator
         self._serializer = serializer
 
-    def serialize_to_request(self, parameters, operation_model):
+    def serialize_to_request(self, parameters, operation_model, context=None):
         input_shape = operation_model.input_shape
         if input_shape is not None:
             report = self._param_validator.validate(parameters,
@@ -359,4 +359,5 @@ class ParamValidationDecorator(object):
             if report.has_errors():
                 raise ParamValidationError(report=report.generate_report())
         return self._serializer.serialize_to_request(parameters,
-                                                     operation_model)
+                                                     operation_model,
+                                                     context)
