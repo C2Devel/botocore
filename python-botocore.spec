@@ -16,6 +16,18 @@ BuildArch:      noarch
 A low-level interface to a growing number of Amazon Web Services. The
 botocore package is the foundation for the AWS CLI as well as boto3.
 
+%package -n     python2-%{pkgname}
+Summary:        Low-level, data-driven core of boto 3
+BuildRequires:  python2-devel
+BuildRequires:  python2-setuptools
+Provides:       python2-%{pkgname}
+Requires:       python2-jmespath >= 0.7.1
+Requires:       python2-dateutil >= 2.1
+
+%description -n python2-%{pkgname}
+A low-level interface to a growing number of Amazon Web Services. The
+botocore package is the foundation for the AWS CLI as well as boto3.
+
 %package -n     python%{python3_pkgversion}-%{pkgname}
 Summary:        Low-level, data-driven core of boto 3
 BuildRequires:  python%{python3_pkgversion}-devel
@@ -36,10 +48,18 @@ rm -rf %{pkgname}.egg-info
 rm -rf tests/integration
 
 %build
+%py2_build
 %py3_build
 
 %install
+%py2_install
 %py3_install
+
+%files -n python2-%{pkgname}
+%doc README.rst
+%license LICENSE.txt
+%{python2_sitelib}/%{pkgname}/
+%{python2_sitelib}/%{pkgname}-*.egg-info/
 
 %files -n python%{python3_pkgversion}-%{pkgname}
 %doc README.rst
