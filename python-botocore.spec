@@ -52,12 +52,12 @@ rm -rf tests/integration
 - eks: add ModifyUserData operations
 
 * Tue Oct 26 2021 Alex Rudenko <arudenko@croc.ru> - 1.20.14-CROC6
-- spec: add urllib3 1.90 to dependencies
+- spec: add urllib3 1.25.6 to dependencies
 - spec: remove build for py2
 
 * Wed Oct 20 2021 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC5
 - eks: use an already allocated public ip address
-- eks: show EbsUserr field
+- eks: show EbsUser field
 - eks: add Pod and Service Subnet CIDR to cluster model
 
 * Mon Aug 23 2021 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC4
