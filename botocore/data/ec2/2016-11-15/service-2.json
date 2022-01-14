@@ -1096,6 +1096,16 @@
       "output":{"shape":"Volume"},
       "documentation":"<p>Creates an EBS volume that can be attached to an instance in the same Availability Zone.</p> <p>You can create a new empty volume or restore a volume from an EBS snapshot. Any Amazon Web Services Marketplace product codes from the snapshot are propagated to the volume.</p> <p>You can create encrypted volumes. Encrypted volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can tag your volumes during creation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tag your Amazon EC2 resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html\">Create an Amazon EBS volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
+    "CreateVolumeExportTask":{
+      "name":"CreateVolumeExportTask",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateVolumeExportTaskRequest"},
+      "output":{"shape":"CreateVolumeExportTaskResult"},
+      "documentation":"<p>Exports a running or stopped volume to an Amazon S3 bucket.</p>"
+    },
     "CreateVpc":{
       "name":"CreateVpc",
       "http":{
@@ -13234,6 +13244,50 @@
         }
       }
     },
+    "CreateVolumeExportTaskRequest":{
+      "type":"structure",
+      "required":[
+        "ExportToS3Task",
+        "VolumeId"
+      ],
+      "members":{
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A description for the conversion task or the resource being exported. The maximum length is 255 characters.</p>",
+          "locationName":"description"
+        },
+        "ExportToS3Task":{
+          "shape":"ExportToS3TaskSpecification",
+          "documentation":"<p>The format and location for an export instance task.</p>",
+          "locationName":"exportToS3"
+        },
+        "VolumeId":{
+          "shape":"VolumeId",
+          "documentation":"<p>The ID of the volume.</p>",
+          "locationName":"volumeId"
+        },
+        "Notify":{
+          "shape":"Boolean",
+          "documentation":"<p>Notify about state of task by email.</p>",
+          "locationName":"notify"
+        },
+        "Email":{
+          "shape":"String",
+          "documentation":"<p>An email address for notification.</p>",
+          "locationName":"email"
+        }
+      }
+    },
+    "CreateVolumeExportTaskResult":{
+      "type":"structure",
+      "members":{
+        "ExportTask":{
+          "shape":"ExportVolumeTask",
+          "documentation":"<p>Information about the export volume task.</p>",
+          "locationName":"exportTask"
+        }
+      }
+    },
     "CreateVpcEndpointConnectionNotificationRequest":{
       "type":"structure",
       "required":[
@@ -24373,12 +24427,52 @@
       },
       "documentation":"<p>Describes a Capacity Reservation Fleet that could not be cancelled.</p>"
     },
-    "FailedCapacityReservationFleetCancellationResultSet":{
-      "type":"list",
-      "member":{
-        "shape":"FailedCapacityReservationFleetCancellationResult",
-        "locationName":"item"
+    "FailedCapacityReservationFleetCancellationResultSet": {
+      "type": "list",
+      "member": {
+        "shape": "FailedCapacityReservationFleetCancellationResult",
+        "locationName": "item"
       }
+    },
+    "ExportVolumeTask":{
+      "type":"structure",
+      "members":{
+        "Description":{
+          "shape":"String",
+          "documentation":"<p>A description of the resource being exported.</p>",
+          "locationName":"description"
+        },
+        "ExportTaskId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the export task.</p>",
+          "locationName":"exportTaskId"
+        },
+        "ExportToS3Task":{
+          "shape":"ExportToS3Task",
+          "documentation":"<p>Information about the export task.</p>",
+          "locationName":"exportToS3"
+        },
+        "VolumeId":{
+          "shape":"VolumeId",
+          "documentation":"<p>The ID of the volume.</p>"
+        },
+        "Progress":{
+          "shape":"String",
+          "documentation":"<p>The progress of the task.</p>",
+          "locationName":"progress"
+        },
+        "State":{
+          "shape":"ExportTaskState",
+          "documentation":"<p>The state of the export task.</p>",
+          "locationName":"state"
+        },
+        "StatusMessage":{
+          "shape":"String",
+          "documentation":"<p>The status message related to the export task.</p>",
+          "locationName":"statusMessage"
+        }
+      },
+      "documentation":"<p>Describes an export volume task.</p>"
     },
     "FailedQueuedPurchaseDeletion":{
       "type":"structure",
