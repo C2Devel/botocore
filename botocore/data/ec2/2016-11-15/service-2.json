@@ -28095,10 +28095,22 @@
           "shape": "BootModeValues",
           "documentation": "<p>The boot mode of the virtual machine.</p>"
         },
+        "ImageName":{
+          "shape":"String",
+          "documentation":"<p>A name for imported AMI.</p> <p>Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)</p>"
+        },
         "VirtualizationType":{
           "shape":"String",
           "documentation":"<p>The type of virtualization (<code>hvm</code> | <code>hvm-legacy</code>).</p> <p>Default: <code>hvm</code> </p>",
           "locationName":"virtualizationType"
+        },
+        "Notify": {
+          "shape": "Boolean",
+          "documentation": "<p>Notify of the task status via Email</p>"
+        },
+        "Email": {
+          "shape": "String",
+          "documentation":  "<p>Notification address</p>"
         }
       }
     },
