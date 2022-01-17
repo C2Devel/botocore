@@ -2094,15 +2094,25 @@
       "output":{"shape":"DescribeExportTasksResult"},
       "documentation":"<p>Describes the specified export instance tasks or all of your export instance tasks.</p>"
     },
-    "DescribeFastLaunchImages":{
-      "name":"DescribeFastLaunchImages",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
+    "DescribeFastLaunchImages": {
+      "name": "DescribeFastLaunchImages",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
       },
       "input":{"shape":"DescribeFastLaunchImagesRequest"},
       "output":{"shape":"DescribeFastLaunchImagesResult"},
       "documentation":"<p>Describe details for Windows AMIs that are configured for faster launching.</p>"
+    },
+    "DescribeExportVolumeTasks":{
+      "name":"DescribeExportVolumeTasks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeExportVolumeTasksRequest"},
+      "output":{"shape":"DescribeExportVolumeTasksResult"},
+      "documentation":"<p>Describes the specified export instance tasks or all of your export instance tasks.</p>"
     },
     "DescribeFastSnapshotRestores":{
       "name":"DescribeFastSnapshotRestores",
@@ -16736,6 +16746,26 @@
         "locationName":"item"
       }
     },
+    "DescribeExportVolumeTasksRequest":{
+      "type":"structure",
+      "members":{
+        "ExportTaskIds":{
+          "shape":"ExportTaskIdStringList",
+          "documentation":"<p>The export task IDs.</p>",
+          "locationName":"exportTaskId"
+        }
+      }
+    },
+    "DescribeExportVolumeTasksResult":{
+      "type":"structure",
+      "members":{
+        "ExportTasks":{
+          "shape":"ExportVolumeTaskList",
+          "documentation":"<p>Information about the export tasks.</p>",
+          "locationName":"exportTaskSet"
+        }
+      }
+    },
     "DescribeFastSnapshotRestoreSuccessItem":{
       "type":"structure",
       "members":{
@@ -24473,6 +24503,13 @@
         }
       },
       "documentation":"<p>Describes an export volume task.</p>"
+    },
+    "ExportVolumeTaskList":{
+      "type":"list",
+      "member":{
+        "shape":"ExportVolumeTask",
+        "locationName":"item"
+      }
     },
     "FailedQueuedPurchaseDeletion":{
       "type":"structure",
