@@ -31049,6 +31049,11 @@
           "documentation":"<p>Information about the instance to export.</p>",
           "locationName":"instanceExport"
         },
+        "Progress":{
+          "shape":"String",
+          "documentation":"<p>The percent complete of the export image task.</p>",
+          "locationName":"progress"
+        },
         "State":{
           "shape":"ExportTaskState",
           "documentation":"<p>The state of the export task.</p>",
