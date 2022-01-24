@@ -97,7 +97,7 @@
       "name": "ModifyWorkersInstanceType",
       "http": {
         "method": "POST",
-        "requestUri": "/clusters/{name}/modify_workers_type"
+        "requestUri": "/clusters/{name}/modify_workers_instance_type"
       },
       "input": {
         "shape": "ModifyWorkersInstanceTypeRequest"
