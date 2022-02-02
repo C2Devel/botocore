@@ -36057,6 +36057,10 @@
           "shape":"SnapshotAttributeName",
           "documentation":"<p>The snapshot attribute to modify. Only volume creation permissions can be modified.</p>"
         },
+        "Description":{
+          "shape":"AttributeValue",
+          "documentation":"<p>A description for the snapshot.</p>"
+        },
         "CreateVolumePermission":{
           "shape":"CreateVolumePermissionModifications",
           "documentation":"<p>A JSON representation of the snapshot attribute modification.</p>"
