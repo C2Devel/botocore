@@ -77,6 +77,7 @@ rm -rf tests/integration
 - eks: change requestUri of ModifyWorkersInstanceType method
 - botocore: data: ec2: add VirtualizationType to ImportImage request
 - botocore: data: ec2: add ImageName, Notify, Email to ImportImage request
+- ec2: add volume versions
 
 * Mon Nov 29 2021 Konstantin Zakharov <kzakharov@croc.ru> - 1.20.14-CROC8
 - spec: revert build for py2
