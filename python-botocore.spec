@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC8%{?buildid}%{?dist}
+Release:        CROC9%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -69,6 +69,15 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Mon Feb 07 2022 Alexander Chernev <achernev@croc.ru> - 1.20.14-CROC9
+- botocore: data: ec2: add CreateVolumeExportTask method
+- botocore: data: ec2: add DescribeExportVolumeTasks method
+- botocore: data: ec2: add Notify and Email fields to IE requests
+- botocore: data: ec2: add Progress field to ExportTask structure
+- eks: change requestUri of ModifyWorkersInstanceType method
+- botocore: data: ec2: add VirtualizationType to ImportImage request
+- botocore: data: ec2: add ImageName, Notify, Email to ImportImage request
+
 * Mon Nov 29 2021 Konstantin Zakharov <kzakharov@croc.ru> - 1.20.14-CROC8
 - spec: revert build for py2
 - eks: add ModifyWorkersInstanceType operations
