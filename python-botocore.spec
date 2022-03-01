@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC10%{?buildid}%{?dist}
+Release:        CROC11%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -69,6 +69,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Tue Mar 01 2022 Ivan Konov <ikonov@croc.ru> - 1.20.14-CROC11
+- ec2: add Description to ModifySnapshotAttributeRequest
+
 * Mon Feb 07 2022 Alexander Chernev <achernev@croc.ru> - 1.20.14-CROC10
 - Technical Release
 
