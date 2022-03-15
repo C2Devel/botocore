@@ -20,10 +20,10 @@ botocore package is the foundation for the AWS CLI as well as boto3.
 Summary:        Low-level, data-driven core of boto 3
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
-Provides:       python2-%{pkgname}
 Requires:       python2-jmespath >= 0.7.1
 Requires:       python2-dateutil >= 2.1
 Requires:       python2-urllib3 >= 1.24.1
+Provides:       python-botocore
 
 %description -n python2-%{pkgname}
 A low-level interface to a growing number of Amazon Web Services. The
@@ -33,7 +33,6 @@ botocore package is the foundation for the AWS CLI as well as boto3.
 Summary:        Low-level, data-driven core of boto 3
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-Provides:       python%{python3_pkgversion}-%{pkgname}
 Requires:       python%{python3_pkgversion}-jmespath >= 0.7.1
 Requires:       python%{python3_pkgversion}-dateutil >= 2.1
 Requires:       python%{python3_pkgversion}-urllib3 >= 1.24.1
