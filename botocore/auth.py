@@ -121,7 +121,7 @@ class SigV2Auth(BaseSigner):
             value = six.text_type(params[key])
             quoted_key = quote(key.encode('utf-8'), safe='')
             quoted_value = quote(value.encode('utf-8'), safe='-_~')
-            pairs.append(f'{quoted_key}={quoted_value}')
+            pairs.append('{0}={1}'.format(quoted_key, quoted_value))
         qs = '&'.join(pairs)
         string_to_sign += qs
         logger.debug('String to sign: %s', string_to_sign)

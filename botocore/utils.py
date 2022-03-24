@@ -427,7 +427,7 @@ class IMDSFetcher(object):
         sep = ''
         if self._base_url and not self._base_url.endswith('/'):
             sep = '/'
-        return f'{self._base_url}{sep}{path}'
+        return '{0}{1}{2}'.format(self._base_url, sep, path)
 
     def _fetch_metadata_token(self):
         self._assert_enabled()

@@ -460,7 +460,7 @@ class SmartDefaultsConfigStoreFactory:
             mode)
         for config_var in default_configs:
             config_value = default_configs[config_var]
-            method = getattr(self, f'_set_{config_var}', None)
+            method = getattr(self, '_set_{0}'.format(config_var), None)
             if method:
                 method(config_store, config_value)
 

@@ -951,7 +951,7 @@ def add_retry_headers(request, **kwargs):
     headers['amz-sdk-invocation-id'] = retries_context['invocation-id']
     sdk_retry_keys = ('ttl', 'attempt', 'max')
     sdk_request_headers = [
-        f'{key}={retries_context[key]}'
+        '{0}={1}'.format(key, retries_context[key])
         for key in sdk_retry_keys
         if key in retries_context
     ]
