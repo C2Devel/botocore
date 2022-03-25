@@ -19,7 +19,7 @@ import shutil
 
 import pytest
 from dateutil.tz import tzlocal, tzutc
-from pathlib import Path
+from pathlib2 import Path
 
 from botocore import credentials
 from botocore.utils import ContainerMetadataFetcher

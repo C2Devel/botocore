@@ -22,7 +22,7 @@ import subprocess
 from collections import namedtuple
 from copy import deepcopy
 from hashlib import sha1
-from pathlib import Path
+from pathlib2 import Path
 
 from dateutil.parser import parse
 from dateutil.tz import tzlocal, tzutc
