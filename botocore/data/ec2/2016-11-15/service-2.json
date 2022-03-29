@@ -38001,6 +38001,16 @@
     "InstanceNetworkInterfaceAssociation":{
       "type":"structure",
       "members":{
+        "AllocationId":{
+          "shape":"String",
+          "documentation":"<p>The allocation ID.</p>",
+          "locationName":"allocationId"
+        },
+        "AssociationId":{
+          "shape":"String",
+          "documentation":"<p>The association ID.</p>",
+          "locationName":"associationId"
+        },
         "CarrierIp":{
           "shape":"String",
           "documentation":"<p>The carrier IP address associated with the network interface.</p>",
