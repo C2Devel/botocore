@@ -37960,6 +37960,11 @@
           "documentation":"<p>The ID of the subnet.</p>",
           "locationName":"subnetId"
         },
+        "SwitchId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the switch.</p>",
+          "locationName":"switchId"
+        },
         "VpcId":{
           "shape":"String",
           "documentation":"<p>The ID of the VPC.</p>",
