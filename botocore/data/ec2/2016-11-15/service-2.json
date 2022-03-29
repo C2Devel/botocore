@@ -55351,6 +55351,22 @@
           "shape":"InstanceType",
           "documentation":"<p>The instance type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Amazon EC2 instance types</a> in the <i>Amazon EC2 User Guide</i>.</p>"
         },
+        "VirtualizationType":{
+          "shape":"VirtualizationType",
+          "documentation":"<p>The type of virtualization.</p>"
+        },
+        "SwitchIds":{
+          "shape":"SwitchIdList",
+          "documentation":"<p>The ID of the virtual switch.</p>"
+        },
+        "HighAvailable":{
+          "shape":"Boolean",
+          "documentation":"<p>The high availability mode.</p>"
+        },
+        "AddressingType":{
+          "shape":"String",
+          "documentation":"<p>The type of the IP address.</p>"
+        },
         "Ipv6AddressCount":{
           "shape":"Integer",
           "documentation":"<p>The number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. You cannot specify this option and the option to assign specific IPv6 addresses in the same request. You can specify this option if you've specified a minimum number of instances to launch.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>"
