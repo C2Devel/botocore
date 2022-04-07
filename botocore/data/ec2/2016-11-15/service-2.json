@@ -15621,6 +15621,10 @@
           "shape":"VolumeId",
           "documentation":"<p>The ID of the Amazon EBS volume.</p>"
         },
+        "VersionId":{
+          "shape":"VolumeVersionId",
+          "documentation":"<p>The ID of the volume version.</p>"
+        },
         "TagSpecifications":{
           "shape":"TagSpecificationList",
           "documentation":"<p>The tags to apply to the snapshot during creation.</p>",
