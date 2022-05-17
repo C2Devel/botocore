@@ -53071,6 +53071,16 @@
           "shape":"Boolean",
           "documentation":"<p>Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS-optimized instance.</p>"
         },
+        "HighAvailable":{
+          "shape": "Boolean",
+          "documentation":"<p>High availability mode.</p>",
+          "locationName":"highAvailable"
+        },
+        "VirtualizationType":{
+          "shape": "VirtualizationType",
+          "documentation": "<p>The virtualization type of the instance.</p>",
+          "locationName": "virtualizationType"
+        },
         "IamInstanceProfile":{
           "shape":"LaunchTemplateIamInstanceProfileSpecificationRequest",
           "documentation":"<p>The name or Amazon Resource Name (ARN) of an IAM instance profile.</p>"
@@ -54352,6 +54362,16 @@
           "shape":"Boolean",
           "documentation":"<p>Indicates whether the instance is optimized for Amazon EBS I/O. </p>",
           "locationName":"ebsOptimized"
+        },
+        "HighAvailable":{
+          "shape": "Boolean",
+          "documentation":"<p>High availability mode.</p>",
+          "locationName":"highAvailable"
+        },
+        "VirtualizationType":{
+          "shape": "VirtualizationType",
+          "documentation": "<p>The virtualization type of the instance.</p>",
+          "locationName": "virtualizationType"
         },
         "IamInstanceProfile":{
           "shape":"LaunchTemplateIamInstanceProfileSpecification",
