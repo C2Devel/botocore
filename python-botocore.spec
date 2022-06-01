@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC14%{?buildid}%{?dist}
+Release:        CROC15%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -68,6 +68,11 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Wed Jun 01 2022 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC15
+- ec2: add HighAvailable,VirtualizationType,KeyName to InstanceAttribute
+- ec2: add highAvailable,virtualizationType,keyName to InstanceAttributeName
+- ec2: ec2: add RootDeviceName,HighAvailable,VirtualizationType,KeyName to ModifyInstanceAttributeRequest
+
 * Fri May 27 2022 Ivan Konov <ikonov@croc.ru> - 1.20.14-CROC14
 - ec2: add Switch and change Instance methods
 
