@@ -499,6 +499,8 @@ class BaseRestSerializer(Serializer):
         serialized['query_string'] = partitioned['query_string_kwargs']
         if partitioned['headers']:
             serialized['headers'] = partitioned['headers']
+        if isinstance(context, dict) and context.get('aws_sudo_id') is not None:
+            serialized['headers']['AWSSudoId'] = context['aws_sudo_id']
         self._serialize_payload(
             partitioned, parameters, serialized, shape, shape_members
         )
