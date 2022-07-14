@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC16%{?buildid}%{?dist}
+Release:        CROC17%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -68,6 +68,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Thu Jul 14 2022 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC17
+- ec2: add ReplacePrimaryNetworkInterface method
+
 * Wed Jun 22 2022 Evgeny Kovalev <evgkovalev@croc.ru> - 1.20.14-CROC16
 - ec2: add VirtualizationType,HighAvailable to LaunchTemplateData
 
