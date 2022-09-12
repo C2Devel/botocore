@@ -345,6 +345,10 @@ class ParamValidator:
     def _validate_long(self, param, shape, errors, name):
         range_check(name, param, shape, 'invalid range', errors)
 
+    @type_check(valid_types=(dict,))
+    def _validate_none(self, param, shape, errors, name):
+        pass
+
     def _validate_timestamp(self, param, shape, errors, name):
         # We don't use @type_check because datetimes are a bit
         # more flexible.  You can either provide a datetime
