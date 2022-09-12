@@ -1,0 +1,528 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2022-09-06",
+    "endpointPrefix": "paas",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "AWS PaaS",
+    "serviceId": "PaaS",
+    "signatureVersion": "v4",
+    "uid": "paas-2022-09-06"
+  },
+  "operations": {
+    "CreateService": {
+      "name": "CreateService",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services"
+      },
+      "input": {"shape": "CreateServiceRequest"},
+      "output": {"shape": "CreateServiceResponse"},
+      "documentation": "<p>Creates service.</p>"
+    },
+    "DeleteBackups": {
+      "name": "DeleteBackups",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/backups"
+      },
+      "input": {"shape": "DeleteBackupsRequest"},
+      "output": {"shape": "DeleteBackupsResponse"},
+      "documentation": "<p>Deletes service backups.</p>"
+    },
+    "DeleteService": {
+      "name": "DeleteService",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}"
+      },
+      "input": {"shape": "DeleteServiceRequest"},
+      "output": {"shape": "DeleteServiceResponse"},
+      "documentation": "<p>Deletes service.</p>"
+    },
+    "DescribeBackup": {
+      "name": "DescribeBackup",
+      "http": {
+        "method": "GET",
+        "requestUri": "/backups/{backupId}"
+      },
+      "input": {"shape": "DescribeBackupRequest"},
+      "output": {"shape": "DescribeBackupResponse"},
+      "documentation": "<p>Returns descriptive information about backup.</p>"
+    },
+    "DescribeService": {
+      "name": "DescribeService",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services/{serviceId}"
+      },
+      "input": {"shape": "DescribeServiceRequest"},
+      "output": {"shape": "DescribeServiceResponse"},
+      "documentation": "<p>Returns descriptive information about PaaS service.</p>"
+    },
+    "ListBackups": {
+      "name": "ListBackups",
+      "http": {
+        "method": "GET",
+        "requestUri": "/backups"
+      },
+      "input": {"shape": "ListBackupsRequest"},
+      "output": {"shape": "ListBackupsResponse"},
+      "documentation": "<p>Lists backups.</p>"
+    },
+    "ListBackupUsers": {
+      "name": "ListBackupUsers",
+      "http": {
+        "method": "GET",
+        "requestUri": "/backup-users"
+      },
+      "input": {"shape": "ListBackupUsersRequest"},
+      "output": {"shape": "ListBackupUsersResponse"},
+      "documentation": "<p>Returns users list, available for service backup.</p>"
+    },
+    "ListServices": {
+      "name": "ListServices",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services"
+      },
+      "input": {"shape": "ListServicesRequest"},
+      "output": {"shape": "ListServicesResponse"},
+      "documentation": "<p>Returns list of PaaS services.</p>"
+    },
+    "ModifyService": {
+      "name": "ModifyService",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}"
+      },
+      "input": {"shape": "ModifyServiceRequest"},
+      "output": {"shape": "ModifyServiceResponse"},
+      "documentation": "<p>Modifies the PaaS service.</p>"
+    }
+  },
+  "shapes": {
+    "Backup": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "serviceId": {"shape": "String"},
+        "serviceName": {"shape": "String"},
+        "serviceClass": {"shape": "String"},
+        "serviceType": {"shape": "String"},
+        "serviceDeleted": {"shape": "Boolean"},
+        "status": {"shape": "String"},
+        "time": {"shape": "Integer"},
+        "databases": {"shape": "DatabaseBackupList"}
+      }
+    },
+    "BackupSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "enabled"
+      ],
+      "members": {
+        "enabled": {"shape": "Boolean"},
+        "startTime": {"shape": "Integer"},
+        "bucketName": {"shape": "String"},
+        "userLogin": {"shape": "String"},
+        "notificationEmail": {"shape": "String"}
+      }
+    },
+    "BackupSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "enabled": {"shape": "Boolean"},
+        "startTime": {"shape": "Integer"},
+        "bucketName": {"shape": "String"},
+        "userId": {"shape": "String"},
+        "userLogin": {"shape": "String"},
+        "notificationEmail": {"shape": "String"}
+      }
+    },
+    "BackupUser": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "login": {"shape": "String"},
+        "name": {"shape": "String"},
+        "email": {"shape": "String"},
+        "enabled": {"shape": "Boolean"},
+        "lastLoginTime": {"shape": "Integer"},
+        "modifyTime": {"shape": "Integer"},
+        "projectGrants": {"shape": "StringList"}
+      }
+    },
+    "Boolean": {"type": "boolean"},
+    "CreateServiceRequest": {
+      "type": "structure",
+      "required": [
+        "name",
+        "serviceClass",
+        "serviceType",
+        "securityGroupIds",
+        "rootVolumeType",
+        "rootVolumeSize",
+        "instanceType",
+        "highAvailability",
+        "parameters"
+      ],
+      "members": {
+        "name": {"shape": "String"},
+        "serviceClass": {"shape": "String"},
+        "serviceType": {"shape": "String"},
+        "subnetIds": {"shape": "StringList"},
+        "networkInterfaceIds": {"shape": "StringList"},
+        "securityGroupIds": {"shape": "StringList"},
+        "rootVolumeType": {"shape": "String"},
+        "rootVolumeSize": {"shape": "Integer"},
+        "rootVolumeIops": {"shape": "Integer"},
+        "dataVolumeType": {"shape": "String"},
+        "dataVolumeSize": {"shape": "Integer"},
+        "dataVolumeIops": {"shape": "Integer"},
+        "instanceType": {"shape": "String"},
+        "highAvailability": {"shape": "Boolean"},
+        "sshKeyName": {"shape": "String"},
+        "parameters": {"shape": "None"},
+        "userData": {"shape": "String"},
+        "userDataContentType": {"shape": "String"},
+        "backupSettings": {"shape": "BackupSettingsRequest"},
+        "arbitratorRequired": {"shape": "Boolean"}
+      }
+    },
+    "CreateServiceResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the new service.</p>"
+        }
+      }
+    },
+    "Database": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "name": {"shape": "String"},
+        "backupEnabled": {"shape": "Boolean"},
+        "parameters": {"shape": "None"},
+        "users": {"shape": "UserList"}
+      }
+    },
+    "DatabaseBackup": {
+      "type": "structure",
+      "members": {
+        "name": {"shape": "String"},
+        "serviceName": {"shape": "String"},
+        "serviceId": {"shape": "String"},
+        "backupId": {"shape": "String"},
+        "size": {"shape": "Integer"},
+        "status": {"shape": "String"},
+        "parameters": {"shape": "None"},
+        "logfile": {"shape": "String"},
+        "location": {"shape": "String"}
+      }
+    },
+    "DatabaseBackupList": {
+      "type": "list",
+      "member": {"shape": "DatabaseBackup"}
+    },
+    "DatabaseList": {
+      "type": "list",
+      "member": {"shape": "Database"}
+    },
+    "DeleteBackupsRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "backupIds": {
+          "shape": "StringList",
+          "documentation": "<p>The IDs of backups to delete.</p>"
+        }
+      }
+    },
+    "DeleteBackupsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteServiceRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "deleteInterfaces"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service to delete.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "deleteInterfaces": {
+          "shape": "Boolean",
+          "documentation": "<p>Delete interfaces with service.</p>"
+        }
+      }
+    },
+    "DeleteServiceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DescribeBackupRequest": {
+      "type": "structure",
+      "required": [
+        "backupId"
+      ],
+      "members": {
+        "backupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service to describe.</p>",
+          "location": "uri",
+          "locationName": "backupId"
+        }
+      }
+    },
+    "DescribeBackupResponse": {
+      "type": "structure",
+      "members": {
+        "backup": {
+          "shape": "Backup",
+          "documentation": "<p>The full description of the specified backup.</p>"
+        }
+      }
+    },
+    "DescribeServiceRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service to describe.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "DescribeServiceResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
+    "Instance": {
+      "type": "structure",
+      "members": {
+        "role": {"shape": "String"},
+        "instanceId": {"shape": "String"},
+        "privateIp": {"shape": "String"},
+        "interfaceId": {"shape": "String"},
+        "status": {"shape": "String"},
+        "index": {"shape": "Integer"},
+        "endpoint": {"shape": "String"},
+        "name": {"shape": "String"}
+      }
+    },
+    "InstanceList": {
+      "type": "list",
+      "member": {"shape": "Instance"}
+    },
+    "Integer": {"type": "integer"},
+    "ListBackupsRequest": {
+      "type": "structure",
+      "members": {
+        "serviceClass": {
+          "shape": "String",
+          "documentation": "<p>The service class filter.</p>"
+        },
+        "serviceType": {
+          "shape": "String",
+          "documentation": "<p>The service type filter.</p>"
+        },
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The service ID filter.</p>"
+        }
+      }
+    },
+    "ListBackups": {
+      "type": "list",
+      "member": {"shape": "Backup"}
+    },
+    "ListBackupsResponse": {
+      "type": "structure",
+      "members": {
+        "backups": {
+          "shape": "ListBackups",
+          "documentation": "<p>A list of all backups for the account in the specified Region.</p>"
+        }
+      }
+    },
+    "ListBackupUsers": {
+      "type": "list",
+      "member": {"shape": "BackupUser"}
+    },
+    "ListBackupUsersRequest": {
+      "type": "structure",
+      "members": {
+
+      }
+    },
+    "ListBackupUsersResponse": {
+      "type": "structure",
+      "members": {
+        "users": {
+          "shape": "ListBackupUsers",
+          "documentation": "<p>A list of users, available for service backup.</p>"
+        }
+      }
+    },
+    "ListServiceItem": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "name": {"shape": "String"},
+        "status": {"shape": "String"},
+        "serviceType": {"shape": "String"},
+        "serviceClass": {"shape": "String"},
+        "serviceTypeCaption": {"shape": "String"},
+        "version": {"shape": "String"},
+        "errorCode": {"shape": "String"},
+        "totalCpuCount": {"shape": "Integer"},
+        "totalMemory": {"shape": "Integer"}
+      }
+    },
+    "ListServices": {
+      "type": "list",
+      "member": {"shape": "ListServiceItem"}
+    },
+    "ListServicesRequest": {
+      "type": "structure",
+      "members": {
+        "serviceClass": {
+          "shape": "String",
+          "documentation": "<p>The service class filter.</p>"
+        },
+        "serviceType": {
+          "shape": "String",
+          "documentation": "<p>The service type filter.</p>"
+        }
+      }
+    },
+    "ListServicesResponse": {
+      "type": "structure",
+      "members": {
+        "services": {
+          "shape": "ListServices",
+          "documentation": "<p>A list of all of the services for the account in the specified Region.</p>"
+        }
+      }
+   },
+    "ModifyServiceRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The service ID to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "users": {"shape": "UserList"},
+        "databases": {"shape": "DatabaseList"},
+        "backupSettings": {"shape": "BackupSettingsRequest"}
+      }
+    },
+    "ModifyServiceResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of your modified service.</p>"
+        }
+      }
+    },
+    "None": {"type": "none"},
+    "SecurityGroup": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "createdAutomatically": {"shape": "Boolean"}
+      }
+    },
+    "SecurityGroupList": {
+      "type": "list",
+      "member": {"shape": "SecurityGroup"}
+    },
+    "Service": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "name": {"shape": "String"},
+        "serviceClass": {"shape": "String"},
+        "serviceType": {"shape": "String"},
+        "subnetIds": {"shape": "StringList"},
+        "networkInterfaceIds": {"shape": "StringList"},
+        "securityGroups": {"shape": "SecurityGroupList"},
+        "rootVolumeType": {"shape": "String"},
+        "rootVolumeSize": {"shape": "Integer"},
+        "rootVolumeIops": {"shape": "Integer"},
+        "dataVolumeType": {"shape": "String"},
+        "dataVolumeSize": {"shape": "Integer"},
+        "dataVolumeIops": {"shape": "Integer"},
+        "instanceType": {"shape": "String"},
+        "highAvailability": {"shape": "Boolean"},
+        "sshKeyName": {"shape": "String"},
+        "parameters": {"shape": "None"},
+        "users": {"shape": "UserList"},
+        "databases": {"shape": "DatabaseList"},
+        "status": {"shape": "String"},
+        "errorCode": {"shape": "String"},
+        "errorDescription": {"shape": "String"},
+        "endpoints": {"shape": "StringList"},
+        "instances": {"shape": "InstanceList"},
+        "supportedFeatures": {"shape": "StringList"},
+        "backupSettings": {"shape": "BackupSettingsResponse"},
+        "totalCpuCount": {"shape": "Integer"},
+        "totalMemory": {"shape": "Integer"}
+      }
+    },
+    "String": {"type": "string"},
+    "StringList": {
+      "type": "list",
+      "member": {"shape": "String"}
+    },
+    "Timestamp": {"type": "timestamp"},
+    "User": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "UserList": {
+      "type": "list",
+      "member": {"shape": "User"}
+    }
+  }
+}
