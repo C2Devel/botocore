@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC18%{?buildid}%{?dist}
+Release:        CROC19%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -68,6 +68,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Tue Nov 3 2022 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC19
+- ec2: update params DescribeAccountAttributes
+
 * Wed Oct 12 2022 Alexander Chernev <achernev@croc.ru> - 1.20.14-CROC18
 - add aws_sudo_id to json based services (EKS)
 
