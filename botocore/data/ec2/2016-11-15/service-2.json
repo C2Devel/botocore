@@ -36092,6 +36092,11 @@
           "documentation":"<p>A descriptive status message for the import image task.</p>",
           "locationName":"statusMessage"
         },
+        "CreateTime":{
+          "shape":"DateTime",
+          "documentation":"<p>The creation date and time of the export task.</p>",
+          "locationName":"createTime"
+        },
         "Tags":{
           "shape":"TagList",
           "documentation":"<p>The tags for the import image task.</p>",
@@ -36441,6 +36446,11 @@
           "shape":"SnapshotTaskDetail",
           "documentation":"<p>Describes an import snapshot task.</p>",
           "locationName":"snapshotTaskDetail"
+        },
+        "CreateTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The creation date and time of the export task.</p>",
+          "locationName": "createTime"
         },
         "Tags":{
           "shape":"TagList",
@@ -49063,6 +49073,11 @@
           "shape":"String",
           "documentation":"<p>The ID of the subnet.</p>",
           "locationName":"subnetId"
+        },
+        "SwitchId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the switch.</p>",
+          "locationName": "switchId"
         },
         "TagSet":{
           "shape":"TagList",
