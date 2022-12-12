@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC20%{?buildid}%{?dist}
+Release:        CROC21%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -68,6 +68,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Mon Dec 12 2022 Anastasia Berezko <aberezko@croc.ru> - 1.20.14-CROC21
+- ec2: sync API with c2
+
 * Wed Nov 30 2022 Anastasia Berezko <aberezko@croc.ru> - 1.20.14-CROC20
 - C2DEVEL-11786: Return DesiredCapacity after policy execution
 - ec2: sync API with c2
