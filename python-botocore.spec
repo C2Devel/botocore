@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC22%{?buildid}%{?dist}
+Release:        CROC23%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Wed Jan 23 2023 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC23
+- spec: add support for koji 8.4
+
 * Mon Dec 19 2022 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC22
 - ec2: add fields VolumeSizeInBytes and SizeInBytes
 
