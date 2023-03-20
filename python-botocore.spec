@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC24%{?buildid}%{?dist}
+Release:        CROC25%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,11 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Wed Mar 20 2023 Evgenii Proskurnev <eproskurnev@croc.ru> - 1.20.14-CROC25
+- s3: rebase on S3 Api upstream
+- eks: add method for toggling certificate autoupdate
+- C2DEVEL-12500: add DeleteWorker request
+
 * Wed Mar 1 2023 Grigoriy Kulagin <grkulagin@croc.ru> - 1.20.14-CROC24
 - C2DEVEL-12315: Add field for certificates auto-update
 
