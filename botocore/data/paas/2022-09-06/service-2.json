@@ -135,7 +135,7 @@
       ],
       "members": {
         "enabled": {"shape": "Boolean"},
-        "startTime": {"shape": "Integer"},
+        "startTime": {"shape": "String"},
         "bucketName": {"shape": "String"},
         "userLogin": {"shape": "String"},
         "notificationEmail": {"shape": "String"},
@@ -146,7 +146,7 @@
       "type": "structure",
       "members": {
         "enabled": {"shape": "Boolean"},
-        "startTime": {"shape": "Integer"},
+        "startTime": {"shape": "String"},
         "bucketName": {"shape": "String"},
         "userId": {"shape": "String"},
         "userLogin": {"shape": "String"},
