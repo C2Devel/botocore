@@ -9862,6 +9862,11 @@
           "shape":"Integer",
           "documentation":"<p>The number of vCPUs available for launching instances onto the Dedicated Host.</p>",
           "locationName":"availableVCpus"
+        },
+        "AvailableMemory":{
+          "shape":"Integer",
+          "documentation":"<p>The amount of RAM available for launching instances onto the Dedicated Host.</p>",
+          "locationName":"availableMemory"
         }
       },
       "documentation":"<p>The capacity information for instances that can be launched onto the Dedicated Host. </p>"
@@ -34987,6 +34992,21 @@
           "shape":"Integer",
           "documentation":"<p>The total number of vCPUs on the Dedicated Host.</p>",
           "locationName":"totalVCpus"
+        },
+        "TotalMemory":{
+          "shape":"Integer",
+          "documentation":"<p>Total amount of RAM on the Dedicated Host.</p>",
+          "locationName":"totalMemory"
+        },
+        "TotalCCUs":{
+          "shape":"String",
+          "documentation":"<p>Total amount of CCUs on the Dedicated Host.</p>",
+          "locationName":"totalCCUs"
+        },
+        "CpuGeneration":{
+          "shape":"String",
+          "documentation":"<p>Dedicated Host CPU generation name.</p>",
+          "locationName":"cpuGeneration"
         }
       },
       "documentation":"<p>Describes the properties of a Dedicated Host.</p>"
