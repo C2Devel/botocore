@@ -91,6 +91,16 @@
       "output": {"shape": "ListServicesResponse"},
       "documentation": "<p>Returns list of PaaS services.</p>"
     },
+    "ModifyBackup": {
+      "name": "ModifyBackup",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/backups/{backupId}"
+      },
+      "input": {"shape": "ModifyBackupRequest"},
+      "output": {"shape": "ModifyBackupResponse"},
+      "documentation": "<p>Modifies the PaaS backup.</p>"
+    },
     "ModifyService": {
       "name": "ModifyService",
       "http": {
@@ -114,7 +124,8 @@
         "serviceDeleted": {"shape": "Boolean"},
         "status": {"shape": "String"},
         "time": {"shape": "Integer"},
-        "databases": {"shape": "DatabaseBackupList"}
+        "databases": {"shape": "DatabaseBackupList"},
+        "protected": {"shape": "Boolean"}
       }
     },
     "BackupSettingsRequest": {
@@ -127,7 +138,8 @@
         "startTime": {"shape": "Integer"},
         "bucketName": {"shape": "String"},
         "userLogin": {"shape": "String"},
-        "notificationEmail": {"shape": "String"}
+        "notificationEmail": {"shape": "String"},
+        "backupExpirationDays": {"shape": "Integer"}
       }
     },
     "BackupSettingsResponse": {
@@ -138,7 +150,8 @@
         "bucketName": {"shape": "String"},
         "userId": {"shape": "String"},
         "userLogin": {"shape": "String"},
-        "notificationEmail": {"shape": "String"}
+        "notificationEmail": {"shape": "String"},
+        "backupExpirationDays": {"shape": "Integer"}
       }
     },
     "BackupUser": {
@@ -432,7 +445,34 @@
           "documentation": "<p>A list of all of the services for the account in the specified Region.</p>"
         }
       }
-   },
+    },
+    "ModifyBackupRequest": {
+      "type": "structure",
+      "required": [
+        "backupId"
+      ],
+      "members": {
+        "backupId": {
+          "shape": "String",
+          "documentation": "<p>The backup ID to modify.</p>",
+          "location": "uri",
+          "locationName": "backupId"
+        },
+        "protected": {
+          "shape": "Boolean",
+          "documentation": "<p>Protected backups will not be deleted after expiration time.</p>"
+        }
+      }
+    },
+    "ModifyBackupResponse": {
+      "type": "structure",
+      "members": {
+        "backup": {
+          "shape": "Backup",
+          "documentation": "<p>The full description of the specified backup.</p>"
+        }
+      }
+    },
     "ModifyServiceRequest": {
       "type": "structure",
       "required": [
