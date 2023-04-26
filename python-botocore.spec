@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC26%{?buildid}%{?dist}
+Release:        CROC27%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,10 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Wed Apr 26 2023 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC27
+- add none validator
+- paas: add paas client
+
 * Fri Apr 07 2023 Ivan Konov <ikonov@croc.ru> - 1.20.14-CROC26
 - backup: add IsConsistent flag
 - backup: add NextExecutionDate field
