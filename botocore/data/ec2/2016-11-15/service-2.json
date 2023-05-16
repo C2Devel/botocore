@@ -9867,6 +9867,11 @@
           "shape":"Integer",
           "documentation":"<p>The amount of RAM available for launching instances onto the Dedicated Host.</p>",
           "locationName":"availableMemory"
+        },
+        "AvailableCCUs":{
+          "shape": "String",
+          "documentation":"<p>The amount of CCUs available on Dedicated Host.</p>",
+          "locationName":"availableCCUs"
         }
       },
       "documentation":"<p>The capacity information for instances that can be launched onto the Dedicated Host. </p>"
@@ -34979,8 +34984,8 @@
           "locationName":"instanceType"
         },
         "InstanceFamily":{
-          "shape":"String",
-          "documentation":"<p>The instance family supported by the Dedicated Host. For example, <code>m5</code>.</p>",
+          "shape":"HostInstanceFamilyList",
+          "documentation":"<p>The list of instance families supported by the Dedicated Host. For example, <code>[m5]</code>.</p>",
           "locationName":"instanceFamily"
         },
         "Sockets":{
@@ -35010,6 +35015,13 @@
         }
       },
       "documentation":"<p>Describes the properties of a Dedicated Host.</p>"
+    },
+    "HostInstanceFamilyList":{
+      "type":"list",
+      "member":{
+        "shape": "String",
+        "locationName": "item"
+      }
     },
     "HostRecovery":{
       "type":"string",
