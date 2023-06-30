@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC29%{?buildid}%{?dist}
+Release:        CROC30%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,10 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Tue Jun 30 2023 Evgenii Proskurnev <eproskurnev@croc.ru> - 1.20.14-CROC30
+- create EKS nodegroups and EKS clusters
+- paas: change backupSettings startTime type
+
 * Mon Jun 05 2023 Ivan Konov <ikonov@croc.ru> - 1.20.14-CROC29
 - ec2: add SharedOwners option in TransitGateway
 
