@@ -394,45 +394,64 @@
     "Cluster":{
       "type":"structure",
       "members":{
+        "id":{"shape":"String"},
         "Name":{"shape":"String"},
         "Version":{"shape":"String"},
         "HighAvailability":{"shape":"Boolean"},
-        "WorkersQuantity":{"shape":"String"},
+        "WorkersQuantity":{"shape":"Integer"},
         "MastersInstanceType":{"shape":"String"},
         "WorkersInstanceType":{"shape":"String"},
         "MastersVolumeType":{"shape":"String"},
         "WorkersVolumeType":{"shape":"String"},
-        "MastersVolumeSize":{"shape":"String"},
-        "WorkersVolumeSize":{"shape":"String"},
+        "MastersVolumeSize":{"shape":"Integer"},
+        "WorkersVolumeSize":{"shape":"Integer"},
         "MastersVolumeIops":{"shape":"String"},
         "WorkersVolumeIops":{"shape":"String"},
         "IngressInstanceType":{"shape":"String"},
         "IngressVolumeType":{"shape":"String"},
-        "IngressVolumeSize":{"shape":"String"},
+        "IngressVolumeSize":{"shape":"Integer"},
         "IngressVolumeIops":{"shape":"String"},
         "SecurityGroupIds":{"shape":"StringList"},
         "Instances":{"shape":"InstanceList"},
         "SubnetIds":{"shape":"StringList"},
         "SshKeyName":{"shape":"String"},
-        "Status":{"shape":"String"},
+        "Status":{"shape":"ClusterStatus"},
         "Health":{"shape":"String"},
         "DashboardToken":{"shape":"String"},
         "DockerRegistry":{"shape":"String"},
-        "Ingress":{"shape":"String"},
-        "ApiServer":{"shape":"String"},
+        "Ingress":{"shape":"Ingress"},
+        "ApiServer":{"shape":"ApiServer"},
         "ErrorCode":{"shape":"String"},
         "ErrorDescription":{"shape":"String"},
-        "UsePlacementGroups":{"shape":"String"},
+        "UsePlacementGroups":{"shape":"Boolean"},
         "UserData":{"shape":"String"},
         "UserDataContentType":{"shape":"String"},
-        "HasNewWarnings":{"shape":"String"},
-        "TotalCPUCount":{"shape":"String"},
-        "TotalMemory":{"shape":"String"},
+        "HasNewWarnings":{"shape":"Boolean"},
+        "TotalCPUCount":{"shape":"Integer"},
+        "TotalMemory":{"shape":"Float"},
         "EbsUser":{"shape":"String"},
         "PodSubnetCidr":{"shape":"String"},
         "ServiceSubnetCidr":{"shape":"String"},
         "AutoUpdateCertificates":{"shape":"Boolean"},
         "SupportedFeatures":{"shape":"StringList"}
+      }
+    },
+    "ClusterList": {
+      "type":"list",
+      "member":{"shape":"Cluster"}
+    },
+    "ApiServer":{
+      "type":"structure",
+      "members":{
+        "PublicIp":{
+          "shape":"String"
+        },
+        "PrivateIp":{
+          "shape":"String"
+        },
+        "PrivateIps":{
+          "shape":"StringList"
+        }
       }
     },
     "ClusterName":{
@@ -450,6 +469,18 @@
         "FAILED",
         "UPDATING"
       ]
+    },
+    "Float":{"type":"float"},
+    "Ingress":{
+      "type":"structure",
+      "members":{
+        "PublicIp":{
+          "shape":"String"
+        },
+        "PrivateIp":{
+          "shape":"String"
+        }
+      }
     },
     "InstanceList":{
       "type":"list",
@@ -498,7 +529,7 @@
       "members":{
         "ccus":{"shape":"String"},
         "cpu":{"shape":"Integer"},
-        "memory":{"shape":"Integer"},
+        "memory":{"shape":"Float"},
         "name":{"shape":"String"}
       }
     },
@@ -583,8 +614,7 @@
         "workers_volume_type",
         "masters_volume_size",
         "workers_volume_size",
-        "subnet_ids",
-        "auto_update_certificates"
+        "subnet_ids"
       ],
       "members":{
         "name":{"shape":"String"},
@@ -1538,7 +1568,7 @@
       "type":"structure",
       "members":{
         "clusters":{
-          "shape":"StringList",
+          "shape":"ClusterList",
           "documentation":"<p>A list of all of the clusters for your account in the specified Region.</p>"
         },
         "nextToken":{
