@@ -31,6 +31,16 @@
       "output": {"shape": "CreateServiceResponse"},
       "documentation": "<p>Creates service.</p>"
     },
+    "CreateLogstashPipeline": {
+      "name": "CreateLogstashPipeline",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/logstash-pipelines"
+      },
+      "input": {"shape": "CreateLogstashPipelineRequest"},
+      "output": {"shape": "CreateLogstashPipelineResponse"},
+      "documentation": "<p>Creates logstash pipeline in given service.</p>"
+    },
     "CreateUser": {
       "name": "CreateUser",
       "http": {
@@ -50,6 +60,16 @@
       "input": {"shape": "DeleteBackupsRequest"},
       "output": {"shape": "DeleteBackupsResponse"},
       "documentation": "<p>Deletes service backups.</p>"
+    },
+    "DeleteLogstashPipeline": {
+      "name": "DeleteLogstashPipeline",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/logstash-pipelines/{pipelineId}"
+      },
+      "input": {"shape": "DeleteLogstashPipelineRequest"},
+      "output": {"shape": "DeleteLogstashPipelineResponse"},
+      "documentation": "<p>Deletes logstash pipeline in given service.</p>"
     },
     "DeleteDatabase": {
       "name": "DeleteDatabase",
@@ -151,6 +171,16 @@
       "output": {"shape": "ListDatabasesResponse"},
       "documentation": "<p>Returns databases list.</p>"
     },
+    "ListLogstashPipelines": {
+      "name": "ListLogstashPipelines",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services/{serviceId}/logstash-pipelines"
+      },
+      "input": {"shape": "ListLogstashPipelinesRequest"},
+      "output": {"shape": "ListLogstashPipelinesResponse"},
+      "documentation": "<p>Lists logstash pipelines in given service.</p>"
+    },
     "ListServices": {
       "name": "ListServices",
       "http": {
@@ -181,6 +211,16 @@
       "output": {"shape": "ModifyBackupResponse"},
       "documentation": "<p>Modifies the PaaS backup.</p>"
     },
+    "ModifyLogstashPipeline": {
+      "name": "ModifyLogstashPipeline",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/logstash-pipelines/{pipelineId}"
+      },
+      "input": {"shape": "ModifyLogstashPipelineRequest"},
+      "output": {"shape": "ModifyLogstashPipelineResponse"},
+      "documentation": "<p>Modifies logstash pipeline in given service.</p>"
+    },
     "ModifyDatabase": {
       "name": "ModifyDatabase",
       "http": {
@@ -210,6 +250,126 @@
       "input": {"shape": "ModifyUserRequest"},
       "output": {"shape": "ModifyUserResponse"},
       "documentation": "<p>Modifies database.</p>"
+    },
+    "CreatePrometheusRoute": {
+      "name": "CreatePrometheusRoute",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/prometheus-routes"
+      },
+      "input": {"shape": "CreatePrometheusRouteRequest"},
+      "output": {"shape": "CreatePrometheusRouteResponse"},
+      "documentation": "<p>Creates prometheus route in given service.</p>"
+    },
+    "DeletePrometheusRoute": {
+      "name": "DeletePrometheusRoute",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/prometheus-routes/{routeId}"
+      },
+      "input": {"shape": "DeletePrometheusRouteRequest"},
+      "output": {"shape": "DeletePrometheusRouteResponse"},
+      "documentation": "<p>Deletes prometheus route in given service.</p>"
+    },
+    "ListPrometheusRoutes": {
+      "name": "ListPrometheusRoutes",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services/{serviceId}/prometheus-routes"
+      },
+      "input": {"shape": "ListPrometheusRoutesRequest"},
+      "output": {"shape": "ListPrometheusRoutesResponse"},
+      "documentation": "<p>Lists prometheus routes in given service.</p>"
+    },
+    "ModifyPrometheusRoute": {
+      "name": "ModifyPrometheusRoute",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/prometheus-routes/{routeId}"
+      },
+      "input": {"shape": "ModifyPrometheusRouteRequest"},
+      "output": {"shape": "ModifyPrometheusRouteResponse"},
+      "documentation": "<p>Modifies prometheus route in given service.</p>"
+    },
+    "CreatePrometheusScrapeJob": {
+      "name": "CreatePrometheusScrapeJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/prometheus-scrape-jobs"
+      },
+      "input": {"shape": "CreatePrometheusScrapeJobRequest"},
+      "output": {"shape": "CreatePrometheusScrapeJobResponse"},
+      "documentation": "<p>Creates prometheus scrape job in given service.</p>"
+    },
+    "DeletePrometheusScrapeJob": {
+      "name": "DeletePrometheusScrapeJob",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/prometheus-scrape-jobs/{jobId}"
+      },
+      "input": {"shape": "DeletePrometheusScrapeJobRequest"},
+      "output": {"shape": "DeletePrometheusScrapeJobResponse"},
+      "documentation": "<p>Deletes prometheus scrape job in given service.</p>"
+    },
+    "ListPrometheusScrapeJobs": {
+      "name": "ListPrometheusScrapeJobs",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services/{serviceId}/prometheus-scrape-jobs"
+      },
+      "input": {"shape": "ListPrometheusScrapeJobsRequest"},
+      "output": {"shape": "ListPrometheusScrapeJobsResponse"},
+      "documentation": "<p>Lists prometheus scrape jobs in given service.</p>"
+    },
+    "ModifyPrometheusScrapeJob": {
+      "name": "ModifyPrometheusScrapeJob",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/prometheus-scrape-jobs/{jobId}"
+      },
+      "input": {"shape": "ModifyPrometheusScrapeJobRequest"},
+      "output": {"shape": "ModifyPrometheusScrapeJobResponse"},
+      "documentation": "<p>Modifies prometheus scrape job in given service.</p>"
+    },
+    "CreateNotificationChannel": {
+      "name": "CreateNotificationChannel",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/notification-channels"
+      },
+      "input": {"shape": "CreateNotificationChannelRequest"},
+      "output": {"shape": "CreateNotificationChannelResponse"},
+      "documentation": "<p>Creates notification channel in given service.</p>"
+    },
+    "DeleteNotificationChannel": {
+      "name": "DeleteNotificationChannel",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/notification-channels/{channelId}"
+      },
+      "input": {"shape": "DeleteNotificationChannelRequest"},
+      "output": {"shape": "DeleteNotificationChannelResponse"},
+      "documentation": "<p>Deletes notification channel in given service.</p>"
+    },
+    "ListNotificationChannels": {
+      "name": "ListNotificationChannels",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services/{serviceId}/notification-channels"
+      },
+      "input": {"shape": "ListNotificationChannelsRequest"},
+      "output": {"shape": "ListNotificationChannelsResponse"},
+      "documentation": "<p>Lists notification channels in given service.</p>"
+    },
+    "ModifyNotificationChannel": {
+      "name": "ModifyNotificationChannel",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/notification-channels/{channelId}"
+      },
+      "input": {"shape": "ModifyNotificationChannelRequest"},
+      "output": {"shape": "ModifyNotificationChannelResponse"},
+      "documentation": "<p>Modifies notification channel in given service.</p>"
     }
   },
   "shapes": {
@@ -470,6 +630,7 @@
       "type": "structure",
       "members": {}
     },
+
     "DeleteServiceRequest": {
       "type": "structure",
       "required": [
@@ -899,6 +1060,7 @@
         "parameters": {"shape": "None"},
         "users": {"shape": "UserResponseList"},
         "databases": {"shape": "DatabaseResponseList"},
+        "logstashPipelines": {"shape":  "LogstashPipelineList"},
         "status": {"shape": "String"},
         "errorCode": {"shape": "String"},
         "errorDescription": {"shape": "String"},
@@ -961,6 +1123,485 @@
     "UserResponseList": {
       "type": "list",
       "member": {"shape": "UserResponse"}
+    },
+
+    "CreateLogstashPipelineRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "name",
+        "configuration"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The service ID to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "name": {"shape": "String"},
+        "configuration": {"shape": "String"}
+      }
+    },
+    "CreateLogstashPipelineResponse": {
+      "type": "structure",
+      "members": {
+        "logstashPipeline": {
+          "shape": "LogstashPipeline",
+          "documentation": "<p>The full description of created logstash pipeline.</p>"
+        }
+      }
+    },
+    "DeleteLogstashPipelineRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "pipelineId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "pipelineId": {
+          "shape": "String",
+          "documentation": "<p>The ID of pipeline to delete.</p>",
+          "location": "uri",
+          "locationName": "pipelineId"
+        }
+      }
+    },
+    "DeleteLogstashPipelineResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "ListLogstashPipelinesRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "ListLogstashPipelinesResponse": {
+      "type": "structure",
+      "members": {
+        "logstashPipelines": {
+          "shape": "LogstashPipelineList",
+          "documentation": "<p>A list of logstash pipelines, available for service.</p>"
+        }
+      }
+    },
+    "LogstashPipeline": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "name": {"shape": "String"},
+        "configuration": {"shape": "String"}
+      }
+    },
+    "LogstashPipelineList": {
+      "type": "list",
+      "member": {"shape": "LogstashPipeline"}
+    },
+    "ModifyLogstashPipelineRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "pipelineId",
+        "configuration"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "pipelineId": {
+          "shape": "String",
+          "documentation": "<p>The ID of pipeline to modify.</p>",
+          "location": "uri",
+          "locationName": "pipelineId"
+        },
+        "configuration": {"shape": "String"}
+      }
+    },
+    "ModifyLogstashPipelineResponse": {
+      "type": "structure",
+      "members": {
+        "logstashPipeline": {
+          "shape": "LogstashPipeline",
+          "documentation": "<p>The full description of modified logstash pipeline.</p>"
+        }
+      }
+    },
+    "CreatePrometheusRouteRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "name",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The service ID to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "CreatePrometheusRouteResponse": {
+      "type": "structure",
+      "members": {
+        "prometheusRoute": {
+          "shape": "PrometheusRoute",
+          "documentation": "<p>The full description of created prometheus route.</p>"
+        }
+      }
+    },
+    "DeletePrometheusRouteRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "routeId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "routeId": {
+          "shape": "String",
+          "documentation": "<p>The ID of route to delete.</p>",
+          "location": "uri",
+          "locationName": "routeId"
+        }
+      }
+    },
+    "DeletePrometheusRouteResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "ListPrometheusRoutesRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "ListPrometheusRoutesResponse": {
+      "type": "structure",
+      "members": {
+        "prometheusRoutes": {
+          "shape": "PrometheusRouteList",
+          "documentation": "<p>A list of Prometheus routes, available for service.</p>"
+        }
+      }
+    },
+    "PrometheusRoute": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "PrometheusRouteList": {
+      "type": "list",
+      "member": {"shape": "PrometheusRoute"}
+    },
+    "ModifyPrometheusRouteRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "routeId",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "routeId": {
+          "shape": "String",
+          "documentation": "<p>The ID of route to modify.</p>",
+          "location": "uri",
+          "locationName": "routeId"
+        },
+        "parameters": {"shape": "None"}
+      }
+    },
+    "ModifyPrometheusRouteResponse": {
+      "type": "structure",
+      "members": {
+        "prometheusRoute": {
+          "shape": "PrometheusRoute",
+          "documentation": "<p>The full description of modified Prometheus route.</p>"
+        }
+      }
+    },
+
+    "CreatePrometheusScrapeJobRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "name",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The service ID to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "CreatePrometheusScrapeJobResponse": {
+      "type": "structure",
+      "members": {
+        "prometheusScrapeJob": {
+          "shape": "PrometheusScrapeJob",
+          "documentation": "<p>The full description of created prometheus job.</p>"
+        }
+      }
+    },
+    "DeletePrometheusScrapeJobRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "jobId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "jobId": {
+          "shape": "String",
+          "documentation": "<p>The ID of job to delete.</p>",
+          "location": "uri",
+          "locationName": "jobId"
+        }
+      }
+    },
+    "DeletePrometheusScrapeJobResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "ListPrometheusScrapeJobsRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "ListPrometheusScrapeJobsResponse": {
+      "type": "structure",
+      "members": {
+        "prometheusScrapeJobs": {
+          "shape": "PrometheusScrapeJobList",
+          "documentation": "<p>A list of Prometheus jobs, available for service.</p>"
+        }
+      }
+    },
+    "PrometheusScrapeJob": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "PrometheusScrapeJobList": {
+      "type": "list",
+      "member": {"shape": "PrometheusScrapeJob"}
+    },
+    "ModifyPrometheusScrapeJobRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "jobId",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "jobId": {
+          "shape": "String",
+          "documentation": "<p>The ID of job to modify.</p>",
+          "location": "uri",
+          "locationName": "jobId"
+        },
+        "parameters": {"shape": "None"}
+      }
+    },
+    "ModifyPrometheusScrapeJobResponse": {
+      "type": "structure",
+      "members": {
+        "prometheusScrapeJob": {
+          "shape": "PrometheusScrapeJob",
+          "documentation": "<p>The full description of modified Prometheus job.</p>"
+        }
+      }
+    },
+
+    "CreateNotificationChannelRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "name",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The service ID to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "CreateNotificationChannelResponse": {
+      "type": "structure",
+      "members": {
+        "notificationChannel": {
+          "shape": "NotificationChannel",
+          "documentation": "<p>The full description of created notification channel.</p>"
+        }
+      }
+    },
+    "DeleteNotificationChannelRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "channelId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "channelId": {
+          "shape": "String",
+          "documentation": "<p>The ID of channel to delete.</p>",
+          "location": "uri",
+          "locationName": "channelId"
+        }
+      }
+    },
+    "DeleteNotificationChannelResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "ListNotificationChannelsRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "ListNotificationChannelsResponse": {
+      "type": "structure",
+      "members": {
+        "notificationChannels": {
+          "shape": "NotificationChannelList",
+          "documentation": "<p>A list of notification channels, available for service.</p>"
+        }
+      }
+    },
+    "NotificationChannel": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "NotificationChannelList": {
+      "type": "list",
+      "member": {"shape": "NotificationChannel"}
+    },
+    "ModifyNotificationChannelRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "channelId",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "channelId": {
+          "shape": "String",
+          "documentation": "<p>The ID of channel to modify.</p>",
+          "location": "uri",
+          "locationName": "channelId"
+        },
+        "parameters": {"shape": "None"}
+      }
+    },
+    "ModifyNotificationChannelResponse": {
+      "type": "structure",
+      "members": {
+        "notificationChannel": {
+          "shape": "NotificationChannel",
+          "documentation": "<p>The full description of modified notification channel.</p>"
+        }
+      }
     }
   }
 }
