@@ -280,13 +280,13 @@
           "location": "uri",
           "locationName": "serviceId"
         },
-        "database": {"shape": "Database"}
+        "database": {"shape": "DatabaseRequest"}
       }
     },
     "CreateDatabaseResponse": {
       "type": "structure",
       "members": {
-        "database": {"shape": "Database"}
+        "database": {"shape": "DatabaseResponse"}
       }
     },
     "CreateServiceRequest": {
@@ -346,16 +346,28 @@
           "location": "uri",
           "locationName": "serviceId"
         },
-        "user": {"shape": "User"}
+        "user": {"shape": "UserRequest"}
       }
     },
     "CreateUserResponse": {
       "type": "structure",
       "members": {
-        "user": {"shape": "User"}
+        "user": {"shape": "UserResponse"}
       }
     },
-    "Database": {
+    "DatabaseRequest": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "name": {"shape": "String"},
+        "backupEnabled": {"shape": "Boolean"},
+        "parameters": {"shape": "None"},
+        "users": {"shape": "UserListRequest"}
+      }
+    },
+    "DatabaseResponse": {
       "type": "structure",
       "required": [
         "name"
@@ -365,7 +377,7 @@
         "name": {"shape": "String"},
         "backupEnabled": {"shape": "Boolean"},
         "parameters": {"shape": "None"},
-        "users": {"shape": "UserList"}
+        "users": {"shape": "UserListResponse"}
       }
     },
     "DatabaseBackup": {
@@ -386,9 +398,13 @@
       "type": "list",
       "member": {"shape": "DatabaseBackup"}
     },
-    "DatabaseList": {
+    "DatabaseListRequest": {
       "type": "list",
-      "member": {"shape": "Database"}
+      "member": {"shape": "DatabaseRequest"}
+    },
+    "DatabaseListResponse": {
+      "type": "list",
+      "member": {"shape": "DatabaseResponse"}
     },
     "DeleteBackupsRequest": {
       "type": "structure",
@@ -526,7 +542,7 @@
     "DescribeDatabaseResponse": {
       "type": "structure",
       "members": {
-        "database": {"shape": "Database"}
+        "database": {"shape": "DatabaseResponse"}
       }
     },
     "DescribeServiceRequest": {
@@ -574,7 +590,7 @@
     "DescribeUserResponse": {
       "type": "structure",
       "members": {
-        "user": {"shape": "User"}
+        "user": {"shape": "UserResponse"}
       }
     },
     "Instance": {
@@ -660,7 +676,7 @@
     "ListDatabasesResponse": {
       "type": "structure",
       "members": {
-        "databases": {"shape": "DatabaseList"}
+        "databases": {"shape": "DatabaseListResponse"}
       }
     },
     "ListServiceItem": {
@@ -720,7 +736,7 @@
     "ListUsersResponse": {
       "type": "structure",
       "members": {
-        "users": {"shape": "UserList"}
+        "users": {"shape": "UserListResponse"}
       }
     },
     "ModifyBackupRequest": {
@@ -768,13 +784,13 @@
           "location": "uri",
           "locationName": "databaseId"
         },
-        "database": {"shape": "Database"}
+        "database": {"shape": "DatabaseRequest"}
       }
     },
     "ModifyDatabaseResponse": {
       "type": "structure",
       "members": {
-        "database": {"shape": "Database"}
+        "database": {"shape": "DatabaseResponse"}
       }
     },
     "ModifyServiceRequest": {
@@ -789,8 +805,8 @@
           "location": "uri",
           "locationName": "serviceId"
         },
-        "users": {"shape": "UserList"},
-        "databases": {"shape": "DatabaseList"},
+        "users": {"shape": "UserListRequest"},
+        "databases": {"shape": "DatabaseListRequest"},
         "backupSettings": {"shape": "BackupSettingsRequest"}
       }
     },
@@ -821,13 +837,13 @@
           "location": "uri",
           "locationName": "userId"
         },
-        "user": {"shape": "User"}
+        "user": {"shape": "UserRequest"}
       }
     },
     "ModifyUserResponse": {
       "type": "structure",
       "members": {
-        "user": {"shape": "User"}
+        "user": {"shape": "UserResponse"}
       }
     },
     "None": {"type": "none"},
@@ -862,8 +878,8 @@
         "highAvailability": {"shape": "Boolean"},
         "sshKeyName": {"shape": "String"},
         "parameters": {"shape": "None"},
-        "users": {"shape": "UserList"},
-        "databases": {"shape": "DatabaseList"},
+        "users": {"shape": "UserListResponse"},
+        "databases": {"shape": "DatabaseListResponse"},
         "status": {"shape": "String"},
         "errorCode": {"shape": "String"},
         "errorDescription": {"shape": "String"},
@@ -881,7 +897,17 @@
       "member": {"shape": "String"}
     },
     "Timestamp": {"type": "timestamp"},
-    "User": {
+    "UserRequest": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "UserResponse": {
       "type": "structure",
       "required": [
         "name"
@@ -892,9 +918,13 @@
         "parameters": {"shape": "None"}
       }
     },
-    "UserList": {
+    "UserListRequest": {
       "type": "list",
-      "member": {"shape": "User"}
+      "member": {"shape": "UserRequest"}
+    },
+    "UserListResponse": {
+      "type": "list",
+      "member": {"shape": "UserResponse"}
     }
   }
 }
