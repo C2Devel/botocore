@@ -280,7 +280,7 @@
           "location": "uri",
           "locationName": "serviceId"
         },
-        "database": {"shape": "DatabaseRequest"}
+        "database": {"shape": "DatabaseCreateRequest"}
       }
     },
     "CreateDatabaseResponse": {
@@ -346,7 +346,7 @@
           "location": "uri",
           "locationName": "serviceId"
         },
-        "user": {"shape": "UserRequest"}
+        "user": {"shape": "UserCreateRequest"}
       }
     },
     "CreateUserResponse": {
@@ -355,7 +355,7 @@
         "user": {"shape": "UserResponse"}
       }
     },
-    "DatabaseRequest": {
+    "DatabaseCreateRequest": {
       "type": "structure",
       "required": [
         "name"
@@ -364,7 +364,15 @@
         "name": {"shape": "String"},
         "backupEnabled": {"shape": "Boolean"},
         "parameters": {"shape": "None"},
-        "users": {"shape": "UserListRequest"}
+        "users": {"shape": "UserCreateRequestList"}
+      }
+    },
+    "DatabaseModifyRequest": {
+      "type": "structure",
+      "members": {
+        "backupEnabled": {"shape": "Boolean"},
+        "parameters": {"shape": "None"},
+        "users": {"shape": "UserCreateRequestList"}
       }
     },
     "DatabaseResponse": {
@@ -377,7 +385,7 @@
         "name": {"shape": "String"},
         "backupEnabled": {"shape": "Boolean"},
         "parameters": {"shape": "None"},
-        "users": {"shape": "UserListResponse"}
+        "users": {"shape": "UserResponseList"}
       }
     },
     "DatabaseBackup": {
@@ -398,11 +406,11 @@
       "type": "list",
       "member": {"shape": "DatabaseBackup"}
     },
-    "DatabaseListRequest": {
+    "DatabaseCreateRequestList": {
       "type": "list",
-      "member": {"shape": "DatabaseRequest"}
+      "member": {"shape": "DatabaseCreateRequest"}
     },
-    "DatabaseListResponse": {
+    "DatabaseResponseList": {
       "type": "list",
       "member": {"shape": "DatabaseResponse"}
     },
@@ -676,7 +684,7 @@
     "ListDatabasesResponse": {
       "type": "structure",
       "members": {
-        "databases": {"shape": "DatabaseListResponse"}
+        "databases": {"shape": "DatabaseResponseList"}
       }
     },
     "ListServiceItem": {
@@ -736,7 +744,7 @@
     "ListUsersResponse": {
       "type": "structure",
       "members": {
-        "users": {"shape": "UserListResponse"}
+        "users": {"shape": "UserResponseList"}
       }
     },
     "ModifyBackupRequest": {
@@ -784,7 +792,7 @@
           "location": "uri",
           "locationName": "databaseId"
         },
-        "database": {"shape": "DatabaseRequest"}
+        "database": {"shape": "DatabaseModifyRequest"}
       }
     },
     "ModifyDatabaseResponse": {
@@ -805,8 +813,8 @@
           "location": "uri",
           "locationName": "serviceId"
         },
-        "users": {"shape": "UserListRequest"},
-        "databases": {"shape": "DatabaseListRequest"},
+        "users": {"shape": "UserCreateRequestList"},
+        "databases": {"shape": "DatabaseCreateRequestList"},
         "backupSettings": {"shape": "BackupSettingsRequest"}
       }
     },
@@ -837,7 +845,7 @@
           "location": "uri",
           "locationName": "userId"
         },
-        "user": {"shape": "UserRequest"}
+        "user": {"shape": "UserModifyRequest"}
       }
     },
     "ModifyUserResponse": {
@@ -878,8 +886,8 @@
         "highAvailability": {"shape": "Boolean"},
         "sshKeyName": {"shape": "String"},
         "parameters": {"shape": "None"},
-        "users": {"shape": "UserListResponse"},
-        "databases": {"shape": "DatabaseListResponse"},
+        "users": {"shape": "UserResponseList"},
+        "databases": {"shape": "DatabaseResponseList"},
         "status": {"shape": "String"},
         "errorCode": {"shape": "String"},
         "errorDescription": {"shape": "String"},
@@ -897,13 +905,19 @@
       "member": {"shape": "String"}
     },
     "Timestamp": {"type": "timestamp"},
-    "UserRequest": {
+    "UserCreateRequest": {
       "type": "structure",
       "required": [
         "name"
       ],
       "members": {
         "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "UserModifyRequest": {
+      "type": "structure",
+      "members": {
         "parameters": {"shape": "None"}
       }
     },
@@ -918,11 +932,11 @@
         "parameters": {"shape": "None"}
       }
     },
-    "UserListRequest": {
+    "UserCreateRequestList": {
       "type": "list",
-      "member": {"shape": "UserRequest"}
+      "member": {"shape": "UserCreateRequest"}
     },
-    "UserListResponse": {
+    "UserResponseList": {
       "type": "list",
       "member": {"shape": "UserResponse"}
     }
