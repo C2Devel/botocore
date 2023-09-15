@@ -355,6 +355,35 @@
         "user": {"shape": "UserResponse"}
       }
     },
+    "DatabaseBackup": {
+      "type": "structure",
+      "members": {
+        "name": {"shape": "String"},
+        "serviceName": {"shape": "String"},
+        "serviceId": {"shape": "String"},
+        "backupId": {"shape": "String"},
+        "size": {"shape": "Integer"},
+        "status": {"shape": "String"},
+        "parameters": {"shape": "None"},
+        "logfile": {"shape": "String"},
+        "location": {"shape": "String"}
+      }
+    },
+    "DatabaseBackupList": {
+      "type": "list",
+      "member": {"shape": "DatabaseBackup"}
+    },
+    "DatabaseCompactResponse": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "name": {"shape": "String"}
+      }
+    },
+    "DatabaseCompactResponseList": {
+      "type": "list",
+      "member": {"shape": "DatabaseCompactResponse"}
+    },
     "DatabaseCreateRequest": {
       "type": "structure",
       "required": [
@@ -366,6 +395,10 @@
         "parameters": {"shape": "None"},
         "users": {"shape": "UserCreateRequestList"}
       }
+    },
+    "DatabaseCreateRequestList": {
+      "type": "list",
+      "member": {"shape": "DatabaseCreateRequest"}
     },
     "DatabaseModifyRequest": {
       "type": "structure",
@@ -387,28 +420,6 @@
         "parameters": {"shape": "None"},
         "users": {"shape": "UserResponseList"}
       }
-    },
-    "DatabaseBackup": {
-      "type": "structure",
-      "members": {
-        "name": {"shape": "String"},
-        "serviceName": {"shape": "String"},
-        "serviceId": {"shape": "String"},
-        "backupId": {"shape": "String"},
-        "size": {"shape": "Integer"},
-        "status": {"shape": "String"},
-        "parameters": {"shape": "None"},
-        "logfile": {"shape": "String"},
-        "location": {"shape": "String"}
-      }
-    },
-    "DatabaseBackupList": {
-      "type": "list",
-      "member": {"shape": "DatabaseBackup"}
-    },
-    "DatabaseCreateRequestList": {
-      "type": "list",
-      "member": {"shape": "DatabaseCreateRequest"}
     },
     "DatabaseResponseList": {
       "type": "list",
@@ -619,6 +630,10 @@
       "member": {"shape": "Instance"}
     },
     "Integer": {"type": "integer"},
+    "ListBackups": {
+      "type": "list",
+      "member": {"shape": "Backup"}
+    },
     "ListBackupsRequest": {
       "type": "structure",
       "members": {
@@ -635,10 +650,6 @@
           "documentation": "<p>The service ID filter.</p>"
         }
       }
-    },
-    "ListBackups": {
-      "type": "list",
-      "member": {"shape": "Backup"}
     },
     "ListBackupsResponse": {
       "type": "structure",
@@ -684,7 +695,7 @@
     "ListDatabasesResponse": {
       "type": "structure",
       "members": {
-        "databases": {"shape": "DatabaseResponseList"}
+        "databases": {"shape": "DatabaseCompactResponseList"}
       }
     },
     "ListServiceItem": {
@@ -744,7 +755,7 @@
     "ListUsersResponse": {
       "type": "structure",
       "members": {
-        "users": {"shape": "UserResponseList"}
+        "users": {"shape": "UserCompactResponseList"}
       }
     },
     "ModifyBackupRequest": {
@@ -905,6 +916,17 @@
       "member": {"shape": "String"}
     },
     "Timestamp": {"type": "timestamp"},
+    "UserCompactResponse": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "name": {"shape": "String"}
+      }
+    },
+    "UserCompactResponseList": {
+      "type": "list",
+      "member": {"shape": "UserCompactResponse"}
+    },
     "UserCreateRequest": {
       "type": "structure",
       "required": [
@@ -914,6 +936,10 @@
         "name": {"shape": "String"},
         "parameters": {"shape": "None"}
       }
+    },
+    "UserCreateRequestList": {
+      "type": "list",
+      "member": {"shape": "UserCreateRequest"}
     },
     "UserModifyRequest": {
       "type": "structure",
@@ -931,10 +957,6 @@
         "name": {"shape": "String"},
         "parameters": {"shape": "None"}
       }
-    },
-    "UserCreateRequestList": {
-      "type": "list",
-      "member": {"shape": "UserCreateRequest"}
     },
     "UserResponseList": {
       "type": "list",
