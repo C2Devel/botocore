@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC31%{?buildid}%{?dist}
+Release:        CROC32%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Tue Sep 26 2023 Anastasia Berezko <aberezko@croc.ru> - 1.20.14-CROC32
+- paas: add methods for databases and users
+
 * Wed Aug 29 2023 Grigoriy Kulagin <grkulagin@croc.ru> - 1.20.14-CROC31
 - eks: fix eks parameters for terraform
 
