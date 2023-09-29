@@ -241,6 +241,16 @@
       "output": {"shape": "ModifyServiceResponse"},
       "documentation": "<p>Modifies the PaaS service.</p>"
     },
+    "ModifyServiceParameters": {
+      "name": "ModifyServiceParameters",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/parameters"
+      },
+      "input": {"shape": "ModifyServiceParametersRequest"},
+      "output": {"shape": "ModifyServiceParametersResponse"},
+      "documentation": "<p>Modifies the PaaS service parameters.</p>"
+    },
     "ModifyUser": {
       "name": "ModifyUser",
       "http": {
@@ -250,6 +260,16 @@
       "input": {"shape": "ModifyUserRequest"},
       "output": {"shape": "ModifyUserResponse"},
       "documentation": "<p>Modifies database.</p>"
+    },
+    "PatchServiceParameters": {
+      "name": "PatchServiceParameters",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/services/{serviceId}/parameters"
+      },
+      "input": {"shape": "PatchServiceParametersRequest"},
+      "output": {"shape": "PatchServiceParametersResponse"},
+      "documentation": "<p>Modifies the PaaS service parameters.</p>"
     },
     "CreatePrometheusRoute": {
       "name": "CreatePrometheusRoute",
@@ -991,6 +1011,56 @@
       }
     },
     "ModifyServiceResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of your modified service.</p>"
+        }
+      }
+    },
+    "ModifyServiceParametersRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The service ID to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "parameters": {"shape": "None"}
+      }
+    },
+    "ModifyServiceParametersResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of your modified service.</p>"
+        }
+      }
+    },
+    "PatchServiceParametersRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The service ID to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "parameters": {"shape": "None"}
+      }
+    },
+    "PatchServiceParametersResponse": {
       "type": "structure",
       "members": {
         "service": {
