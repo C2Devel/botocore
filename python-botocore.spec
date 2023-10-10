@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC32%{?buildid}%{?dist}
+Release:        CROC33%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,13 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Tue Oct 10 2023 Grigoriy Kulagin <grkulagin@croc.ru> - 1.20.14-CROC33
+- as: Make Notification Configurations C2-compliant
+- ec2: add extra host fields
+- ec2: make host properties instance family field list of string
+- ec2: add host type api
+- ec2: add supported instance types to host type
+
 * Tue Sep 26 2023 Anastasia Berezko <aberezko@croc.ru> - 1.20.14-CROC32
 - paas: add methods for databases and users
 
