@@ -361,6 +361,9 @@ class JSONSerializer(Serializer):
             'X-Amz-Target': target,
             'Content-Type': f'application/x-amz-json-{json_version}',
         }
+        if isinstance(context, dict) and context.get('aws_sudo_id'):
+            serialized['headers']['X-Aws-Sudo-Id'] = context['aws_sudo_id']
+
         body = self.MAP_TYPE()
         input_shape = operation_model.input_shape
         if input_shape is not None:
