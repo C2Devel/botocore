@@ -21,6 +21,16 @@
       "output": {"shape": "CreateDatabaseResponse"},
       "documentation": "<p>Creates database.</p>"
     },
+    "CreateElasticsearchSnapshotRepository": {
+      "name": "CreateElasticsearchSnapshotRepository",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/elasticsearch-snapshot-repositories"
+      },
+      "input": {"shape": "CreateElasticsearchSnapshotRepositoryRequest"},
+      "output": {"shape": "CreateElasticsearchSnapshotRepositoryResponse"},
+      "documentation": "<p>Create Elasticsearch snapshot repository.</p>"
+    },
     "CreateService": {
       "name": "CreateService",
       "http": {
@@ -80,6 +90,16 @@
       "input": {"shape": "DeleteDatabaseRequest"},
       "output": {"shape": "DeleteDatabaseResponse"},
       "documentation": "<p>Deletes database.</p>"
+    },
+    "DeleteElasticsearchSnapshotRepository": {
+      "name": "DeleteElasticsearchSnapshotRepository",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/elasticsearch-snapshot-repositories/{repositoryId}"
+      },
+      "input": {"shape": "DeleteElasticsearchSnapshotRepositoryRequest"},
+      "output": {"shape": "DeleteElasticsearchSnapshotRepositoryResponse"},
+      "documentation": "<p>Delete Elasticsearch snapshot repository.</p>"
     },
     "DeleteService": {
       "name": "DeleteService",
@@ -141,6 +161,26 @@
       "output": {"shape": "DescribeUserResponse"},
       "documentation": "<p>Returns descriptive information about user.</p>"
     },
+    "DisableElasticsearchSnapshotRepository": {
+      "name": "DisableElasticsearchSnapshotRepository",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/elasticsearch-snapshot-repositories/{repositoryId}/disable"
+      },
+      "input": {"shape": "DisableElasticsearchSnapshotRepositoryRequest"},
+      "output": {"shape": "DisableElasticsearchSnapshotRepositoryResponse"},
+      "documentation": "<p>Disable Elasticsearch snapshot repository.</p>"
+    },
+    "EnableElasticsearchSnapshotRepository": {
+      "name": "EnableElasticsearchSnapshotRepository",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/elasticsearch-snapshot-repositories/{repositoryId}/enable"
+      },
+      "input": {"shape": "EnableElasticsearchSnapshotRepositoryRequest"},
+      "output": {"shape": "EnableElasticsearchSnapshotRepositoryResponse"},
+      "documentation": "<p>Enable Elasticsearch snapshot repository.</p>"
+    },
     "ListBackups": {
       "name": "ListBackups",
       "http": {
@@ -170,6 +210,26 @@
       "input": {"shape": "ListDatabasesRequest"},
       "output": {"shape": "ListDatabasesResponse"},
       "documentation": "<p>Returns databases list.</p>"
+    },
+    "ListElasticsearchServicesSuitableForRecovery": {
+      "name": "ListElasticsearchServicesSuitableForRecovery",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services/{serviceId}/elasticsearch-services-suitable-for-recovery"
+      },
+      "input": {"shape": "ListElasticsearchServicesSuitableForRecoveryRequest"},
+      "output": {"shape": "ListElasticsearchServicesSuitableForRecoveryResponse"},
+      "documentation": "<p>Returns elasticsearch services suitable for target service recovery.</p>"
+    },
+    "ListElasticsearchSnapshotRepositories": {
+      "name": "ListElasticsearchSnapshotRepositories",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services/{serviceId}/elasticsearch-snapshot-repositories"
+      },
+      "input": {"shape": "ListElasticsearchSnapshotRepositoriesRequest"},
+      "output": {"shape": "ListElasticsearchSnapshotRepositoriesResponse"},
+      "documentation": "<p>Returns list of Elasticsearch snapshot repositories.</p>"
     },
     "ListLogstashPipelines": {
       "name": "ListLogstashPipelines",
@@ -504,6 +564,27 @@
         "database": {"shape": "DatabaseResponse"}
       }
     },
+    "CreateElasticsearchSnapshotRepositoryRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "parameters": {"shape": "None"}
+      }
+    },
+    "CreateElasticsearchSnapshotRepositoryResponse": {
+      "type": "structure",
+      "members": {
+        "repository": {"shape": "ElasticsearchSnapshotRepositoryResponse"}
+      }
+    },
     "CreateServiceRequest": {
       "type": "structure",
       "required": [
@@ -684,7 +765,29 @@
       "type": "structure",
       "members": {}
     },
-
+    "DeleteElasticsearchSnapshotRepositoryRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "repositoryId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "repositoryId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "repositoryId"
+        }
+      }
+    },
+    "DeleteElasticsearchSnapshotRepositoryResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteServiceRequest": {
       "type": "structure",
       "required": [
@@ -827,6 +930,68 @@
         "user": {"shape": "UserResponse"}
       }
     },
+    "DisableElasticsearchSnapshotRepositoryRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "repositoryId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "repositoryId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "repositoryId"
+        }
+      }
+    },
+    "DisableElasticsearchSnapshotRepositoryResponse": {
+      "type": "structure",
+      "members": {
+        "repository": {"shape": "ElasticsearchSnapshotRepositoryResponse"}
+      }
+    },
+    "ElasticsearchSnapshotRepositoriesResponseList": {
+      "type": "list",
+      "member": {"shape": "ElasticsearchSnapshotRepositoryResponse"}
+    },
+    "ElasticsearchSnapshotRepositoryResponse": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "EnableElasticsearchSnapshotRepositoryRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "repositoryId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "repositoryId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "repositoryId"
+        }
+      }
+    },
+    "EnableElasticsearchSnapshotRepositoryResponse": {
+      "type": "structure",
+      "members": {
+        "repository": {"shape": "ElasticsearchSnapshotRepositoryResponse"}
+      }
+    },
     "Instance": {
       "type": "structure",
       "members": {
@@ -911,6 +1076,44 @@
       "type": "structure",
       "members": {
         "databases": {"shape": "DatabaseCompactResponseList"}
+      }
+    },
+    "ListElasticsearchServicesSuitableForRecoveryRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "ListElasticsearchSnapshotRepositoriesRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "ListElasticsearchServicesSuitableForRecoveryResponse": {
+      "type": "structure",
+      "members": {
+        "services": {"shape": "ListServices"}
+      }
+    },
+    "ListElasticsearchSnapshotRepositoriesResponse": {
+      "type": "structure",
+      "members": {
+        "repositories": {"shape": "ElasticsearchSnapshotRepositoriesResponseList"}
       }
     },
     "ListServiceItem": {
