@@ -576,9 +576,6 @@
       "type": "structure",
       "members": {
         "name": {"shape": "String"},
-        "serviceName": {"shape": "String"},
-        "serviceId": {"shape": "String"},
-        "backupId": {"shape": "String"},
         "size": {"shape": "Integer"},
         "status": {"shape": "String"},
         "parameters": {"shape": "None"},
