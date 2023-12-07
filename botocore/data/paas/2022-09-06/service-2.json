@@ -1255,8 +1255,9 @@
         "externalBalancerAllowed": {"shape": "Boolean"},
         "internalBalancerTargets": {"shape":  "BalancerTargets"},
         "externalBalancerTargets": {"shape":  "BalancerTargets"},
-        "loadBalancers": {"shape": "LoadBalancers"}
-        "environmentVersion": {"shape":  "String"}
+        "loadBalancers": {"shape": "LoadBalancers"},
+        "environmentVersion": {"shape":  "String"},
+        "availableEnvironmentVersions": {"shape":  "StringList"}
       }
     },
     "String": {"type": "string"},
