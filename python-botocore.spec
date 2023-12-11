@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC34%{?buildid}%{?dist}
+Release:        CROC35%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Mon Dec 11 2023 Grigoriy Kulagin <grkulagin@croc.ru> - 1.20.14-CROC35
+- autoscaling: Modify types for c2-client compatibility
+
 * Tue Nov 07 2023 Linar Nasyyrov <lnasyyrov@croc.ru> - 1.20.14-CROC34
 - s3: move trail recorc in s3 to system users
 - paas: add elk and prometheus
