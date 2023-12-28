@@ -1002,7 +1002,7 @@
         "interfaceId": {"shape": "String"},
         "status": {"shape": "String"},
         "index": {"shape": "Integer"},
-        "endpoint": {"shape": "String"},
+        "endpoints": {"shape": "StringList"},
         "name": {"shape": "String"}
       }
     },
