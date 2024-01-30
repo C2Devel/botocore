@@ -1,0 +1,1561 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "apiVersion":"2017-11-01",
+    "endpointPrefix":"eks",
+    "jsonVersion":"1.1",
+    "protocol":"rest-json",
+    "serviceAbbreviation":"Amazon EKS",
+    "serviceFullName":"Amazon Elastic Kubernetes Private API",
+    "serviceId":"EKS private",
+    "signatureVersion":"v4",
+    "signingName":"eks-private",
+    "uid":"eks-private-2017-11-01"
+  },
+  "operations":{
+    "ListEKSClusters":{
+      "name":"ListEKSClusters",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/eks/clusters"
+      },
+      "input":{"shape":  "EmptyStruct"},
+      "output":{"shape":"CompactEKSClusters"},
+      "documentation":"<p>List eks clusters with additional information.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "ValidateEKSClusterCreation":{
+      "name":"ValidateEKSClusterCreation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/eks/clusters"
+      },
+      "input":{"shape":  "ValidateEKSClusterCreationRequest"},
+      "output":{"shape":"ValidateCreationResponse"},
+      "documentation":"<p>Validate request against limits.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "DescribeEKSCluster": {
+      "name": "DescribeEKSCluster",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/eks/clusters/{cluster_name}"
+      },
+      "input":{"shape":"DescribeEKSClusterRequest"},
+      "output":{"shape":"DescribeEKSClusterResponse"},
+      "documentation":"<p>List eks clusters with additional information.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "ListNodeGroups": {
+      "name": "ListNodeGroups",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/eks/clusters/{cluster_name}/node-groups"
+      },
+      "input":{"shape":"ListNodegroupsRequest"},
+      "output":{"shape":"ListNodegroupsResponse"},
+      "documentation":"<p>List eks cluster's nodegroups with additional information.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "DescribeNodegroup": {
+      "name": "DescribeNodegroup",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/eks/clusters/{cluster_name}/node-groups/{nodegroup_name}"
+      },
+      "input":{"shape":"DescribeNodegroupRequest"},
+      "output":{"shape":"DescribeNodegroupResponse"},
+      "documentation":"<p>Describe eks cluster's nodegroup with additional information.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "ValidateClusterCreation": {
+      "name": "ValidateClusterCreation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/legacy/clusters"
+      },
+      "input":{"shape":"ValidateClusterCreationRequest"},
+      "output":{"shape":"ValidateCreationResponse"},
+      "documentation":"<p>Check limits for creating a legacy cluster.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "GetClusterSecurityGroups": {
+      "name": "GetClusterSecurityGroups",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/legacy/clusters/{cluster_name}/security-groups"
+      },
+      "input":{"shape":"GetClusterSecurityGroupsRequest"},
+      "output":{"shape":"GetClusterSecurityGroupsResponse"},
+      "documentation":"<p>Get security groups for a legacy cluster.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "GetDefaultSubnets": {
+      "name": "GetDefaultSubnets",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/default-subnets"
+      },
+      "input":{"shape":  "EmptyStruct"},
+      "output":{"shape":"GetDefaultSubnetsResponse"},
+      "documentation":"<p>Get default subnets for pods and services.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "ValidateClusterName": {
+      "name": "ValidateClusterName",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/validate-cluster-name"
+      },
+      "input":{"shape":"ValidateClusterNameRequest"},
+      "output":{"shape":"ValidateClusterNameResponse"},
+      "documentation":"<p>Validate cluster name.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "GetSettings": {
+      "name": "GetSettings",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/settings"
+      },
+      "input":{"shape":  "EmptyStruct"},
+      "output":{"shape":"GetSettingsResponse"},
+      "documentation":"<p>Get Kubernetes version settings.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "GetEbsUsers": {
+      "name": "GetEbsUsers",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/ebs-users"
+      },
+      "input":{"shape":  "EmptyStruct"},
+      "output":{"shape":"GetEbsUsersResponse"},
+      "documentation":"<p>Get EBS Users.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "GetStaticLimits": {
+      "name": "GetStaticLimits",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/limits"
+      },
+      "input":{"shape":  "EmptyStruct"},
+      "output":{"shape":"GetStaticLimitsResponse"},
+      "documentation":"<p>Get static limits.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "ListWarnings": {
+      "name": "ListWarnings",
+      "http":{
+        "method":"GET",
+        "requestUri":"/v1/warnings"
+      },
+      "input":{"shape":"ListWarningsRequest"},
+      "output":{"shape":"ListWarningsResponse"},
+      "documentation":"<p>List clusters warnings.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "ReadWarning": {
+      "name": "ReadWarning",
+      "http":{
+        "method":"PATCH",
+        "requestUri":"/v1/warnings/{warning_id}/read"
+      },
+      "input":{"shape":"ReadWarningRequest"},
+      "output":{"shape":"ReadWarningResponse"},
+      "documentation":"<p>Mark warnings as read.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "ValidateScalingConfig": {
+      "name": "ValidateScalingConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/eks/clusters/{clusterName}/node-groups/{nodegroupName}/scaling-config"
+      },
+      "input":{"shape":"ValidateScalingConfigRequest"},
+      "output":{"shape":"ValidateScalingConfigResponse"},
+      "documentation":"<p>Validate nodegroup's scaling config.</p>",
+      "deprecated":true,
+      "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    }
+  },
+  "shapes": {
+    "BoxedBoolean":{
+      "type":"boolean",
+      "box":true
+    },
+    "EmptyStruct": {
+      "type": "structure",
+      "members": {}
+    },
+    "ValidateScalingConfigRequest": {
+      "type": "structure",
+      "required": [
+        "clusterName",
+        "nodegroupName",
+        "onUpdate"
+      ],
+      "members": {
+        "clusterName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon EKS cluster.</p>",
+          "location": "uri",
+          "locationName": "clusterName"
+        },
+        "nodegroupName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon EKS nodegroup.</p>",
+          "location": "uri",
+          "locationName": "nodegroupName"
+        },
+        "onUpdate": {"shape": "Boolean"},
+        "scalingConfig": {"shape": "NodegroupScalingConfig"}
+      }
+    },
+    "ValidateScalingConfigResponse":{
+      "type": "structure",
+      "members": {
+        "valid": {"shape": "Boolean"}
+      }
+    },
+    "ReadWarningRequest": {
+      "type": "structure",
+      "members": {
+          "warning_id": {
+              "shape": "String",
+              "location": "uri",
+              "locationName": "warning_id"
+          }
+      }
+    },
+    "ReadWarningResponse": {
+      "type": "structure",
+      "members": {
+        "is_new": {"shape": "Boolean"}
+      }
+    },
+    "LimitError": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "shape": "String"
+        },
+        "limit": {
+          "shape": "String"
+        },
+        "usage": {
+          "shape": "Integer"
+        },
+        "required_quantity": {
+          "shape": "Integer"
+        },
+        "vpc_id": {
+          "shape": "String"
+        },
+        "az": {
+          "shape": "String"
+        },
+        "param": {
+          "shape": "String"
+        }
+      }
+    },
+    "LimitErrors": {
+      "type": "list",
+      "member": {
+        "shape": "LimitError"
+      }
+    },
+    "Boolean": {
+      "type": "boolean"
+    },
+    "String": {
+      "type": "string"
+    },
+    "Integer":{"type":"integer"},
+    "Float": {
+      "type": "float"
+    },
+    "StringList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "LogSetup": {
+      "type": "structure",
+      "members": {
+        "types": {
+          "shape": "LogTypes",
+          "documentation": "<p>The available cluster control plane log types.</p>"
+        },
+        "enabled": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>If a log type is enabled, that log type exports its control plane logs to CloudWatch Logs. If a log type isn't enabled, that log type doesn't export its control plane logs. Each individual log type can be enabled or disabled independently.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the enabled or disabled Kubernetes control plane logs for your cluster.</p>"
+    },
+    "LogSetups": {
+      "type": "list",
+      "member": {
+        "shape": "LogSetup"
+      }
+    },
+    "LogType": {
+      "type": "string",
+      "enum": [
+        "api",
+        "audit",
+        "authenticator",
+        "controllerManager",
+        "scheduler"
+      ]
+    },
+    "LogTypes": {
+      "type": "list",
+      "member": {
+        "shape": "LogType"
+      }
+    },
+    "Logging": {
+      "type": "structure",
+      "members": {
+        "clusterLogging": {
+          "shape": "LogSetups",
+          "documentation": "<p>The cluster control plane logging configuration for your cluster.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the logging configuration for resources in your cluster.</p>"
+    },
+    "VpcConfigRequest": {
+      "type": "structure",
+      "members": {
+        "subnetIds": {
+          "shape": "StringList",
+          "documentation": "<p>Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.</p>"
+        },
+        "securityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your nodes and the Kubernetes control plane. If you don't specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p> <ul> <li> <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p> </li> <li> <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Amazon EKS security group considerations</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the VPC configuration to use for an Amazon EKS cluster.</p>"
+    },
+    "KubernetesNetworkConfigRequest": {
+      "type": "structure",
+      "members": {
+        "podIpv4Cidr": {
+          "shape": "String",
+          "documentation": "<p>The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:</p> <ul> <li> <p>Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.</p> </li> <li> <p>Doesn't overlap with any CIDR block assigned to the VPC that you selected for VPC.</p> </li> <li> <p>Between /24 and /12.</p> </li> </ul> <important> <p>You can only specify a custom CIDR block when you create a cluster and can't change this value once the cluster is created.</p> </important>"
+        },
+        "serviceIpv4Cidr": {
+          "shape": "String",
+          "documentation": "<p>The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:</p> <ul> <li> <p>Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.</p> </li> <li> <p>Doesn't overlap with any CIDR block assigned to the VPC that you selected for VPC.</p> </li> <li> <p>Between /24 and /12.</p> </li> </ul> <important> <p>You can only specify a custom CIDR block when you create a cluster and can't change this value once the cluster is created.</p> </important>"
+        },
+        "serviceIpv6Cidr": {
+          "shape": "String"
+        },
+        "ipFamily": {
+          "shape": "String"
+        }
+      },
+      "documentation": "<p>The Kubernetes network configuration for the cluster.</p>"
+    },
+    "masterConfig": {
+      "type": "structure",
+      "members": {
+        "highAvailability": {
+          "shape": "Boolean"
+        },
+        "mastersInstanceType": {
+          "shape": "String"
+        },
+        "mastersVolumeType": {
+          "shape": "String"
+        },
+        "mastersVolumeSize": {
+          "shape": "Integer"
+        },
+        "mastersVolumeIops": {
+          "shape": "Integer"
+        },
+        "masterPublicIp": {
+          "shape": "String"
+        }
+      }
+    },
+    "ingressConfig": {
+      "type": "structure",
+      "members": {
+        "ingressRequired": {
+          "shape": "Boolean"
+        },
+        "ingressPublicIp": {
+          "shape": "String"
+        },
+        "ingressInstanceType": {
+          "shape": "String"
+        },
+        "ingressVolumeType": {
+          "shape": "String"
+        },
+        "ingressVolumeSize": {
+          "shape": "Integer"
+        },
+        "ingressVolumeIops": {
+          "shape": "Integer"
+        }
+      }
+    },
+    "dockerRegistryConfig": {
+      "type": "structure",
+      "members": {
+        "dockerRegistryRequired": {
+          "shape": "Boolean"
+        },
+        "dockerRegistryVolumeType": {
+          "shape": "String"
+        },
+        "dockerRegistryVolumeSize": {
+          "shape": "Integer"
+        },
+        "dockerRegistryVolumeIops": {
+          "shape": "Integer"
+        }
+      }
+    },
+    "ebsProviderConfig": {
+      "type": "structure",
+      "members": {
+        "ebsProviderRequired": {
+          "shape": "Boolean"
+        },
+        "ebsUser": {
+          "shape": "String"
+        }
+      }
+    },
+    "userDataConfig": {
+      "type": "structure",
+      "members": {
+        "userData": {
+          "shape": "String"
+        },
+        "userDataContentType": {
+          "shape": "String"
+        }
+      }
+    },
+    "placementGroupsConfig": {
+      "type": "structure",
+      "members": {
+        "usePlacementGroups": {
+          "shape": "Boolean"
+        }
+      }
+    },
+    "legacyClusterParams": {
+      "type": "structure",
+      "members": {
+        "masterConfig": {
+          "shape": "masterConfig",
+          "documentation": "<p>The Kubernetes master configuration for the cluster.</p>"
+        },
+        "ingressConfig": {
+          "shape": "ingressConfig",
+          "documentation": "<p>The Kubernetes ingress configuration for the cluster.</p>"
+        },
+        "dockerRegistryConfig": {
+          "shape": "dockerRegistryConfig",
+          "documentation": "<p>The Kubernetes docker registry configuration for the cluster.</p>"
+        },
+        "ebsProviderConfig": {
+          "shape": "ebsProviderConfig",
+          "documentation": "<p>The Kubernetes ens provider configuration for the cluster</p>"
+        },
+        "userDataConfig": {
+          "shape": "userDataConfig",
+          "documentation": "<p>The Kubernetes userData configuration for the cluster</p>"
+        },
+        "placementGroupsConfig": {
+          "shape": "placementGroupsConfig",
+          "documentation": "<p>The Kubernetes placement groups configuration for the cluster</p>"
+        }
+      }
+    },
+    "CompactEKSClusters": {
+      "type": "structure",
+      "members": {
+        "clusters": {"shape": "CompactEKSClusterList"}
+      }
+    },
+    "RemoteAccessConfig": {
+      "type": "structure",
+      "members": {
+        "ec2SshKey": {
+          "shape": "String",
+          "documentation": "<p>The Amazon EC2 SSH key that provides access for SSH communication with the nodes in the managed node group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 Key Pairs</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.</p>"
+        },
+        "sourceSecurityGroups": {
+          "shape": "StringList",
+          "documentation": "<p>The security groups that are allowed SSH access (port 22) to the nodes. If you specify an Amazon EC2 SSH key but do not specify a source security group when you create a managed node group, then port 22 on the nodes is opened to the internet (0.0.0.0/0). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the remote access configuration for the managed node group.</p>"
+    },
+    "CompactEKSClusterList": {
+      "type": "list",
+      "member": {
+        "shape": "CompactEKSCluster"
+      }
+    },
+    "CompactEKSCluster": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "String",
+          "documentation": "<p>Cluster's ID</p>."
+        },
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>Cluster's name</p>."
+        },
+        "Version": {
+          "shape": "String",
+          "documentation": "<p>Cluster's version</p>."
+        },
+        "WorkersQuantity": {
+          "shape": "String"
+        },
+        "Status": {
+          "shape": "String"
+        },
+        "Health": {
+          "shape": "String"
+        },
+        "ErrorCode": {
+          "shape": "String"
+        },
+        "HasNewWarnings": {
+          "shape": "String"
+        },
+        "SubnetIds": {
+          "shape": "StringList"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The metadata to apply to the provider configuration to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you defined.</p>"
+        }
+      }
+    },
+    "ClusterName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*"
+    },
+    "ValidateEKSClusterCreationRequest": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "ClusterName",
+          "documentation": "<p>The unique name to give to your cluster.</p>"
+        },
+        "version": {
+          "shape": "String",
+          "documentation": "<p>The desired Kubernetes version for your cluster. If you don't specify a value here, the default version available in Amazon EKS is used.</p> <note> <p>The default version might not be the latest version available.</p> </note>"
+        },
+        "roleArn": {
+          "shape": "String",
+          "documentation": "<p>A valid Amazon Resource Name (ARN) that identifies an IAM role."
+        },
+        "remoteAccessConfig": {
+          "shape": "RemoteAccessConfig",
+          "documentation": "<p>An object representing the remote access configuration for the Kubernetes cluster.</p>",
+          "deprecated": true
+        },
+        "resourcesVpcConfig": {
+          "shape": "VpcConfigRequest",
+          "documentation": "<p>The VPC configuration that's used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You can specify up to five security groups. However, we recommend that you use a dedicated security group for your cluster control plane.</p>"
+        },
+        "kubernetesNetworkConfig": {
+          "shape": "KubernetesNetworkConfigRequest",
+          "documentation": "<p>The Kubernetes network configuration for the cluster.</p>"
+        },
+        "logging": {
+          "shape": "Logging",
+          "documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster control plane logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch Pricing</a>.</p> </note>"
+        },
+        "clientRequestToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken": true
+        },
+        "platformVersion": {
+          "shape": "String",
+          "documentation": "<p>The platform version of your Amazon EKS cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html\">Platform Versions</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The metadata to apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value. You define both.</p>"
+        },
+        "legacyClusterParams": {
+          "shape": "legacyClusterParams",
+          "documentation": "<p>Legacy cluster parameters that are required to start control plane</p>"
+        }
+      }
+    },
+    "ValidateCreationResponse": {
+      "type": "structure",
+      "members": {
+        "errors": {
+          "shape": "LimitErrors"
+        }
+      }
+    },
+    "InstanceDTO": {
+      "type": "structure",
+      "members": {
+        "InstanceId": {
+          "shape": "String"
+        },
+        "PrivateIp": {
+          "shape": "String"
+        },
+        "PublicIp": {
+          "shape": "String"
+        },
+        "InterfaceId": {
+          "shape": "String"
+        },
+        "Role": {
+          "shape": "String"
+        },
+        "Status": {
+          "shape": "String"
+        },
+        "SchedulingDisabled": {
+          "shape": "Boolean"
+        },
+        "Name": {
+          "shape": "String"
+        },
+        "Type": {
+          "shape": "InstanceType"
+        },
+        "Ghost": {
+          "shape": "Boolean"
+        },
+        "PendingForTermination": {
+          "shape": "Boolean"
+        }
+      }
+    },
+    "InstanceType": {
+      "type": "structure",
+      "members": {
+        "ccus": {
+          "shape": "String"
+        },
+        "cpu": {
+          "shape": "Integer"
+        },
+        "memory": {
+          "shape": "Float"
+        },
+        "name": {
+          "shape": "String"
+        }
+      }
+    },
+    "InstanceDTOList": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceDTO"
+      }
+    },
+    "ClusterDTO": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "String"
+        },
+        "Name": {
+          "shape": "String"
+        },
+        "Version": {
+          "shape": "String"
+        },
+        "HighAvailability": {
+          "shape": "Boolean"
+        },
+        "WorkersQuantity": {
+          "shape": "Integer"
+        },
+        "MastersInstanceType": {
+          "shape": "String"
+        },
+        "WorkersInstanceType": {
+          "shape": "String"
+        },
+        "IngressInstanceType": {
+          "shape": "String"
+        },
+        "MastersVolumeType": {
+          "shape": "String"
+        },
+        "WorkersVolumeType": {
+          "shape": "String"
+        },
+        "IngressVolumeType": {
+          "shape": "String"
+        },
+        "MastersVolumeSize": {
+          "shape": "String"
+        },
+        "WorkersVolumeSize": {
+          "shape": "String"
+        },
+        "IngressVolumeSize": {
+          "shape": "String"
+        },
+        "MastersVolumeIops": {
+          "shape": "String"
+        },
+        "WorkersVolumeIops": {
+          "shape": "String"
+        },
+        "IngressVolumeIops": {
+          "shape": "String"
+        },
+        "Instances": {
+          "shape": "InstanceDTOList"
+        },
+        "SupportedFeatures": {
+          "shape": "StringList"
+        },
+        "SecurityGroupIds": {
+          "shape": "StringList"
+        },
+        "SecurityGroups": {
+          "shape": "SecurityGroupList"
+        },
+        "SubnetIds": {
+          "shape": "StringList"
+        },
+        "SshKeyName": {
+          "shape": "String"
+        },
+        "Status": {
+          "shape": "String"
+        },
+        "Health": {
+          "shape": "String"
+        },
+        "DashboardToken": {
+          "shape": "String"
+        },
+        "DockerRegistry": {
+          "shape": "String"
+        },
+        "Ingress": {
+          "shape": "String"
+        },
+        "ApiServer": {
+          "shape": "String"
+        },
+        "ErrorCode": {
+          "shape": "String"
+        },
+        "ErrorDescription": {
+          "shape": "String"
+        },
+        "UsePlacementGroups": {
+          "shape": "Boolean"
+        },
+        "UserData": {
+          "shape": "String"
+        },
+        "UserDataContentType": {
+          "shape": "String"
+        },
+        "HasNewWarnings": {
+          "shape": "Boolean"
+        },
+        "EbsUser": {
+          "shape": "String"
+        },
+        "PodSubnetCidr": {
+          "shape": "String"
+        },
+        "ServiceSubnetCidr": {
+          "shape": "String"
+        },
+        "AutoUpdateCertificates": {
+          "shape": "Boolean"
+        },
+        "PlatformVersion": {
+          "shape": "String"
+        },
+        "TotalCPUCount": {
+          "shape": "Integer"
+        },
+        "TotalMemory": {
+          "shape": "Float"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The metadata to apply to the provider configuration to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you defined.</p>"
+        }
+      }
+    },
+    "ApiServer": {
+      "type": "structure",
+      "members": {
+        "PublicIp": {"shape": "String"},
+        "PrivateIp":{"shape": "String"},
+        "PrivateIps": {"shape": "StringList"}
+      }
+    },
+    "SecurityGroupList": {
+      "type": "list",
+      "member": {"shape": "SecurityGroupObject"}
+    },
+    "SecurityGroupObject": {
+      "type": "structure",
+      "members": {
+        "_id": {"shape": "String"},
+        "created_automatically": {"shape": "Boolean"}
+      }
+    },
+    "DescribeEKSClusterRequest": {
+      "type": "structure",
+      "members": {
+        "cluster_name": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "cluster_name"
+        }
+      }
+    },
+    "DescribeEKSClusterResponse": {
+      "type": "structure",
+      "members": {
+        "cluster": {
+          "shape": "ClusterDTO"
+        }
+      }
+    },
+    "ListNodegroupsRequest": {
+      "type": "structure",
+      "required": [
+        "clusterName"
+      ],
+      "members": {
+        "clusterName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon EKS cluster that you would like to list node groups in.</p>",
+          "location": "uri",
+          "locationName": "cluster_name"
+        },
+        "maxResults": {
+          "shape": "ListNodegroupsRequestMaxResults",
+          "documentation": "<p>The maximum number of node group results returned by <code>ListNodegroups</code> in paginated output. When you use this parameter, <code>ListNodegroups</code> returns only <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. You can see the remaining results of the initial request by sending another <code>ListNodegroups</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If you don't use this parameter, <code>ListNodegroups</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>",
+          "location":"querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListNodegroups</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p>",
+          "location":"querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListNodegroupsRequestMaxResults": {
+      "type": "integer",
+      "box": true,
+      "max": 100,
+      "min": 1
+    },
+    "ListOfNodegroups": {
+      "type": "list",
+      "member": {"shape": "CompactNodegroup"}
+    },
+    "ListNodegroupsResponse": {
+      "type": "structure",
+      "members": {
+        "nodegroups": {
+          "shape": "ListOfNodegroups",
+          "documentation": "<p>A list of all of the node groups associated with the specified cluster.</p>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListNodegroups</code> request. When the results of a <code>ListNodegroups</code> request exceed <code>maxResults</code>, you can use this value to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
+    "DescribeNodegroupRequest": {
+      "type": "structure",
+      "members": {
+        "cluster_name": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon EKS cluster.</p>",
+          "location": "uri",
+          "locationName": "cluster_name"
+        },
+        "nodegroup_name": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon EKS nodegroup.</p>",
+          "location": "uri",
+          "locationName": "nodegroup_name"
+        }
+      }
+    },
+    "DescribeNodegroupResponse": {
+      "type": "structure",
+      "members": {
+        "nodegroup": {"shape": "Nodegroup"}
+      }
+    },
+    "AutoScalingGroup":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the Auto Scaling group associated with an Amazon EKS managed node group.</p>"
+        }
+      },
+      "documentation":"<p>An Auto Scaling group that is associated with an Amazon EKS managed node group.</p>"
+    },
+    "AutoScalingGroupList":{
+      "type":"list",
+      "member":{"shape":"AutoScalingGroup"}
+    },
+    "NodegroupResources":{
+      "type":"structure",
+      "members":{
+        "autoScalingGroups":{
+          "shape":"AutoScalingGroupList",
+          "documentation":"<p>The Auto Scaling groups associated with the node group.</p>"
+        },
+        "remoteAccessSecurityGroup":{
+          "shape":"String",
+          "documentation":"<p>The remote access security group associated with the node group. This security group controls SSH access to the nodes.</p>"
+        }
+      },
+      "documentation":"<p>An object representing the resources associated with the node group, such as Auto Scaling groups and security groups for remote access.</p>"
+    },
+    "Capacity":{
+      "type":"integer",
+      "box":true,
+      "min":1
+    },
+    "NodegroupScalingConfig":{
+      "type":"structure",
+      "members":{
+        "minSize":{
+          "shape":"Capacity",
+          "documentation":"<p>The minimum number of nodes that the managed node group can scale in to. This number must be greater than zero.</p>"
+        },
+        "maxSize":{
+          "shape":"Capacity",
+          "documentation":"<p>The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html\">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.</p>"
+        },
+        "desiredSize":{
+          "shape":"Capacity",
+          "documentation":"<p>The current number of nodes that the managed node group should maintain.</p>"
+        }
+      },
+      "documentation":"<p>An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group. If you specify a value for any property, then you must specify values for all of the properties.</p>"
+    },
+    "NonZeroInteger":{
+      "type":"integer",
+      "box":true,
+      "min":1
+    },
+    "PercentCapacity":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
+    "NodegroupUpdateConfig":{
+      "type":"structure",
+      "members":{
+        "maxUnavailable":{
+          "shape":"NonZeroInteger",
+          "documentation":"<p>The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or <code>maxUnavailablePercentage</code> is required to have a value.The maximum number is 100.</p>"
+        },
+        "maxUnavailablePercentage":{
+          "shape":"PercentCapacity",
+          "documentation":"<p>The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or <code>maxUnavailable</code> is required to have a value.</p>"
+        }
+      },
+      "documentation":"<p>The node group update configuration.</p>"
+    },
+    "NodegroupIssueCode":{
+      "type":"string",
+      "enum":[
+        "AutoScalingGroupNotFound",
+        "AutoScalingGroupInvalidConfiguration",
+        "Ec2SecurityGroupNotFound",
+        "Ec2SecurityGroupDeletionFailure",
+        "Ec2LaunchTemplateNotFound",
+        "Ec2LaunchTemplateVersionMismatch",
+        "Ec2SubnetNotFound",
+        "Ec2SubnetInvalidConfiguration",
+        "IamInstanceProfileNotFound",
+        "IamLimitExceeded",
+        "IamNodeRoleNotFound",
+        "NodeCreationFailure",
+        "AsgInstanceLaunchFailures",
+        "InstanceLimitExceeded",
+        "InsufficientFreeAddresses",
+        "AccessDenied",
+        "InternalFailure",
+        "ClusterUnreachable"
+      ]
+    },
+    "Issue":{
+      "type":"structure",
+      "members":{
+        "code":{
+          "shape":"NodegroupIssueCode",
+          "documentation":"<p>A brief description of the error.</p> <ul> <li> <p> <b>AccessDenied</b>: Amazon EKS or one or more of your managed nodes is failing to authenticate or authorize with your Kubernetes cluster API server.</p> </li> <li> <p> <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch instances.</p> </li> <li> <p> <b>AutoScalingGroupNotFound</b>: We couldn't find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.</p> </li> <li> <p> <b>ClusterUnreachable</b>: Amazon EKS or one or more of your managed nodes is unable to to communicate with your Kubernetes cluster API server. This can happen if there are network disruptions or if API servers are timing out processing requests. </p> </li> <li> <p> <b>Ec2LaunchTemplateNotFound</b>: We couldn't find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.</p> </li> <li> <p> <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the version that Amazon EKS created to recover.</p> </li> <li> <p> <b>Ec2SecurityGroupDeletionFailure</b>: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.</p> </li> <li> <p> <b>Ec2SecurityGroupNotFound</b>: We couldn't find the cluster security group for the cluster. You must recreate your cluster.</p> </li> <li> <p> <b>Ec2SubnetInvalidConfiguration</b>: One or more Amazon EC2 subnets specified for a node group do not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable the <code>auto-assign public IP address</code> setting for the subnet. See <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying the public IPv4 addressing attribute for your subnet</a> in the Amazon VPC User Guide.</p> </li> <li> <p> <b>IamInstanceProfileNotFound</b>: We couldn't find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.</p> </li> <li> <p> <b>IamNodeRoleNotFound</b>: We couldn't find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.</p> </li> <li> <p> <b>InstanceLimitExceeded</b>: Your AWS account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.</p> </li> <li> <p> <b>InsufficientFreeAddresses</b>: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.</p> </li> <li> <p> <b>InternalFailure</b>: These errors are usually caused by an Amazon EKS server-side issue.</p> </li> <li> <p> <b>NodeCreationFailure</b>: Your launched instances are unable to register with your Amazon EKS cluster. Common causes of this failure are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html\">node IAM role</a> permissions or lack of outbound internet access for the nodes. </p> </li> </ul>"
+        },
+        "message":{
+          "shape":"String",
+          "documentation":"<p>The error message associated with the issue.</p>"
+        },
+        "resourceIds":{
+          "shape":"StringList",
+          "documentation":"<p>The AWS resources that are afflicted by this issue.</p>"
+        }
+      },
+      "documentation":"<p>An object representing an issue with an Amazon EKS resource.</p>"
+    },
+    "IssueList":{
+      "type":"list",
+      "member":{"shape":"Issue"}
+    },
+    "NodegroupHealth":{
+      "type":"structure",
+      "members":{
+        "issues":{
+          "shape":"IssueList",
+          "documentation":"<p>Any issues that are associated with the node group. </p>"
+        }
+      },
+      "documentation":"<p>An object representing the health status of the node group.</p>"
+    },
+    "NodegroupInstance": {
+      "type": "structure",
+      "members": {
+        "instanceId": {"shape":"String"},
+        "privateIp":{"shape":"String"},
+        "publicIp": {"shape":"String"},
+        "interfaceId":{"shape":"String"},
+        "status": {"shape":"String"},
+        "name":{"shape":"String"},
+        "Type": {"shape": "InstanceType"},
+        "Ghost":{"shape":"Boolean"}
+      }
+    },
+    "NodegroupInstanceList": {
+      "type": "list",
+      "member": {"shape": "NodegroupInstance"}
+    },
+    "LaunchTemplateSpecification":{
+      "type":"structure",
+      "members":{
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the launch template.</p>"
+        },
+        "version":{
+          "shape":"String",
+          "documentation":"<p>The version of the launch template to use. If no version is specified, then the template's default version is used.</p>"
+        },
+        "id":{
+          "shape":"String",
+          "documentation":"<p>The ID of the launch template.</p>"
+        }
+      },
+      "documentation":"<p>An object representing a node group launch template specification. The launch template cannot include <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\"> <code>SubnetId</code> </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\"> <code>IamInstanceProfile</code> </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\"> <code>RequestSpotInstances</code> </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html\"> <code>HibernationOptions</code> </a>, or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html\"> <code>TerminateInstances</code> </a>, or the node group deployment or update will fail. For more information about launch templates, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html\"> <code>CreateLaunchTemplate</code> </a> in the Amazon EC2 API Reference. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p> <p>Specify either <code>name</code> or <code>id</code>, but not both.</p>"
+    },
+    "CompactNodegroup":{
+      "type": "structure",
+      "members": {
+        "id": {"shape":"String"},
+        "nodegroupName": {"shape":"String"},
+        "desiredSize":{"shape":"Capacity"},
+        "launchTemplate": {"shape": "LaunchTemplateSpecification"},
+        "status":{"shape":"String"},
+        "tags":{"shape": "TagMap"},
+        "version":{"shape": "String"}
+      }
+    },
+    "Nodegroup": {
+      "type": "structure",
+      "members": {
+        "id": {"shape":"String"},
+        "capacityType":{"shape":"String"},
+        "clusterName": {"shape":"String"},
+        "createdAt":{"shape":"Timestamp"},
+        "health": {"shape": "NodegroupHealth"},
+        "modifiedAt":{"shape":"Timestamp"},
+        "nodegroupName": {"shape":"String"},
+        "status":{"shape":"String"},
+        "instanceTypes": {"shape": "StringList"},
+        "remoteAccess":{"shape": "RemoteAccessConfig"},
+        "labels": {"shape": "TagMap"},
+        "launchTemplate": {"shape": "LaunchTemplateSpecification"},
+        "createdWithLaunchTemplate": {"shape": "Boolean"},
+        "resources":{"shape":"NodegroupResources"},
+        "scalingConfig": {"shape":"NodegroupScalingConfig"},
+        "subnets":{"shape":"StringList"},
+        "taints": {"shape": "taintsList"},
+        "updateConfig":{"shape": "NodegroupUpdateConfig"},
+        "version":{"shape": "String"},
+        "instances": {"shape": "NodegroupInstanceList"},
+        "tags":{"shape": "TagMap"}
+      }
+    },
+    "ValidateClusterCreationRequest": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "String"
+        },
+        "version": {
+          "shape": "String"
+        },
+        "high_availability": {
+          "shape": "Boolean"
+        },
+        "workers_quantity": {
+          "shape": "Integer"
+        },
+        "masters_instance_type": {
+          "shape": "String"
+        },
+        "workers_instance_type": {
+          "shape": "String"
+        },
+        "masters_volume_type": {
+          "shape": "String"
+        },
+        "workers_volume_type": {
+          "shape": "String"
+        },
+        "masters_volume_size": {
+          "shape": "Integer"
+        },
+        "workers_volume_size": {
+          "shape": "Integer"
+        },
+        "subnet_ids": {
+          "shape": "StringList"
+        },
+        "masters_volume_iops": {
+          "shape": "Integer"
+        },
+        "workers_volume_iops": {
+          "shape": "Integer"
+        },
+        "master_public_ip": {
+          "shape": "String"
+        },
+        "security_group_ids": {
+          "shape": "StringList"
+        },
+        "ssh_key_name": {
+          "shape": "String"
+        },
+        "docker_registry_required": {
+          "shape": "Boolean"
+        },
+        "docker_registry_volume_type": {
+          "shape": "String"
+        },
+        "docker_registry_volume_size": {
+          "shape": "Integer"
+        },
+        "docker_registry_volume_iops": {
+          "shape": "Integer"
+        },
+        "ingress_required": {
+          "shape": "Boolean"
+        },
+        "ingress_public_ip": {
+          "shape": "String"
+        },
+        "ingress_instance_type": {
+          "shape": "String"
+        },
+        "ingress_volume_type": {
+          "shape": "String"
+        },
+        "ingress_volume_size": {
+          "shape": "Integer"
+        },
+        "ingress_volume_iops": {
+          "shape": "Integer"
+        },
+        "ebs_provider_required": {
+          "shape": "Boolean"
+        },
+        "ebs_user": {
+          "shape": "String"
+        },
+        "use_placement_groups": {
+          "shape": "Boolean"
+        },
+        "user_data": {
+          "shape": "String"
+        },
+        "user_data_content_type": {
+          "shape": "String"
+        },
+        "pod_subnet_cidr": {
+          "shape": "String"
+        },
+        "service_subnet_cidr": {
+          "shape": "String"
+        },
+        "auto_update_certificates": {
+          "shape": "Boolean"
+        }
+      }
+    },
+    "ClusterSecurityGroup": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "String",
+          "documentation": "<p>Security group's ID.</p>"
+        },
+        "created_automatically": {
+          "shape": "String",
+          "documentation": "<p>Security group's created_automatically field.</p>"
+        }
+      }
+    },
+    "ClusterSecurityGroupList": {
+      "type": "list",
+      "member": {"shape": "ClusterSecurityGroup"}
+    },
+    "GetClusterSecurityGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "cluster_name": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "cluster_name"
+        }
+      }
+    },
+    "GetClusterSecurityGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "security_groups": {
+          "shape": "ClusterSecurityGroupList"
+        }
+      }
+    },
+    "RequiredValueObject": {
+      "type": "structure",
+      "members": {
+        "value": {
+          "shape": "String"
+        },
+        "required": {
+          "shape": "Boolean"
+        }
+      }
+    },
+    "GetDefaultSubnetsResponse": {
+      "type": "structure",
+      "members": {
+        "pod_default_subnet": {
+          "shape": "RequiredValueObject"
+        },
+        "service_default_subnet": {
+          "shape": "RequiredValueObject"
+        }
+      }
+    },
+    "ValidateClusterNameRequest": {
+      "type": "structure",
+      "members": {
+        "cluster_name": {
+          "shape": "String",
+          "documentation": "<p>Desired cluster name to validate.</p>"
+        }
+      }
+    },
+    "ValidateClusterNameResponse": {
+      "type": "structure",
+      "members": {
+        "valid": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates validity of a desired cluster name.</p>"
+        }
+      }
+    },
+    "VersionVisibility": {
+      "type": "structure",
+      "members": {
+        "public": {
+          "shape": "Boolean"
+        },
+        "customers": {
+          "shape": "StringList"
+        }
+      }
+    },
+    "Version": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "String"
+        },
+        "number": {
+          "shape": "String"
+        },
+        "visibility": {
+          "shape": "VersionVisibility"
+        }
+      }
+    },
+    "VersionSetting": {
+      "type": "structure",
+      "members": {
+        "version": {
+          "shape": "Version"
+        },
+        "image_id": {
+          "shape": "String"
+        },
+        "bucket_address": {
+          "shape": "String"
+        },
+        "yaml_path": {
+          "shape": "String"
+        },
+        "rpm_path": {
+          "shape": "String"
+        },
+        "docker_registry_address": {
+          "shape": "String"
+        },
+        "docker_registry_namespace": {
+          "shape": "String"
+        },
+        "insecure_endpoints": {
+          "shape": "Boolean"
+        },
+        "multi_az_validation": {
+          "shape": "Boolean"
+        },
+        "ha_subnets_quantity": {
+          "shape": "Integer"
+        }
+      }
+    },
+    "VersionSettingsList": {
+      "type": "list",
+      "member": {
+        "shape": "VersionSetting"
+      }
+    },
+    "GetSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "settings": {
+          "shape": "VersionSettingsList"
+        }
+      }
+    },
+    "EBSUser": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "String"
+        },
+        "login": {
+          "shape": "String"
+        },
+        "name": {
+          "shape": "String"
+        },
+        "email": {
+          "shape": "String"
+        },
+        "enabled": {
+          "shape": "Boolean"
+        }
+      }
+    },
+    "EBSUserList": {
+      "type": "list",
+      "member": {
+        "shape": "EBSUser"
+      }
+    },
+    "GetEbsUsersResponse": {
+      "type": "structure",
+      "members": {
+        "ebs_users": {
+          "shape": "EBSUserList"
+        }
+      }
+    },
+    "StaticLimit": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "shape": "String"
+        },
+        "usage": {
+          "shape": "Float"
+        },
+        "limit": {
+          "shape": "Float"
+        }
+      }
+    },
+    "StaticLimitsList": {
+      "type": "list",
+      "member": {
+        "shape": "StaticLimit"
+      }
+    },
+    "GetStaticLimitsResponse": {
+      "type": "structure",
+      "members": {
+        "static_limits": {
+          "shape": "StaticLimitsList"
+        }
+      }
+    },
+    "ListWarningsRequest": {
+      "type": "structure",
+      "members": {
+        "cluster_name": {
+          "shape": "String",
+          "location": "querystring",
+          "locationName": "cluster_name"
+        }
+      }
+    },
+    "Warning": {
+      "type": "structure",
+      "members": {
+        "id":  {"shape": "String"},
+        "is_new": {"shape": "Boolean"},
+        "type":  {"shape": "String"},
+        "reason": {"shape": "String"},
+        "created":  {"shape": "String"},
+        "entity_id": {"shape": "String"}
+      }
+    },
+    "WarningsList": {
+      "type": "list",
+      "member": {"shape": "Warning"}
+    },
+    "ListWarningsResponse": {
+      "type": "structure",
+      "members": {
+        "warnings": {"shape": "WarningsList"}
+      }
+    },
+    "taintKey":{
+      "type":"string",
+      "max":63,
+      "min":1
+    },
+    "taintValue":{
+      "type":"string",
+      "max":63,
+      "min":0
+    },
+    "taintsList":{
+      "type":"list",
+      "member":{"shape":"Taint"}
+    },
+    "Taint":{
+      "type":"structure",
+      "members":{
+        "key":{
+          "shape":"taintKey",
+          "documentation":"<p>The key of the taint.</p>"
+        },
+        "value":{
+          "shape":"taintValue",
+          "documentation":"<p>The value of the taint.</p>"
+        },
+        "effect":{
+          "shape":"TaintEffect",
+          "documentation":"<p>The effect of the taint.</p>"
+        }
+      },
+      "documentation":"<p>A property that allows a node to repel a set of pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html\">Node taints on managed node groups</a>.</p>"
+    },
+    "TaintEffect":{
+      "type":"string",
+      "enum":[
+        "NO_SCHEDULE",
+        "NO_EXECUTE",
+        "PREFER_NO_SCHEDULE"
+      ]
+    },
+    "Timestamp":{"type":"timestamp"}
+  },
+  "documentation":"<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on AWS without needing to stand up or maintain your own Kubernetes control plane. Kubernetes is an open-source system for automating the deployment, scaling, and management of containerized applications. </p> <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use all the existing plugins and tooling from the Kubernetes community. Applications running on Amazon EKS are fully compatible with applications running on any standard Kubernetes environment, whether running in on-premises data centers or public clouds. This means that you can easily migrate any standard Kubernetes application to Amazon EKS without any code modification required.</p>"
+}
