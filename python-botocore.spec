@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC37%{?buildid}%{?dist}
+Release:        CROC38%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Wed Feb 14 2024 Evgenii Proskurnev <eproskurnev@croc.ru> - 1.20.14-CROC38
+- botocore: remove unused fields from DatabaseBackup structure
+
 * Wed Jan 31 2024 Anastasia Berezko <aberezko@croc.ru> - 1.20.14-CROC37
 - eks: fix parameters types in cluster schema
 - backup: add ResourcesCount to ListBackupSelections output
