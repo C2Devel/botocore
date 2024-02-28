@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC38%{?buildid}%{?dist}
+Release:        CROC39%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Wed Feb 28 2024 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC39
+- paas: add isRolledBack attribute to Service shape
+
 * Wed Feb 14 2024 Evgenii Proskurnev <eproskurnev@croc.ru> - 1.20.14-CROC38
 - botocore: remove unused fields from DatabaseBackup structure
 
