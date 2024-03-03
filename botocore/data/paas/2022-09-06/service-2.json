@@ -1178,14 +1178,39 @@
         "users": {"shape": "UserCompactResponseList"}
       }
     },
+    "LoadBalancerTargetGroup": {
+      "type": "structure",
+      "members": {
+        "arn": {"shape": "String"},
+        "port": {"shape": "Integer"},
+        "protocol": {"shape": "String"},
+        "targetType": {"shape": "String"}
+      }
+    },
+    "LoadBalancerListener": {
+      "type": "structure",
+      "members": {
+        "arn": {"shape": "String"},
+        "port": {"shape": "Integer"},
+        "protocol": {"shape": "String"}
+      }
+    },
+    "targetGroupsList": {
+      "type": "list",
+      "member": {"shape": "LoadBalancerTargetGroup"}
+    },
+    "listenersList": {
+      "type": "list",
+      "member": {"shape": "LoadBalancerListener"}
+    },
     "LoadBalancer": {
       "type": "structure",
       "members": {
         "balancerId": {"shape": "String"},
         "dnsName": {"shape": "String"},
         "balancerName": {"shape": "String"},
-        "targetGroupIds": {"shape": "StringList"},
-        "listenerIds": {"shape": "StringList"}
+        "targetGroups": {"shape": "targetGroupsList"},
+        "listeners": {"shape": "listenersList"}
       }
     },
     "LoadBalancerList": {
