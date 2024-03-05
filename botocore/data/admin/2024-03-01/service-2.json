@@ -1,0 +1,1033 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "24.3.0",
+    "endpointPrefix": "admin",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "Cloud Admin API",
+    "serviceId": "Admin",
+    "signatureVersion": "v4",
+    "uid": "admin-2024-03-01"
+  },
+  "operations": {
+    "DescribeCustomers": {
+      "name": "DescribeCustomers",
+      "http": {
+        "method": "GET",
+        "requestUri": "/admin/customer"
+      },
+      "input": {
+        "shape": "DescribeCustomersRequest"
+      },
+      "output": {
+        "shape": "DescribeCustomersResponse"
+      },
+      "documentation": "<p>Get a list of customers.</p>"
+    },
+    "CreateCustomer": {
+      "name": "CreateCustomer",
+      "http": {
+        "method": "POST",
+        "requestUri": "/admin/customer"
+      },
+      "input": {
+        "shape": "CreateCustomerRequest"
+      },
+      "output": {
+        "shape": "CreateCustomerResponse"
+      },
+      "documentation": "<p>Create a new cloud customer.</p>"
+    },
+    "DescribeLimits": {
+      "name": "DescribeLimits",
+      "http": {
+        "method": "GET",
+        "requestUri": "/admin/customer/{CustomerName}/limit"
+      },
+      "input": {
+        "shape": "DescribeLimitsRequest"
+      },
+      "output": {
+        "shape": "DescribeLimitsResponse"
+      },
+      "documentation": "<p>Get a list of customer limits.</p>"
+    },
+    "SetLimitValue": {
+      "name": "SetLimitValue",
+      "http": {
+        "method": "POST",
+        "requestUri": "/admin/customer/{CustomerName}/limit"
+      },
+      "input": {
+        "shape": "SetLimitValueRequest"
+      },
+      "output": {
+        "shape": "SetLimitValueResponse"
+      },
+      "documentation": "<p>Set customer limit.</p>"
+    },
+    "DeleteLimits": {
+      "name": "DeleteLimits",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/admin/customer/{CustomerName}/limit"
+      },
+      "input": {
+        "shape": "DeleteLimitsRequest"
+      },
+      "output": {
+        "shape": "DeleteLimitResponse"
+      },
+      "documentation": "<p>Delete a customer limit.</p>"
+    },
+    "DescribeProjects": {
+      "name": "DescribeProjects",
+      "http": {
+        "method": "GET",
+        "requestUri": "/admin/customer/{CustomerName}/project"
+      },
+      "input": {
+        "shape": "DescribeProjectsRequest"
+      },
+      "output": {
+        "shape": "DescribeProjectsResponse"
+      },
+      "documentation": "<p>Get a list of projects.</p>"
+    },
+    "CreateProject": {
+      "name": "CreateProject",
+      "http": {
+        "method": "POST",
+        "requestUri": "/admin/customer/{CustomerName}/project"
+      },
+      "input": {
+        "shape": "CreateProjectRequest"
+      },
+      "output": {
+        "shape": "CreateProjectResponse"
+      },
+      "documentation": "<p>Create a new cloud project.</p>"
+    },
+    "DescribeProviders": {
+      "name": "DescribeProviders",
+      "http": {
+        "method": "GET",
+        "requestUri": "/admin/customer/{CustomerName}/provider"
+      },
+      "input": {
+        "shape": "DescribeProvidersRequest"
+      },
+      "output": {
+        "shape": "DescribeProvidersResponse"
+      },
+      "documentation": "<p>Get a list of Active Directory providers.</p>"
+    },
+    "CreateProvider": {
+      "name": "CreateProvider",
+      "http": {
+        "method": "POST",
+        "requestUri": "/admin/customer/{CustomerName}/provider"
+      },
+      "input": {
+        "shape": "CreateProviderRequest"
+      },
+      "output": {
+        "shape": "CreateProviderResponse"
+      },
+      "documentation": "<p>Create a new cloud Active Directory provider.</p>"
+    },
+    "CreateActiveDirectoryGroup": {
+      "name": "CreateActiveDirectoryGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/admin/customer/{CustomerName}/provider/{ProviderName}/group"
+      },
+      "input": {
+        "shape": "CreateActiveDirectoryGroupRequest"
+      },
+      "output": {
+        "shape": "CreateActiveDirectoryGroupResponse"
+      },
+      "documentation": "<p>Create a new Active Directory provider group.</p>"
+    },
+    "SetActiveDirectoryProjectPrivileges": {
+      "name": "SetActiveDirectoryProjectPrivileges",
+      "http": {
+        "method": "POST",
+        "requestUri": "/admin/customer/{CustomerName}/provider/{ProviderName}/group/{GroupName}"
+      },
+      "input": {
+        "shape": "SetADGroupProjectPrivilegesRequest"
+      },
+      "output": {
+        "shape": "SetADGroupProjectPrivilegesResponse"
+      },
+      "documentation": "<p>Set privileges for an Active Directory provider group.</p>"
+    },
+    "DeleteCustomer": {
+      "name": "DeleteCustomer",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/admin/customer/{Name}"
+      },
+      "input": {
+        "shape": "DeleteCustomerRequest"
+      },
+      "output": {
+        "shape": "DeleteCustomerResponse"
+      },
+      "documentation": "<p>Delete a customer and all its resources.</p>"
+    },
+    "ChangeCustomerTariff": {
+      "name": "ChangeCustomerTariff",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/admin/customer/{Name}/tariff"
+      },
+      "input": {
+        "shape": "ChangeCustomerTariffRequest"
+      },
+      "output": {
+        "shape": "ChangeCustomerTariffResponse"
+      },
+      "documentation": "<p>Change a customer's tariff.</p>"
+    }
+  },
+  "shapes": {
+    "DescribeCustomersRequest": {
+      "type": "structure",
+      "members": {
+        "Names": {
+          "shape": "NamesList",
+          "location": "querystring",
+          "locationName": "NamesList",
+          "documentation": "<p></p>"
+        }
+      },
+      "required": []
+    },
+    "NamesList": {
+      "type": "list",
+      "member": {
+        "shape": "string"
+      }
+    },
+    "Name": {
+      "type": "string"
+    },
+    "TariffId": {
+      "type": "string"
+    },
+    "Customer": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the customer.</p>"
+        },
+        "tariffId": {
+          "shape": "TariffId",
+          "documentation": "<p>ID of the tariff.</p>"
+        }
+      },
+      "required": [
+        "Name",
+        "TariffId"
+      ]
+    },
+    "RequestId": {
+      "type": "string"
+    },
+    "Customers": {
+      "type": "list",
+      "member": {
+        "shape": "Customer"
+      }
+    },
+    "DescribeCustomersResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "customers": {
+          "shape": "Customers",
+          "documentation": "<p>List of customers.</p>"
+        }
+      }
+    },
+    "Email": {
+      "type": "string"
+    },
+    "CreateCustomerRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the customer.</p>"
+        },
+        "Email": {
+          "shape": "Email"
+        }
+      },
+      "required": [
+        "Name",
+        "Email"
+      ]
+    },
+    "CreateCustomerResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the customer.</p>"
+        },
+        "email": {
+          "shape": "Email",
+          "documentation": "<p>Email of the customer admin.</p>"
+        }
+      }
+    },
+    "DescribeLimitsRequest": {
+      "type": "structure",
+      "members": {
+        "ProjectName": {
+          "shape": "ProjectName",
+          "location": "querystring",
+          "locationName": "ProjectName",
+          "documentation": "<p></p>"
+        },
+        "Limits": {
+          "shape": "LimitsList",
+          "location": "querystring",
+          "locationName": "LimitsList",
+          "documentation": "<p></p>"
+        },
+        "CustomerName": {
+          "shape": "CustomerName",
+          "location": "uri",
+          "locationName": "CustomerName",
+          "documentation": "<p>Name of the customer.</p>"
+        }
+      },
+      "required": [
+        "CustomerName"
+      ]
+    },
+    "ProjectName": {
+      "type": "string"
+    },
+    "LimitsList": {
+      "type": "list",
+      "member": {
+        "shape": "SupportedLimits"
+      }
+    },
+    "CustomerName": {
+      "type": "string"
+    },
+    "SupportedLimits": {
+      "type": "string",
+      "enum": [
+        "cores_max_num",
+        "memory_max_size",
+        "volumes_total_size"
+      ]
+    },
+    "Value": {
+      "type": "integer"
+    },
+    "CloudLimit": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "SupportedLimits",
+          "documentation": "<p>Name of the limit.</p>"
+        },
+        "value": {
+          "shape": "Value",
+          "documentation": "<p>Value of the limit.</p>"
+        }
+      },
+      "required": [
+        "Name",
+        "Value"
+      ]
+    },
+    "Limits": {
+      "type": "list",
+      "member": {
+        "shape": "CloudLimit"
+      }
+    },
+    "DescribeLimitsResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "limits": {
+          "shape": "Limits",
+          "documentation": "<p>List of limits.</p>"
+        }
+      }
+    },
+    "string": {
+      "type": "string"
+    },
+    "LimitValue": {
+      "type": "integer"
+    },
+    "SetLimitValueRequest": {
+      "type": "structure",
+      "members": {
+        "ProjectName": {
+          "shape": "string",
+          "documentation": "<p>Name of the project.</p>"
+        },
+        "LimitName": {
+          "shape": "SupportedLimits",
+          "documentation": "<p>Limit name.</p>"
+        },
+        "LimitValue": {
+          "shape": "LimitValue",
+          "documentation": "<p>Limit value.</p>"
+        },
+        "CustomerName": {
+          "shape": "CustomerName",
+          "location": "uri",
+          "locationName": "CustomerName",
+          "documentation": "<p>Name of the customer.</p>"
+        }
+      },
+      "required": [
+        "LimitName",
+        "LimitValue",
+        "CustomerName"
+      ]
+    },
+    "SetLimitValueResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "customerName": {
+          "shape": "CustomerName",
+          "documentation": "<p>Name of the customer.</p>"
+        },
+        "projectName": {
+          "shape": "ProjectName",
+          "documentation": "<p>Name of the project.</p>"
+        },
+        "limitName": {
+          "shape": "SupportedLimits",
+          "documentation": "<p>Name of the limit.</p>"
+        },
+        "limitValue": {
+          "shape": "LimitValue",
+          "documentation": "<p>Value of the limit.</p>"
+        }
+      }
+    },
+    "DeleteLimitsRequest": {
+      "type": "structure",
+      "members": {
+        "ProjectName": {
+          "shape": "ProjectName",
+          "location": "querystring",
+          "locationName": "ProjectName",
+          "documentation": "<p></p>"
+        },
+        "LimitName": {
+          "shape": "LimitName",
+          "location": "querystring",
+          "locationName": "LimitName",
+          "documentation": "<p></p>"
+        },
+        "CustomerName": {
+          "shape": "CustomerName",
+          "location": "uri",
+          "locationName": "CustomerName",
+          "documentation": "<p>Name of the customer.</p>"
+        }
+      },
+      "required": [
+        "LimitName",
+        "CustomerName"
+      ]
+    },
+    "LimitName": {
+      "type": "string"
+    },
+    "AccountName": {
+      "type": "string"
+    },
+    "Success": {
+      "type": "boolean"
+    },
+    "DeleteLimitResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "accountName": {
+          "shape": "AccountName",
+          "documentation": "<p>Name of the account.</p>"
+        },
+        "projectName": {
+          "shape": "ProjectName",
+          "documentation": "<p>Name of the project.</p>"
+        },
+        "limit": {
+          "shape": "SupportedLimits",
+          "documentation": "<p>Name of the limit.</p>"
+        },
+        "success": {
+          "shape": "Success",
+          "documentation": "<p>Success of the operation.</p>"
+        }
+      }
+    },
+    "DescribeProjectsRequest": {
+      "type": "structure",
+      "members": {
+        "Names": {
+          "shape": "NamesList",
+          "location": "querystring",
+          "locationName": "NamesList",
+          "documentation": "<p></p>"
+        },
+        "CustomerName": {
+          "shape": "CustomerName",
+          "location": "uri",
+          "locationName": "CustomerName",
+          "documentation": "<p>Name of the customer.</p>"
+        }
+      },
+      "required": [
+        "CustomerName"
+      ]
+    },
+    "Id": {
+      "type": "string"
+    },
+    "Login": {
+      "type": "string"
+    },
+    "State": {
+      "type": "string"
+    },
+    "CreateTime": {
+      "type": "string"
+    },
+    "Project": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "Id",
+          "documentation": "<p>ID of the project.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the project.</p>"
+        },
+        "login": {
+          "shape": "Login",
+          "documentation": "<p>Login of the project.</p>"
+        },
+        "state": {
+          "shape": "State",
+          "documentation": "<p>State of the project.</p>"
+        },
+        "email": {
+          "shape": "Email",
+          "documentation": "<p>Email of the project.</p>"
+        },
+        "createTime": {
+          "shape": "CreateTime",
+          "documentation": "<p>Creation time of the project.</p>"
+        }
+      },
+      "required": [
+        "Id",
+        "Name",
+        "Login",
+        "State",
+        "Email",
+        "CreateTime"
+      ]
+    },
+    "Projects": {
+      "type": "list",
+      "member": {
+        "shape": "Project"
+      }
+    },
+    "DescribeProjectsResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "projects": {
+          "shape": "Projects",
+          "documentation": "<p>List of projects.</p>"
+        }
+      }
+    },
+    "CreateProjectRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the project.</p>"
+        },
+        "Login": {
+          "shape": "Login",
+          "documentation": "<p>Login of the project.</p>"
+        },
+        "CustomerName": {
+          "shape": "CustomerName",
+          "location": "uri",
+          "locationName": "CustomerName",
+          "documentation": "<p>Name of the customer.</p>"
+        }
+      },
+      "required": [
+        "Name",
+        "Login",
+        "CustomerName"
+      ]
+    },
+    "CreateProjectResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "project": {
+          "shape": "Project",
+          "documentation": "<p>Created project.</p>"
+        }
+      }
+    },
+    "DescribeProvidersRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "Name",
+          "location": "querystring",
+          "locationName": "Name",
+          "documentation": "<p></p>"
+        },
+        "CustomerName": {
+          "shape": "CustomerName",
+          "location": "uri",
+          "locationName": "CustomerName",
+          "documentation": "<p>Name of the customer.</p>"
+        }
+      },
+      "required": [
+        "CustomerName"
+      ]
+    },
+    "ClientId": {
+      "type": "string"
+    },
+    "ClientSecret": {
+      "type": "string"
+    },
+    "AuthUrl": {
+      "type": "string"
+    },
+    "TokenUrl": {
+      "type": "string"
+    },
+    "LogoutUrl": {
+      "type": "string"
+    },
+    "VerifySSL": {
+      "type": "boolean"
+    },
+    "Provider": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "string",
+          "documentation": "<p>ID of the provider.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the provider.</p>"
+        },
+        "clientId": {
+          "shape": "ClientId",
+          "documentation": "<p>Client ID of the provider.</p>"
+        },
+        "clientSecret": {
+          "shape": "ClientSecret",
+          "documentation": "<p>Client secret of the provider.</p>"
+        },
+        "authUrl": {
+          "shape": "AuthUrl",
+          "documentation": "<p>Auth URL of the provider.</p>"
+        },
+        "tokenUrl": {
+          "shape": "TokenUrl",
+          "documentation": "<p>Token URL of the provider.</p>"
+        },
+        "logoutUrl": {
+          "shape": "LogoutUrl",
+          "documentation": "<p>Logout URL of the provider.</p>"
+        },
+        "verifySSL": {
+          "shape": "VerifySSL",
+          "documentation": "<p>SSL verification enabled.</p>"
+        }
+      },
+      "required": [
+        "Id",
+        "Name",
+        "ClientId",
+        "ClientSecret",
+        "AuthUrl",
+        "TokenUrl",
+        "LogoutUrl",
+        "VerifySSL"
+      ]
+    },
+    "Providers": {
+      "type": "list",
+      "member": {
+        "shape": "Provider"
+      }
+    },
+    "DescribeProvidersResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "providers": {
+          "shape": "Providers",
+          "documentation": "<p>Active Directory providers.</p>"
+        }
+      }
+    },
+    "boolean": {
+      "type": "string"
+    },
+    "CreateProviderRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the provider.</p>"
+        },
+        "ClientId": {
+          "shape": "ClientId",
+          "documentation": "<p>Client ID of the provider.</p>"
+        },
+        "ClientSecret": {
+          "shape": "ClientSecret",
+          "documentation": "<p>Client secret of the provider.</p>"
+        },
+        "AuthUrl": {
+          "shape": "AuthUrl",
+          "documentation": "<p>Auth URL of the provider.</p>"
+        },
+        "TokenUrl": {
+          "shape": "TokenUrl",
+          "documentation": "<p>Token URL of the provider.</p>"
+        },
+        "LogoutUrl": {
+          "shape": "LogoutUrl",
+          "documentation": "<p>Logout URL of the provider.</p>"
+        },
+        "VerifySSL": {
+          "shape": "boolean",
+          "documentation": "<p>SSL verification enabled.</p>"
+        },
+        "CustomerName": {
+          "shape": "CustomerName",
+          "location": "uri",
+          "locationName": "CustomerName",
+          "documentation": "<p>Name of the customer.</p>"
+        }
+      },
+      "required": [
+        "Name",
+        "ClientId",
+        "ClientSecret",
+        "AuthUrl",
+        "TokenUrl",
+        "LogoutUrl",
+        "CustomerName"
+      ]
+    },
+    "CreateProviderResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "provider": {
+          "shape": "Provider",
+          "documentation": "<p>Active Directory provider.</p>"
+        }
+      }
+    },
+    "CreateActiveDirectoryGroupRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the group.</p>"
+        },
+        "CustomerName": {
+          "shape": "CustomerName",
+          "location": "uri",
+          "locationName": "CustomerName",
+          "documentation": "<p>Name of the customer.</p>"
+        },
+        "ProviderName": {
+          "shape": "ProviderName",
+          "location": "uri",
+          "locationName": "ProviderName",
+          "documentation": "<p>Name of the provider.</p>"
+        }
+      },
+      "required": [
+        "Name",
+        "CustomerName",
+        "ProviderName"
+      ]
+    },
+    "ProviderName": {
+      "type": "string"
+    },
+    "ModifyTime": {
+      "type": "integer"
+    },
+    "ProjectGrants": {
+      "type": "list",
+      "member": {
+        "shape": "ProjectGrant"
+      }
+    },
+    "ADGroup": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "string",
+          "documentation": "<p>ID of the AD group.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the AD group.</p>"
+        },
+        "modifyTime": {
+          "shape": "ModifyTime",
+          "documentation": "<p>Modify time of the AD group.</p>"
+        },
+        "projectGrants": {
+          "shape": "ProjectGrants",
+          "documentation": "<p>Project grants of the AD group.</p>"
+        },
+        "ProviderId": {
+          "shape": "string",
+          "documentation": "<p>ID of the AD provider.</p>"
+        }
+      },
+      "required": [
+        "Id",
+        "Name",
+        "ModifyTime",
+        "ProjectGrants",
+        "ProviderId"
+      ]
+    },
+    "Action": {
+      "type": "string"
+    },
+    "ProjectId": {
+      "type": "string"
+    },
+    "ProjectLogin": {
+      "type": "string"
+    },
+    "ProjectGrant": {
+      "type": "structure",
+      "members": {
+        "action": {
+          "shape": "Action",
+          "documentation": "<p>Action of the grant.</p>"
+        },
+        "projectId": {
+          "shape": "ProjectId",
+          "documentation": "<p>ID of the project.</p>"
+        },
+        "projectLogin": {
+          "shape": "ProjectLogin",
+          "documentation": "<p>Login of the project.</p>"
+        }
+      },
+      "required": [
+        "Action",
+        "ProjectId",
+        "ProjectLogin"
+      ]
+    },
+    "CreateActiveDirectoryGroupResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "adGroup": {
+          "shape": "ADGroup",
+          "documentation": "<p>Active Directory group.</p>"
+        }
+      }
+    },
+    "RoleIds": {
+      "type": "list",
+      "member": {
+        "shape": "string"
+      }
+    },
+    "SetADGroupProjectPrivilegesRequest": {
+      "type": "structure",
+      "members": {
+        "ProjectName": {
+          "shape": "ProjectName",
+          "documentation": "<p>Project name.</p>"
+        },
+        "RoleIds": {
+          "shape": "RoleIds",
+          "documentation": "<p>IDs of roles to give grants to.</p>"
+        },
+        "CustomerName": {
+          "shape": "CustomerName",
+          "location": "uri",
+          "locationName": "CustomerName",
+          "documentation": "<p>Customer name.</p>"
+        },
+        "ProviderName": {
+          "shape": "ProviderName",
+          "location": "uri",
+          "locationName": "ProviderName",
+          "documentation": "<p>AD Provider name.</p>"
+        },
+        "GroupName": {
+          "shape": "GroupName",
+          "location": "uri",
+          "locationName": "GroupName",
+          "documentation": "<p>AD Group name.</p>"
+        }
+      },
+      "required": [
+        "ProjectName",
+        "RoleIds",
+        "CustomerName",
+        "ProviderName",
+        "GroupName"
+      ]
+    },
+    "GroupName": {
+      "type": "string"
+    },
+    "SetADGroupProjectPrivilegesResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "adGroup": {
+          "shape": "ADGroup",
+          "documentation": "<p>Active Directory group.</p>"
+        }
+      }
+    },
+    "DeleteCustomerRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "Name",
+          "location": "uri",
+          "locationName": "Name",
+          "documentation": "<p>Name of the customer.</p>"
+        }
+      },
+      "required": [
+        "Name"
+      ]
+    },
+    "DeleteCustomerResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the customer.</p>"
+        }
+      }
+    },
+    "ChangeCustomerTariffRequest": {
+      "type": "structure",
+      "members": {
+        "TariffId": {
+          "shape": "TariffId",
+          "documentation": "<p>ID of the tariff.</p>"
+        },
+        "Name": {
+          "shape": "Name",
+          "location": "uri",
+          "locationName": "Name",
+          "documentation": "<p>Name of the customer.</p>"
+        }
+      },
+      "required": [
+        "TariffId",
+        "Name"
+      ]
+    },
+    "ChangeCustomerTariffResponse": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>Request UUID.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>Name of the customer.</p>"
+        },
+        "tariffId": {
+          "shape": "TariffId",
+          "documentation": "<p>ID of the tariff.</p>"
+        }
+      }
+    }
+  }
+}
