@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC39%{?buildid}%{?dist}
+Release:        CROC40%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Mon Mar 11 2024 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC40
+- paas: add methods for elasticsearch snapshot repositories
+
 * Wed Feb 28 2024 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC39
 - paas: add isRolledBack attribute to Service shape
 
