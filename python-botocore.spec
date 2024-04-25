@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC41%{?buildid}%{?dist}
+Release:        CROC42%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,9 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Thu Apr 25 2024 Anastasia Berezko <aberezko@croc.ru> - 1.20.14-CROC42
+- data: add admin service
+
 * Thu Apr 04 2024 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC41
 - eks: add private endpoint
 
