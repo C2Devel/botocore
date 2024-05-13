@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC45%{?buildid}%{?dist}
+Release:        ROCKIT45%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
