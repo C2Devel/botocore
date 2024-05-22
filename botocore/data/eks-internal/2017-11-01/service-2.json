@@ -1407,6 +1407,9 @@
         },
         "ha_subnets_quantity": {
           "shape": "Integer"
+        },
+        "deprecated": {
+          "shape": "Boolean"
         }
       }
     },
