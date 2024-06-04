@@ -589,7 +589,9 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The metadata to apply to the provider configuration to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you defined.</p>"
-        }
+        },
+        "TotalCPUCount": {"shape": "String"},
+        "TotalMemory": {"shape": "String"}
       }
     },
     "ClusterName": {
