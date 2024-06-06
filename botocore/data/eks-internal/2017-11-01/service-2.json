@@ -732,6 +732,9 @@
         "Version": {
           "shape": "String"
         },
+        "ContainsDeprecatedVersion": {
+          "shape": "Boolean"
+        },
         "HighAvailability": {
           "shape": "Boolean"
         },
