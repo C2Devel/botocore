@@ -3218,6 +3218,16 @@
       "output":{"shape":"DescribePublicIpv4PoolsResult"},
       "documentation":"<p>Describes the specified IPv4 address pools.</p>"
     },
+    "DescribeQuotas":{
+      "name":"DescribeQuotas",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeQuotasRequest"},
+      "output":{"shape":"DescribeQuotasResult"},
+      "documentation":"<p>Describes the specified quotas.</p>"
+    },
     "DescribeRegions":{
       "name":"DescribeRegions",
       "http":{
@@ -24476,6 +24486,27 @@
           "shape":"String",
           "documentation":"<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName":"nextToken"
+        }
+      }
+    },
+    "DescribeQuotasRequest":{
+      "type":"structure",
+      "required":["QuotaNames"],
+      "members":{
+        "QuotaNames":{
+          "shape":"QuotaNameStringList",
+          "documentation":"<p>The names of quotas.</p>",
+          "location": "quotaName"
+        }
+      }
+    },
+    "DescribeQuotasResult":{
+      "type":"structure",
+      "members":{
+        "Quotas":{
+          "shape":"QuotaList",
+          "documentation":"<p>Information about the quotas.</p>",
+          "locationName":"quotaSet"
         }
       }
     },
@@ -51871,6 +51902,87 @@
       "member":{
         "shape":"ScheduledInstance",
         "locationName":"item"
+      }
+    },
+    "Quota":{
+      "type":"structure",
+      "members":{
+        "Name":{
+          "shape":"QuotaName",
+          "documentation":"<p>The name of the quota.</p>",
+          "locationName":"name"
+        },
+        "Values":{
+          "shape":"QuotaValueList",
+          "documentation":"<p>The values of the quota. If quota supports per-AZ values, the quota value includes an availability zone.</p>",
+          "locationName":"valueSet"
+        }
+      }
+    },
+    "QuotaAzValue":{
+      "type":"structure",
+      "members":{
+        "Type":{
+          "shape":"String",
+          "documentation":"<p>The type of the resource connected with the quota.</p>",
+          "locationName":"type"
+        },
+        "Limit":{
+          "shape":"String",
+          "documentation":"<p>The value of the quota limit.</p>",
+          "locationName":"limit"
+        },
+        "Usage":{
+          "shape":"String",
+          "documentation":"<p>The value of the quota usage.</p>",
+          "locationName":"usage"
+        }
+      }
+    },
+    "QuotaAzValueList":{
+      "type":"list",
+      "member":{
+        "shape":"QuotaAzValue",
+        "locationName": "item"
+      }
+    },
+    "QuotaList":{
+      "type":"list",
+      "member":{
+        "shape":"Quota",
+        "locationName":"item"
+      }
+    },
+    "QuotaName":{
+      "type":"string"
+    },
+    "QuotaNameStringList":{
+      "type":"list",
+      "member":{
+        "shape":"QuotaName",
+        "locationName":"quotaName"
+      }
+    },
+    "QuotaValue":{
+      "type":"structure",
+      "members":{
+        "AvailabilityZone":{
+          "shape":"String",
+          "documentation":"<p>The availability zone. Specified, if quota supports per AZ values.</p>",
+          "locationName":"availabilityZone"
+        },
+        "AzValues":{
+          "shape":"QuotaAzValueList",
+          "documentation":"<p>The values of the quota.</p>",
+          "locationName":"azValueSet"
+        }
+      }
+    },
+    "QuotaValueList":{
+      "type":"list",
+      "member":{
+        "shape":"QuotaValue",
+        "locationName": "item"
       }
     },
     "RIProductDescription":{
