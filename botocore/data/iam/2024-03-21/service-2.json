@@ -410,6 +410,38 @@
         "shape":"UpdateUserResponse",
         "resultWrapper":"UpdateUserResult"
       }
+    },
+    "UploadServerCertificate":{
+      "name":"UploadServerCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UploadServerCertificateRequest"},
+      "output":{
+        "shape":"UploadServerCertificateResponse",
+        "resultWrapper":"UploadServerCertificateResult"
+      }
+    },
+    "DeleteServerCertificate":{
+      "name":"DeleteServerCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteServerCertificateRequest"}
+    },
+    "ListServerCertificates":{
+      "name":"ListServerCertificates",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListServerCertificatesRequest"},
+      "output":{
+        "shape":"ListServerCertificatesResponse",
+        "resultWrapper":"ListServerCertificatesResult"
+      }
     }
   },
   "shapes":{
@@ -1380,6 +1412,113 @@
       "max":40,
       "min":1,
       "pattern":"^[a-zA-Z][a-zA-Z0-9_.-]*$"
+    },
+    "UploadServerCertificateRequest":{
+      "type":"structure",
+      "required":[
+        "ServerCertificateName",
+        "CertificateBody",
+        "PrivateKey"
+      ],
+      "members":{
+        "ServerCertificateName":{
+          "shape":"serverCertificateNameType"
+        },
+        "CertificateBody":{
+          "shape":"certificateBodyType"
+        },
+        "PrivateKey":{
+          "shape":"privateKeyType"
+        },
+        "CertificateChain":{
+          "shape":"certificateChainType"
+        }
+      }
+    },
+    "UploadServerCertificateResponse":{
+      "type":"structure",
+      "members":{
+        "ServerCertificateMetadata":{
+          "shape":"ServerCertificateMetadata"
+        }
+      }
+    },
+    "serverCertificateNameType":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[\\w+=,.@-]+"
+    },
+    "certificateBodyType":{
+      "type":"string",
+      "max":16384,
+      "min":1,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+    },
+    "privateKeyType":{
+      "type":"string",
+      "max":16384,
+      "min":1,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+",
+      "sensitive":true
+    },
+    "certificateChainType":{
+      "type":"string",
+      "max":2097152,
+      "min":1,
+      "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+    },
+    "ServerCertificateMetadata":{
+      "type":"structure",
+      "required":[
+        "ServerCertificateName",
+        "ServerCertificateId",
+        "Arn"
+      ],
+      "members":{
+        "ServerCertificateName":{
+          "shape":"serverCertificateNameType",
+          "documentation":"<p>The name that identifies the server certificate.</p>"
+        },
+        "ServerCertificateId":{
+          "shape":"idType"
+        },
+        "Arn":{
+          "shape":"arnType"
+        },
+        "UploadDate":{
+          "shape":"dateType"
+        },
+        "Expiration":{
+          "shape":"dateType"
+        }
+      }
+    },
+    "DeleteServerCertificateRequest":{
+      "type":"structure",
+      "required":["ServerCertificateName"],
+      "members":{
+        "ServerCertificateName":{
+          "shape":"serverCertificateNameType"
+        }
+      }
+    },
+    "ListServerCertificatesRequest":{
+      "type":"structure",
+      "members":{}
+    },
+    "ListServerCertificatesResponse":{
+      "type":"structure",
+      "required":["ServerCertificateMetadataList"],
+      "members":{
+        "ServerCertificateMetadataList":{
+          "shape":"serverCertificateMetadataListType"
+        }
+      }
+    },
+    "serverCertificateMetadataListType":{
+      "type":"list",
+      "member":{"shape":"ServerCertificateMetadata"}
     }
   },
   "documentation":"Identity and Access Management"
