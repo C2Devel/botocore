@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        CROC42%{?buildid}%{?dist}
+Release:        CROC43%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,12 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Fri Jun 21 2024 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC43
+- paas: modify load balancers section in describe service
+- paas: add instanceQty field to Service and to CreateService method
+- efs: add dns name to mount target description
+- eks: add TotalCPUCount and TotalMemory to CompactEKSCluster
+
 * Thu Apr 25 2024 Anastasia Berezko <aberezko@croc.ru> - 1.20.14-CROC42
 - data: add admin service
 
