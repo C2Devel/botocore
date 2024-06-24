@@ -133,14 +133,14 @@
       "deprecated":true,
       "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
     },
-    "GetEbsUsers": {
-      "name": "GetEbsUsers",
+    "GetProviderUsers": {
+      "name": "GetProviderUsers",
       "http":{
         "method":"GET",
-        "requestUri":"/v1/ebs-users"
+        "requestUri":"/v1/provider-users"
       },
       "input":{"shape":  "EmptyStruct"},
-      "output":{"shape":"GetEbsUsersResponse"},
+      "output":{"shape":"GetProviderUsersResponse"},
       "documentation":"<p>Get EBS Users.</p>",
       "deprecated":true,
       "deprecatedMessage":"Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
@@ -479,6 +479,17 @@
         }
       }
     },
+    "nlbProviderConfig": {
+      "type": "structure",
+      "members": {
+        "nlbProviderRequired": {
+          "shape": "Boolean"
+        },
+        "nlbUser": {
+          "shape": "String"
+        }
+      }
+    },
     "userDataConfig": {
       "type": "structure",
       "members": {
@@ -515,6 +526,10 @@
         },
         "ebsProviderConfig": {
           "shape": "ebsProviderConfig",
+          "documentation": "<p>The Kubernetes ens provider configuration for the cluster</p>"
+        },
+        "nlbProviderConfig": {
+          "shape": "nlbProviderConfig",
           "documentation": "<p>The Kubernetes ens provider configuration for the cluster</p>"
         },
         "userDataConfig": {
@@ -832,6 +847,9 @@
           "shape": "Boolean"
         },
         "EbsUser": {
+          "shape": "String"
+        },
+        "NlbUser": {
           "shape": "String"
         },
         "PodSubnetCidr": {
@@ -1258,6 +1276,12 @@
         "ebs_user": {
           "shape": "String"
         },
+        "nlb_provider_required": {
+          "shape": "Boolean"
+        },
+        "nlb_user": {
+          "shape": "String"
+        },
         "use_placement_groups": {
           "shape": "Boolean"
         },
@@ -1430,7 +1454,7 @@
         }
       }
     },
-    "EBSUser": {
+    "ProviderUser": {
       "type": "structure",
       "members": {
         "id": {
@@ -1450,17 +1474,20 @@
         }
       }
     },
-    "EBSUserList": {
+    "ProviderUserList": {
       "type": "list",
       "member": {
-        "shape": "EBSUser"
+        "shape": "ProviderUser"
       }
     },
-    "GetEbsUsersResponse": {
+    "GetProviderUsersResponse": {
       "type": "structure",
       "members": {
         "ebs_users": {
-          "shape": "EBSUserList"
+          "shape": "ProviderUserList"
+        },
+        "nlb_users": {
+          "shape": "ProviderUserList"
         }
       }
     },
