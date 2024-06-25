@@ -1,7 +1,7 @@
 {
   "version": "2.0",
   "metadata": {
-    "apiVersion": "24.3.0",
+    "apiVersion": "24.9.0",
     "endpointPrefix": "admin",
     "jsonVersion": "1.1",
     "protocol": "rest-json",
@@ -824,12 +824,6 @@
     "ModifyTime": {
       "type": "integer"
     },
-    "ProjectGrants": {
-      "type": "list",
-      "member": {
-        "shape": "ProjectGrant"
-      }
-    },
     "ADGroup": {
       "type": "structure",
       "members": {
@@ -845,10 +839,6 @@
           "shape": "ModifyTime",
           "documentation": "<p>Modify time of the AD group.</p>"
         },
-        "projectGrants": {
-          "shape": "ProjectGrants",
-          "documentation": "<p>Project grants of the AD group.</p>"
-        },
         "ProviderId": {
           "shape": "string",
           "documentation": "<p>ID of the AD provider.</p>"
@@ -858,39 +848,7 @@
         "Id",
         "Name",
         "ModifyTime",
-        "ProjectGrants",
         "ProviderId"
-      ]
-    },
-    "Action": {
-      "type": "string"
-    },
-    "ProjectId": {
-      "type": "string"
-    },
-    "ProjectLogin": {
-      "type": "string"
-    },
-    "ProjectGrant": {
-      "type": "structure",
-      "members": {
-        "action": {
-          "shape": "Action",
-          "documentation": "<p>Action of the grant.</p>"
-        },
-        "projectId": {
-          "shape": "ProjectId",
-          "documentation": "<p>ID of the project.</p>"
-        },
-        "projectLogin": {
-          "shape": "ProjectLogin",
-          "documentation": "<p>Login of the project.</p>"
-        }
-      },
-      "required": [
-        "Action",
-        "ProjectId",
-        "ProjectLogin"
       ]
     },
     "CreateActiveDirectoryGroupResponse": {
@@ -906,7 +864,7 @@
         }
       }
     },
-    "RoleIds": {
+    "GroupARNs": {
       "type": "list",
       "member": {
         "shape": "string"
@@ -919,9 +877,9 @@
           "shape": "ProjectName",
           "documentation": "<p>Project name.</p>"
         },
-        "RoleIds": {
-          "shape": "RoleIds",
-          "documentation": "<p>IDs of roles to give grants to.</p>"
+        "GroupARNs": {
+          "shape": "GroupARNs",
+          "documentation": "<p>ARNs of groups to add AD group to.</p>"
         },
         "CustomerName": {
           "shape": "CustomerName",
@@ -944,7 +902,7 @@
       },
       "required": [
         "ProjectName",
-        "RoleIds",
+        "GroupARNs",
         "CustomerName",
         "ProviderName",
         "GroupName"
