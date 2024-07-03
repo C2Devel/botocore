@@ -4893,6 +4893,13 @@
       },
       "documentation":"<p>The attributes associated with an Elastic IP address.</p>"
     },
+    "AddressingType":{
+      "type":"string",
+      "enum":[
+        "public",
+        "private"
+      ]
+    },
     "AddressAttributeName":{
       "type":"string",
       "enum":["domain-name"]
@@ -34456,6 +34463,10 @@
     "RequestLaunchTemplateData":{
       "type":"structure",
       "members":{
+        "AddressingType":{
+          "shape":"AddressingType",
+          "documentation":"<p>The type of the IP address.</p>"
+        },
         "KernelId":{
           "shape":"KernelId",
           "documentation":"<p>The ID of the kernel.</p> <important> <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html\">User Provided Kernels</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </important>"
@@ -35640,6 +35651,11 @@
           "documentation":"<p>The block device mappings.</p>",
           "locationName":"blockDeviceMappingSet"
         },
+        "AddressingType": {
+          "shape":"AddressingType",
+          "documentation":"<p>The type of the IP address.</p>",
+          "locationName":"addressingType"
+        },
         "NetworkInterfaces":{
           "shape":"LaunchTemplateInstanceNetworkInterfaceSpecificationList",
           "documentation":"<p>The network interfaces.</p>",
@@ -36318,7 +36334,7 @@
           "documentation":"<p>The high availability mode.</p>"
         },
         "AddressingType":{
-          "shape":"String",
+          "shape":"AddressingType",
           "documentation":"<p>The type of the IP address.</p>"
         },
         "Ipv6AddressCount":{
