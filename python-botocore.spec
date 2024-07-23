@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        ROCKIT45%{?buildid}%{?dist}
+Release:        ROCKIT46%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,10 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Tue Jul 23 2024 Linar Nasyyrov <lnasyyrov@k2.cloud> - 1.20.14-ROCKIT46
+- ec2: add ramMonitoring as instance attribute
+- spec: move to ROCKIT
+
 * Thu Jul 11 2024 Andrey Kulaev <akulaev@croc.ru> - 1.20.14-CROC45
 - botocore: set endpoints to type StringList
 - botocore,bc: add last tag name of protected resource
