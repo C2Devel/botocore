@@ -41,6 +41,16 @@
       "output": {"shape": "CreateServiceResponse"},
       "documentation": "<p>Creates service.</p>"
     },
+    "CreateKafkaTopic": {
+        "name": "CreateKafkaTopic",
+        "http": {
+            "method": "POST",
+            "requestUri": "/services/{serviceId}/kafka-topics"
+        },
+        "input": {"shape": "CreateKafkaTopicRequest"},
+        "output": {"shape": "CreateKafkaTopicResponse"},
+        "documentation": "<p>Create Kafka topic.</p>"
+    },
     "CreateLogstashPipeline": {
       "name": "CreateLogstashPipeline",
       "http": {
@@ -70,6 +80,16 @@
       "input": {"shape": "DeleteBackupsRequest"},
       "output": {"shape": "DeleteBackupsResponse"},
       "documentation": "<p>Deletes service backups.</p>"
+    },
+    "DeleteKafkaTopic": {
+        "name": "DeleteKafkaTopic",
+        "http": {
+            "method": "DELETE",
+            "requestUri": "/services/{serviceId}/kafka-topics/{topicId}"
+        },
+        "input": {"shape": "DeleteKafkaTopicRequest"},
+        "output": {"shape": "DeleteKafkaTopicResponse"},
+        "documentation": "<p>Deletes a Kafka topic.</p>"
     },
     "DeleteLogstashPipeline": {
       "name": "DeleteLogstashPipeline",
@@ -231,6 +251,16 @@
       "output": {"shape": "ListElasticsearchSnapshotRepositoriesResponse"},
       "documentation": "<p>Returns list of Elasticsearch snapshot repositories.</p>"
     },
+    "ListKafkaTopics": {
+        "name": "ListKafkaTopics",
+        "http": {
+            "method": "GET",
+            "requestUri": "/services/{serviceId}/kafka-topics"
+        },
+        "input": {"shape": "ListKafkaTopicsRequest"},
+        "output": {"shape": "ListKafkaTopicsResponse"},
+        "documentation": "<p>Returns list of Kafka topics.</p>"
+    },
     "ListLogstashPipelines": {
       "name": "ListLogstashPipelines",
       "http": {
@@ -290,6 +320,16 @@
       "input": {"shape": "ModifyDatabaseRequest"},
       "output": {"shape": "ModifyDatabaseResponse"},
       "documentation": "<p>Modifies database.</p>"
+    },
+    "ModifyKafkaTopic": {
+        "name": "ModifyKafkaTopic",
+        "http": {
+            "method": "PUT",
+            "requestUri": "/services/{serviceId}/kafka-topics/{topicId}"
+        },
+        "input": {"shape": "ModifyKafkaTopicRequest"},
+        "output": {"shape": "ModifyKafkaTopicResponse"},
+        "documentation": "<p>Modifies a Kafka topic in given service.</p>"
     },
     "ModifyLoadBalancers": {
       "name": "ModifyLoadBalancers",
@@ -595,6 +635,33 @@
         "repository": {"shape": "ElasticsearchSnapshotRepositoryResponse"}
       }
     },
+    "CreateKafkaTopicRequest": {
+        "type": "structure",
+        "required": [
+          "serviceId",
+          "name",
+          "parameters"
+        ],
+        "members": {
+          "serviceId": {
+            "shape": "String",
+            "documentation": "<p>The service ID to modify.</p>",
+            "location": "uri",
+            "locationName": "serviceId"
+          },
+          "name": {"shape": "String"},
+          "parameters": {"shape": "None"}
+        }
+    },
+    "CreateKafkaTopicResponse": {
+        "type": "structure",
+        "members": {
+          "kafkaTopic": {
+            "shape": "KafkaTopic",
+            "documentation": "<p>The full description of created kafka topic.</p>"
+          }
+        }
+    },
     "CreateServiceRequest": {
       "type": "structure",
       "required": [
@@ -706,6 +773,31 @@
     "DatabaseCreateRequestList": {
       "type": "list",
       "member": {"shape": "DatabaseCreateRequest"}
+    },
+    "DeleteKafkaTopicRequest": {
+        "type": "structure",
+        "required": [
+          "serviceId",
+          "topicId"
+        ],
+        "members": {
+          "serviceId": {
+            "shape": "String",
+            "documentation": "<p>The ID of service.</p>",
+            "location": "uri",
+            "locationName": "serviceId"
+          },
+          "topicId": {
+            "shape": "String",
+            "documentation": "<p>The ID of kafka topic to delete.</p>",
+            "location": "uri",
+            "locationName": "topicId"
+          }
+        }
+    },
+    "DeleteKafkaTopicResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DatabaseModifyRequest": {
       "type": "structure",
@@ -1033,6 +1125,18 @@
       "member": {"shape": "Instance"}
     },
     "Integer": {"type": "integer"},
+    "KafkaTopic": {
+        "type": "structure",
+        "members": {
+          "id": {"shape": "String"},
+          "name": {"shape": "String"},
+          "parameters": {"shape": "None"}
+        }
+    },
+    "KafkaTopicsList": {
+        "type": "list",
+        "member": {"shape": "KafkaTopic"}
+    },
     "ListBackups": {
       "type": "list",
       "member": {"shape": "Backup"}
@@ -1138,6 +1242,29 @@
       "members": {
         "repositories": {"shape": "ElasticsearchSnapshotRepositoriesResponseList"}
       }
+    },
+    "ListKafkaTopicsRequest": {
+        "type": "structure",
+        "required": [
+          "serviceId"
+        ],
+        "members": {
+          "serviceId": {
+            "shape": "String",
+            "documentation": "<p>The ID of service.</p>",
+            "location": "uri",
+            "locationName": "serviceId"
+          }
+        }
+    },
+    "ListKafkaTopicsResponse": {
+        "type": "structure",
+        "members": {
+          "kafkaTopics": {
+            "shape": "KafkaTopicsList",
+            "documentation": "<p>A list of kafka topics, available for service.</p>"
+          }
+        }
     },
     "ListServiceItem": {
       "type": "structure",
@@ -1325,6 +1452,38 @@
           "documentation": "<p>The full description of your modified service.</p>"
         }
       }
+    },
+    "ModifyKafkaTopicRequest": {
+        "type": "structure",
+        "required": [
+          "serviceId",
+          "topicId",
+          "parameters"
+        ],
+        "members": {
+          "serviceId": {
+            "shape": "String",
+            "documentation": "<p>The ID of service to modify.</p>",
+            "location": "uri",
+            "locationName": "serviceId"
+          },
+          "topicId": {
+            "shape": "String",
+            "documentation": "<p>The ID of kafka topic to modify.</p>",
+            "location": "uri",
+            "locationName": "topicId"
+          },
+          "parameters": {"shape": "None"}
+        }
+    },
+    "ModifyKafkaTopicResponse": {
+        "type": "structure",
+        "members": {
+          "kafkaTopic": {
+            "shape": "KafkaTopic",
+            "documentation": "<p>The full description of modified kafka topic.</p>"
+          }
+        }
     },
     "ModifyServiceRequest": {
       "type": "structure",
@@ -1613,7 +1772,6 @@
       "type": "list",
       "member": {"shape": "UserResponse"}
     },
-
     "CreateLogstashPipelineRequest": {
       "type": "structure",
       "required": [
