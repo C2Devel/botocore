@@ -1013,9 +1013,20 @@
         "interfaceId": {"shape": "String"},
         "status": {"shape": "String"},
         "index": {"shape": "Integer"},
-        "endpoints": {"shape": "StringList"},
+        "endpoints": {"shape": "InstanceEndpoints"},
         "name": {"shape": "String"}
       }
+    },
+    "InstanceEndpoint": {
+      "type": "structure",
+      "members": {
+        "name": {"shape": "String"},
+        "address": {"shape": "String"}
+      }
+    },
+    "InstanceEndpoints": {
+      "type": "list",
+      "member": {"shape": "InstanceEndpoint"}
     },
     "InstanceList": {
       "type": "list",
@@ -1519,7 +1530,7 @@
         "status": {"shape": "String"},
         "errorCode": {"shape": "String"},
         "errorDescription": {"shape": "String"},
-        "endpoints": {"shape": "StringList"},
+        "endpoints": {"shape": "ServiceEndpoints"},
         "instances": {"shape": "InstanceList"},
         "supportedFeatures": {"shape": "StringList"},
         "backupSettings": {"shape": "BackupSettingsResponse"},
@@ -1538,6 +1549,17 @@
         "isRolledBack": {"shape": "Boolean"},
         "supportAccessEnabled": {"shape": "Boolean"}
       }
+    },
+    "ServiceEndpoint": {
+      "type": "structure",
+      "members": {
+        "name": {"shape": "String"},
+        "addresses": {"shape": "StringList"}
+      }
+    },
+    "ServiceEndpoints": {
+      "type": "list",
+      "member": {"shape": "ServiceEndpoint"}
     },
     "String": {"type": "string"},
     "StringList": {
