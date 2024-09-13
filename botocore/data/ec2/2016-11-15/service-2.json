@@ -20505,7 +20505,6 @@
     },
     "DescribeByoipCidrsRequest":{
       "type":"structure",
-      "required":["MaxResults"],
       "members":{
         "DryRun":{
           "shape":"Boolean",
