@@ -101,6 +101,16 @@
       "output": {"shape": "DeleteElasticsearchSnapshotRepositoryResponse"},
       "documentation": "<p>Delete Elasticsearch snapshot repository.</p>"
     },
+    "UpdateServiceStatus": {
+      "name": "UpdateServiceStatus",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/services/{serviceId}"
+      },
+      "input": {"shape": "UpdateServiceStatusRequest"},
+      "output": {"shape": "UpdateServiceStatusResponse"},
+      "documentation": "<p>Update service status for puppet.</p>"
+    },
     "DeleteService": {
       "name": "DeleteService",
       "http": {
@@ -786,6 +796,24 @@
       }
     },
     "DeleteElasticsearchSnapshotRepositoryResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateServiceStatusRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service to update.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "UpdateServiceStatusResponse": {
       "type": "structure",
       "members": {}
     },
