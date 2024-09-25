@@ -992,6 +992,15 @@
         "EXPIRED"
       ]
     },
+    "BackupJobConfiguration":{
+      "type":"structure",
+      "members":{
+        "ExcludeVolumeIds":{
+          "shape":"VolumeIds",
+          "documentation":"<p>List of volume ids to exclude from instance's backup.</p>"
+        }
+      }
+    },
     "BackupJobsList":{
       "type":"list",
       "member":{"shape":"BackupJob"}
@@ -1248,9 +1257,31 @@
         "ListOfTags":{
           "shape":"ListOfTags",
           "documentation":"<p>An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>\"StringEquals\": {\"ec2:ResourceTag/Department\": \"accounting\"</code>. Assigns the backup plan to every resource with at least one matching tag.</p>"
+        },
+        "Configuration":{
+          "shape":"BackupSelectionConfiguration",
+          "documentation":"<p>Configuration to apply to individual resources.</p>"
         }
       },
       "documentation":"<p>Used to specify a set of resources to a backup plan.</p>"
+    },
+    "BackupSelectionConfiguration":{
+      "type":"list",
+      "member":{"shape":"BackupSelectionConfigurationItem"}
+    },
+    "BackupSelectionConfigurationItem":{
+      "type":"structure",
+      "required":["Resource"],
+      "members":{
+        "Resource":{
+          "shape":"ARN",
+          "documentation":"<p>ARN of resource to apply configuration to.</p>."
+        },
+        "ExcludeVolumeIds":{
+          "shape":"VolumeIds",
+          "documentation":"<p>List of volume ids to exclude from instance's backup.</p>"
+        }
+      }
     },
     "BackupSelectionName":{
       "type":"string",
@@ -3466,6 +3497,10 @@
         "BackupOptions":{
           "shape":"BackupOptions",
           "documentation":"<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: Set to <code>\"WindowsVSS”:“enabled\"</code> to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default.</p>"
+        },
+        "Configuration": {
+          "shape": "BackupJobConfiguration",
+          "documentation":"<p>Specifies the backup job configuration.</p>"
         }
       }
     },
@@ -3795,6 +3830,11 @@
           "documentation":"<p>Updates the list of services along with the opt-in preferences for the Region.</p>"
         }
       }
+    },
+    "VolumeId":{"type":"string"},
+    "VolumeIds":{
+      "type":"list",
+      "member":{"shape":"VolumeId"}
     },
     "WindowMinutes":{"type":"long"},
     "boolean":{"type":"boolean"},
