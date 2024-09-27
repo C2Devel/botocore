@@ -975,6 +975,10 @@
         "BackupType":{
           "shape":"string",
           "documentation":"<p>Represents the type of backup for a backup job.</p>"
+        },
+        "Configuration": {
+          "shape": "BackupJobConfiguration",
+          "documentation":"<p>Represents the backup job configuration.</p>"
         }
       },
       "documentation":"<p>Contains detailed information about a backup job.</p>"
@@ -1871,6 +1875,10 @@
         "BackupType":{
           "shape":"string",
           "documentation":"<p>Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, <code>BackupType</code> returns \"WindowsVSS\". If <code>BackupType</code> is empty, then the backup type that was is a regular backup.</p>"
+        },
+        "Configuration": {
+          "shape": "BackupJobConfiguration",
+          "documentation":"<p>Represents the backup job configuration.</p>"
         }
       }
     },
