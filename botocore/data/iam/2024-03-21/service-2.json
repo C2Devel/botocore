@@ -13,6 +13,14 @@
     "xmlNamespace":"https://iam.amazonaws.com/doc/2024-03-21/"
   },
   "operations":{
+    "AddIDProviderGroupToGroup":{
+      "name":"AddIDProviderGroupToGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AddIDProviderGroupToGroupRequest"}
+    },
     "AddUserToGroup":{
       "name":"AddUserToGroup",
       "http":{
@@ -28,6 +36,14 @@
         "requestUri":"/"
       },
       "input":{"shape":"AttachGroupPolicyRequest"}
+    },
+    "AttachIDProviderGroupPolicy":{
+      "name":"AttachIDProviderGroupPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachIDProviderGroupPolicyRequest"}
     },
     "AttachUserPolicy":{
       "name":"AttachUserPolicy",
@@ -47,6 +63,30 @@
       "output":{
         "shape":"CreateGroupResponse",
         "resultWrapper":"CreateGroupResult"
+      }
+    },
+    "CreateIDProvider":{
+      "name":"CreateIDProvider",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateIDProviderRequest"},
+      "output":{
+        "shape":"CreateIDProviderResponse",
+        "resultWrapper":"CreateIDProviderResult"
+      }
+    },
+    "CreateIDProviderGroup":{
+      "name":"CreateIDProviderGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateIDProviderGroupRequest"},
+      "output":{
+        "shape":"CreateIDProviderGroupResponse",
+        "resultWrapper":"CreateIDProviderGroupResult"
       }
     },
     "CreatePolicy":{
@@ -93,6 +133,22 @@
       },
       "input":{"shape":"DeleteGroupRequest"}
     },
+    "DeleteIDProvider":{
+      "name":"DeleteIDProvider",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteIDProviderRequest"}
+    },
+    "DeleteIDProviderGroup":{
+      "name":"DeleteIDProviderGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteIDProviderGroupRequest"}
+    },
     "DeletePolicy":{
       "name":"DeletePolicy",
       "http":{
@@ -125,6 +181,14 @@
       },
       "input":{"shape":"DetachGroupPolicyRequest"}
     },
+    "DetachIDProviderGroupPolicy":{
+      "name":"DetachIDProviderGroupPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetachIDProviderGroupPolicyRequest"}
+    },
     "DetachUserPolicy":{
       "name":"DetachUserPolicy",
       "http":{
@@ -143,6 +207,18 @@
       "output":{
         "shape":"GetGroupResponse",
         "resultWrapper":"GetGroupResult"
+      }
+    },
+    "GetIDProvider":{
+      "name":"GetIDProvider",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetIDProviderRequest"},
+      "output":{
+        "shape":"GetIDProviderResponse",
+        "resultWrapper":"GetIDProviderResult"
       }
     },
     "GetPolicy":{
@@ -215,6 +291,101 @@
       "output":{
         "shape":"ListGroupsResponse",
         "resultWrapper":"ListGroupsResult"
+      }
+    },
+    "ListIDProviderGroupGlobalActions":{
+      "name":"ListIDProviderGroupGlobalActions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListIDProviderGroupGlobalActionsRequest"},
+      "output":{
+        "shape":"ListIDProviderGroupGlobalActionsResponse",
+        "resultWrapper":"ListIDProviderGroupGlobalActionsResult"
+      }
+    },
+    "ListIDProviderGroupGlobalGroups":{
+      "name":"ListIDProviderGroupGlobalGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListIDProviderGroupGlobalGroupsRequest"},
+      "output":{
+        "shape":"ListIDProviderGroupGlobalGroupsResponse",
+        "resultWrapper":"ListIDProviderGroupGlobalGroupsResult"
+      }
+    },
+    "ListIDProviderGroupGlobalPolicies":{
+      "name":"ListIDProviderGroupGlobalPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListIDProviderGroupGlobalPoliciesRequest"},
+      "output":{
+        "shape":"ListIDProviderGroupGlobalPoliciesResponse",
+        "resultWrapper":"ListIDProviderGroupGlobalPoliciesResult"
+      }
+    },
+    "ListIDProviderGroupProjectActions":{
+      "name":"ListIDProviderGroupProjectActions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListIDProviderGroupProjectActionsRequest"},
+      "output":{
+        "shape":"ListIDProviderGroupProjectActionsResponse",
+        "resultWrapper":"ListIDProviderGroupProjectActionsResult"
+      }
+    },
+    "ListIDProviderGroupProjectGroups":{
+      "name":"ListIDProviderGroupProjectGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListIDProviderGroupProjectGroupsRequest"},
+      "output":{
+        "shape":"ListIDProviderGroupProjectGroupsResponse",
+        "resultWrapper":"ListIDProviderGroupProjectGroupsResult"
+      }
+    },
+    "ListIDProviderGroupProjectPolicies":{
+      "name":"ListIDProviderGroupProjectPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListIDProviderGroupProjectPoliciesRequest"},
+      "output":{
+        "shape":"ListIDProviderGroupProjectPoliciesResponse",
+        "resultWrapper":"ListIDProviderGroupProjectPoliciesResult"
+      }
+    },
+    "ListIDProviderGroupProjects":{
+      "name":"ListIDProviderGroupProjects",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListIDProviderGroupProjectsRequest"},
+      "output":{
+        "shape":"ListIDProviderGroupProjectsResponse",
+        "resultWrapper":"ListIDProviderGroupProjectsResult"
+      }
+    },
+    "ListIDProviders":{
+      "name":"ListIDProviders",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{
+        "shape":"ListIDProvidersResponse",
+        "resultWrapper":"ListIDProvidersResult"
       }
     },
     "ListPolicies":{
@@ -359,6 +530,22 @@
         "resultWrapper":"ListUsersResult"
       }
     },
+    "RemoveIDProviderGroupFromGroup":{
+      "name":"RemoveIDProviderGroupFromGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemoveIDProviderGroupFromGroupRequest"}
+    },
+    "RemoveIDProviderGroupFromProject":{
+      "name":"RemoveIDProviderGroupFromProject",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemoveIDProviderGroupFromProjectRequest"}
+    },
     "RemoveUserFromGroup":{
       "name":"RemoveUserFromGroup",
       "http":{
@@ -374,6 +561,18 @@
         "requestUri":"/"
       },
       "input":{"shape":"RemoveUserFromProjectRequest"}
+    },
+    "UpdateIDProvider":{
+      "name":"UpdateIDProvider",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateIDProviderRequest"},
+      "output":{
+        "shape":"UpdateIDProviderResponse",
+        "resultWrapper":"UpdateIDProviderResult"
+      }
     },
     "UpdatePolicy":{
       "name":"UpdatePolicy",
@@ -449,6 +648,28 @@
       "type":"list",
       "member":{"shape":"stringType"}
     },
+    "AddIDProviderGroupToGroupRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName",
+        "GroupArn"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        },
+        "GroupArn":{
+          "shape":"arnType"
+        },
+        "ProjectName":{
+          "shape":"projectNameType"
+        }
+      }
+    },
     "AddUserToGroupRequest":{
       "type":"structure",
       "required":[
@@ -487,6 +708,28 @@
         }
       }
     },
+    "AttachIDProviderGroupPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName",
+        "PolicyArn"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        },
+        "PolicyArn":{
+          "shape":"arnType"
+        },
+        "ProjectName":{
+          "shape":"projectNameType"
+        }
+      }
+    },
     "AttachUserPolicyRequest":{
       "type":"structure",
       "required":[
@@ -506,6 +749,11 @@
       }
     },
     "booleanType":{"type":"boolean"},
+    "clientIdType":{
+      "type":"string",
+      "max": 255,
+      "min":8
+    },
     "CreateGroupRequest":{
       "type":"structure",
       "required":[
@@ -526,6 +774,68 @@
       "members":{
         "Group":{
           "shape":"Group"
+        }
+      }
+    },
+    "CreateIDProviderRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "ClientId",
+        "ClientSecret",
+        "AuthUrl",
+        "LogoutUrl",
+        "TokenUrl"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "ClientId":{
+          "shape":"clientIdType"
+        },
+        "ClientSecret":{
+          "shape":"stringType"
+        },
+        "AuthUrl":{
+          "shape":"stringType"
+        },
+        "LogoutUrl":{
+          "shape":"stringType"
+        },
+        "TokenUrl":{
+          "shape":"stringType"
+        }
+      }
+    },
+    "CreateIDProviderResponse":{
+      "type":"structure",
+      "members":{
+        "IDProvider":{
+          "shape":"IDProvider"
+        }
+      }
+    },
+    "CreateIDProviderGroupRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        }
+      }
+    },
+    "CreateIDProviderGroupResponse":{
+      "type":"structure",
+      "members":{
+        "IDProviderGroup":{
+          "shape":"IDProviderGroup"
         }
       }
     },
@@ -625,6 +935,30 @@
         }
       }
     },
+    "DeleteIDProviderRequest":{
+      "type":"structure",
+      "required":["IDProviderName"],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        }
+      }
+    },
+    "DeleteIDProviderGroupRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        }
+      }
+    },
     "DeletePolicyRequest":{
       "type":"structure",
       "required":["PolicyName"],
@@ -667,6 +1001,28 @@
         }
       }
     },
+    "DetachIDProviderGroupPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName",
+        "PolicyArn"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        },
+        "PolicyArn":{
+          "shape":"arnType"
+        },
+        "ProjectName":{
+          "shape":"projectNameType"
+        }
+      }
+    },
     "DetachUserPolicyRequest":{
       "type":"structure",
       "required":[
@@ -702,6 +1058,26 @@
         },
         "Users":{
           "shape":"userListType"
+        }
+      }
+    },
+    "GetIDProviderRequest":{
+      "type":"structure",
+      "required":["IDProviderName"],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        }
+      }
+    },
+    "GetIDProviderResponse":{
+      "type":"structure",
+      "members":{
+        "IDProvider":{
+          "shape":"IDProvider"
+        },
+        "IDProviderGroups":{
+          "shape":"idProviderGroupListType"
         }
       }
     },
@@ -823,6 +1199,86 @@
       "min":1,
       "pattern":"[\\w+=,.@-]+"
     },
+    "IDProvider":{
+      "type":"structure",
+      "members":{
+        "IDProviderArn":{
+          "shape":"arnType"
+        },
+        "IDProviderId":{
+          "shape":"idType"
+        },
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "CreateDate":{
+          "shape":"dateType"
+        },
+        "UpdateDate":{
+          "shape":"dateType"
+        },
+        "ClientId":{
+          "shape":"clientIdType"
+        },
+        "AuthUrl":{
+          "shape":"stringType"
+        },
+        "LogoutUrl":{
+          "shape":"stringType"
+        },
+        "TokenUrl":{
+          "shape":"stringType"
+        },
+        "LoginPage":{
+          "shape":"stringType"
+        }
+      }
+    },
+    "IDProviderGroup":{
+      "type":"structure",
+      "members":{
+        "IDProviderGroupId":{
+          "shape":"idType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        },
+        "CreateDate":{
+          "shape":"dateType"
+        }
+      }
+    },
+    "idProviderGroupListType":{
+      "type":"list",
+      "member":{"shape":"IDProviderGroup"}
+    },
+    "idProviderGroupNameType":{
+      "type":"string",
+      "max": 64
+    },
+    "idProviderLinkType":{
+      "type":"structure",
+      "members":{
+        "IDProviderArn":{
+          "shape":"arnType"
+        },
+        "IDProviderId":{
+          "shape":"idType"
+        },
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        }
+      }
+    },
+    "idProviderListType":{
+      "type":"list",
+      "member":{"shape":"IDProvider"}
+    },
+    "idProviderNameType":{
+      "type":"string",
+      "max": 10,
+      "min":4
+    },
     "idType":{
       "type":"string",
       "max":128,
@@ -862,6 +1318,187 @@
       "members":{
         "Groups":{
           "shape":"groupListType"
+        }
+      }
+    },
+    "ListIDProviderGroupGlobalActionsRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        }
+      }
+    },
+    "ListIDProviderGroupGlobalActionsResponse":{
+      "type":"structure",
+      "members":{
+        "Actions":{
+          "shape":"actionListType"
+        }
+      }
+    },
+    "ListIDProviderGroupGlobalGroupsRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        }
+      }
+    },
+    "ListIDProviderGroupGlobalGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "Groups":{
+          "shape":"groupListType"
+        }
+      }
+    },
+    "ListIDProviderGroupGlobalPoliciesRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        }
+      }
+    },
+    "ListIDProviderGroupGlobalPoliciesResponse":{
+      "type":"structure",
+      "members":{
+        "Policies":{
+          "shape":"policyListType"
+        }
+      }
+    },
+    "ListIDProviderGroupProjectActionsRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName",
+        "ProjectName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        },
+        "ProjectName":{
+          "shape":"projectNameType"
+        }
+      }
+    },
+    "ListIDProviderGroupProjectActionsResponse":{
+      "type":"structure",
+      "members":{
+        "Actions":{
+          "shape":"actionListType"
+        }
+      }
+    },
+    "ListIDProviderGroupProjectGroupsRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName",
+        "ProjectName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        },
+        "ProjectName":{
+          "shape":"projectNameType"
+        }
+      }
+    },
+    "ListIDProviderGroupProjectGroupsResponse":{
+      "type":"structure",
+      "members":{
+        "Groups":{
+          "shape":"groupListType"
+        }
+      }
+    },
+    "ListIDProviderGroupProjectPoliciesRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName",
+        "ProjectName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        },
+        "ProjectName":{
+          "shape":"projectNameType"
+        }
+      }
+    },
+    "ListIDProviderGroupProjectPoliciesResponse":{
+      "type":"structure",
+      "members":{
+        "Policies":{
+          "shape":"policyListType"
+        }
+      }
+    },
+    "ListIDProviderGroupProjectsRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        }
+      }
+    },
+    "ListIDProviderGroupProjectsResponse":{
+      "type":"structure",
+      "members":{
+        "Projects":{
+          "shape":"projectListType"
+        }
+      }
+    },
+    "ListIDProvidersResponse":{
+      "type":"structure",
+      "members":{
+        "IDProviders":{
+          "shape":"idProviderListType"
         }
       }
     },
@@ -1220,6 +1857,47 @@
         "deleted"
       ]
     },
+    "RemoveIDProviderGroupFromGroupRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName",
+        "GroupArn"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        },
+        "GroupArn":{
+          "shape":"arnType"
+        },
+        "ProjectName":{
+          "shape":"projectNameType"
+        }
+      }
+    },
+    "RemoveIDProviderGroupFromProjectRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName",
+        "IDProviderGroupName",
+        "ProjectName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "IDProviderGroupName":{
+          "shape":"idProviderGroupNameType"
+        },
+        "ProjectName":{
+          "shape":"projectNameType"
+        }
+      }
+    },
     "RemoveUserFromGroupRequest":{
       "type":"structure",
       "required":[
@@ -1269,6 +1947,40 @@
       "member":{"shape":"Service"}
     },
     "stringType":{"type":"string"},
+    "UpdateIDProviderRequest":{
+      "type":"structure",
+      "required":[
+        "IDProviderName"
+      ],
+      "members":{
+        "IDProviderName":{
+          "shape":"idProviderNameType"
+        },
+        "ClientId":{
+          "shape":"clientIdType"
+        },
+        "ClientSecret":{
+          "shape":"stringType"
+        },
+        "AuthUrl":{
+          "shape":"stringType"
+        },
+        "LogoutUrl":{
+          "shape":"stringType"
+        },
+        "TokenUrl":{
+          "shape":"stringType"
+        }
+      }
+    },
+    "UpdateIDProviderResponse":{
+      "type":"structure",
+      "members":{
+        "IDProvider":{
+          "shape":"IDProvider"
+        }
+      }
+    },
     "UpdatePolicyRequest":{
       "type":"structure",
       "required":[
@@ -1383,8 +2095,8 @@
         "LastLoginDate":{
           "shape":"dateType"
         },
-        "IdentityProvider":{
-          "shape":"stringType"
+        "IDProvider":{
+          "shape":"idProviderLinkType"
         },
         "Projects":{
           "shape":"projectLinksListType"
