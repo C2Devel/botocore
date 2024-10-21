@@ -534,6 +534,10 @@
         "HistoryData":{
           "shape":"HistoryData",
           "documentation":"<p>Data about the alarm, in JSON format.</p>"
+        },
+        "RawTimestamp":{
+          "shape":"Float",
+          "documentation":"<p>The raw time stamp for the alarm history item.</p>"
         }
       },
       "documentation":"<p>Represents the history of a specific alarm.</p>"
@@ -1113,6 +1117,14 @@
         "NextToken":{
           "shape":"NextToken",
           "documentation":"<p>The token returned by a previous call to indicate that there is more data available.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>The name of the metric associated with the alarm.</p>"
+        },
+        "Dimensions":{
+          "shape":"Dimensions",
+          "documentation":"<p>The dimensions.</p>"
         }
       }
     },
@@ -1341,6 +1353,7 @@
     "FailureDescription":{"type":"string"},
     "FailureResource":{"type":"string"},
     "FaultDescription":{"type":"string"},
+    "Float":{"type":"float"},
     "GetDashboardInput":{
       "type":"structure",
       "required":["DashboardName"],
