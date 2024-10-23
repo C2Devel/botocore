@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        ROCKIT49%{?buildid}%{?dist}
+Release:        ROCKIT50%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,10 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Mon Oct 23 2024 Linar Nasyirov <lnasyyrov@k2.cloud> - 1.20.14-ROCKIT50
+- ec2: remove required param from DescribeByoipCidrsRequest
+- vendored: add support for python 3.12
+
 * Mon Oct 07 2024 Evgenii Proskurnev <eproskurnev@k2.cloud> - 1.20.14-ROCKIT49
 - botocore: add NLB provider support
 - ec2: add VolumesCompatibleAvailabilityZones to launch templates
