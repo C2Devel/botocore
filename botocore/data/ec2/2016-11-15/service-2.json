@@ -6121,10 +6121,20 @@
     "AttachExtNetworkRequest":{
       "type":"structure",
       "members":{
+        "ExtNetId":{
+          "shape":"ExtNetId",
+          "documentation":"<p>Id of the External Network.</p>",
+          "locationName":"ExtNetId"
+        },
         "ExtNetName":{
           "shape":"ExtNetName",
           "documentation":"<p>Name of the External Network.</p>",
           "locationName":"ExtNetName"
+        },
+        "AvailabilityZone":{
+          "shape":"String",
+          "documentation":"<p>The Availability Zone in which external network is to be attached.</p>",
+          "locationName":"AvailabilityZone"
         },
         "SubnetId":{
           "shape":"String",
@@ -14504,6 +14514,7 @@
       }
     },
     "ExtNetName":{"type":"string"},
+    "ExtNetId":{"type":"string"},
     "ExtNetNameStringList":{
       "type":"list",
       "member":{
@@ -14530,6 +14541,11 @@
           "shape":"String",
           "documentation":"<p>Name of the External Network.</p>",
           "locationName":"extNetName"
+        },
+        "ExtNetId":{
+          "shape":"String",
+          "documentation":"<p>Id of the External Network.</p>",
+          "locationName":"extNetId"
         },
         "State":{
           "shape":"String",
@@ -19096,10 +19112,20 @@
     "DetachExtNetworkRequest":{
       "type":"structure",
       "members":{
+        "ExtNetId":{
+          "shape":"ExtNetId",
+          "documentation":"<p>Id of the External Network.</p>",
+          "locationName":"ExtNetId"
+        },
         "ExtNetName":{
           "shape":"ExtNetName",
           "documentation":"<p>Name of the External Network.</p>",
           "locationName":"ExtNetName"
+        },
+        "AvailabilityZone":{
+          "shape":"String",
+          "documentation":"<p>The Availability Zone in which external network is to be attached.</p>",
+          "locationName":"AvailabilityZone"
         },
         "DryRun":{
           "shape":"Boolean",
