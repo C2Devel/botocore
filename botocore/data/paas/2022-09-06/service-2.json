@@ -533,7 +533,7 @@
         "serviceCaption": {"shape": "String"},
         "serviceType": {"shape": "String"},
         "protocol": {"shape": "String"},
-        "port": {"shape": "String"}
+        "port": {"shape": "Integer"}
       }
     },
     "BalancerTargets": {
@@ -621,7 +621,8 @@
         "backupSettings": {"shape": "BackupSettingsRequest"},
         "arbitratorRequired": {"shape": "Boolean"},
         "internalBalancerRequired": {"shape": "Boolean"},
-        "externalBalancerRequired": {"shape": "Boolean"}
+        "externalBalancerRequired": {"shape": "Boolean"},
+        "coordinator": {"shape": "NodeRequest"}
       }
     },
     "CreateServiceResponse": {
@@ -1002,9 +1003,20 @@
         "interfaceId": {"shape": "String"},
         "status": {"shape": "String"},
         "index": {"shape": "Integer"},
-        "endpoints": {"shape": "StringList"},
+        "endpoints": {"shape": "InstanceEndpoints"},
         "name": {"shape": "String"}
       }
+    },
+    "InstanceEndpoint": {
+      "type": "structure",
+      "members": {
+        "name": {"shape": "String"},
+        "address": {"shape": "String"}
+      }
+    },
+    "InstanceEndpoints": {
+      "type": "list",
+      "member": {"shape": "InstanceEndpoint"}
     },
     "InstanceList": {
       "type": "list",
@@ -1430,6 +1442,45 @@
         "externalBalancerRequired": {"shape": "Boolean"}
       }
     },
+    "Node": {
+        "type": "structure",
+        "members": {
+            "role": {"shape": "String"},
+            "instanceType": {"shape": "String"},
+            "nodeQty": {"shape": "Integer"},
+            "rootVolumeType": {"shape": "String"},
+            "rootVolumeSize": {"shape": "Integer"},
+            "rootVolumeIops": {"shape": "Integer"},
+            "dataVolumeType": {"shape": "String"},
+            "dataVolumeSize": {"shape": "Integer"},
+            "dataVolumeIops": {"shape": "Integer"}
+        }
+    },
+    "Nodes": {
+        "type": "structure",
+        "members": {
+            "main": {"shape": "Node"},
+            "arbitrator": {"shape": "Node"},
+            "coordinator": {"shape": "Node"}
+        }
+    },
+    "NodeRequest": {
+        "type": "structure",
+        "required": [
+            "instanceType",
+            "rootVolumeType",
+            "rootVolumeSize"
+        ],
+        "members": {
+            "instanceType": {"shape": "String"},
+            "rootVolumeType": {"shape": "String"},
+            "rootVolumeSize": {"shape": "Integer"},
+            "rootVolumeIops": {"shape": "Integer"},
+            "dataVolumeType": {"shape": "String"},
+            "dataVolumeSize": {"shape": "Integer"},
+            "dataVolumeIops": {"shape": "Integer"}
+        }
+    },
     "None": {"type": "none"},
     "SecurityGroup": {
       "type": "structure",
@@ -1461,15 +1512,15 @@
         "instanceType": {"shape": "String"},
         "highAvailability": {"shape": "Boolean"},
         "instanceQty": {"shape": "Integer"},
+        "nodes": {"shape": "Nodes"},
         "sshKeyName": {"shape": "String"},
         "parameters": {"shape": "None"},
         "users": {"shape": "UserResponseList"},
         "databases": {"shape": "DatabaseResponseList"},
-        "logstashPipelines": {"shape":  "LogstashPipelineList"},
         "status": {"shape": "String"},
         "errorCode": {"shape": "String"},
         "errorDescription": {"shape": "String"},
-        "endpoints": {"shape": "StringList"},
+        "endpoints": {"shape": "ServiceEndpoints"},
         "instances": {"shape": "InstanceList"},
         "supportedFeatures": {"shape": "StringList"},
         "backupSettings": {"shape": "BackupSettingsResponse"},
@@ -1480,13 +1531,24 @@
         "externalBalancerRequired": {"shape": "Boolean"},
         "internalBalancerAllowed": {"shape": "Boolean"},
         "externalBalancerAllowed": {"shape": "Boolean"},
-        "internalBalancerTargets": {"shape":  "BalancerTargets"},
-        "externalBalancerTargets": {"shape":  "BalancerTargets"},
+        "internalBalancerTargets": {"shape": "BalancerTargets"},
+        "externalBalancerTargets": {"shape": "BalancerTargets"},
         "loadBalancers": {"shape": "LoadBalancers"},
-        "environmentVersion": {"shape":  "String"},
-        "availableEnvironmentVersions": {"shape":  "StringList"},
+        "environmentVersion": {"shape": "String"},
+        "availableEnvironmentVersions": {"shape": "StringList"},
         "isRolledBack": {"shape": "Boolean"}
       }
+    },
+    "ServiceEndpoint": {
+      "type": "structure",
+      "members": {
+        "name": {"shape": "String"},
+        "addresses": {"shape": "StringList"}
+      }
+    },
+    "ServiceEndpoints": {
+      "type": "list",
+      "member": {"shape": "ServiceEndpoint"}
     },
     "String": {"type": "string"},
     "StringList": {
