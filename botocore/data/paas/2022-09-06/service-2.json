@@ -470,6 +470,16 @@
       "input": {"shape": "ModifyNotificationChannelRequest"},
       "output": {"shape": "ModifyNotificationChannelResponse"},
       "documentation": "<p>Modifies notification channel in given service.</p>"
+    },
+    "ModifySupportAccess": {
+      "name": "ModifySupportAccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/support-access"
+      },
+      "input": {"shape": "ModifySupportAccessRequest"},
+      "output": {"shape": "ModifySupportAccessResponse"},
+      "documentation": "<p>Modifies support access for given service.</p>"
     }
   },
   "shapes": {
@@ -533,7 +543,7 @@
         "serviceCaption": {"shape": "String"},
         "serviceType": {"shape": "String"},
         "protocol": {"shape": "String"},
-        "port": {"shape": "String"}
+        "port": {"shape": "Integer"}
       }
     },
     "BalancerTargets": {
@@ -621,7 +631,8 @@
         "backupSettings": {"shape": "BackupSettingsRequest"},
         "arbitratorRequired": {"shape": "Boolean"},
         "internalBalancerRequired": {"shape": "Boolean"},
-        "externalBalancerRequired": {"shape": "Boolean"}
+        "externalBalancerRequired": {"shape": "Boolean"},
+        "coordinator": {"shape": "NodeRequest"}
       }
     },
     "CreateServiceResponse": {
@@ -1430,6 +1441,45 @@
         "externalBalancerRequired": {"shape": "Boolean"}
       }
     },
+    "Node": {
+        "type": "structure",
+        "members": {
+            "role": {"shape": "String"},
+            "instanceType": {"shape": "String"},
+            "nodeQty": {"shape": "Integer"},
+            "rootVolumeType": {"shape": "String"},
+            "rootVolumeSize": {"shape": "Integer"},
+            "rootVolumeIops": {"shape": "Integer"},
+            "dataVolumeType": {"shape": "String"},
+            "dataVolumeSize": {"shape": "Integer"},
+            "dataVolumeIops": {"shape": "Integer"}
+        }
+    },
+    "Nodes": {
+        "type": "structure",
+        "members": {
+            "main": {"shape": "Node"},
+            "arbitrator": {"shape": "Node"},
+            "coordinator": {"shape": "Node"}
+        }
+    },
+    "NodeRequest": {
+        "type": "structure",
+        "required": [
+            "instanceType",
+            "rootVolumeType",
+            "rootVolumeSize"
+        ],
+        "members": {
+            "instanceType": {"shape": "String"},
+            "rootVolumeType": {"shape": "String"},
+            "rootVolumeSize": {"shape": "Integer"},
+            "rootVolumeIops": {"shape": "Integer"},
+            "dataVolumeType": {"shape": "String"},
+            "dataVolumeSize": {"shape": "Integer"},
+            "dataVolumeIops": {"shape": "Integer"}
+        }
+    },
     "None": {"type": "none"},
     "SecurityGroup": {
       "type": "structure",
@@ -1461,11 +1511,11 @@
         "instanceType": {"shape": "String"},
         "highAvailability": {"shape": "Boolean"},
         "instanceQty": {"shape": "Integer"},
+        "nodes": {"shape": "Nodes"},
         "sshKeyName": {"shape": "String"},
         "parameters": {"shape": "None"},
         "users": {"shape": "UserResponseList"},
         "databases": {"shape": "DatabaseResponseList"},
-        "logstashPipelines": {"shape":  "LogstashPipelineList"},
         "status": {"shape": "String"},
         "errorCode": {"shape": "String"},
         "errorDescription": {"shape": "String"},
@@ -1480,12 +1530,13 @@
         "externalBalancerRequired": {"shape": "Boolean"},
         "internalBalancerAllowed": {"shape": "Boolean"},
         "externalBalancerAllowed": {"shape": "Boolean"},
-        "internalBalancerTargets": {"shape":  "BalancerTargets"},
-        "externalBalancerTargets": {"shape":  "BalancerTargets"},
+        "internalBalancerTargets": {"shape": "BalancerTargets"},
+        "externalBalancerTargets": {"shape": "BalancerTargets"},
         "loadBalancers": {"shape": "LoadBalancers"},
-        "environmentVersion": {"shape":  "String"},
-        "availableEnvironmentVersions": {"shape":  "StringList"},
-        "isRolledBack": {"shape": "Boolean"}
+        "environmentVersion": {"shape": "String"},
+        "availableEnvironmentVersions": {"shape": "StringList"},
+        "isRolledBack": {"shape": "Boolean"},
+        "supportAccessEnabled": {"shape": "Boolean"}
       }
     },
     "String": {"type": "string"},
@@ -2016,6 +2067,34 @@
         "notificationChannel": {
           "shape": "NotificationChannel",
           "documentation": "<p>The full description of modified notification channel.</p>"
+        }
+      }
+    },
+    "ModifySupportAccessRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "enable"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "enable": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the support access is enabled.</p>"
+        }
+      }
+    },
+    "ModifySupportAccessResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
         }
       }
     }
