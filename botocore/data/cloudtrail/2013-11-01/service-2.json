@@ -736,6 +736,10 @@
         "CloudTrailEvent":{
           "shape":"String",
           "documentation":"<p>A JSON string that contains a representation of the event returned.</p>"
+        },
+        "Project":{
+          "shape":"String",
+          "documentation":"<p>The ID of the project from which the API method was called.</p>"
         }
       },
       "documentation":"<p>Contains information about an event that was returned by a lookup request. The result includes a representation of a CloudTrail event.</p>"
