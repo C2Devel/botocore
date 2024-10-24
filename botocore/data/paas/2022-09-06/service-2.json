@@ -41,6 +41,16 @@
       "output": {"shape": "CreateServiceResponse"},
       "documentation": "<p>Creates service.</p>"
     },
+    "CreateKafkaTopic": {
+        "name": "CreateKafkaTopic",
+        "http": {
+            "method": "POST",
+            "requestUri": "/services/{serviceId}/kafka-topics"
+        },
+        "input": {"shape": "CreateKafkaTopicRequest"},
+        "output": {"shape": "CreateKafkaTopicResponse"},
+        "documentation": "<p>Create Kafka topic.</p>"
+    },
     "CreateLogstashPipeline": {
       "name": "CreateLogstashPipeline",
       "http": {
@@ -70,6 +80,16 @@
       "input": {"shape": "DeleteBackupsRequest"},
       "output": {"shape": "DeleteBackupsResponse"},
       "documentation": "<p>Deletes service backups.</p>"
+    },
+    "DeleteKafkaTopic": {
+        "name": "DeleteKafkaTopic",
+        "http": {
+            "method": "DELETE",
+            "requestUri": "/services/{serviceId}/kafka-topics/{topicId}"
+        },
+        "input": {"shape": "DeleteKafkaTopicRequest"},
+        "output": {"shape": "DeleteKafkaTopicResponse"},
+        "documentation": "<p>Deletes a Kafka topic.</p>"
     },
     "DeleteLogstashPipeline": {
       "name": "DeleteLogstashPipeline",
@@ -231,6 +251,16 @@
       "output": {"shape": "ListElasticsearchSnapshotRepositoriesResponse"},
       "documentation": "<p>Returns list of Elasticsearch snapshot repositories.</p>"
     },
+    "ListKafkaTopics": {
+        "name": "ListKafkaTopics",
+        "http": {
+            "method": "GET",
+            "requestUri": "/services/{serviceId}/kafka-topics"
+        },
+        "input": {"shape": "ListKafkaTopicsRequest"},
+        "output": {"shape": "ListKafkaTopicsResponse"},
+        "documentation": "<p>Returns list of Kafka topics.</p>"
+    },
     "ListLogstashPipelines": {
       "name": "ListLogstashPipelines",
       "http": {
@@ -290,6 +320,16 @@
       "input": {"shape": "ModifyDatabaseRequest"},
       "output": {"shape": "ModifyDatabaseResponse"},
       "documentation": "<p>Modifies database.</p>"
+    },
+    "ModifyKafkaTopic": {
+        "name": "ModifyKafkaTopic",
+        "http": {
+            "method": "PUT",
+            "requestUri": "/services/{serviceId}/kafka-topics/{topicId}"
+        },
+        "input": {"shape": "ModifyKafkaTopicRequest"},
+        "output": {"shape": "ModifyKafkaTopicResponse"},
+        "documentation": "<p>Modifies a Kafka topic in given service.</p>"
     },
     "ModifyLoadBalancers": {
       "name": "ModifyLoadBalancers",
@@ -533,7 +573,7 @@
         "serviceCaption": {"shape": "String"},
         "serviceType": {"shape": "String"},
         "protocol": {"shape": "String"},
-        "port": {"shape": "String"}
+        "port": {"shape": "Integer"}
       }
     },
     "BalancerTargets": {
@@ -585,6 +625,33 @@
         "repository": {"shape": "ElasticsearchSnapshotRepositoryResponse"}
       }
     },
+    "CreateKafkaTopicRequest": {
+        "type": "structure",
+        "required": [
+          "serviceId",
+          "name",
+          "parameters"
+        ],
+        "members": {
+          "serviceId": {
+            "shape": "String",
+            "documentation": "<p>The service ID to modify.</p>",
+            "location": "uri",
+            "locationName": "serviceId"
+          },
+          "name": {"shape": "String"},
+          "parameters": {"shape": "None"}
+        }
+    },
+    "CreateKafkaTopicResponse": {
+        "type": "structure",
+        "members": {
+          "kafkaTopic": {
+            "shape": "KafkaTopic",
+            "documentation": "<p>The full description of created kafka topic.</p>"
+          }
+        }
+    },
     "CreateServiceRequest": {
       "type": "structure",
       "required": [
@@ -621,7 +688,8 @@
         "backupSettings": {"shape": "BackupSettingsRequest"},
         "arbitratorRequired": {"shape": "Boolean"},
         "internalBalancerRequired": {"shape": "Boolean"},
-        "externalBalancerRequired": {"shape": "Boolean"}
+        "externalBalancerRequired": {"shape": "Boolean"},
+        "coordinator": {"shape": "NodeRequest"}
       }
     },
     "CreateServiceResponse": {
@@ -695,6 +763,31 @@
     "DatabaseCreateRequestList": {
       "type": "list",
       "member": {"shape": "DatabaseCreateRequest"}
+    },
+    "DeleteKafkaTopicRequest": {
+        "type": "structure",
+        "required": [
+          "serviceId",
+          "topicId"
+        ],
+        "members": {
+          "serviceId": {
+            "shape": "String",
+            "documentation": "<p>The ID of service.</p>",
+            "location": "uri",
+            "locationName": "serviceId"
+          },
+          "topicId": {
+            "shape": "String",
+            "documentation": "<p>The ID of kafka topic to delete.</p>",
+            "location": "uri",
+            "locationName": "topicId"
+          }
+        }
+    },
+    "DeleteKafkaTopicResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DatabaseModifyRequest": {
       "type": "structure",
@@ -1011,6 +1104,18 @@
       "member": {"shape": "Instance"}
     },
     "Integer": {"type": "integer"},
+    "KafkaTopic": {
+        "type": "structure",
+        "members": {
+          "id": {"shape": "String"},
+          "name": {"shape": "String"},
+          "parameters": {"shape": "None"}
+        }
+    },
+    "KafkaTopicsList": {
+        "type": "list",
+        "member": {"shape": "KafkaTopic"}
+    },
     "ListBackups": {
       "type": "list",
       "member": {"shape": "Backup"}
@@ -1116,6 +1221,29 @@
       "members": {
         "repositories": {"shape": "ElasticsearchSnapshotRepositoriesResponseList"}
       }
+    },
+    "ListKafkaTopicsRequest": {
+        "type": "structure",
+        "required": [
+          "serviceId"
+        ],
+        "members": {
+          "serviceId": {
+            "shape": "String",
+            "documentation": "<p>The ID of service.</p>",
+            "location": "uri",
+            "locationName": "serviceId"
+          }
+        }
+    },
+    "ListKafkaTopicsResponse": {
+        "type": "structure",
+        "members": {
+          "kafkaTopics": {
+            "shape": "KafkaTopicsList",
+            "documentation": "<p>A list of kafka topics, available for service.</p>"
+          }
+        }
     },
     "ListServiceItem": {
       "type": "structure",
@@ -1304,6 +1432,38 @@
         }
       }
     },
+    "ModifyKafkaTopicRequest": {
+        "type": "structure",
+        "required": [
+          "serviceId",
+          "topicId",
+          "parameters"
+        ],
+        "members": {
+          "serviceId": {
+            "shape": "String",
+            "documentation": "<p>The ID of service to modify.</p>",
+            "location": "uri",
+            "locationName": "serviceId"
+          },
+          "topicId": {
+            "shape": "String",
+            "documentation": "<p>The ID of kafka topic to modify.</p>",
+            "location": "uri",
+            "locationName": "topicId"
+          },
+          "parameters": {"shape": "None"}
+        }
+    },
+    "ModifyKafkaTopicResponse": {
+        "type": "structure",
+        "members": {
+          "kafkaTopic": {
+            "shape": "KafkaTopic",
+            "documentation": "<p>The full description of modified kafka topic.</p>"
+          }
+        }
+    },
     "ModifyServiceRequest": {
       "type": "structure",
       "required": [
@@ -1430,6 +1590,45 @@
         "externalBalancerRequired": {"shape": "Boolean"}
       }
     },
+    "Node": {
+        "type": "structure",
+        "members": {
+            "role": {"shape": "String"},
+            "instanceType": {"shape": "String"},
+            "nodeQty": {"shape": "Integer"},
+            "rootVolumeType": {"shape": "String"},
+            "rootVolumeSize": {"shape": "Integer"},
+            "rootVolumeIops": {"shape": "Integer"},
+            "dataVolumeType": {"shape": "String"},
+            "dataVolumeSize": {"shape": "Integer"},
+            "dataVolumeIops": {"shape": "Integer"}
+        }
+    },
+    "Nodes": {
+        "type": "structure",
+        "members": {
+            "main": {"shape": "Node"},
+            "arbitrator": {"shape": "Node"},
+            "coordinator": {"shape": "Node"}
+        }
+    },
+    "NodeRequest": {
+        "type": "structure",
+        "required": [
+            "instanceType",
+            "rootVolumeType",
+            "rootVolumeSize"
+        ],
+        "members": {
+            "instanceType": {"shape": "String"},
+            "rootVolumeType": {"shape": "String"},
+            "rootVolumeSize": {"shape": "Integer"},
+            "rootVolumeIops": {"shape": "Integer"},
+            "dataVolumeType": {"shape": "String"},
+            "dataVolumeSize": {"shape": "Integer"},
+            "dataVolumeIops": {"shape": "Integer"}
+        }
+    },
     "None": {"type": "none"},
     "SecurityGroup": {
       "type": "structure",
@@ -1461,11 +1660,11 @@
         "instanceType": {"shape": "String"},
         "highAvailability": {"shape": "Boolean"},
         "instanceQty": {"shape": "Integer"},
+        "nodes": {"shape": "Nodes"},
         "sshKeyName": {"shape": "String"},
         "parameters": {"shape": "None"},
         "users": {"shape": "UserResponseList"},
         "databases": {"shape": "DatabaseResponseList"},
-        "logstashPipelines": {"shape":  "LogstashPipelineList"},
         "status": {"shape": "String"},
         "errorCode": {"shape": "String"},
         "errorDescription": {"shape": "String"},
@@ -1480,11 +1679,11 @@
         "externalBalancerRequired": {"shape": "Boolean"},
         "internalBalancerAllowed": {"shape": "Boolean"},
         "externalBalancerAllowed": {"shape": "Boolean"},
-        "internalBalancerTargets": {"shape":  "BalancerTargets"},
-        "externalBalancerTargets": {"shape":  "BalancerTargets"},
+        "internalBalancerTargets": {"shape": "BalancerTargets"},
+        "externalBalancerTargets": {"shape": "BalancerTargets"},
         "loadBalancers": {"shape": "LoadBalancers"},
-        "environmentVersion": {"shape":  "String"},
-        "availableEnvironmentVersions": {"shape":  "StringList"},
+        "environmentVersion": {"shape": "String"},
+        "availableEnvironmentVersions": {"shape": "StringList"},
         "isRolledBack": {"shape": "Boolean"}
       }
     },
@@ -1540,7 +1739,6 @@
       "type": "list",
       "member": {"shape": "UserResponse"}
     },
-
     "CreateLogstashPipelineRequest": {
       "type": "structure",
       "required": [
