@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        ROCKIT50%{?buildid}%{?dist}
+Release:        ROCKIT51%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,13 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Sat Nov 02 2024 Andrey Kulaev <akulaev@k2.cloud> - 1.20.14-ROCKIT51
+- data: add ExtNetId and AvailabilityZone to AttachExtNetworkRequest and DetachExtNetworkRequest
+- paas: add support access parameter
+- paas: support nodes and kafka coordinator
+- paas: add name for service and instance endpoints
+- cloudtrail: add missing Project parameter to Event
+
 * Mon Oct 23 2024 Linar Nasyirov <lnasyyrov@k2.cloud> - 1.20.14-ROCKIT50
 - ec2: remove required param from DescribeByoipCidrsRequest
 - vendored: add support for python 3.12
