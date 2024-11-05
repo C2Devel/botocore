@@ -1563,6 +1563,33 @@
       "documentation":"<p>Describes how uncompressed comma-separated values (CSV)-formatted results are formatted.</p>"
     },
     "CacheControl":{"type":"string"},
+    "Checksum":{
+      "type":"structure",
+      "members":{
+        "ChecksumCRC32":{
+          "shape":"ChecksumCRC32",
+          "documentation":"<p>The base64-encoded, 32-bit CRC32 checksum of the object. This will only be present if it was uploaded with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\"> Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+        },
+        "ChecksumCRC32C":{
+          "shape":"ChecksumCRC32C",
+          "documentation":"<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\"> Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+        },
+        "ChecksumSHA1":{
+          "shape":"ChecksumSHA1",
+          "documentation":"<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded with the object. When you use the API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\"> Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+        },
+        "ChecksumSHA256":{
+          "shape":"ChecksumSHA256",
+          "documentation":"<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded with the object. When you use an API operation on an object that was uploaded using multipart uploads, this value may not be a direct checksum value of the full object. Instead, it's a calculation based on the checksum values of each individual part. For more information about how checksums are calculated with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\"> Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+        }
+      },
+
+      "documentation":"<p>Contains all the possible checksum or digest values for an object.</p>"
+    },
+    "ChecksumCRC32":{"type":"string"},
+    "ChecksumCRC32C":{"type":"string"},
+    "ChecksumSHA1":{"type":"string"},
+    "ChecksumSHA256":{"type":"string"},
     "CloudFunction":{"type":"string"},
     "CloudFunctionConfiguration":{
       "type":"structure",
@@ -9853,6 +9880,7 @@
       }
     },
     "Value":{"type":"string"},
+    "VersionCount":{"type":"integer"},
     "VersionIdMarker":{"type":"string"},
     "VersioningConfiguration":{
       "type":"structure",
