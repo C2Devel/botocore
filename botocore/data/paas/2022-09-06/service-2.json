@@ -311,6 +311,26 @@
       "output": {"shape": "ModifyEnvironmentResponse"},
       "documentation": "<p>Modifies the PaaS service environment.</p>"
     },
+    "ChangeInstanceVolume": {
+      "name": "ChangeInstanceVolume",
+      "http": {
+        "method": "POST",
+        "requestUri": "services/{serviceId}/instance_volume"
+      },
+      "input": {"shape": "ChangeInstanceVolumeRequest"},
+      "output": {"shape": "ChangeInstanceVolumeResponse"},
+      "documentation": "<p>Modifies the PaaS service volumes size.</p>"
+    },
+    "ChangeInstanceIops": {
+      "name": "ChangeInstanceIops",
+      "http": {
+        "method": "POST",
+        "requestUri": "services/{serviceId}/instance_iops"
+      },
+      "input": {"shape": "ChangeInstanceIopsRequest"},
+      "output": {"shape": "ChangeInstanceIopsResponse"},
+      "documentation": "<p>Modifies the PaaS service IOPS.</p>"
+    },
     "ModifyService": {
       "name": "ModifyService",
       "http": {
@@ -1318,6 +1338,56 @@
       }
     },
     "ModifyEnvironmentResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of your modified service.</p>"
+        }
+      }
+    },
+    "ChangeInstanceVolumeRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "volumeSize": {
+          "shape": "Integer"
+        }
+      }
+    },
+    "ChangeInstanceVolumeResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of your modified service.</p>"
+        }
+      }
+    },
+    "ChangeInstanceIopsRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "iops": {
+          "shape": "Integer"
+        }
+      }
+    },
+    "ChangeInstanceIopsResponse": {
       "type": "structure",
       "members": {
         "service": {
