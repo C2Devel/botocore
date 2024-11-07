@@ -351,6 +351,26 @@
       "output": {"shape": "ModifyEnvironmentResponse"},
       "documentation": "<p>Modifies the PaaS service environment.</p>"
     },
+    "ModifyInstanceVolumeSize": {
+      "name": "ModifyInstanceVolumeSize",
+      "http": {
+        "method": "PUT",
+        "requestUri": "services/{serviceId}/instance-volume-size"
+      },
+      "input": {"shape": "ModifyInstanceVolumeSizeRequest"},
+      "output": {"shape": "ModifyInstanceVolumeSizeResponse"},
+      "documentation": "<p>Modifies the PaaS service volumes size.</p>"
+    },
+    "ModifyInstanceVolumeIops": {
+      "name": "ModifyInstanceVolumeIops",
+      "http": {
+        "method": "PUT",
+        "requestUri": "services/{serviceId}/instance-volume-iops"
+      },
+      "input": {"shape": "ModifyInstanceVolumeIopsRequest"},
+      "output": {"shape": "ModifyInstanceVolumeIopsResponse"},
+      "documentation": "<p>Modifies the PaaS service volumes IOPS.</p>"
+    },
     "ModifyService": {
       "name": "ModifyService",
       "http": {
@@ -1484,6 +1504,62 @@
             "documentation": "<p>The full description of modified kafka topic.</p>"
           }
         }
+    },
+    "ModifyInstanceVolumeSizeRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "size"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "size": {
+          "shape": "Integer",
+          "documentation": "<p>The size of the virtual disk, GiB.</p>"
+        }
+      }
+    },
+    "ModifyInstanceVolumeSizeResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of your modified service.</p>"
+        }
+      }
+    },
+    "ModifyInstanceVolumeIopsRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "iops"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "iops": {
+          "shape": "Integer",
+          "documentation": "<p>The number of I/O operations per second.</p>"
+        }
+      }
+    },
+    "ModifyInstanceVolumeIopsResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of your modified service.</p>"
+        }
+      }
     },
     "ModifyServiceRequest": {
       "type": "structure",
