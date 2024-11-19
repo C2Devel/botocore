@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        ROCKIT51%{?buildid}%{?dist}
+Release:        ROCKIT52%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,6 +47,11 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
+* Tue Nov 19 2024 Aleksander Badulin <abadulin@k2.cloud> - 1.20.14-ROCKIT52
+- cloudwatch: add MetricName and Dimensions parameters to DescribeAlarms
+- ec2: add volume placement group
+- iam: add identity provider entities
+
 * Sat Nov 02 2024 Andrey Kulaev <akulaev@k2.cloud> - 1.20.14-ROCKIT51
 - data: add ExtNetId and AvailabilityZone to AttachExtNetworkRequest and DetachExtNetworkRequest
 - paas: add support access parameter
