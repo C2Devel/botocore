@@ -530,6 +530,18 @@
         "resultWrapper":"ListUsersResult"
       }
     },
+    "ListUserTags":{
+      "name":"ListUserTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListUserTagsRequest"},
+      "output":{
+        "shape":"ListUserTagsResponse",
+        "resultWrapper":"ListUserTagsResult"
+      }
+    },
     "RemoveIDProviderGroupFromGroup":{
       "name":"RemoveIDProviderGroupFromGroup",
       "http":{
@@ -561,6 +573,22 @@
         "requestUri":"/"
       },
       "input":{"shape":"RemoveUserFromProjectRequest"}
+    },
+    "TagUser":{
+      "name":"TagUser",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagUserRequest"}
+    },
+    "UntagUser":{
+      "name":"UntagUser",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagUserRequest"}
     },
     "UpdateIDProvider":{
       "name":"UpdateIDProvider",
@@ -1717,6 +1745,25 @@
         }
       }
     },
+    "ListUserTagsRequest":{
+      "type":"structure",
+      "required":[
+        "UserName"
+      ],
+      "members":{
+        "UserName":{
+          "shape":"userNameType"
+        }
+      }
+    },
+    "ListUserTagsResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{
+          "shape":"tagsType"
+        }
+      }
+    },
     "Policy":{
       "type":"structure",
       "members":{
@@ -1947,6 +1994,63 @@
       "member":{"shape":"Service"}
     },
     "stringType":{"type":"string"},
+    "Tag":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"stringType",
+          "documentation":"<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>"
+        },
+        "Value":{
+          "shape":"stringType",
+          "documentation":"<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.</p>"
+        }
+      },
+      "documentation":"<p>Describes a tag.</p>"
+    },
+    "TagKey":{
+      "type":"string"
+    },
+    "TagUserRequest":{
+      "type":"structure",
+      "required":[
+        "UserName",
+        "Tags"
+      ],
+      "members":{
+        "UserName":{
+          "shape":"userNameType"
+        },
+        "Tags":{
+          "shape":"tagsType"
+        }
+      }
+    },
+    "tagKeysType":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "tagsType":{
+      "type":"list",
+      "member":{
+        "shape":"Tag"
+      }
+    },
+  "UntagUserRequest":{
+      "type":"structure",
+      "required":[
+        "UserName",
+        "TagKeys"
+      ],
+      "members":{
+        "UserName":{
+          "shape":"userNameType"
+        },
+        "TagKeys":{
+          "shape":"tagKeysType"
+        }
+      }
+    },
     "UpdateIDProviderRequest":{
       "type":"structure",
       "required":[
