@@ -4,7 +4,7 @@
 Name:           python-%{pkgname}
 # NOTICE - Updating this package requires updating python-boto3
 Version:        1.20.14
-Release:        ROCKIT53.rc.1%{?buildid}%{?dist}
+Release:        ROCKIT53%{?buildid}%{?dist}
 Summary:        Low-level, data-driven core of boto 3
 
 License:        ASL 2.0
@@ -47,7 +47,7 @@ rm -rf tests/integration
 %{python3_sitelib}/%{pkgname}-*.egg-info/
 
 %changelog
-* Fri Nov 29 2024 Andrey Kulaev <akulaev@k2.cloud> - 1.20.14-ROCKIT53.rc.1
+* Wed Dec 11 2024 Andrey Kulaev <akulaev@k2.cloud> - 1.20.14-ROCKIT53
 - backup: add configuration to BackupSelection and StartBackupJob
 - backup: add IsPartial to RecoveryPoint shapes
 - backup: add configuration to job list and get
