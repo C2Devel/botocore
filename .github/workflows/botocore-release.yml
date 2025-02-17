@@ -1,0 +1,20 @@
+name: Botocore Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Type of release
+        required: true
+        type: choice
+        default: rc
+        options:
+        - release
+        - rc
+
+jobs:
+  call-workflow:
+    uses: ./.github/workflows/deps-release.yml
+    with:
+      bump: ${{ github.event.inputs.bump }}
+    secrets: inherit
