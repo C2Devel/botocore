@@ -25210,6 +25210,11 @@
           "documentation":"<p>The AMI launch index, which can be used to find this instance in the launch group.</p>",
           "locationName":"amiLaunchIndex"
         },
+        "HighAvailability":{
+          "shape":"Boolean",
+          "documentation":"<p>The high availability mode.</p>",
+          "locationName":"highAvailability"
+        },
         "ImageId":{
           "shape":"String",
           "documentation":"<p>The ID of the AMI used to launch the instance.</p>",
@@ -25293,6 +25298,11 @@
           "shape":"Boolean",
           "documentation":"<p>Specifies whether RAM monitoring is enabled for the instance.</p>",
           "locationName":"ramMonitoring"
+        },
+        "RemoteConsole":{
+          "shape":"String",
+          "documentation":"<p>The remote console type.</p>",
+          "locationName":"remoteConsole"
         },
         "State":{
           "shape":"InstanceState",
