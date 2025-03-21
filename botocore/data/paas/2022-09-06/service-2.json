@@ -719,7 +719,8 @@
         "arbitratorRequired": {"shape": "Boolean"},
         "internalBalancerRequired": {"shape": "Boolean"},
         "externalBalancerRequired": {"shape": "Boolean"},
-        "coordinator": {"shape": "NodeRequest"}
+        "coordinator": {"shape": "NodeRequest"},
+        "tags": {"shape":  "TagList"}
       }
     },
     "CreateServiceResponse": {
@@ -1300,7 +1301,8 @@
         "totalCpuCount": {"shape": "Integer"},
         "totalMemory": {"shape": "Integer"},
         "vpcId": {"shape": "String"},
-        "environmentVersion": {"shape":  "String"}
+        "environmentVersion": {"shape":  "String"},
+        "tags": {"shape":  "TagList"}
       }
     },
     "ListServices": {
@@ -1782,7 +1784,8 @@
         "environmentVersion": {"shape": "String"},
         "availableEnvironmentVersions": {"shape": "StringList"},
         "isRolledBack": {"shape": "Boolean"},
-        "supportAccessEnabled": {"shape": "Boolean"}
+        "supportAccessEnabled": {"shape": "Boolean"},
+        "tags": {"shape":  "TagList"}
       }
     },
     "ServiceEndpoint": {
@@ -1800,6 +1803,41 @@
     "StringList": {
       "type": "list",
       "member": {"shape": "String"}
+    },
+    "Tag":{
+      "type":"structure",
+      "members":{
+        "Key":{
+          "shape":"String",
+          "documentation":"<p>The key of the tag. </p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code></p>",
+          "locationName":"key"
+        },
+        "Value":{
+          "shape":"String",
+          "documentation":"<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.</p>",
+          "locationName":"value"
+        }
+      },
+      "documentation":"<p>Describes a tag.</p>"
+    },
+    "TagKey": {"type": "string"},
+    "TagValue":{
+      "type":"string",
+      "max":256
+    },
+    "TagList":{
+      "type":"list",
+      "member":{
+        "shape":"Tag",
+        "locationName":"item"
+      }
+    },
+    "TagMap":{
+      "type":"map",
+      "key":{"shape":"TagKey"},
+      "value":{"shape":"TagValue"},
+      "max":50,
+      "min":1
     },
     "Timestamp": {"type": "timestamp"},
     "UserCompactResponse": {
