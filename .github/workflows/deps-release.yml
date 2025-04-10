@@ -1,0 +1,100 @@
+name: Dependencies release
+
+on:
+  workflow_call:
+    inputs:
+      bump:
+        description: Type of release
+        required: true
+        type: string
+
+jobs:
+
+  release:
+    permissions:
+      contents: write
+      pull-requests: read
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout default branch
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.repository.default_branch }}
+        fetch-depth: 0
+
+    - name: Automatic update version
+      id: autoversion
+      uses: ./.github/actions/deps-ver/
+      with:
+        AUTOMATION_PAT: ${{ secrets.GITHUB_TOKEN }}
+        release_type: ${{ github.event.inputs.bump }}
+
+    - name: Create release notes
+      id: releaseNotes
+      run: |
+        releaseNotes=$(git log --pretty='%s' ${{ steps.autoversion.outputs.current_tag }}..HEAD | grep -ivE '(Merge|Bump)' | sort)
+        if [[ ! -z "$releaseNotes" ]]; then
+          echo -e "releaseNotes<<EOF\n$releaseNotes\nEOF" >> $GITHUB_OUTPUT;
+        else 
+          echo "Something went wrong"
+          exit 1
+        fi
+        echo $GITHUB_OUTPUT
+
+    - name: Bump version, update changelog in .spec
+      id: upd_version
+      run: |
+        version=$(echo ${{ steps.autoversion.outputs.new_tag }} | cut -d'-' -f1)
+        release=$(echo ${{ steps.autoversion.outputs.new_tag }} | cut -d'-' -f2)
+        specfile=$(ls *.spec | head -n 1)
+        echo "specfile=$specfile" >> $GITHUB_OUTPUT
+        sed -i "s/^Version: [0-9]\+\.[0-9]\+\.[0-9]\+$/Version: ${version}/" "$specfile"        
+        sed -i "s/^Release: [^%]*%{?buildid}%{?dist}/Release:        ${release}%{?buildid}%{?dist}/" "$specfile"
+        current_date=$(date +"%a %b %d %Y")
+
+        if ! grep -q "* $current_date <devel@k2.cloud>" "$specfile"; then
+          sed -i "/%changelog/a * $current_date <devel@k2.cloud> - ${{ steps.autoversion.outputs.new_tag }}\n" "$specfile"
+        fi
+        releaseNotes="${{ steps.releaseNotes.outputs.releaseNotes }}"
+        IFS=$'\n'
+        for commit in $releaseNotes; do
+          sed -i "/\* $current_date <devel@k2.cloud>/a - $commit" "$specfile"
+        done
+                
+    - name: Commit bump .spec
+      uses: stefanzweifel/git-auto-commit-action@v5.0.1
+      with:
+        file_pattern: ${{ steps.upd_version.outputs.specfile }}
+        commit_message: ${{ steps.autoversion.outputs.new_tag }}
+        commit_user_name: ${{ vars.COMMIT_USER_NAME }}
+        commit_user_email: ${{ vars.COMMIT_USER_EMAIL }}
+
+    - name: GHE release
+      uses: softprops/action-gh-release@v1
+      id: ghe_release
+      with:
+         name: ${{ steps.autoversion.outputs.new_tag }}
+         tag_name: ${{ steps.autoversion.outputs.new_tag }}
+         body: ${{ steps.releaseNotes.outputs.releaseNotes }}
+         draft: false
+         prerelease: ${{ steps.autoversion.outputs.rc }}
+         token: ${{ secrets.GITHUB_TOKEN }}
+
+  merge-next-master:
+    needs:
+      - release
+    if: ${{ github.event.inputs.bump != 'rc'}}
+    runs-on: self-hosted
+    steps:
+
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Perform fast-forward merge
+        run: |
+          git merge --ff-only origin/next
+          git push origin master
+        continue-on-error: false

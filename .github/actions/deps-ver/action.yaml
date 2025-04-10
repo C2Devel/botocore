@@ -1,0 +1,126 @@
+name: Dependencies versioning
+description: Create new version tag for dependencies
+
+inputs:
+    release_type:
+        description: Type of release
+        required: true      
+    AUTOMATION_PAT:
+        description: Personal Access Token
+        required: true
+
+outputs:
+  current_tag:
+    description: 'The current release tag'
+    value: ${{ steps.current_tag.outputs.current_tag }}
+  new_tag:
+    description: 'The New release tag'
+    value: ${{ steps.new_tag.outputs.new_tag }}
+  rc:
+    description: 'Is release candidate?'
+    value: ${{ steps.new_tag.outputs.rc }}
+
+runs:
+    using: composite
+
+    steps:
+
+      - name: Get current tag
+        shell: bash
+        id: current_tag
+        run: |
+          echo "current_tag=$(curl -k -H 'Accept: application/vnd.github+json' \
+          -H 'Authorization: Bearer ${{ inputs.AUTOMATION_PAT }}' \
+          $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/releases | jq -r '.[0].name')" >> $GITHUB_OUTPUT
+
+      - name: Generate version
+        shell: bash
+        id: new_tag
+        run: |
+
+          latest_tag=${{ steps.current_tag.outputs.current_tag }}
+          release_type=${{ inputs.release_type }}
+
+          echo "Latest tag: $latest_tag"
+
+          version=$(echo $latest_tag | sed -E 's/([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+          vendor=$(echo $latest_tag | sed -E "s/.*-([a-zA-Z]+)[0-9]+.*/\1/;t;d")
+          vendor_number=$(echo $latest_tag | sed -E "s/.*-$vendor([0-9]+).*/\1/;t;d")
+          rc_number=$(echo $latest_tag | sed -E "s/.*.rc([0-9]+)$/\1/;t;d")
+
+          IFS='.' read -r major minor patch <<< "$version"
+          echo "Major: $major"
+          echo "Minor: $minor"
+          echo "Patch: $patch"
+
+          echo "Vendor: $vendor"
+          echo "Current version: $version"
+          echo "Current $vendor number: $vendor_number"
+          echo "Current rc number: $rc_number"
+
+          [ $release_type = "rc" ] && rc=true || rc=false
+
+          if [ -z "$rc_number" ]; then
+              new_vendor_number=$((vendor_number + 1))
+          else
+              new_vendor_number=$vendor_number
+          fi
+
+          if [ -z "$vendor" ]; then
+              case $release_type in
+                  "patch")
+                      new_patch=$((patch + 1))
+                      new_tag="${major}.${minor}.${new_patch}"
+                      ;;
+                  "minor")
+                      new_minor=$((minor + 1))
+                      new_tag="${major}.${new_minor}.0"
+                      ;;
+                  "major")
+                      new_major=$((major + 1))
+                      new_tag="${new_major}.0.0"
+                      ;;
+                  "release")
+                      new_tag="${version}"
+                      ;;
+                  "rc")
+                      new_minor=$((minor + 1))
+                      if [ -z "$rc_number" ]; then
+                          new_tag="${major}.${new_minor}.0.rc1"
+                      else
+                          new_rc_number=$((rc_number + 1))
+                          new_tag="${version}.rc${new_rc_number}"
+                      fi
+                      ;;
+              esac
+          else
+              case $release_type in
+                  "patch")
+                      new_patch=$((patch + 1))
+                      new_tag="${major}.${minor}.${new_patch}-${vendor}1"
+                      ;;
+                  "minor")
+                      new_minor=$((minor + 1))
+                      new_tag="${major}.${new_minor}.0-${vendor}1"
+                      ;;
+                  "major")
+                      new_major=$((major + 1))
+                      new_tag="${new_major}.0.0-${vendor}1"
+                      ;;
+                  "release")
+                      new_tag="${version}-${vendor}${new_vendor_number}"
+                      ;;
+                  "rc")
+                      if [ -z "$rc_number" ]; then
+                          new_tag="${version}-${vendor}${new_vendor_number}.rc1"
+                      else
+                          new_rc_number=$((rc_number + 1))
+                          new_tag="${version}-${vendor}${new_vendor_number}.rc${new_rc_number}"
+                      fi
+                      ;;
+              esac
+          fi
+
+          echo "New tag: $new_tag" 
+          echo "new_tag=$new_tag" >> $GITHUB_OUTPUT
+          echo "rc=$rc" >> $GITHUB_OUTPUT
