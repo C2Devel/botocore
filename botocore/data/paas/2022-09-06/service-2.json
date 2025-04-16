@@ -1343,6 +1343,7 @@
         "totalMemory": {"shape": "Integer"},
         "vpcId": {"shape": "String"},
         "environmentVersion": {"shape":  "String"},
+        "supportedFeatures": {"shape": "StringList"},
         "tags": {"shape":  "TagList"}
       }
     },
