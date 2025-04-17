@@ -45,4 +45,3 @@ rm -rf tests/integration
 %license LICENSE.txt
 %{python3_sitelib}/%{pkgname}/
 %{python3_sitelib}/%{pkgname}-*.egg-info/
-
