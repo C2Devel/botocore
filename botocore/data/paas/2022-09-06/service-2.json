@@ -411,6 +411,46 @@
       "output": {"shape": "PatchServiceParametersResponse"},
       "documentation": "<p>Modifies the PaaS service parameters.</p>"
     },
+    "RestartService": {
+      "name": "RestartService",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/restart"
+      },
+      "input": {"shape": "RestartServiceRequest"},
+      "output": {"shape": "RestartServiceResponse"},
+      "documentation": "<p>Restart service.</p>"
+    },
+    "StartService": {
+      "name": "StartService",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/start"
+      },
+      "input": {"shape": "StartServiceRequest"},
+      "output": {"shape": "StartServiceResponse"},
+      "documentation": "<p>Start service.</p>"
+    },
+    "StopService": {
+      "name": "StopService",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/stop"
+      },
+      "input": {"shape": "StopServiceRequest"},
+      "output": {"shape": "StopServiceResponse"},
+      "documentation": "<p>Stop service.</p>"
+    },
+    "SynchronizeServiceStatus": {
+      "name": "SynchronizeServiceStatus",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/synchronize-status"
+      },
+      "input": {"shape": "SynchronizeServiceStatusRequest"},
+      "output": {"shape": "SynchronizeServiceStatusResponse"},
+      "documentation": "<p>Synchronize service status.</p>"
+    },
     "CreatePrometheusRoute": {
       "name": "CreatePrometheusRoute",
       "http": {
@@ -1298,10 +1338,12 @@
         "serviceTypeCaption": {"shape": "String"},
         "version": {"shape": "String"},
         "errorCode": {"shape": "String"},
+        "errorRecoverable": {"shape": "Boolean"},
         "totalCpuCount": {"shape": "Integer"},
         "totalMemory": {"shape": "Integer"},
         "vpcId": {"shape": "String"},
         "environmentVersion": {"shape":  "String"},
+        "supportedFeatures": {"shape": "StringList"},
         "tags": {"shape":  "TagList"}
       }
     },
@@ -1729,6 +1771,29 @@
         }
     },
     "None": {"type": "none"},
+    "RestartServiceResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
+    "RestartServiceRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service to restart.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
     "SecurityGroup": {
       "type": "structure",
       "members": {
@@ -1767,6 +1832,7 @@
         "status": {"shape": "String"},
         "errorCode": {"shape": "String"},
         "errorDescription": {"shape": "String"},
+        "errorRecoverable": {"shape": "Boolean"},
         "endpoints": {"shape": "ServiceEndpoints"},
         "instances": {"shape": "InstanceList"},
         "supportedFeatures": {"shape": "StringList"},
@@ -1798,6 +1864,52 @@
     "ServiceEndpoints": {
       "type": "list",
       "member": {"shape": "ServiceEndpoint"}
+    },
+    "StartServiceResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
+    "StartServiceRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service to start.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "StopServiceResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
+    "StopServiceRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service to stop.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
     },
     "String": {"type": "string"},
     "StringList": {
@@ -1838,6 +1950,29 @@
       "value":{"shape":"TagValue"},
       "max":50,
       "min":1
+    },
+    "SynchronizeServiceStatusResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
+    "SynchronizeServiceStatusRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service to synchronize its status.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
     },
     "Timestamp": {"type": "timestamp"},
     "UserCompactResponse": {
@@ -2124,7 +2259,6 @@
         }
       }
     },
-
     "CreatePrometheusScrapeJobRequest": {
       "type": "structure",
       "required": [
@@ -2244,7 +2378,6 @@
         }
       }
     },
-
     "CreateNotificationChannelRequest": {
       "type": "structure",
       "required": [
