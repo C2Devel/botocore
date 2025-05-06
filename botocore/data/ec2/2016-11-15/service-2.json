@@ -10682,6 +10682,11 @@
           "shape":"String",
           "documentation":"<p>The description of the Traffic Mirror rule.</p>"
         },
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "documentation":"<p>Traffic Mirroring tags specifications.</p>",
+          "locationName":"TagSpecification"
+        },
         "DryRun":{
           "shape":"Boolean",
           "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
@@ -40543,6 +40548,11 @@
           "shape":"String",
           "documentation":"<p>The description of the Traffic Mirror rule.</p>",
           "locationName":"description"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "documentation":"<p>Tags on Traffic Mirroring filter rules.</p>",
+          "locationName":"tagSet"
         }
       },
       "documentation":"<p>Describes the Traffic Mirror rule.</p>"
