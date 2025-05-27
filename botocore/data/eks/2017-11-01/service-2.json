@@ -994,6 +994,10 @@
         "placementGroupsConfig":{
           "shape":"placementGroupsConfig",
           "documentation":"<p>The Kubernetes placement groups configuration for the cluster</p>"
+        },
+        "placementConfig": {
+          "shape": "placementConfig",
+          "documentation": "<p>The Kubernetes placement configuration for the cluster</p>"
         }
       }
     },
@@ -1597,6 +1601,20 @@
         "usePlacementGroups":{"shape":"Boolean"}
       }
     },
+    "placementConfig": {
+      "type": "structure",
+      "members": {
+        "affinity": {
+          "shape":"Affinity"
+        },
+        "hostId": {
+          "shape":"String"
+        },
+        "tenancy": {
+          "shape":"Tenancy"
+        }
+      }
+    },
     "RemoteAccessConfig":{
       "type":"structure",
       "members":{
@@ -1820,6 +1838,20 @@
       "fault":true
     },
     "String":{"type":"string"},
+    "Affinity":{
+      "type":"string",
+      "enum":[
+        "default",
+        "host"
+      ]
+    },
+    "Tenancy":{
+      "type":"string",
+      "enum":[
+        "default",
+        "host"
+      ]
+    },
     "StringList":{
       "type":"list",
       "member":{"shape":"String"}
