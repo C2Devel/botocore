@@ -2,12 +2,13 @@
   "version":"2.0",
   "metadata":{
     "apiVersion":"2012-06-01",
-    "endpointPrefix":"elasticloadbalancing",
+    "endpointPrefix":"elb",
     "protocol":"query",
     "serviceFullName":"Elastic Load Balancing",
     "serviceId":"Elastic Load Balancing",
     "signatureVersion":"v4",
     "uid":"elasticloadbalancing-2012-06-01",
+    "signingName":"elasticloadbalancing",
     "xmlNamespace":"http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/"
   },
   "operations":{

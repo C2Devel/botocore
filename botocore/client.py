@@ -412,7 +412,7 @@ class ClientEndpointBridge(object):
             # TODO: fallback partition_name should be configurable in the
             # future for users to define as needed.
             resolved = self.endpoint_resolver.construct_endpoint(
-                service_name, region_name, partition_name='aws')
+                service_name, region_name, partition_name='k2')
 
         if resolved:
             return self._create_endpoint(

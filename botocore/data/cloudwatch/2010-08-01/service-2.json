@@ -2,13 +2,14 @@
   "version":"2.0",
   "metadata":{
     "apiVersion":"2010-08-01",
-    "endpointPrefix":"monitoring",
+    "endpointPrefix":"cloudwatch",
     "protocol":"query",
     "serviceAbbreviation":"CloudWatch",
     "serviceFullName":"Amazon CloudWatch",
     "serviceId":"CloudWatch",
     "signatureVersion":"v4",
     "uid":"monitoring-2010-08-01",
+    "signingName":"monitoring",
     "xmlNamespace":"http://monitoring.amazonaws.com/doc/2010-08-01/"
   },
   "operations":{
