@@ -770,14 +770,16 @@
       "type":"structure",
       "members": {
         "ebsProviderRequired":{"shape":"Boolean"},
-        "ebsUser":{"shape":"String"}
+        "ebsUser":{"shape":"String"},
+        "ebsUserName":{"shape":"String"}
       }
     },
     "nlbProviderConfig":{
       "type":"structure",
       "members": {
         "nlbProviderRequired":{"shape":"Boolean"},
-        "nlbUser":{"shape":"String"}
+        "nlbUser":{"shape":"String"},
+        "nlbUserName":{"shape":"String"}
       }
     },
     "clusterAutoscalerConfig":{
