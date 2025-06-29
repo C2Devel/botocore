@@ -332,6 +332,10 @@
         "legacyClusterParams":{
           "shape":"legacyClusterParams",
           "documentation":"<p>Legacy cluster parameters</p>"
+        },
+        "roleArn": {
+          "shape": "String",
+          "documentation": "The ARN of the IAM role that provides permissions for the Kubernetes control plane to make calls to API operations on your behalf."
         }
       },
       "documentation":"<p>An object representing an EKS cluster.</p>"
@@ -776,6 +780,13 @@
         "nlbUser":{"shape":"String"}
       }
     },
+    "clusterAutoscalerConfig":{
+      "type":"structure",
+      "members": {
+        "clusterAutoscalerRequired":{"shape":"Boolean"},
+        "clusterAutoscalerUser":{"shape":"String"}
+      }
+    },
     "ErrorCode":{
       "type":"string",
       "enum":[
@@ -986,6 +997,10 @@
         "nlbProviderConfig":{
           "shape":"nlbProviderConfig",
           "documentation":"<p>The Kubernetes nlb provider configuration for the cluster</p>"
+        },
+        "clusterAutoscalerConfig":{
+          "shape":"clusterAutoscalerConfig",
+          "documentation":"<p>The Kubernetes cluster autoscaler provider configuration for the cluster</p>"
         },
         "userDataConfig":{
           "shape":"userDataConfig",

@@ -490,6 +490,17 @@
         }
       }
     },
+    "clusterAutoscalerConfig": {
+      "type": "structure",
+      "members": {
+        "clusterAutoscalerRequired": {
+          "shape": "Boolean"
+        },
+        "clusterAutoscalerUser": {
+          "shape": "String"
+        }
+      }
+    },
     "userDataConfig": {
       "type": "structure",
       "members": {
@@ -526,11 +537,15 @@
         },
         "ebsProviderConfig": {
           "shape": "ebsProviderConfig",
-          "documentation": "<p>The Kubernetes ens provider configuration for the cluster</p>"
+          "documentation": "<p>The Kubernetes ebs provider configuration for the cluster</p>"
         },
         "nlbProviderConfig": {
           "shape": "nlbProviderConfig",
-          "documentation": "<p>The Kubernetes ens provider configuration for the cluster</p>"
+          "documentation": "<p>The Kubernetes nlb provider configuration for the cluster</p>"
+        },
+        "clusterAutoscalerConfig": {
+          "shape": "clusterAutoscalerConfig",
+          "documentation": "<p>The Kubernetes cluster autoscaler configuration for the cluster</p>"
         },
         "userDataConfig": {
           "shape": "userDataConfig",
@@ -852,6 +867,9 @@
         "NlbUser": {
           "shape": "String"
         },
+        "ClusterAutoscalerUser": {
+          "shape": "String"
+        },
         "PodSubnetCidr": {
           "shape": "String"
         },
@@ -869,6 +887,12 @@
         },
         "TotalMemory": {
           "shape": "Float"
+        },
+        "RoleArn": {
+          "shape": "String"
+        },
+        "ServiceUser": {
+          "shape": "String"
         },
         "tags": {
           "shape": "TagMap",
@@ -1471,6 +1495,9 @@
         },
         "enabled": {
           "shape": "Boolean"
+        },
+        "arn": {
+          "shape": "String"
         }
       }
     },
@@ -1487,6 +1514,12 @@
           "shape": "ProviderUserList"
         },
         "nlb_users": {
+          "shape": "ProviderUserList"
+        },
+        "cluster_autoscaler_users": {
+          "shape": "ProviderUserList"
+        },
+        "cluster_users": {
           "shape": "ProviderUserList"
         }
       }
