@@ -2,12 +2,13 @@
   "version":"2.0",
   "metadata":{
     "apiVersion":"2015-02-01",
-    "endpointPrefix":"elasticfilesystem",
+    "endpointPrefix":"efs",
     "protocol":"rest-json",
     "serviceAbbreviation":"EFS",
     "serviceFullName":"Amazon Elastic File System",
     "serviceId":"EFS",
     "signatureVersion":"v4",
+    "signingName":"elasticfilesystem",
     "uid":"elasticfilesystem-2015-02-01"
   },
   "operations":{
