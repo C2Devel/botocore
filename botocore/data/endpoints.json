@@ -3,13 +3,8 @@
     {
       "defaults": {
         "hostname": "{service}.{region}.{dnsSuffix}",
-        "protocols": [
-          "http",
-          "https"
-        ],
-        "signatureVersions": [
-          "v4"
-        ]
+        "protocols": ["http", "https"],
+        "signatureVersions": ["v4"]
       },
       "dnsSuffix": "k2.cloud",
       "partition": "k2",
@@ -117,14 +112,21 @@
         },
         "s3": {
           "defaults": {
-            "signatureVersions": [
-              "s3v4"
-            ]
+            "signatureVersions": ["s3v4"]
           },
           "endpoints": {
             "ru-msk": {},
-            "ru-spb": {}
-          }
+            "ru-spb": {},
+            "k2-global": {
+              "credentialScope": {
+                "region": "ru-msk"
+              },
+              "hostname": "s3.k2.cloud",
+              "signatureVersions": ["s3", "s3v4"]
+            }
+          },
+          "isRegionalized": true,
+          "partitionEndpoint": "k2-global"
         }
       }
     }
