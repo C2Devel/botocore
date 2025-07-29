@@ -1216,6 +1216,11 @@
       "type": "list",
       "member": {"shape": "Backup"}
     },
+    "MaxItems": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
     "ListBackupsRequest": {
       "type": "structure",
       "members": {
@@ -1230,6 +1235,14 @@
         "serviceId": {
           "shape": "String",
           "documentation": "<p>The service ID filter.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxItems",
+          "documentation": "<p>The maximum number of identity provider configurations returned by <code>ListBackups</code> in paginated output. When you use this parameter, <code>ListBackups</code> returns only <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. You can see the remaining results of the initial request by sending another <code>ListBackups</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If you don't use this parameter, <code>ListBackups</code> returns all results.</p>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListBackups</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p>"
         }
       }
     },
@@ -1239,6 +1252,10 @@
         "backups": {
           "shape": "ListBackups",
           "documentation": "<p>A list of all backups for the account in the specified Region.</p>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListBackups</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p>"
         }
       }
     },
@@ -1979,39 +1996,39 @@
       "member": {"shape": "String"}
     },
     "Tag":{
-      "type":"structure",
+      "type": "structure",
       "members":{
         "Key":{
-          "shape":"String",
-          "documentation":"<p>The key of the tag. </p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code></p>",
-          "locationName":"key"
+          "shape": "String",
+          "documentation": "<p>The key of the tag. </p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code></p>",
+          "locationName": "key"
         },
         "Value":{
-          "shape":"String",
-          "documentation":"<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.</p>",
-          "locationName":"value"
+          "shape": "String",
+          "documentation": "<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.</p>",
+          "locationName": "value"
         }
       },
-      "documentation":"<p>Describes a tag.</p>"
+      "documentation": "<p>Describes a tag.</p>"
     },
     "TagKey": {"type": "string"},
     "TagValue":{
-      "type":"string",
-      "max":256
+      "type": "string",
+      "max": 256
     },
-    "TagList":{
-      "type":"list",
-      "member":{
-        "shape":"Tag",
-        "locationName":"item"
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag",
+        "locationName": "item"
       }
     },
-    "TagMap":{
-      "type":"map",
-      "key":{"shape":"TagKey"},
-      "value":{"shape":"TagValue"},
-      "max":50,
-      "min":1
+    "TagMap": {
+      "type": "map",
+      "key": {"shape": "TagKey"},
+      "value": {"shape": "TagValue"},
+      "max": 50,
+      "min": 1
     },
     "SynchronizeServiceStatusResponse": {
       "type": "structure",
