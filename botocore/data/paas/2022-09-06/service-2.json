@@ -451,6 +451,16 @@
       "output": {"shape": "SynchronizeServiceStatusResponse"},
       "documentation": "<p>Synchronize service status.</p>"
     },
+    "ModifyMaintenancePreferences": {
+      "name": "ModifyMaintenancePreferences",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/maintenance/preferences"
+      },
+      "input": {"shape": "ModifyMaintenancePreferencesRequest"},
+      "output": {"shape": "ModifyMaintenancePreferencesResponse"},
+      "documentation": "<p>Modifies maintenance preferences.</p>"
+    },
     "CreatePrometheusRoute": {
       "name": "CreatePrometheusRoute",
       "http": {
@@ -760,6 +770,7 @@
         "internalBalancerRequired": {"shape": "Boolean"},
         "externalBalancerRequired": {"shape": "Boolean"},
         "coordinator": {"shape": "NodeRequest"},
+        "maintenance": {"shape": "MaintenancePeriod"},
         "tags": {"shape":  "TagList"}
       }
     },
@@ -1851,6 +1862,7 @@
         "availableEnvironmentVersions": {"shape": "StringList"},
         "isRolledBack": {"shape": "Boolean"},
         "supportAccessEnabled": {"shape": "Boolean"},
+        "maintenance": {"shape": "MaintenancePreferences"},
         "tags": {"shape":  "TagList"}
       }
     },
@@ -1864,6 +1876,20 @@
     "ServiceEndpoints": {
       "type": "list",
       "member": {"shape": "ServiceEndpoint"}
+    },
+    "MaintenancePeriod": {
+      "type": "structure",
+      "members": {
+        "dayOfWeek": {"shape": "String"},
+        "hour": {"shape": "Integer"}
+      }
+    },
+    "MaintenancePreferences": {
+      "type": "structure",
+      "members": {
+        "anytime": {"shape": "Boolean"},
+        "period": {"shape": "MaintenancePeriod"}
+      }
     },
     "StartServiceResponse": {
       "type": "structure",
@@ -1971,6 +1997,31 @@
           "documentation": "<p>The ID of the service to synchronize its status.</p>",
           "location": "uri",
           "locationName": "serviceId"
+        }
+      }
+    },
+    "ModifyMaintenancePreferencesRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service to modify its maintenance preferences.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "anytime": {"shape": "Boolean"},
+        "period": {"shape": "MaintenancePeriod"}
+      }
+    },
+    "ModifyMaintenancePreferencesResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
         }
       }
     },
