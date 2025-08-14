@@ -1746,6 +1746,7 @@
         "type": "structure",
         "members": {
             "role": {"shape": "String"},
+            "isMain": {"shape": "Boolean"},
             "instanceType": {"shape": "String"},
             "nodeQty": {"shape": "Integer"},
             "rootVolumeType": {"shape": "String"},
