@@ -1117,7 +1117,6 @@
     },
     "ListNodegroupsRequest":{
       "type":"structure",
-      "required":["clusterName"],
       "members":{
         "clusterName":{
           "shape":"String",
