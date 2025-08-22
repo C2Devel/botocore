@@ -580,16 +580,6 @@
       "input": {"shape": "ModifyNotificationChannelRequest"},
       "output": {"shape": "ModifyNotificationChannelResponse"},
       "documentation": "<p>Modifies notification channel in given service.</p>"
-    },
-    "ModifySupportAccess": {
-      "name": "ModifySupportAccess",
-      "http": {
-        "method": "POST",
-        "requestUri": "/services/{serviceId}/support-access"
-      },
-      "input": {"shape": "ModifySupportAccessRequest"},
-      "output": {"shape": "ModifySupportAccessResponse"},
-      "documentation": "<p>Modifies support access for given service.</p>"
     }
   },
   "shapes": {
@@ -1862,7 +1852,6 @@
         "environmentVersion": {"shape": "String"},
         "availableEnvironmentVersions": {"shape": "StringList"},
         "isRolledBack": {"shape": "Boolean"},
-        "supportAccessEnabled": {"shape": "Boolean"},
         "maintenance": {"shape": "MaintenancePreferences"},
         "tags": {"shape":  "TagList"}
       }
@@ -2546,34 +2535,6 @@
         "notificationChannel": {
           "shape": "NotificationChannel",
           "documentation": "<p>The full description of modified notification channel.</p>"
-        }
-      }
-    },
-    "ModifySupportAccessRequest": {
-      "type": "structure",
-      "required": [
-        "serviceId",
-        "enable"
-      ],
-      "members": {
-        "serviceId": {
-          "shape": "String",
-          "documentation": "<p>The ID of service to modify.</p>",
-          "location": "uri",
-          "locationName": "serviceId"
-        },
-        "enable": {
-          "shape": "Boolean",
-          "documentation": "<p>Indicates whether the support access is enabled.</p>"
-        }
-      }
-    },
-    "ModifySupportAccessResponse": {
-      "type": "structure",
-      "members": {
-        "service": {
-          "shape": "Service",
-          "documentation": "<p>The full description of the specified service.</p>"
         }
       }
     }
