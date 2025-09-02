@@ -371,6 +371,16 @@
       "output": {"shape": "ModifyInstanceVolumeIopsResponse"},
       "documentation": "<p>Modifies the PaaS service volumes IOPS.</p>"
     },
+    "ModifyInstanceType": {
+      "name": "ModifyInstanceType",
+      "http": {
+        "method": "PUT",
+        "requestUri": "services/{serviceId}/instance-type"
+      },
+      "input": {"shape": "ModifyInstanceTypeRequest"},
+      "output": {"shape": "ModifyInstanceTypeResponse"},
+      "documentation": "<p>Modifies the instance type of PaaS service nodes.</p>"
+    },
     "ModifyService": {
       "name": "ModifyService",
       "http": {
@@ -1598,6 +1608,39 @@
       }
     },
     "ModifyInstanceVolumeIopsResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of your modified service.</p>"
+        }
+      }
+    },
+    "ModifyInstanceTypeRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "instanceType",
+        "nodeRole"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "instanceType": {
+          "shape": "String",
+          "documentation": "<p>The name of the new instance type.</p>"
+        },
+        "nodeRole": {
+          "shape": "String",
+          "documentation": "<p>The name of the node role to be changed.</p>"
+        }
+      }
+    },
+    "ModifyInstanceTypeResponse": {
       "type": "structure",
       "members": {
         "service": {
