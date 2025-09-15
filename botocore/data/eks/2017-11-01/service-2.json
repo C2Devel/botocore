@@ -43,6 +43,21 @@
       "output":{"shape":"DescribeClusterResponse"},
       "documentation":"<p>Returns descriptive information about Kubernetes cluster.</p>"
     },
+    "DescribeClusterVersions":{
+      "name":"DescribeClusterVersions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/cluster-versions"
+      },
+      "input":{"shape":"DescribeClusterVersionsRequest"},
+      "output":{"shape":"DescribeClusterVersionsResponse"},
+      "errors":[
+        {"shape":"ServerException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"InvalidRequestException"}
+      ],
+      "documentation":"<p>Lists available Kubernetes versions for Amazon EKS clusters.</p>"
+    },
     "ListClusters":{
       "name":"ListClusters",
       "http":{
@@ -223,11 +238,24 @@
     "BadRequestException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"String"}
+        "message":{
+          "shape":"String",
+          "documentation":"<p>This exception is thrown if the request contains a semantic error. The precise meaning will depend on the API, and will be documented in the error message.</p>"
+        }
       },
       "documentation":"<p>This exception is thrown if the request contains a semantic error. The precise meaning will depend on the API, and will be documented in the error message.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "BlockStorage":{
+      "type":"structure",
+      "members":{
+        "enabled":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Indicates if the block storage capability is enabled on your EKS Auto Mode cluster. If the block storage capability is enabled, EKS Auto Mode will create and delete EBS volumes in your Amazon Web Services account.</p>"
+        }
+      },
+      "documentation":"<p>Indicates the current configuration of the block storage capability on your EKS Auto Mode cluster. For example, if the capability is enabled or disabled. If the block storage capability is enabled, EKS Auto Mode will create and delete EBS volumes in your Amazon Web Services account. For more information, see EKS Auto Mode block storage capability in the <i>Amazon EKS User Guide</i>.</p>"
     },
     "Boolean":{"type":"boolean"},
     "BoxedBoolean":{
@@ -311,9 +339,13 @@
           "shape":"String",
           "documentation":"<p>The endpoint for your Kubernetes API server.</p>"
         },
+        "roleArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to Amazon Web Services API operations on your behalf.</p>"
+        },
         "resourcesVpcConfig":{
           "shape":"VpcConfigResponse",
-          "documentation":"<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+          "documentation":"<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster security group considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
         },
         "kubernetesNetworkConfig":{
           "shape":"KubernetesNetworkConfigResponse",
@@ -350,10 +382,6 @@
         "legacyClusterParams":{
           "shape":"legacyClusterParams",
           "documentation":"<p>Legacy cluster parameters</p>"
-        },
-        "roleArn": {
-          "shape": "String",
-          "documentation": "The ARN of the IAM role that provides permissions for the Kubernetes control plane to make calls to API operations on your behalf."
         }
       },
       "documentation":"<p>An object representing an EKS cluster.</p>"
@@ -410,6 +438,100 @@
         "FAILED",
         "UPDATING"
       ]
+    },
+    "ClusterVersionInformation":{
+      "type":"structure",
+      "members":{
+        "clusterVersion":{
+          "shape":"String",
+          "documentation":"<p>The Kubernetes version for the cluster.</p>"
+        },
+        "clusterType":{
+          "shape":"String",
+          "documentation":"<p>The type of cluster this version is for.</p>"
+        },
+        "defaultPlatformVersion":{
+          "shape":"String",
+          "documentation":"<p>Default platform version for this Kubernetes version.</p>"
+        },
+        "defaultVersion":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates if this is a default version.</p>"
+        },
+        "releaseDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>The release date of this cluster version.</p>"
+        },
+        "endOfStandardSupportDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>Date when standard support ends for this version.</p>"
+        },
+        "endOfExtendedSupportDate":{
+          "shape":"Timestamp",
+          "documentation":"<p>Date when extended support ends for this version.</p>"
+        },
+        "status":{
+          "shape":"ClusterVersionStatus",
+          "documentation":"<important> <p>This field is deprecated. Use <code>versionStatus</code> instead, as that field matches for input and output of this action.</p> </important> <p>Current status of this cluster version.</p>"
+        },
+        "versionStatus":{
+          "shape":"VersionStatus",
+          "documentation":"<p>Current status of this cluster version.</p>"
+        },
+        "kubernetesPatchVersion":{
+          "shape":"String",
+          "documentation":"<p>The patch version of Kubernetes for this cluster version.</p>"
+        }
+      },
+      "documentation":"<p>Contains details about a specific EKS cluster version.</p>"
+    },
+    "ClusterVersionList":{
+      "type":"list",
+      "member":{"shape":"ClusterVersionInformation"}
+    },
+    "ClusterVersionStatus":{
+      "type":"string",
+      "enum":[
+        "unsupported",
+        "standard-support",
+        "extended-support"
+      ]
+    },
+    "ComputeConfigRequest":{
+      "type":"structure",
+      "members":{
+        "enabled":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Request to enable or disable the compute capability on your EKS Auto Mode cluster. If the compute capability is enabled, EKS Auto Mode will create and delete EC2 Managed Instances in your Amazon Web Services account.</p>"
+        },
+        "nodePools":{
+          "shape":"StringList",
+          "documentation":"<p>Configuration for node pools that defines the compute resources for your EKS Auto Mode cluster. For more information, see EKS Auto Mode Node Pools in the <i>Amazon EKS User Guide</i>.</p>"
+        },
+        "nodeRoleArn":{
+          "shape":"String",
+          "documentation":"<p>The ARN of the IAM Role EKS will assign to EC2 Managed Instances in your EKS Auto Mode cluster. This value cannot be changed after the compute capability of EKS Auto Mode is enabled. For more information, see the IAM Reference in the <i>Amazon EKS User Guide</i>.</p>"
+        }
+      },
+      "documentation":"<p>Request to update the configuration of the compute capability of your EKS Auto Mode cluster. For example, enable the capability. For more information, see EKS Auto Mode compute capability in the <i>Amazon EKS User Guide</i>.</p>"
+    },
+    "ComputeConfigResponse":{
+      "type":"structure",
+      "members":{
+        "enabled":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Indicates if the compute capability is enabled on your EKS Auto Mode cluster. If the compute capability is enabled, EKS Auto Mode will create and delete EC2 Managed Instances in your Amazon Web Services account.</p>"
+        },
+        "nodePools":{
+          "shape":"StringList",
+          "documentation":"<p>Indicates the current configuration of node pools in your EKS Auto Mode cluster. For more information, see EKS Auto Mode Node Pools in the <i>Amazon EKS User Guide</i>.</p>"
+        },
+        "nodeRoleArn":{
+          "shape":"String",
+          "documentation":"<p>The ARN of the IAM Role EKS will assign to EC2 Managed Instances in your EKS Auto Mode cluster.</p>"
+        }
+      },
+      "documentation":"<p>Indicates the status of the request to update the compute capability of your EKS Auto Mode cluster.</p>"
     },
     "CreateClusterRequest":{
       "type":"structure",
@@ -700,6 +822,81 @@
         "cluster":{
           "shape":"Cluster",
           "documentation":"<p>The full description of your specified cluster.</p>"
+        }
+      }
+    },
+    "DescribeClusterVersionMaxResults":{
+      "type":"integer",
+      "box":true,
+      "max":100,
+      "min":1
+    },
+    "DescribeClusterVersionsRequest":{
+      "type":"structure",
+      "members":{
+        "clusterType":{
+          "shape":"String",
+          "documentation":"<p>The type of cluster to filter versions by.</p>",
+          "location":"querystring",
+          "locationName":"clusterType"
+        },
+        "maxResults":{
+          "shape":"DescribeClusterVersionMaxResults",
+          "documentation":"<p>Maximum number of results to return.</p>",
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "nextToken":{
+          "shape":"String",
+          "documentation":"<p>Pagination token for the next set of results.</p>",
+          "location":"querystring",
+          "locationName":"nextToken"
+        },
+        "defaultOnly":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Filter to show only default versions.</p>",
+          "location":"querystring",
+          "locationName":"defaultOnly"
+        },
+        "includeAll":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Include all available versions in the response.</p>",
+          "location":"querystring",
+          "locationName":"includeAll"
+        },
+        "clusterVersions":{
+          "shape":"StringList",
+          "documentation":"<p>List of specific cluster versions to describe.</p>",
+          "location":"querystring",
+          "locationName":"clusterVersions"
+        },
+        "status":{
+          "shape":"ClusterVersionStatus",
+          "documentation":"<important> <p>This field is deprecated. Use <code>versionStatus</code> instead, as that field matches for input and output of this action.</p> </important> <p>Filter versions by their current status.</p>",
+          "deprecated":true,
+          "deprecatedMessage":"status has been replaced by versionStatus",
+          "deprecatedSince":"2025-02-15",
+          "location":"querystring",
+          "locationName":"status"
+        },
+        "versionStatus":{
+          "shape":"VersionStatus",
+          "documentation":"<p>Filter versions by their current status.</p>",
+          "location":"querystring",
+          "locationName":"versionStatus"
+        }
+      }
+    },
+    "DescribeClusterVersionsResponse":{
+      "type":"structure",
+      "members":{
+        "nextToken":{
+          "shape":"String",
+          "documentation":"<p>Pagination token for the next set of results.</p>"
+        },
+        "clusterVersions":{
+          "shape":"ClusterVersionList",
+          "documentation":"<p>List of cluster version information objects.</p>"
         }
       }
     },
@@ -2063,7 +2260,8 @@
           "shape":"String",
           "documentation":"<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
           "idempotencyToken":true
-        }
+        },
+        "kubernetesNetworkConfig":{"shape":"KubernetesNetworkConfigRequest"}
       }
     },
     "UpdateClusterConfigResponse":{
@@ -2274,7 +2472,8 @@
         "IdentityProviderConfig",
         "AddonVersion",
         "ServiceAccountRoleArn",
-        "ResolveConflicts"
+        "ResolveConflicts",
+        "KubernetesNetworkConfig"
       ]
     },
     "UpdateParams":{
@@ -2323,6 +2522,14 @@
         "userDataContentType":{"shape":"String"}
       }
     },
+    "VersionStatus":{
+      "type":"string",
+      "enum":[
+        "UNSUPPORTED",
+        "STANDARD_SUPPORT",
+        "EXTENDED_SUPPORT"
+      ]
+    },
     "VpcConfigRequest":{
       "type":"structure",
       "members":{
@@ -2333,6 +2540,18 @@
         "securityGroupIds":{
           "shape":"StringList",
           "documentation":"<p>Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your nodes and the Kubernetes control plane. If you don't specify any security groups, then familiarize yourself with the difference between Amazon EKS defaults for clusters deployed with Kubernetes:</p> <ul> <li> <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p> </li> <li> <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Amazon EKS security group considerations</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        },
+        "endpointPublicAccess":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Set this value to <code>false</code> to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is <code>true</code>, which enables public access for your Kubernetes API server. The endpoint domain name and IP address family depends on the value of the <code>ipFamily</code> for the cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Cluster API server endpoint</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        },
+        "endpointPrivateAccess":{
+          "shape":"BoxedBoolean",
+          "documentation":"<p>Set this value to <code>true</code> to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is <code>false</code>, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Cluster API server endpoint</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        },
+        "publicAccessCidrs":{
+          "shape":"StringList",
+          "documentation":"<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code> and additionally <code>::/0</code> for dual-stack `IPv6` clusters. If you've disabled private endpoint access, make sure that you specify the necessary CIDR blocks for every node and Fargate <code>Pod</code> in the cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Cluster API server endpoint</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <p>Note that the public endpoints are dual-stack for only <code>IPv6</code> clusters that are made after October 2024. You can't add <code>IPv6</code> CIDR blocks to <code>IPv4</code> clusters or <code>IPv6</code> clusters that were made before October 2024.</p>"
         }
       },
       "documentation":"<p>An object representing the VPC configuration to use for an Amazon EKS cluster.</p>"
@@ -2368,6 +2587,18 @@
         "vpcId":{
           "shape":"String",
           "documentation":"<p>The VPC associated with your cluster.</p>"
+        },
+        "endpointPublicAccess":{
+          "shape":"Boolean",
+          "documentation":"<p>Whether the public API server endpoint is enabled.</p>"
+        },
+        "endpointPrivateAccess":{
+          "shape":"Boolean",
+          "documentation":"<p>This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster's VPC use the private VPC endpoint instead of traversing the internet. If this value is disabled and you have nodes or Fargate pods in the cluster, then ensure that <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Cluster API server endpoint</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p>"
+        },
+        "publicAccessCidrs":{
+          "shape":"StringList",
+          "documentation":"<p>The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code> and additionally <code>::/0</code> for dual-stack `IPv6` clusters. If you've disabled private endpoint access, make sure that you specify the necessary CIDR blocks for every node and Fargate <code>Pod</code> in the cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Cluster API server endpoint</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <p>Note that the public endpoints are dual-stack for only <code>IPv6</code> clusters that are made after October 2024. You can't add <code>IPv6</code> CIDR blocks to <code>IPv4</code> clusters or <code>IPv6</code> clusters that were made before October 2024.</p>"
         }
       },
       "documentation":"<p>An object representing an Amazon EKS cluster VPC configuration response.</p>"
