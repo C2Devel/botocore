@@ -476,6 +476,9 @@
         },
         "ebsUser": {
           "shape": "String"
+        },
+        "ebsUserName": {
+          "shape": "String"
         }
       }
     },
@@ -487,6 +490,9 @@
         },
         "nlbUser": {
           "shape": "String"
+        },
+        "nlbUserName": {
+          "shape": "String"
         }
       }
     },
@@ -497,6 +503,9 @@
           "shape": "Boolean"
         },
         "clusterAutoscalerUser": {
+          "shape": "String"
+        },
+        "clusterAutoscalerUserName": {
           "shape": "String"
         }
       }

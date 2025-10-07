@@ -786,7 +786,8 @@
       "type":"structure",
       "members": {
         "clusterAutoscalerRequired":{"shape":"Boolean"},
-        "clusterAutoscalerUser":{"shape":"String"}
+        "clusterAutoscalerUser":{"shape":"String"},
+        "clusterAutoscalerUserName":{"shape":"String"}
       }
     },
     "ErrorCode":{
