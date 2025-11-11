@@ -257,6 +257,18 @@
         "resultWrapper":"GetServiceResult"
       }
     },
+    "GetServerCertificate":{
+      "name":"GetServerCertificate",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetServerCertificateRequest"},
+      "output":{
+        "shape":"GetServerCertificateResponse",
+        "resultWrapper":"GetServerCertificateResult"
+      }
+    },
     "GetUser":{
       "name":"GetUser",
       "http":{
@@ -1146,6 +1158,24 @@
         }
       }
     },
+    "GetServerCertificateRequest":{
+      "type":"structure",
+      "required":["ServerCertificateName"],
+      "members":{
+        "ServerCertificateName":{
+          "shape":"serverCertificateNameType"
+        }
+      }
+    },
+    "GetServerCertificateResponse":{
+      "type":"structure",
+      "required":["ServerCertificate"],
+      "members":{
+        "ServerCertificate":{
+          "shape":"ServerCertificate"
+        }
+      }
+    },
     "GetServiceRequest":{
       "type":"structure",
       "required":["ServiceName"],
@@ -1981,6 +2011,24 @@
         }
       }
     },
+    "ServerCertificate":{
+      "type":"structure",
+      "required":[
+        "ServerCertificateMetadata",
+        "CertificateBody"
+      ],
+      "members":{
+        "ServerCertificateMetadata":{
+          "shape":"ServerCertificateMetadata"
+        },
+        "CertificateBody":{
+          "shape":"certificateBodyType"
+        },
+        "CertificateChain":{
+          "shape":"certificateChainType"
+        }
+      }
+    },
     "Service":{
       "type":"structure",
       "members":{
@@ -2299,8 +2347,7 @@
       ],
       "members":{
         "ServerCertificateName":{
-          "shape":"serverCertificateNameType",
-          "documentation":"<p>The name that identifies the server certificate.</p>"
+          "shape":"serverCertificateNameType"
         },
         "ServerCertificateId":{
           "shape":"idType"
