@@ -33017,6 +33017,11 @@
           "shape":"String",
           "documentation":"<p>The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p> <p>This parameter is not supported by <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet\">CreateFleet</a>.</p>",
           "locationName":"hostResourceGroupArn"
+        },
+        "GroupId":{
+          "shape":"PlacementGroupId",
+          "documentation":"<p>The ID of the placement group that the instance is in.</p> <p>On input, you can specify <code>GroupId</code> or <code>GroupName</code>, but not both.</p>",
+          "locationName":"groupId"
         }
       },
       "documentation":"<p>Describes the placement of an instance.</p>"
