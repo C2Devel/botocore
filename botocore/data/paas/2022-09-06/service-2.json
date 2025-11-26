@@ -770,6 +770,8 @@
         "arbitratorRequired": {"shape": "Boolean"},
         "internalBalancerRequired": {"shape": "Boolean"},
         "externalBalancerRequired": {"shape": "Boolean"},
+        "internalBalancerName": {"shape": "String"},
+        "externalBalancerName": {"shape": "String"},
         "coordinator": {"shape": "NodeRequest"},
         "maintenance": {"shape": "MaintenancePeriod"},
         "tags": {"shape":  "TagList"}
@@ -1439,6 +1441,12 @@
         "listeners": {"shape": "listenersList"}
       }
     },
+    "Dns": {
+      "type": "structure",
+      "members": {
+        "dnsName": {"shape": "String"}
+      }
+    },
     "LoadBalancerList": {
       "type": "list",
       "member": {"shape": "LoadBalancer"}
@@ -1447,7 +1455,9 @@
       "type": "structure",
       "members": {
         "internalBalancers": {"shape": "LoadBalancerList"},
-        "externalBalancers": {"shape": "LoadBalancerList"}
+        "externalBalancers": {"shape": "LoadBalancerList"},
+        "internalDns": {"shape": "Dns"},
+        "externalDns": {"shape": "Dns"}
       }
     },
     "ModifyBackupRequest": {
@@ -1766,7 +1776,9 @@
           "locationName": "serviceId"
         },
         "internalBalancerRequired": {"shape": "Boolean"},
-        "externalBalancerRequired": {"shape": "Boolean"}
+        "externalBalancerRequired": {"shape": "Boolean"},
+        "internalBalancerName": {"shape": "String"},
+        "externalBalancerName": {"shape": "String"}
       }
     },
     "ModifyLoadBalancersResponse": {
@@ -1888,6 +1900,8 @@
         "vpcId": {"shape": "String"},
         "internalBalancerRequired": {"shape": "Boolean"},
         "externalBalancerRequired": {"shape": "Boolean"},
+        "internalBalancerName": {"shape": "String"},
+        "externalBalancerName": {"shape": "String"},
         "internalBalancerAllowed": {"shape": "Boolean"},
         "externalBalancerAllowed": {"shape": "Boolean"},
         "internalBalancerTargets": {"shape": "BalancerTargets"},
