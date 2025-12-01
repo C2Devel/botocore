@@ -824,7 +824,8 @@
       "type": "structure",
       "members": {
         "id": {"shape": "String"},
-        "name": {"shape": "String"}
+        "name": {"shape": "String"},
+        "status": {"shape": "String"}
       }
     },
     "DatabaseCompactResponseList": {
@@ -888,6 +889,7 @@
       "members": {
         "id": {"shape": "String"},
         "name": {"shape": "String"},
+        "status": {"shape": "String"},
         "backupEnabled": {"shape": "Boolean"},
         "parameters": {"shape": "None"},
         "users": {"shape": "UserResponseList"}
