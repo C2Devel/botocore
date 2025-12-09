@@ -1,0 +1,172 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2022-09-06",
+    "endpointPrefix": "paas",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "AWS PaaS private",
+    "serviceId": "PaaS private",
+    "signatureVersion": "v4",
+    "signingName": "paas-private",
+    "uid": "paas-private-2022-09-06"
+  },
+  "operations": {
+    "ListBackupsByService": {
+      "name": "ListBackupsByService",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/paas/service-backups"
+      },
+      "input": {"shape": "ListBackupsByServiceRequest"},
+      "output": {"shape": "ListBackupsByServiceResponse"},
+      "documentation": "<p>Lists backups by service.</p>",
+      "deprecated":true,
+      "deprecatedMessage": "Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "ListBackupsDatabases": {
+      "name": "ListBackupsDatabases",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/paas/backups-databases"
+      },
+      "input": {"shape": "ListBackupsDatabasesRequest"},
+      "output": {"shape": "ListBackupsDatabasesResponse"},
+      "documentation": "<p>Lists backups.</p>",
+      "deprecated":true,
+      "deprecatedMessage": "Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    }
+  },
+  "shapes": {
+    "Boolean": {"type": "boolean"},
+    "None": {"type": "none"},
+    "Integer": {"type": "integer"},
+    "String": {"type": "string"},
+    "StringList": {
+      "type": "list",
+      "member": {"shape": "String"}
+    },
+    "Timestamp": {"type": "timestamp"},
+    "MaxItems": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
+    "Backup": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "serviceId": {"shape": "String"},
+        "serviceName": {"shape": "String"},
+        "status": {"shape": "String"},
+        "time": {"shape": "Integer"},
+        "databases": {"shape": "DatabaseBackupList"},
+        "protected": {"shape": "Boolean"}
+      }
+    },
+    "ServiceBackups": {
+      "type": "structure",
+      "members": {
+        "serviceId": {"shape": "String"},
+        "serviceName": {"shape": "String"},
+        "serviceClass": {"shape": "String"},
+        "serviceType": {"shape": "String"},
+        "deleted": {"shape": "Boolean"},
+        "backupCount": {"shape": "Integer"}
+      }
+    },
+    "ListBackups": {
+      "type": "list",
+      "member": {"shape": "Backup"}
+    },
+    "ListServiceBackups": {
+      "type": "list",
+      "member": {"shape": "ServiceBackups"}
+    },
+    "ListBackupsByServiceRequest": {
+      "type": "structure",
+      "members": {
+        "serviceClass": {
+          "shape": "String",
+          "documentation": "<p>The service class filter.</p>"
+        },
+        "serviceType": {
+          "shape": "String",
+          "documentation": "<p>The service type filter.</p>"
+        },
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The service ID filter.</p>"
+        },
+        "serviceName": {
+          "shape": "String",
+          "documentation": "<p>The service name filter.</p>"
+        }
+      }
+    },
+    "ListBackupsByServiceResponse": {
+      "type": "structure",
+      "members": {
+        "serviceBackups": {
+          "shape": "ListServiceBackups",
+          "documentation": "<p>A list of all backups for the account in the specified Region.</p>"
+        }
+      }
+    },
+    "ListBackupsDatabasesRequest": {
+      "type": "structure",
+      "members": {
+        "serviceClass": {
+          "shape": "String",
+          "documentation": "<p>The service class filter.</p>"
+        },
+        "serviceType": {
+          "shape": "String",
+          "documentation": "<p>The service type filter.</p>"
+        },
+        "serviceName": {
+          "shape": "String",
+          "documentation": "<p>The service name filter.</p>"
+        },
+        "databaseName": {
+          "shape": "String",
+          "documentation": "<p>The backup name filter.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxItems",
+          "documentation": "<p>The maximum number of identity provider configurations returned by <code>ListBackupsDatabasesRequest</code> in paginated output. When you use this parameter, <code>ListBackupsDatabasesRequest</code> returns only <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. You can see the remaining results of the initial request by sending another <code>ListBackupsDatabasesRequest</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If you don't use this parameter, <code>ListBackupsDatabasesRequest</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.</p>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListBackupsDatabasesRequest</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p>"
+        }
+      }
+    },
+    "ListBackupsDatabasesResponse": {
+      "type": "structure",
+      "members": {
+        "backups": {
+          "shape": "ListBackups",
+          "documentation": "<p>A list of all backups for the account in the specified Region.</p>"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListBackups</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p>"
+        }
+      }
+    },
+    "DatabaseBackupList": {
+      "type": "list",
+      "member": {"shape": "DatabaseBackup"}
+    },
+    "DatabaseBackup": {
+      "type": "structure",
+      "members": {
+        "name": {"shape": "String"},
+        "size": {"shape": "Integer"},
+        "status": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    }
+  }
+}
