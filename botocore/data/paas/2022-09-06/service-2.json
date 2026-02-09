@@ -11,6 +11,16 @@
     "uid": "paas-2022-09-06"
   },
   "operations": {
+    "AddInstances": {
+      "name": "AddInstances",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/instances"
+      },
+      "input": {"shape": "AddInstancesRequest"},
+      "output": {"shape": "AddInstancesResponse"},
+      "documentation": "<p>Add instances to the specified service.</p>"
+    },
     "CreateDatabase": {
       "name": "CreateDatabase",
       "http": {
@@ -355,7 +365,7 @@
       "name": "ModifyInstanceVolumeSize",
       "http": {
         "method": "PUT",
-        "requestUri": "services/{serviceId}/instance-volume-size"
+        "requestUri": "/services/{serviceId}/instance-volume-size"
       },
       "input": {"shape": "ModifyInstanceVolumeSizeRequest"},
       "output": {"shape": "ModifyInstanceVolumeSizeResponse"},
@@ -365,7 +375,7 @@
       "name": "ModifyInstanceVolumeIops",
       "http": {
         "method": "PUT",
-        "requestUri": "services/{serviceId}/instance-volume-iops"
+        "requestUri": "/services/{serviceId}/instance-volume-iops"
       },
       "input": {"shape": "ModifyInstanceVolumeIopsRequest"},
       "output": {"shape": "ModifyInstanceVolumeIopsResponse"},
@@ -375,7 +385,7 @@
       "name": "ModifyInstanceType",
       "http": {
         "method": "PUT",
-        "requestUri": "services/{serviceId}/instance-type"
+        "requestUri": "/services/{serviceId}/instance-type"
       },
       "input": {"shape": "ModifyInstanceTypeRequest"},
       "output": {"shape": "ModifyInstanceTypeResponse"},
@@ -593,6 +603,34 @@
     }
   },
   "shapes": {
+    "AddInstancesRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "role",
+        "instanceQty"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "role": {"shape": "String"},
+        "instanceQty": {"shape": "Integer"},
+        "networkInterfaceIds": {"shape": "StringList"}
+      }
+    },
+    "AddInstancesResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
     "Backup": {
       "type": "structure",
       "members": {
