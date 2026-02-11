@@ -20011,7 +20011,8 @@
       "enum":[
         "VMDK",
         "RAW",
-        "VHD"
+        "VHD",
+        "QCOW2"
       ]
     },
     "DiskImageList":{
@@ -24339,7 +24340,7 @@
         },
         "Format":{
           "shape":"String",
-          "documentation":"<p>The format of the disk image being imported.</p> <p>Valid values: <code>OVA</code> | <code>VHD</code> | <code>VHDX</code> | <code>VMDK</code> | <code>RAW</code> </p>"
+          "documentation":"<p>The format of the disk image being imported.</p> <p>Valid values: <code>OVA</code> | <code>VHD</code> | <code>VMDK</code> | <code>RAW</code> | <code>QCOW2</code> </p>"
         },
         "SnapshotId":{
           "shape":"SnapshotId",
@@ -38250,7 +38251,7 @@
         },
         "Format":{
           "shape":"String",
-          "documentation":"<p>The format of the disk image being imported.</p> <p>Valid values: <code>VHD</code> | <code>VMDK</code> | <code>RAW</code> </p>"
+          "documentation":"<p>The format of the disk image being imported.</p> <p>Valid values: <code>VHD</code> | <code>VMDK</code> | <code>RAW</code> | <code>QCOW2</code> </p>"
         },
         "Url":{
           "shape":"String",
