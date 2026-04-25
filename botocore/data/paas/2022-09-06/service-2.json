@@ -607,7 +607,7 @@
       "type": "structure",
       "required": [
         "serviceId",
-        "role",
+        "instanceRole",
         "instanceQty"
       ],
       "members": {
@@ -617,7 +617,7 @@
           "location": "uri",
           "locationName": "serviceId"
         },
-        "role": {"shape": "String"},
+        "instanceRole": {"shape": "String"},
         "instanceQty": {"shape": "Integer"},
         "networkInterfaceIds": {"shape": "StringList"}
       }
