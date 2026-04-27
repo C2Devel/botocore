@@ -668,6 +668,10 @@
         "SecurityGroups":{
           "shape":"SecurityGroups",
           "documentation":"<p>Up to five VPC security group IDs, of the form <code>sg-xxxxxxxx</code>. These must be for the same VPC as subnet specified.</p>"
+        },
+        "Type":{
+          "shape":"MountTargetType",
+          "documentation":"<p>Mount target type.</p>"
         }
       },
       "documentation":"<p/>"
@@ -1082,7 +1086,8 @@
         "NumberOfMountTargets",
         "SizeInBytes",
         "PerformanceMode",
-        "Tags"
+        "Tags",
+        "Type"
       ],
       "members":{
         "OwnerId":{
@@ -1299,6 +1304,9 @@
       "min":7,
       "pattern":"^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$"
     },
+    "MountTargetType":{
+      "type":"string"
+    },
     "IpAddressInUse":{
       "type":"structure",
       "required":["ErrorCode"],
@@ -1483,6 +1491,10 @@
         "DNSName":{
           "shape":"DNSName",
           "documentation":"<p>The DNS name of the mount target.</p>"
+        },
+        "Type":{
+          "shape":"MountTargetType",
+          "documentation":"<p>Mount target protocol type.</p>"
         }
       },
       "documentation":"<p>Provides a description of a mount target.</p>"
