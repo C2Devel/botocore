@@ -581,6 +581,46 @@
       "output": {"shape": "ModifyPrometheusScrapeJobResponse"},
       "documentation": "<p>Modifies prometheus scrape job in given service.</p>"
     },
+    "CreatePrometheusRemoteWriteTarget": {
+      "name": "CreatePrometheusRemoteWriteTarget",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/prometheus-remote-write-targets"
+      },
+      "input": {"shape": "CreatePrometheusRemoteWriteTargetRequest"},
+      "output": {"shape": "CreatePrometheusRemoteWriteTargetResponse"},
+      "documentation": "<p>Creates prometheus remote write target in given service.</p>"
+    },
+    "DeletePrometheusRemoteWriteTarget": {
+      "name": "DeletePrometheusRemoteWriteTarget",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/prometheus-remote-write-targets/{targetId}"
+      },
+      "input": {"shape": "DeletePrometheusRemoteWriteTargetRequest"},
+      "output": {"shape": "DeletePrometheusRemoteWriteTargetResponse"},
+      "documentation": "<p>Deletes prometheus remote write target in given service.</p>"
+    },
+    "ListPrometheusRemoteWriteTargets": {
+      "name": "ListPrometheusRemoteWriteTargets",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services/{serviceId}/prometheus-remote-write-targets"
+      },
+      "input": {"shape": "ListPrometheusRemoteWriteTargetsRequest"},
+      "output": {"shape": "ListPrometheusRemoteWriteTargetsResponse"},
+      "documentation": "<p>Lists prometheus remote write targets in given service.</p>"
+    },
+    "ModifyPrometheusRemoteWriteTarget": {
+      "name": "ModifyPrometheusRemoteWriteTarget",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/prometheus-remote-write-targets/{targetId}"
+      },
+      "input": {"shape": "ModifyPrometheusRemoteWriteTargetRequest"},
+      "output": {"shape": "ModifyPrometheusRemoteWriteTargetResponse"},
+      "documentation": "<p>Modifies prometheus remote write target in given service.</p>"
+    },
     "CreateNotificationChannel": {
       "name": "CreateNotificationChannel",
       "http": {
@@ -2836,6 +2876,139 @@
           "documentation": "<p>The full description of modified Prometheus job.</p>"
         }
       }
+    },
+    "CreatePrometheusRemoteWriteTargetRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "name",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The service ID to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "name": {"shape": "String"},
+        "parameters": {"shape": "PrometheusRemoteWriteTargetParameters"}
+      }
+    },
+    "CreatePrometheusRemoteWriteTargetResponse": {
+      "type": "structure",
+      "members": {
+        "prometheusRemoteWriteTarget": {
+          "shape": "PrometheusRemoteWriteTarget",
+          "documentation": "<p>The full description of created prometheus target.</p>"
+        }
+      }
+    },
+    "DeletePrometheusRemoteWriteTargetRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "targetId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "targetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of target to delete.</p>",
+          "location": "uri",
+          "locationName": "targetId"
+        }
+      }
+    },
+    "DeletePrometheusRemoteWriteTargetResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "ListPrometheusRemoteWriteTargetsRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "ListPrometheusRemoteWriteTargetsResponse": {
+      "type": "structure",
+      "members": {
+        "prometheusRemoteWriteTargets": {
+          "shape": "PrometheusRemoteWriteTargetList",
+          "documentation": "<p>A list of Prometheus targets, available for service.</p>"
+        }
+      }
+    },
+    "PrometheusRemoteWriteTarget": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "name": {"shape": "String"},
+        "parameters": {"shape": "None"}
+      }
+    },
+    "PrometheusRemoteWriteTargetList": {
+      "type": "list",
+      "member": {"shape": "PrometheusRemoteWriteTarget"}
+    },
+    "ModifyPrometheusRemoteWriteTargetRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "targetId",
+        "parameters"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service to modify.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "targetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of target to modify.</p>",
+          "location": "uri",
+          "locationName": "targetId"
+        },
+        "parameters": {"shape": "PrometheusRemoteWriteTargetParameters"}
+      }
+    },
+    "ModifyPrometheusRemoteWriteTargetResponse": {
+      "type": "structure",
+      "members": {
+        "prometheusRemoteWriteTarget": {
+          "shape": "PrometheusRemoteWriteTarget",
+          "documentation": "<p>The full description of modified Prometheus target.</p>"
+        }
+      }
+    },
+    "PrometheusRemoteWriteTargetParameters": {
+      "type": "structure",
+      "required": ["url"],
+      "members": {
+        "url": {"shape": "String"},
+        "username": {"shape": "String"},
+        "password": {"shape": "String"},
+        "writeRelabelConfigs": {"shape": "WriteRelabelConfigsList"}
+      }
+    },
+    "WriteRelabelConfigsList": {
+      "type": "list",
+      "member": {"shape": "None"}
     },
     "CreateNotificationChannelRequest": {
       "type": "structure",
