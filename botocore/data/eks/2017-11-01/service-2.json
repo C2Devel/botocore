@@ -13,6 +13,42 @@
     "uid":"eks-2017-11-01"
   },
   "operations":{
+    "AssociateIdentityProviderConfig":{
+      "name":"AssociateIdentityProviderConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/clusters/{name}/identity-provider-configs/associate"
+      },
+      "input":{"shape":"AssociateIdentityProviderConfigRequest"},
+      "output":{"shape":"AssociateIdentityProviderConfigResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServerException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Associates an identity provider configuration to a cluster.</p> <p>If you want to authenticate identities using an identity provider, you can create an identity provider configuration and associate it to your cluster. After configuring authentication to your cluster you can create Kubernetes <code>Role</code> and <code>ClusterRole</code> objects, assign permissions to them, and then bind them to the identities using Kubernetes <code>RoleBinding</code> and <code>ClusterRoleBinding</code> objects. For more information see <a href=\"https://kubernetes.io/docs/reference/access-authn-authz/rbac/\">Using RBAC Authorization</a> in the Kubernetes documentation.</p>"
+    },
+    "DescribeIdentityProviderConfig":{
+      "name":"DescribeIdentityProviderConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/clusters/{name}/identity-provider-configs/describe"
+      },
+      "input":{"shape":"DescribeIdentityProviderConfigRequest"},
+      "output":{"shape":"DescribeIdentityProviderConfigResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ClientException"},
+        {"shape":"ServerException"},
+        {"shape":"ServiceUnavailableException"}
+      ],
+      "documentation":"<p>Describes an identity provider configuration.</p>"
+    },
     "CreateAddon":{
       "name":"CreateAddon",
       "http":{
@@ -186,6 +222,42 @@
       ],
       "documentation":"<p>Returns descriptive information about an Amazon EKS node group.</p>"
     },
+    "DisassociateIdentityProviderConfig":{
+      "name":"DisassociateIdentityProviderConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/clusters/{name}/identity-provider-configs/disassociate"
+      },
+      "input":{"shape":"DisassociateIdentityProviderConfigRequest"},
+      "output":{"shape":"DisassociateIdentityProviderConfigResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServerException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"},
+        {"shape":"ThrottlingException"}
+      ],
+      "documentation":"<p>Disassociates an identity provider configuration from a cluster.</p> <p>If you disassociate an identity provider from your cluster, users included in the provider can no longer access the cluster. However, you can still access the cluster with IAM principals.</p>"
+    },
+    "ListIdentityProviderConfigs":{
+      "name":"ListIdentityProviderConfigs",
+      "http":{
+        "method":"GET",
+        "requestUri":"/clusters/{name}/identity-provider-configs"
+      },
+      "input":{"shape":"ListIdentityProviderConfigsRequest"},
+      "output":{"shape":"ListIdentityProviderConfigsResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServerException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ResourceNotFoundException"}
+      ],
+      "documentation":"<p>Lists the identity provider configurations for your cluster.</p>"
+    },
     "ListAddons":{
       "name":"ListAddons",
       "http":{
@@ -337,6 +409,44 @@
         "AL2_x86_64_GPU",
         "AL2_ARM_64"
       ]
+    },
+    "AssociateIdentityProviderConfigRequest":{
+      "type":"structure",
+      "required":[
+        "clusterName",
+        "oidc"
+      ],
+      "members":{
+        "clusterName":{
+          "shape":"String",
+          "documentation":"<p>The name of your cluster.</p>",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "oidc":{
+          "shape":"OidcIdentityProviderConfigRequest",
+          "documentation":"<p>An object representing an OpenID Connect (OIDC) identity provider configuration.</p>"
+        },
+        "tags":{
+          "shape":"TagMap",
+          "documentation":"<p>Metadata that assists with categorization and organization. Each tag consists of a key and an optional value. You define both. Tags don't propagate to any other cluster or Amazon Web Services resources.</p>"
+        },
+        "clientRequestToken":{
+          "shape":"String",
+          "documentation":"<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "AssociateIdentityProviderConfigResponse":{
+      "type":"structure",
+      "members":{
+        "update":{"shape":"Update"},
+        "tags":{
+          "shape":"TagMap",
+          "documentation":"<p>The tags for the resource.</p>"
+        }
+      }
     },
     "Addon":{
       "type":"structure",
@@ -1526,6 +1636,34 @@
         }
       }
     },
+    "DescribeIdentityProviderConfigRequest":{
+      "type":"structure",
+      "required":[
+        "clusterName",
+        "identityProviderConfig"
+      ],
+      "members":{
+        "clusterName":{
+          "shape":"String",
+          "documentation":"<p>The name of your cluster.</p>",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "identityProviderConfig":{
+          "shape":"IdentityProviderConfig",
+          "documentation":"<p>An object representing an identity provider configuration.</p>"
+        }
+      }
+    },
+    "DescribeIdentityProviderConfigResponse":{
+      "type":"structure",
+      "members":{
+        "identityProviderConfig":{
+          "shape":"IdentityProviderConfigResponse",
+          "documentation":"<p>The object that represents an OpenID Connect (OIDC) identity provider configuration.</p>"
+        }
+      }
+    },
     "DescribeNodegroupRequest":{
       "type":"structure",
       "required":[
@@ -1596,6 +1734,36 @@
           "shape":"Update",
           "documentation":"<p>The full description of the specified update.</p>"
         }
+      }
+    },
+    "DisassociateIdentityProviderConfigRequest":{
+      "type":"structure",
+      "required":[
+        "clusterName",
+        "identityProviderConfig"
+      ],
+      "members":{
+        "clusterName":{
+          "shape":"String",
+          "documentation":"<p>The name of your cluster.</p>",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "identityProviderConfig":{
+          "shape":"IdentityProviderConfig",
+          "documentation":"<p>An object representing an identity provider configuration.</p>"
+        },
+        "clientRequestToken":{
+          "shape":"String",
+          "documentation":"<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "DisassociateIdentityProviderConfigResponse":{
+      "type":"structure",
+      "members":{
+        "update":{"shape":"Update"}
       }
     },
     "dockerRegistryConfig":{
@@ -1680,6 +1848,38 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "IdentityProviderConfig":{
+      "type":"structure",
+      "required":[
+        "type",
+        "name"
+      ],
+      "members":{
+        "type":{
+          "shape":"String",
+          "documentation":"<p>The type of the identity provider configuration. The only type available is <code>oidc</code>.</p>"
+        },
+        "name":{
+          "shape":"String",
+          "documentation":"<p>The name of the identity provider configuration.</p>"
+        }
+      },
+      "documentation":"<p>An object representing an identity provider configuration.</p>"
+    },
+    "IdentityProviderConfigResponse":{
+      "type":"structure",
+      "members":{
+        "oidc":{
+          "shape":"OidcIdentityProviderConfig",
+          "documentation":"<p>An object representing an OpenID Connect (OIDC) identity provider configuration.</p>"
+        }
+      },
+      "documentation":"<p>The full description of your identity configuration.</p>"
+    },
+    "IdentityProviderConfigs":{
+      "type":"list",
+      "member":{"shape":"IdentityProviderConfig"}
     },
     "IncludeClustersList":{
       "type":"list",
@@ -1987,19 +2187,19 @@
       "members":{
         "clusterName":{
           "shape":"String",
-          "documentation":"<p>The cluster name that you want to list identity provider configurations for.</p>",
+          "documentation":"<p>The name of your cluster.</p>",
           "location":"uri",
           "locationName":"name"
         },
         "maxResults":{
           "shape":"ListIdentityProviderConfigsRequestMaxResults",
-          "documentation":"<p>The maximum number of identity provider configurations returned by <code>ListIdentityProviderConfigs</code> in paginated output. When you use this parameter, <code>ListIdentityProviderConfigs</code> returns only <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. You can see the remaining results of the initial request by sending another <code>ListIdentityProviderConfigs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If you don't use this parameter, <code>ListIdentityProviderConfigs</code> returns up to 100 results and a <code>nextToken</code> value, if applicable.</p>",
+          "documentation":"<p>The maximum number of results, returned in paginated output. You receive <code>maxResults</code> in a single page, along with a <code>nextToken</code> response element. You can see the remaining results of the initial request by sending another request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If you don't use this parameter, 100 results and a <code>nextToken</code> value, if applicable, are returned.</p>",
           "location":"querystring",
           "locationName":"maxResults"
         },
         "nextToken":{
           "shape":"String",
-          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated <code>IdentityProviderConfigsRequest</code> where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p>",
+          "documentation":"<p>The <code>nextToken</code> value returned from a previous paginated request, where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is null when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes.</p> </note>",
           "location":"querystring",
           "locationName":"nextToken"
         }
@@ -2424,6 +2624,10 @@
           "shape":"String",
           "documentation":"<p>The URL of the OIDC identity provider that allows the API server to discover public signing keys for verifying tokens.</p>"
         },
+        "issuerCertificateAuthority":{
+          "shape":"String",
+          "documentation":"<p>The certificate authority data for your cluster. This is required if you are using a self-signed certificate.</p> <note> <p>If you are using an ACM certificate, you do not need to specify this value.</p> </note>"
+        },
         "clientId":{
           "shape":"String",
           "documentation":"<p>This is also known as <i>audience</i>. The ID of the client application that makes authentication requests to the OIDC identity provider.</p>"
@@ -2457,7 +2661,7 @@
           "documentation":"<p>The status of the OIDC identity provider.</p>"
         }
       },
-      "documentation":"<p>An object that represents the configuration for an OpenID Connect (OIDC) identity provider. </p>"
+      "documentation":"<p>An object representing the configuration for an OpenID Connect (OIDC) identity provider. </p>"
     },
     "OidcIdentityProviderConfigRequest":{
       "type":"structure",
@@ -2474,6 +2678,10 @@
         "issuerUrl":{
           "shape":"String",
           "documentation":"<p>The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens. The URL must begin with <code>https://</code> and should correspond to the <code>iss</code> claim in the provider's OIDC ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a hostname, like <code>https://server.example.org</code> or <code>https://example.com</code>. This URL should point to the level below <code>.well-known/openid-configuration</code> and must be publicly accessible over the internet.</p>"
+        },
+        "issuerCertificateAuthority":{
+          "shape":"String",
+          "documentation":"<p>The certificate authority data for your cluster. This is required if you are using a self-signed certificate.</p> <note> <p>If you are using an ACM certificate, you do not need to specify this value.</p> </note>"
         },
         "clientId":{
           "shape":"String",
