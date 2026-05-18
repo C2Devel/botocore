@@ -2,7 +2,7 @@ name: Notify on workflow completion
 
 on:
   workflow_run:
-    workflows: ["Packaging botocore due to merge", "Release botocore"]
+    workflows: ["Packaging botocore due to merge", "Release botocore", "Set JIRA version in issue"]
     types: [completed]
 
 jobs:
