@@ -3289,6 +3289,16 @@
       "output":{"shape":"GetCoipPoolUsageResult"},
       "documentation":"<p>Describes the allocations from the specified customer-owned address pool.</p>"
     },
+    "GetConsoleAccesses":{
+      "name":"GetConsoleAccesses",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetConsoleAccessesRequest"},
+      "output":{"shape":"GetConsoleAccessesResult"},
+      "documentation":"<p>Gets the console accesses for the specified instance.</p>"
+    },
     "GetConsoleOutput":{
       "name":"GetConsoleOutput",
       "http":{
@@ -22674,6 +22684,53 @@
           "locationName":"localGatewayRouteTableId"
         }
       }
+    },
+    "GetConsoleAccessesRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the instance.</p>"
+        }
+      },
+      "documentation":"<p>Contains the parameters for GetConsoleAccesses.</p>"
+    },
+    "ConsoleAccess":{
+      "type":"structure",
+      "members":{
+        "Email":{
+          "shape":"String",
+          "locationName":"email"
+        },
+        "EndTime":{
+          "shape":"DateTime",
+          "locationName":"endTime"
+        }
+      } 
+    }, 
+    "ConsoleAccessList":{
+      "type":"list",
+      "member":{
+        "shape":"ConsoleAccess",
+        "locationName":"item"
+      }
+    },
+    "GetConsoleAccessesResult":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{
+          "shape":"String",
+          "documentation":"<p>The ID of the instance.</p>",
+          "locationName":"instanceId"
+        },
+        "AccessSet":{
+          "shape":"ConsoleAccessList",
+          "documentation":"<p>The console accesses.</p>",
+          "locationName":"accessSet"
+        }
+      },
+      "documentation":"<p>Contains the output of GetConsoleAccesses.</p>"
     },
     "GetConsoleOutputRequest":{
       "type":"structure",
