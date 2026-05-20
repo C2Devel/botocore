@@ -21,6 +21,26 @@
       "output": {"shape": "AddInstancesResponse"},
       "documentation": "<p>Add instances to the specified service.</p>"
     },
+    "ListMetrics":{
+      "name":"ListMetrics",
+      "http":{
+        "method": "POST",
+        "requestUri":"/list_metrics"
+      },
+      "input":{"shape":"ListMetricsInput"},
+      "output":{"shape":"ListMetricsOutput"},
+      "documentation":"<p>List the specified metrics.</p>"
+    },
+    "GetMetricStatistics":{
+      "name":"GetMetricStatistics",
+      "http":{
+        "method": "POST",
+        "requestUri":"/get_metric_statistics"
+      },
+      "input":{"shape":"GetMetricStatisticsInput"},
+      "output":{"shape":"GetMetricStatisticsOutput"},
+      "documentation":"<p>Gets statistics for the specified metric.</p>"
+    },
     "CreateDatabase": {
       "name": "CreateDatabase",
       "http": {
@@ -631,6 +651,250 @@
         }
       }
     },
+    "GetMetricStatisticsInput":{
+      "type":"structure",
+      "required":[
+        "Namespace",
+        "MetricName",
+        "StartTime",
+        "EndTime",
+        "Period"
+      ],
+      "members":{
+        "Namespace":{
+          "shape":"Namespace",
+          "documentation":"<p>The namespace of the metric, with or without spaces.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>The name of the metric, with or without spaces.</p>"
+        },
+        "Dimensions":{
+          "shape":"Dimensions",
+          "documentation":"<p>The dimensions. If the metric contains multiple dimensions, you must include a value for each dimension.</p>"
+        },
+        "StartTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time stamp that determines the first data point to return.</p>"
+        },
+        "EndTime":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time stamp that determines the last data point to return.</p>"
+        },
+        "Period":{
+          "shape":"Period",
+          "documentation":"<p>The granularity, in seconds, of the returned data points. </p>"
+        },
+        "Statistics":{
+          "shape":"Statistics",
+          "documentation":"<p>The metric statistics, other than percentile.</p>"
+        },
+        "Unit":{
+          "shape":"StandardUnit",
+          "documentation":"<p>The unit for a given metric.</p>"
+        }
+      }
+    },
+    "GetMetricStatisticsOutput":{
+      "type":"structure",
+      "members":{
+        "Label":{
+          "shape":"MetricLabel",
+          "documentation":"<p>A label for the specified metric.</p>"
+        },
+        "Datapoints":{
+          "shape":"Datapoints",
+          "documentation":"<p>The data points for the specified metric.</p>"
+        }
+      }
+    },
+    "Datapoints":{
+      "type":"list",
+      "member":{"shape":"Datapoint"}
+    },
+    "Datapoint":{
+      "type":"structure",
+      "members":{
+        "Timestamp":{
+          "shape":"Timestamp",
+          "documentation":"<p>The time stamp used for the data point.</p>"
+        },
+        "SampleCount":{
+          "shape":"DatapointValue",
+          "documentation":"<p>The number of metric values that contributed to the aggregate value of this data point.</p>"
+        },
+        "Average":{
+          "shape":"DatapointValue",
+          "documentation":"<p>The average of the metric values that correspond to the data point.</p>"
+        },
+        "Sum":{
+          "shape":"DatapointValue",
+          "documentation":"<p>The sum of the metric values for the data point.</p>"
+        },
+        "Minimum":{
+          "shape":"DatapointValue",
+          "documentation":"<p>The minimum metric value for the data point.</p>"
+        },
+        "Maximum":{
+          "shape":"DatapointValue",
+          "documentation":"<p>The maximum metric value for the data point.</p>"
+        },
+        "Unit":{
+          "shape":"StandardUnit",
+          "documentation":"<p>The standard unit for the data point.</p>"
+        }
+      }
+    },
+    "DatapointValue":{"type":"double"},
+    "DatapointValueMap":{
+      "type":"map",
+      "key":{"shape":"ExtendedStatistic"},
+      "value":{"shape":"DatapointValue"}
+    },
+    "StandardUnit":{
+      "type":"string"
+    },
+    "Period":{
+      "type":"integer",
+      "min":1
+    },
+    "Statistics":{
+      "type":"list",
+      "member":{"shape":"Statistic"},
+      "max":5,
+      "min":1
+    },
+    "Statistic":{
+      "type":"string",
+      "enum":[
+        "SampleCount",
+        "Average",
+        "Sum",
+        "Minimum",
+        "Maximum"
+      ]
+    },
+    "MetricLabel":{"type":"string"},
+    "ListMetricsInput":{
+      "type":"structure",
+      "required":[
+        "Dimensions"
+      ],
+      "members":{
+        "Namespace":{
+          "shape":"Namespace",
+          "documentation":"<p>The metric namespace to filter against. Only the namespace that matches exactly will be returned.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>The name of the metric to filter against. Only the metrics with names that match exactly will be returned.</p>"
+        },
+        "Dimensions":{
+          "shape":"DimensionFilters",
+          "documentation":"<p>The dimensions to filter against. Only the dimensions that match exactly will be returned.</p>"
+        }
+      }
+    },
+    "ListMetricsOutput":{
+      "type":"structure",
+      "members":{
+        "Metrics":{
+          "shape":"Metrics",
+          "documentation":"<p>The metrics that match your request. </p>"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "documentation":"<p>The token that marks the start of the next batch of returned results. </p>"
+        }
+      }
+    },
+    "Metrics":{
+      "type":"list",
+      "member":{"shape":"Metric"}
+    },
+    "Metric":{
+      "type":"structure",
+      "members":{
+        "Namespace":{
+          "shape":"Namespace",
+          "documentation":"<p>The namespace of the metric.</p>"
+        },
+        "MetricName":{
+          "shape":"MetricName",
+          "documentation":"<p>The name of the metric. This is a required field.</p>"
+        },
+        "Dimensions":{
+          "shape":"Dimensions",
+          "documentation":"<p>The dimensions for the metric.</p>"
+        }
+      },
+      "documentation":"<p>Represents a specific metric.</p>"
+    },
+    "Namespace":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[^:].*"
+    },
+    "MetricName":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "Dimensions":{
+      "type":"list",
+      "member":{"shape":"Dimension"},
+      "max":10
+    },
+    "Dimension":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Value"
+      ],
+      "members":{
+        "Name":{
+          "shape":"DimensionName",
+          "documentation":"<p>The name of the dimension. Dimension names cannot contain blank spaces or non-ASCII characters.</p>"
+        },
+        "Value":{
+          "shape":"DimensionValue",
+          "documentation":"<p>The value of the dimension. Dimension values cannot contain blank spaces or non-ASCII characters.</p>"
+        }
+      },
+      "documentation":"<p>A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique identifier for a metric, whenever you add a unique name/value pair to one of your metrics, you are creating a new variation of that metric. </p>"
+    },
+    "DimensionFilters":{
+      "type":"list",
+      "member":{"shape":"DimensionFilter"},
+      "max":10
+    },
+    "DimensionFilter":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{
+          "shape":"DimensionName",
+          "documentation":"<p>The dimension name to be matched.</p>"
+        },
+        "Value":{
+          "shape":"DimensionValue",
+          "documentation":"<p>The value of the dimension to be matched.</p>"
+        }
+      },
+      "documentation":"<p>Represents filters for a dimension.</p>"
+    },
+    "DimensionName":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "DimensionValue":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "NextToken":{"type":"string"},
     "Backup": {
       "type": "structure",
       "members": {
