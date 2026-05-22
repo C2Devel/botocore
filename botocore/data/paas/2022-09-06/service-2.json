@@ -81,6 +81,96 @@
       "output":{"shape":"GetMetricStatisticsOutput"},
       "documentation":"<p>Gets statistics for the specified metric.</p>"
     },
+    "CreateBackupJob": {
+      "name": "CreateBackupJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/backup-jobs"
+      },
+      "input": {"shape": "CreateBackupJobRequest"},
+      "output": {"shape": "CreateBackupJobResponse"},
+      "documentation": "<p>Creates a backup job for a service.</p>"
+    },
+    "DeleteBackupJob": {
+      "name": "DeleteBackupJob",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/backup-jobs/{jobId}"
+      },
+      "input": {"shape": "DeleteBackupJobRequest"},
+      "output": {"shape": "DeleteBackupJobResponse"},
+      "documentation": "<p>Deletes a backup job from a service.</p>"
+    },
+    "ListBackupJobs": {
+      "name": "ListBackupJobs",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services/{serviceId}/backup-jobs"
+      },
+      "input": {"shape": "ListBackupJobsRequest"},
+      "output": {"shape": "ListBackupJobsResponse"},
+      "documentation": "<p>Lists backup jobs for a service.</p>"
+    },
+    "ModifyBackupJob": {
+      "name": "ModifyBackupJob",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/backup-jobs/{jobId}"
+      },
+      "input": {"shape": "ModifyBackupJobRequest"},
+      "output": {"shape": "ModifyBackupJobResponse"},
+      "documentation": "<p>Modifies a backup job in a service.</p>"
+    },
+    "CreateBackupStorage": {
+      "name": "CreateBackupStorage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/backup-storages"
+      },
+      "input": {"shape": "CreateBackupStorageRequest"},
+      "output": {"shape": "CreateBackupStorageResponse"},
+      "documentation": "<p>Creates a project-scoped backup storage.</p>"
+    },
+    "DeleteBackupStorage": {
+      "name": "DeleteBackupStorage",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/backup-storages/{storageId}"
+      },
+      "input": {"shape": "DeleteBackupStorageRequest"},
+      "output": {"shape": "DeleteBackupStorageResponse"},
+      "documentation": "<p>Deletes a backup storage.</p>"
+    },
+    "ListBackupStorages": {
+      "name": "ListBackupStorages",
+      "http": {
+        "method": "GET",
+        "requestUri": "/backup-storages"
+      },
+      "input": {"shape": "ListBackupStoragesRequest"},
+      "output": {"shape": "ListBackupStoragesResponse"},
+      "documentation": "<p>Lists project-scoped backup storages.</p>"
+    },
+    "ModifyBackupStorage": {
+      "name": "ModifyBackupStorage",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/backup-storages/{storageId}"
+      },
+      "input": {"shape": "ModifyBackupStorageRequest"},
+      "output": {"shape": "ModifyBackupStorageResponse"},
+      "documentation": "<p>Modifies a backup storage.</p>"
+    },
+    "ModifyBackupConfig": {
+      "name": "ModifyBackupConfig",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/backup-config"
+      },
+      "input": {"shape": "ModifyBackupConfigRequest"},
+      "output": {"shape": "ModifyBackupConfigResponse"},
+      "documentation": "<p>Modifies backup configuration for a service.</p>"
+    },
     "CreateDatabase": {
       "name": "CreateDatabase",
       "http": {
@@ -864,6 +954,36 @@
       "input": {"shape": "UpdateAutoDiskExpansionSettingsRequest"},
       "output": {"shape": "UpdateAutoDiskExpansionSettingsResponse"},
       "documentation": "<p>Modifies the ADE settings for service.</p>"
+    },
+    "InitiatePITRRestore": {
+      "name": "InitiatePITRRestore",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/restore-pitr"
+      },
+      "input": {"shape": "InitiatePITRRestoreRequest"},
+      "output": {"shape": "InitiatePITRRestoreResponse"},
+      "documentation": "<p>Initiates a point-in-time recovery restore for a service.</p>"
+    },
+    "GetPITRWindow": {
+      "name": "GetPITRWindow",
+      "http": {
+        "method": "GET",
+        "requestUri": "/services/{serviceId}/pitr-window"
+      },
+      "input": {"shape": "GetPITRWindowRequest"},
+      "output": {"shape": "GetPITRWindowResponse"},
+      "documentation": "<p>Returns the available point-in-time recovery window for a service.</p>"
+    },
+    "CancelPITRRestore": {
+      "name": "CancelPITRRestore",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/restore-pitr"
+      },
+      "input": {"shape": "CancelPITRRestoreRequest"},
+      "output": {"shape": "CancelPITRRestoreResponse"},
+      "documentation": "<p>Cancels an active PITR restore for a service.</p>"
     }
   },
   "shapes": {
@@ -1261,9 +1381,237 @@
         "serviceDeleted": {"shape": "Boolean"},
         "status": {"shape": "String"},
         "time": {"shape": "Integer"},
+        "method": {"shape": "BackupMethod"},
+        "backupName": {"shape": "String"},
         "databases": {"shape": "DatabaseBackupList"},
         "protected": {"shape": "Boolean"}
       }
+    },
+    "BackupJob": {
+      "type": "structure",
+      "members": {
+        "jobId": {"shape": "String", "documentation": "<p>The generated job identifier.</p>"},
+        "name": {"shape": "String", "documentation": "<p>The user-supplied job name.</p>"},
+        "method": {"shape": "BackupMethod", "documentation": "<p>Backup method.</p>"},
+        "storage": {"shape": "String", "documentation": "<p>Storage backend name.</p>"},
+        "time": {"shape": "StringList", "documentation": "<p>Scheduled time [HH, MM].</p>"},
+        "day": {"shape": "BackupDay", "documentation": "<p>Scheduled day of the week: 0=Sunday … 6=Saturday (optional).</p>"},
+        "node": {"shape": "String", "documentation": "<p>Node to run backup on (optional).</p>"},
+        "databases": {"shape": "StringList", "documentation": "<p>List of databases (dump method only).</p>"},
+        "rotate": {"shape": "Integer", "documentation": "<p>Number of backups to retain (wal-g method only).</p>"},
+        "schemaOnly": {"shape": "Boolean", "documentation": "<p>Dump schema only, no data (dump method only).</p>"},
+        "instant": {"shape": "Boolean", "documentation": "<p>Trigger the backup immediately on next Puppet run.</p>"},
+        "nextExecution": {"shape": "Integer", "documentation": "<p>UTC timestamp of the next scheduled execution.</p>"}
+      }
+    },
+    "BackupJobList": {
+      "type": "list",
+      "member": {"shape": "BackupJob"},
+      "documentation": "<p>List of backup job definitions.</p>"
+    },
+    "BackupJobMap": {
+      "type": "map",
+      "key": {"shape": "String"},
+      "value": {"shape": "BackupJob"},
+      "documentation": "<p>Map of jobId to backup job definition.</p>"
+    },
+    "BackupMethod": {
+      "type": "string",
+      "enum": ["dump", "wal-g"]
+    },
+    "BackupDay": {
+      "type": "string",
+      "enum": ["0", "1", "2", "3", "4", "5", "6"]
+    },
+    "CreateBackupJobRequest": {
+      "type": "structure",
+      "required": ["serviceId", "name", "parameters"],
+      "members": {
+        "serviceId": {"shape": "String", "documentation": "<p>The ID of service.</p>", "location": "uri", "locationName": "serviceId"},
+        "name": {"shape": "String", "documentation": "<p>The name of the backup job.</p>"},
+        "parameters": {"shape": "None", "documentation": "<p>Backup job parameters.</p>"}
+      }
+    },
+    "CreateBackupJobResponse": {
+      "type": "structure",
+      "members": {
+        "backupJob": {"shape": "BackupJob", "documentation": "<p>The created backup job.</p>"}
+      }
+    },
+    "DeleteBackupJobRequest": {
+      "type": "structure",
+      "required": ["serviceId", "jobId"],
+      "members": {
+        "serviceId": {"shape": "String", "documentation": "<p>The ID of service.</p>", "location": "uri", "locationName": "serviceId"},
+        "jobId": {"shape": "String", "documentation": "<p>The name of the backup job to delete.</p>", "location": "uri", "locationName": "jobId"}
+      }
+    },
+    "DeleteBackupJobResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "ListBackupJobsRequest": {
+      "type": "structure",
+      "required": ["serviceId"],
+      "members": {
+        "serviceId": {"shape": "String", "documentation": "<p>The ID of service.</p>", "location": "uri", "locationName": "serviceId"}
+      }
+    },
+    "ListBackupJobsResponse": {
+      "type": "structure",
+      "members": {
+        "backupJobs": {"shape": "BackupJobMap", "documentation": "<p>Map of jobId to backup job definition.</p>"}
+      }
+    },
+    "ModifyBackupJobRequest": {
+      "type": "structure",
+      "required": ["serviceId", "jobId", "parameters"],
+      "members": {
+        "serviceId": {"shape": "String", "documentation": "<p>The ID of service.</p>", "location": "uri", "locationName": "serviceId"},
+        "jobId": {"shape": "String", "documentation": "<p>The name of the backup job to modify.</p>", "location": "uri", "locationName": "jobId"},
+        "parameters": {"shape": "None", "documentation": "<p>Updated backup job parameters.</p>"}
+      }
+    },
+    "ModifyBackupJobResponse": {
+      "type": "structure",
+      "members": {
+        "backupJob": {"shape": "BackupJob", "documentation": "<p>The modified backup job.</p>"}
+      }
+    },
+    "BackupStorage": {
+      "type": "structure",
+      "members": {
+        "storageId": {"shape": "String", "documentation": "<p>The generated storage identifier.</p>"},
+        "name": {"shape": "String", "documentation": "<p>The user-supplied storage name.</p>"},
+        "type": {"shape": "String", "documentation": "<p>Storage type (e.g. s3).</p>"},
+        "bucket": {"shape": "String", "documentation": "<p>S3 bucket name.</p>"},
+        "accessKey": {"shape": "String", "documentation": "<p>Access key (project:login).</p>"},
+        "url": {"shape": "String", "documentation": "<p>S3 endpoint URL (optional).</p>"},
+        "verifySsl": {"shape": "Boolean", "documentation": "<p>Whether to verify SSL (optional).</p>"},
+        "chunkSize": {"shape": "Integer", "documentation": "<p>Multipart chunk size in bytes (optional).</p>"},
+        "encrypt": {"shape": "Boolean", "documentation": "<p>Enable server-side encryption (optional).</p>"}
+      }
+    },
+    "BackupStorageList": {
+      "type": "list",
+      "member": {"shape": "BackupStorage"},
+      "documentation": "<p>List of backup storage definitions.</p>"
+    },
+    "BackupStorageMap": {
+      "type": "map",
+      "key": {"shape": "String"},
+      "value": {"shape": "BackupStorage"},
+      "documentation": "<p>Map of storageId to backup storage definition.</p>"
+    },
+    "CreateBackupStorageRequest": {
+      "type": "structure",
+      "required": ["name", "parameters"],
+      "members": {
+        "name": {"shape": "String", "documentation": "<p>The name of the backup storage.</p>"},
+        "parameters": {"shape": "None", "documentation": "<p>Backup storage parameters.</p>"}
+      }
+    },
+    "CreateBackupStorageResponse": {
+      "type": "structure",
+      "members": {
+        "backupStorage": {"shape": "BackupStorage", "documentation": "<p>The created backup storage.</p>"}
+      }
+    },
+    "DeleteBackupStorageRequest": {
+      "type": "structure",
+      "required": ["storageId"],
+      "members": {
+        "storageId": {"shape": "String", "location": "uri", "locationName": "storageId"}
+      }
+    },
+    "DeleteBackupStorageResponse": {"type": "structure", "members": {}},
+    "ListBackupStoragesRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "ListBackupStoragesResponse": {
+      "type": "structure",
+      "members": {
+        "backupStorages": {"shape": "BackupStorageMap", "documentation": "<p>Map of storageId to backup storage definition.</p>"}
+      }
+    },
+    "ModifyBackupStorageRequest": {
+      "type": "structure",
+      "required": ["storageId"],
+      "members": {
+        "storageId": {"shape": "String", "location": "uri", "locationName": "storageId"},
+        "name": {"shape": "String", "documentation": "<p>New name for the storage (optional).</p>"},
+        "parameters": {"shape": "None", "documentation": "<p>Updated backup storage parameters (optional).</p>"}
+      }
+    },
+    "ModifyBackupStorageResponse": {
+      "type": "structure",
+      "members": {
+        "backupStorage": {"shape": "BackupStorage", "documentation": "<p>The modified backup storage.</p>"}
+      }
+    },
+    "ModifyBackupConfigRequest": {
+      "type": "structure",
+      "required": ["serviceId"],
+      "members": {
+        "serviceId": {"shape": "String", "location": "uri", "locationName": "serviceId"},
+        "notificationEmail": {"shape": "String", "documentation": "<p>Email for backup notifications.</p>"},
+        "backupExpirationDays": {"shape": "Integer", "documentation": "<p>Days to retain expired backups.</p>"}
+      }
+    },
+    "BackupConfig": {
+      "type": "structure",
+      "members": {
+        "notificationEmail": {"shape": "String", "documentation": "<p>Email for backup notifications.</p>"},
+        "backupExpirationDays": {"shape": "Integer", "documentation": "<p>Days to retain expired backups.</p>"}
+      }
+    },
+    "ModifyBackupConfigResponse": {
+      "type": "structure",
+      "members": {
+        "backupConfig": {"shape": "BackupConfig", "documentation": "<p>The updated backup configuration.</p>"}
+      }
+    },
+    "InitiatePITRRestoreRequest": {
+      "type": "structure",
+      "required": ["serviceId", "backupName"],
+      "members": {
+        "serviceId": {"shape": "String", "documentation": "<p>The ID of the service to restore.</p>", "location": "uri", "locationName": "serviceId"},
+        "backupName": {"shape": "String", "documentation": "<p>The WAL-G backup name to restore from.</p>"},
+        "time": {"shape": "Integer", "documentation": "<p>UTC timestamp to restore the service to.</p>"},
+        "timeline": {"shape": "String", "documentation": "<p>PostgreSQL timeline to recover to..</p>"}
+      }
+    },
+    "InitiatePITRRestoreResponse": {
+      "type": "structure",
+      "members": {
+        "taskId": {"shape": "String", "documentation": "<p>The ID of the restore task.</p>"}
+      }
+    },
+    "GetPITRWindowRequest": {
+      "type": "structure",
+      "required": ["serviceId"],
+      "members": {
+        "serviceId": {"shape": "String", "documentation": "<p>The ID of the service.</p>", "location": "uri", "locationName": "serviceId"}
+      }
+    },
+    "GetPITRWindowResponse": {
+      "type": "structure",
+      "members": {
+        "start": {"shape": "String", "documentation": "<p>Timestamp of the earliest available restore point.</p>"},
+        "end": {"shape": "String", "documentation": "<p>Timestamp of the latest available restore point.</p>"}
+      }
+    },
+    "CancelPITRRestoreRequest": {
+      "type": "structure",
+      "required": ["serviceId"],
+      "members": {
+        "serviceId": {"shape": "String", "documentation": "<p>The ID of the service.</p>", "location": "uri", "locationName": "serviceId"}
+      }
+    },
+    "CancelPITRRestoreResponse": {
+      "type": "structure",
+      "members": {}
     },
     "BackupSettingsRequest": {
       "type": "structure",
@@ -1424,6 +1772,9 @@
         "userData": {"shape": "String"},
         "userDataContentType": {"shape": "String"},
         "backupSettings": {"shape": "BackupSettingsRequest"},
+        "backupStorage": {"shape": "CreateServiceBackupStorageRequest", "documentation": "<p>Backup storage to create along with the service (v4.3+ only).</p>"},
+        "backupJob": {"shape": "CreateServiceBackupJobRequest", "documentation": "<p>Backup job to create along with the service (v4.3+ only).</p>"},
+        "backupConfig": {"shape": "CreateServiceBackupConfigRequest", "documentation": "<p>Backup configuration (notification email, retention) to set along with the service (v4.3+ only).</p>"},
         "arbitratorRequired": {"shape": "Boolean"},
         "internalBalancerRequired": {"shape": "Boolean"},
         "externalBalancerRequired": {"shape": "Boolean"},
@@ -1436,6 +1787,29 @@
         "user": {"shape":  "UserCreateRequest"},
         "database": {"shape":  "DatabaseCreateRequest"},
         "adeSettings": {"shape": "CreateAutoDiskExpansionSettingsRequest"}
+      }
+    },
+    "CreateServiceBackupStorageRequest": {
+      "type": "structure",
+      "required": ["name", "parameters"],
+      "members": {
+        "name": {"shape": "String", "documentation": "<p>The name of the backup storage.</p>"},
+        "parameters": {"shape": "None", "documentation": "<p>Backup storage parameters (type, bucket, user_login, etc.).</p>"}
+      }
+    },
+    "CreateServiceBackupJobRequest": {
+      "type": "structure",
+      "required": ["name", "parameters"],
+      "members": {
+        "name": {"shape": "String", "documentation": "<p>The name of the backup job.</p>"},
+        "parameters": {"shape": "None", "documentation": "<p>Backup job parameters (method, storage, time, etc.).</p>"}
+      }
+    },
+    "CreateServiceBackupConfigRequest": {
+      "type": "structure",
+      "members": {
+        "notificationEmail": {"shape": "String", "documentation": "<p>Email for backup notifications.</p>"},
+        "backupExpirationDays": {"shape": "Integer", "documentation": "<p>Days to retain expired backups.</p>"}
       }
     },
     "CreateServiceResponse": {
@@ -2598,6 +2972,9 @@
         "instances": {"shape": "InstanceList"},
         "supportedFeatures": {"shape": "StringList"},
         "backupSettings": {"shape": "BackupSettingsResponse"},
+        "backupJobs": {"shape": "BackupJobMap"},
+        "backupStorages": {"shape": "BackupStorageMap"},
+        "backupConfig": {"shape": "BackupConfig"},
         "totalCpuCount": {"shape": "Integer"},
         "totalMemory": {"shape": "Integer"},
         "vpcId": {"shape": "String"},
