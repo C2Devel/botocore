@@ -844,6 +844,16 @@
         "shape": "DeleteClickHouseQuotaResponse"
       },
       "documentation": "<p>Deletes a ClickHouse quota from given service.</p>"
+    },
+    "UpdateAutoDiskExpansionSettings": {
+      "name": "UpdateAutoDiskExpansionSettings",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/ade"
+      },
+      "input": {"shape": "UpdateAutoDiskExpansionSettingsRequest"},
+      "output": {"shape": "UpdateAutoDiskExpansionSettingsResponse"},
+      "documentation": "<p>Modifies the ADE settings for service.</p>"
     }
   },
   "shapes": {
@@ -1389,7 +1399,8 @@
         "tags": {"shape":  "TagList"},
         "placementConfig": {"shape":  "PlacementConfigRequest"},
         "user": {"shape":  "UserCreateRequest"},
-        "database": {"shape":  "DatabaseCreateRequest"}
+        "database": {"shape":  "DatabaseCreateRequest"},
+        "adeSettings": {"shape": "CreateAutoDiskExpansionSettingsRequest"}
       }
     },
     "CreateServiceResponse": {
@@ -2569,6 +2580,7 @@
         "isRolledBack": {"shape": "Boolean"},
         "maintenance": {"shape": "MaintenancePreferences"},
         "tags": {"shape":  "TagList"},
+        "autoDiskExpansionSettings": {"shape": "AutoDiskExpansionSettings"},
         "placementConfig": {"shape":  "PlacementConfigResponse"}
       }
     },
@@ -3798,6 +3810,71 @@
     },
     "ClickHouseQuotaParameters": {
       "type": "none"
+    },
+    "AutoDiskExpansionSettings": {
+      "type": "structure",
+      "members": {
+        "enabled": {"shape": "Boolean"},
+        "status": {"shape": "String"},
+        "conditionValue": {"shape": "Integer"},
+        "maxSizeGb": {"shape": "Integer"}
+      }
+    },
+    "CreateAutoDiskExpansionSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Auto disk expansion option is enabled.</p>"
+        },
+        "conditionValue": {
+          "shape": "Integer",
+          "documentation": "<p>The disk usage percentage threshold that triggers autoexpansion.</p>"
+        },
+        "maxSizeGb": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum disk size in GiB that auto expansion can reach.</p>"
+        }
+      }
+    },
+    "UpdateAutoDiskExpansionSettingsRequest": {
+      "type": "structure",
+      "documentation": "<p>Service settings for automatic disk expansion.</p>",
+      "required": [
+        "serviceId",
+        "enabled",
+        "conditionValue",
+        "maxSizeGb"
+    ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service to modify ADE settings.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Auto disk expansion option is enabled.</p>"
+        },
+        "conditionValue": {
+          "shape": "Integer",
+          "documentation": "<p>The disk usage percentage threshold that triggers auto expansion.</p>"
+        },
+        "maxSizeGb": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum disk size in GiB that auto expansion can reach.</p>"
+        }
+      }
+    },
+    "UpdateAutoDiskExpansionSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "return": {
+          "shape": "Boolean",
+          "documentation": "<p>Returns true if the ADE settings were updated successfully.</p>"
+        }
+      }
     }
   }
 }
