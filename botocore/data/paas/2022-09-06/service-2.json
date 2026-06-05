@@ -1076,7 +1076,8 @@
         "externalBalancerName": {"shape": "String"},
         "coordinator": {"shape": "NodeRequest"},
         "maintenance": {"shape": "MaintenancePeriod"},
-        "tags": {"shape":  "TagList"}
+        "tags": {"shape":  "TagList"},
+        "placementConfig": {"shape":  "PlacementConfigRequest"}
       }
     },
     "CreateServiceResponse": {
@@ -1969,7 +1970,8 @@
         "nodeRole": {
           "shape": "String",
           "documentation": "<p>The name of the node role to be changed.</p>"
-        }
+        },
+        "placementConfig": {"shape":  "PlacementConfigRequest"}
       }
     },
     "ModifyInstanceTypeResponse": {
@@ -2054,6 +2056,28 @@
         "service": {
           "shape": "Service",
           "documentation": "<p>The full description of your modified service.</p>"
+        }
+      }
+    },
+    "PlacementConfigRequest": {
+      "type": "structure",
+      "members": {
+        "affinity": {
+          "shape":"Affinity"
+        },
+        "hosts": {
+          "shape":"StringList"
+        }
+      }
+    },
+    "PlacementConfigResponse": {
+      "type": "structure",
+      "members": {
+        "affinity": {
+          "shape":"Affinity"
+        },
+        "hosts": {
+          "shape":"None"
         }
       }
     },
@@ -2232,7 +2256,8 @@
         "availableEnvironmentVersions": {"shape": "StringList"},
         "isRolledBack": {"shape": "Boolean"},
         "maintenance": {"shape": "MaintenancePreferences"},
-        "tags": {"shape":  "TagList"}
+        "tags": {"shape":  "TagList"},
+        "placementConfig": {"shape":  "PlacementConfigResponse"}
       }
     },
     "ServiceEndpoint": {
@@ -2307,6 +2332,20 @@
       }
     },
     "String": {"type": "string"},
+    "Affinity":{
+      "type":"string",
+      "enum":[
+        "default",
+        "host"
+      ]
+    },
+    "Tenancy":{
+      "type":"string",
+      "enum":[
+        "default",
+        "host"
+      ]
+    },
     "StringList": {
       "type": "list",
       "member": {"shape": "String"}
