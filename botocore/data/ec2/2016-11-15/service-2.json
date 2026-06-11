@@ -25556,6 +25556,16 @@
           "shape":"EnclaveOptions",
           "documentation":"<p>Indicates whether the instance is enabled for AWS Nitro Enclaves.</p>",
           "locationName":"enclaveOptions"
+        },
+        "Username":{
+          "shape":"String",
+          "documentation":"<p>The login username.</p>",
+          "locationName":"username"
+        },
+        "HasPassword":{
+          "shape":"Boolean",
+          "documentation":"<p>Indicates whether a password is set to login.</p>",
+          "locationName":"hasPassword"
         }
       },
       "documentation":"<p>Describes an instance.</p>"
@@ -25662,6 +25672,11 @@
           "shape":"AttributeValue",
           "documentation":"<p>The type of virtualization.</p>",
           "locationName":"virtualizationType"
+        },
+        "Username":{
+          "shape":"AttributeValue",
+          "documentation":"<p>The login username.</p>",
+          "locationName":"username"
         }
       },
       "documentation":"<p>Describes an instance attribute.</p>"
@@ -29971,6 +29986,11 @@
           "shape":"AttributeValue",
           "documentation":"<p>Changes the type of virtualization.</p>",
           "locationName":"virtualizationType"
+        },
+        "Password":{
+          "shape":"AttributeValue",
+          "documentation":"<p>Changes the password to login.</p>",
+          "locationName":"password"
         },
         "Value":{
           "shape":"String",
@@ -36978,6 +36998,14 @@
         "EnclaveOptions":{
           "shape":"EnclaveOptionsRequest",
           "documentation":"<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html\"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>You can't enable AWS Nitro Enclaves and hibernation on the same instance.</p>"
+        },
+        "Username":{
+          "shape":"String",
+          "documentation":"<p>The login username.</p>"
+        },
+        "Password":{
+          "shape":"String",
+          "documentation":"<p>The login password.</p>"
         }
       }
     },
