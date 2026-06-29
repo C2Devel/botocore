@@ -24007,6 +24007,13 @@
         "host"
       ]
     },
+    "HostnameType":{
+      "type":"string",
+      "enum":[
+        "ip-name",
+        "resource-name"
+      ]
+    },
     "HttpTokensState":{
       "type":"string",
       "enum":[
@@ -25556,6 +25563,11 @@
           "shape":"EnclaveOptions",
           "documentation":"<p>Indicates whether the instance is enabled for AWS Nitro Enclaves.</p>",
           "locationName":"enclaveOptions"
+        },
+        "PrivateDnsNameOptions":{
+          "shape":"PrivateDnsNameOptionsResponse",
+          "documentation":"<p>The options for the instance hostname.</p>",
+          "locationName":"privateDnsNameOptions"
         },
         "Username":{
           "shape":"String",
@@ -30302,6 +30314,27 @@
         }
       },
       "documentation":"<p>Contains the parameters for ModifyNetworkInterfaceAttribute.</p>"
+    },
+      "PrivateDnsNameOptionsRequest":{
+      "type":"structure",
+      "members":{
+        "HostnameType":{
+          "shape":"HostnameType",
+          "documentation":"<p>The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID.</p>"
+        }
+      },
+      "documentation":"<p>Describes the options for instance hostnames.</p>"
+    },
+    "PrivateDnsNameOptionsResponse":{
+      "type":"structure",
+      "members":{
+        "HostnameType":{
+          "shape":"HostnameType",
+          "documentation":"<p>The type of hostname to assign to an instance.</p>",
+          "locationName":"hostnameType"
+        }
+      },
+      "documentation":"<p>Describes the options for instance hostnames.</p>"
     },
     "ModifyReservedInstancesRequest":{
       "type":"structure",
@@ -36998,6 +37031,10 @@
         "EnclaveOptions":{
           "shape":"EnclaveOptionsRequest",
           "documentation":"<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html\"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>You can't enable AWS Nitro Enclaves and hibernation on the same instance.</p>"
+        },
+        "PrivateDnsNameOptions":{
+          "shape":"PrivateDnsNameOptionsRequest",
+          "documentation":"<p>The options for the instance hostname. The default values are inherited from the subnet. Applies only if creating a network interface, not attaching an existing one.</p>"
         },
         "Username":{
           "shape":"String",
