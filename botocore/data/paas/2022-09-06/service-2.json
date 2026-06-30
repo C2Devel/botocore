@@ -21,6 +21,16 @@
       "output": {"shape": "AddInstancesResponse"},
       "documentation": "<p>Add instances to the specified service.</p>"
     },
+    "RemoveInstance": {
+      "name": "RemoveInstance",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/instance/{instanceId}"
+      },
+      "input": {"shape": "RemoveInstanceRequest"},
+      "output": {"shape": "RemoveInstanceResponse"},
+      "documentation": "<p>Add instances to the specified service.</p>"
+    },
     "ListMetrics":{
       "name":"ListMetrics",
       "http":{
@@ -683,6 +693,36 @@
       }
     },
     "AddInstancesResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
+    "RemoveInstanceRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "instanceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "instanceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the instance.</p>",
+          "location": "uri",
+          "locationName": "instanceId"
+        }
+      }
+    },
+    "RemoveInstanceResponse": {
       "type": "structure",
       "members": {
         "service": {
