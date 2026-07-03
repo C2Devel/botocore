@@ -6802,6 +6802,13 @@
       }
     },
     "Boolean":{"type":"boolean"},
+    "BootModeValues":{
+      "type":"string",
+      "enum":[
+        "legacy-bios",
+        "uefi"
+      ]
+    },
     "BundleId":{"type":"string"},
     "BundleIdStringList":{
       "type":"list",
@@ -22707,8 +22714,8 @@
           "shape":"DateTime",
           "locationName":"endTime"
         }
-      } 
-    }, 
+      }
+    },
     "ConsoleAccessList":{
       "type":"list",
       "member":{
@@ -24322,6 +24329,11 @@
           "shape":"VirtualizationType",
           "documentation":"<p>The type of virtualization of the AMI.</p>",
           "locationName":"virtualizationType"
+        },
+        "BootMode":{
+          "shape":"BootModeValues",
+          "documentation":"<p>The boot mode of the image. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html\">Instance launch behavior with Amazon EC2 boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+          "locationName":"bootMode"
         }
       },
       "documentation":"<p>Describes an image.</p>"
@@ -24591,6 +24603,10 @@
           "shape":"String",
           "documentation":"<p>The type of virtualization (<code>hvm</code> | <code>hvm-legacy</code>).</p> <p>Default: <code>hvm</code> </p>",
           "locationName":"virtualizationType"
+        },
+        "BootMode":{
+          "shape":"BootModeValues",
+          "documentation":"<p>The boot mode of the virtual machine.</p> <note> <p>The <code>uefi-preferred</code> boot mode isn't supported for importing images. For more information, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/prerequisites.html#vmimport-boot-modes\">Boot modes</a> in the <i>VM Import/Export User Guide</i>.</p> </note>"
         },
         "Notify":{
           "shape":"Boolean",
