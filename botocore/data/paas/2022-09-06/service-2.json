@@ -11,6 +11,16 @@
     "uid": "paas-2022-09-06"
   },
   "operations": {
+    "ConvertToHighAvailability": {
+      "name": "ConvertToHighAvailability",
+      "http": {
+        "method": "POST",
+        "requestUri": "services/{serviceId}/high-availability"
+      },
+      "input": {"shape": "ConvertToHighAvailabilityRequest"},
+      "output": {"shape":  "ConvertToHighAvailabilityResponse"},
+      "documentation": "<p>Convert the specified service to a high-availability configuration.</p>"
+    },
     "AddInstances": {
       "name": "AddInstances",
       "http": {
@@ -857,6 +867,31 @@
     }
   },
   "shapes": {
+    "ConvertToHighAvailabilityRequest": {
+      "type": "structure",
+      "required": ["serviceId"],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "arbitratorRequired": {"shape": "Boolean"},
+        "networkInterfaceIds": {"shape": "StringList"},
+        "subnetIds": {"shape": "StringList"},
+        "parameters": {"shape":  "None"}
+      }
+    },
+    "ConvertToHighAvailabilityResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
     "AddInstancesRequest": {
       "type": "structure",
       "required": [
