@@ -11,25 +11,25 @@
     "uid": "paas-2022-09-06"
   },
   "operations": {
-    "AddInstances": {
-      "name": "AddInstances",
+    "AddNodes": {
+      "name": "AddNodes",
       "http": {
         "method": "PUT",
-        "requestUri": "/services/{serviceId}/instances"
+        "requestUri": "/services/{serviceId}/nodes"
       },
-      "input": {"shape": "AddInstancesRequest"},
-      "output": {"shape": "AddInstancesResponse"},
-      "documentation": "<p>Add instances to the specified service.</p>"
+      "input": {"shape": "AddNodesRequest"},
+      "output": {"shape": "AddNodesResponse"},
+      "documentation": "<p>Add nodes to the specified service.</p>"
     },
-    "RemoveInstance": {
-      "name": "RemoveInstance",
+    "RemoveNode": {
+      "name": "RemoveNode",
       "http": {
         "method": "DELETE",
-        "requestUri": "/services/{serviceId}/instance/{instanceId}"
+        "requestUri": "/services/{serviceId}/nodes/{nodeId}"
       },
-      "input": {"shape": "RemoveInstanceRequest"},
-      "output": {"shape": "RemoveInstanceResponse"},
-      "documentation": "<p>Add instances to the specified service.</p>"
+      "input": {"shape": "RemoveNodeRequest"},
+      "output": {"shape": "RemoveNodeResponse"},
+      "documentation": "<p>Remove nodes to the specified service.</p>"
     },
     "ListMetrics":{
       "name":"ListMetrics",
@@ -673,12 +673,12 @@
     }
   },
   "shapes": {
-    "AddInstancesRequest": {
+    "AddNodesRequest": {
       "type": "structure",
       "required": [
         "serviceId",
-        "instanceRole",
-        "instanceQty"
+        "nodeRole",
+        "nodeQty"
       ],
       "members": {
         "serviceId": {
@@ -687,12 +687,12 @@
           "location": "uri",
           "locationName": "serviceId"
         },
-        "instanceRole": {"shape": "String"},
-        "instanceQty": {"shape": "Integer"},
+        "nodeRole": {"shape": "String"},
+        "nodeQty": {"shape": "Integer"},
         "networkInterfaceIds": {"shape": "StringList"}
       }
     },
-    "AddInstancesResponse": {
+    "AddNodesResponse": {
       "type": "structure",
       "members": {
         "service": {
@@ -701,11 +701,11 @@
         }
       }
     },
-    "RemoveInstanceRequest": {
+    "RemoveNodeRequest": {
       "type": "structure",
       "required": [
         "serviceId",
-        "instanceId"
+        "nodeId"
       ],
       "members": {
         "serviceId": {
@@ -714,15 +714,15 @@
           "location": "uri",
           "locationName": "serviceId"
         },
-        "instanceId": {
+        "nodeId": {
           "shape": "String",
-          "documentation": "<p>The ID of the instance.</p>",
+          "documentation": "<p>The ID of the node.</p>",
           "location": "uri",
-          "locationName": "instanceId"
+          "locationName": "nodeId"
         }
       }
     },
-    "RemoveInstanceResponse": {
+    "RemoveNodeResponse": {
       "type": "structure",
       "members": {
         "service": {
