@@ -2265,6 +2265,9 @@
         "Phone":{
           "shape":"stringType"
         },
+        "OtpEnabled":{
+          "shape":"booleanType"
+        },
         "OtpRequired":{
           "shape":"booleanType"
         },
