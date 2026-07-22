@@ -684,7 +684,7 @@
     }
   },
   "shapes":{
-    "actionListType":{
+    "stringListType":{
       "type":"list",
       "member":{"shape":"stringType"}
     },
@@ -1192,7 +1192,7 @@
           "shape":"Service"
         },
         "Actions":{
-          "shape":"actionListType"
+          "shape":"stringListType"
         }
       }
     },
@@ -1401,7 +1401,7 @@
       "type":"structure",
       "members":{
         "Actions":{
-          "shape":"actionListType"
+          "shape":"stringListType"
         }
       }
     },
@@ -1474,7 +1474,7 @@
       "type":"structure",
       "members":{
         "Actions":{
-          "shape":"actionListType"
+          "shape":"stringListType"
         }
       }
     },
@@ -1678,7 +1678,7 @@
       "type":"structure",
       "members":{
         "Actions":{
-          "shape":"actionListType"
+          "shape":"stringListType"
         }
       }
     },
@@ -1720,7 +1720,7 @@
       "type":"structure",
       "members":{
         "Actions":{
-          "shape":"actionListType"
+          "shape":"stringListType"
         }
       }
     },
@@ -1898,6 +1898,9 @@
         },
         "S3Email":{
           "shape":"stringType"
+        },
+        "Services":{
+          "shape":"stringListType"
         }
       }
     },
