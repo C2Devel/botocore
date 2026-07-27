@@ -3001,9 +3001,15 @@
       "required": ["url"],
       "members": {
         "url": {"shape": "String"},
-        "username": {"shape": "String"},
-        "password": {"shape": "String"},
+        "basicAuth": {"shape": "PrometheusRemoteWriteBasicAuth"},
         "writeRelabelConfigs": {"shape": "WriteRelabelConfigsList"}
+      }
+    },
+    "PrometheusRemoteWriteBasicAuth": {
+      "type": "structure",
+      "members": {
+        "username": {"shape": "String"},
+        "password": {"shape": "String"}
       }
     },
     "WriteRelabelConfigsList": {
