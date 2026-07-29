@@ -994,6 +994,16 @@
       "input": {"shape": "CancelPITRRestoreRequest"},
       "output": {"shape": "CancelPITRRestoreResponse"},
       "documentation": "<p>Cancels an active PITR restore for a service.</p>"
+    },
+    "MajorVersionUpgrade": {
+      "name": "MajorVersionUpgrade",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/upgrade"
+      },
+      "input": {"shape": "MajorVersionUpgradeRequest"},
+      "output": {"shape": "MajorVersionUpgradeResponse"},
+      "documentation": "<p>Start major version upgrade for a service.</p>"
     }
   },
   "shapes": {
@@ -2866,6 +2876,29 @@
         "user": {"shape": "UserResponse"}
       }
     },
+    "MajorVersionUpgradeRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service to upgrade.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        }
+      }
+    },
+    "MajorVersionUpgradeResponse": {
+      "type": "structure",
+      "members": {
+        "return": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the upgrade was started successfully.</p>"
+        }
+      }
+    },
     "ModifyLoadBalancersRequest": {
       "type": "structure",
       "required": [
@@ -3016,6 +3049,8 @@
         "environmentVersion": {"shape": "String"},
         "availableEnvironmentVersions": {"shape": "StringList"},
         "isRolledBack": {"shape": "Boolean"},
+        "majorUpgradeCheckAt": {"shape": "Double"},
+        "majorUpgradeCheckError": {"shape": "String"},
         "maintenance": {"shape": "MaintenancePreferences"},
         "tags": {"shape":  "TagList"},
         "autoDiskExpansionSettings": {"shape": "AutoDiskExpansionSettings"},
@@ -3095,6 +3130,7 @@
       }
     },
     "String": {"type": "string"},
+    "Double": {"type": "double"},
     "Affinity":{
       "type":"string",
       "enum":[
