@@ -2581,7 +2581,8 @@
         "maintenance": {"shape": "MaintenancePreferences"},
         "tags": {"shape":  "TagList"},
         "autoDiskExpansionSettings": {"shape": "AutoDiskExpansionSettings"},
-        "placementConfig": {"shape":  "PlacementConfigResponse"}
+        "placementConfig": {"shape":  "PlacementConfigResponse"},
+        "connectionUrl": {"shape": "String"}
       }
     },
     "ServiceEndpoint": {
