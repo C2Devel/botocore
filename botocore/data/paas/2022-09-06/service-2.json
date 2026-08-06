@@ -21,6 +21,16 @@
       "output": {"shape": "AddInstancesResponse"},
       "documentation": "<p>Add instances to the specified service.</p>"
     },
+    "ModifySecurityGroups": {
+      "name": "ModifySecurityGroups",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/security_groups"
+      },
+      "input": {"shape": "ModifySecurityGroupsRequest"},
+      "output": {"shape": "ModifySecurityGroupsResponse"},
+      "documentation": "<p>Modify security groups to the specified service.</p>"
+    },
     "ListMetrics":{
       "name":"ListMetrics",
       "http":{
@@ -683,6 +693,34 @@
       }
     },
     "AddInstancesResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
+    "ModifySecurityGroupsRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "securityGroupIds"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "securityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>The IDs of the security groups.</p>"
+        }
+      }
+    },
+    "ModifySecurityGroupsResponse": {
       "type": "structure",
       "members": {
         "service": {
