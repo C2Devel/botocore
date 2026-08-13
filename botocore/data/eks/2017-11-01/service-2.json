@@ -3589,6 +3589,11 @@
       "key":{"shape":"labelKey"},
       "value":{"shape":"labelValue"}
     },
+    "namespace":{
+      "type":"string",
+      "max":63,
+      "min":1
+    },
     "requiredClaimsKey":{
       "type":"string",
       "max":63,
