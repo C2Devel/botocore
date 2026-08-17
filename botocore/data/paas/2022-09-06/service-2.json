@@ -11,15 +11,25 @@
     "uid": "paas-2022-09-06"
   },
   "operations": {
-    "AddInstances": {
-      "name": "AddInstances",
+    "AddNodes": {
+      "name": "AddNodes",
       "http": {
         "method": "PUT",
-        "requestUri": "/services/{serviceId}/instances"
+        "requestUri": "/services/{serviceId}/nodes"
       },
-      "input": {"shape": "AddInstancesRequest"},
-      "output": {"shape": "AddInstancesResponse"},
-      "documentation": "<p>Add instances to the specified service.</p>"
+      "input": {"shape": "AddNodesRequest"},
+      "output": {"shape": "AddNodesResponse"},
+      "documentation": "<p>Add nodes to the specified service.</p>"
+    },
+    "RemoveNode": {
+      "name": "RemoveNode",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/services/{serviceId}/nodes/{nodeId}"
+      },
+      "input": {"shape": "RemoveNodeRequest"},
+      "output": {"shape": "RemoveNodeResponse"},
+      "documentation": "<p>Remove nodes to the specified service.</p>"
     },
     "ModifySecurityGroups": {
       "name": "ModifySecurityGroups",
@@ -673,12 +683,12 @@
     }
   },
   "shapes": {
-    "AddInstancesRequest": {
+    "AddNodesRequest": {
       "type": "structure",
       "required": [
         "serviceId",
-        "instanceRole",
-        "instanceQty"
+        "nodeRole",
+        "nodeQty"
       ],
       "members": {
         "serviceId": {
@@ -687,12 +697,42 @@
           "location": "uri",
           "locationName": "serviceId"
         },
-        "instanceRole": {"shape": "String"},
-        "instanceQty": {"shape": "Integer"},
+        "nodeRole": {"shape": "String"},
+        "nodeQty": {"shape": "Integer"},
         "networkInterfaceIds": {"shape": "StringList"}
       }
     },
-    "AddInstancesResponse": {
+    "AddNodesResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
+    "RemoveNodeRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "nodeId"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "nodeId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the node.</p>",
+          "location": "uri",
+          "locationName": "nodeId"
+        }
+      }
+    },
+    "RemoveNodeResponse": {
       "type": "structure",
       "members": {
         "service": {
