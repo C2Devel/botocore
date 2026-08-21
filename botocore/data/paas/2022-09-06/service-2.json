@@ -11,6 +11,16 @@
     "uid": "paas-2022-09-06"
   },
   "operations": {
+    "AddInstances": {
+      "name": "AddInstances",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/services/{serviceId}/instances"
+      },
+      "input": {"shape": "AddInstancesRequest"},
+      "output": {"shape": "AddInstancesResponse"},
+      "documentation": "<p>Add instances to the specified service.</p>"
+    },
     "AddNodes": {
       "name": "AddNodes",
       "http": {
@@ -837,6 +847,34 @@
     }
   },
   "shapes": {
+    "AddInstancesRequest": {
+      "type": "structure",
+      "required": [
+        "serviceId",
+        "instanceRole",
+        "instanceQty"
+      ],
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the service.</p>",
+          "location": "uri",
+          "locationName": "serviceId"
+        },
+        "instanceRole": {"shape": "String"},
+        "instanceQty": {"shape": "Integer"},
+        "networkInterfaceIds": {"shape": "StringList"}
+      }
+    },
+    "AddInstancesResponse": {
+      "type": "structure",
+      "members": {
+        "service": {
+          "shape": "Service",
+          "documentation": "<p>The full description of the specified service.</p>"
+        }
+      }
+    },
     "AddNodesRequest": {
       "type": "structure",
       "required": [
