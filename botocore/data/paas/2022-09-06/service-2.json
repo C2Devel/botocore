@@ -1387,7 +1387,9 @@
         "coordinator": {"shape": "NodeRequest"},
         "maintenance": {"shape": "MaintenancePeriod"},
         "tags": {"shape":  "TagList"},
-        "placementConfig": {"shape":  "PlacementConfigRequest"}
+        "placementConfig": {"shape":  "PlacementConfigRequest"},
+        "user": {"shape":  "UserCreateRequest"},
+        "database": {"shape":  "DatabaseCreateRequest"}
       }
     },
     "CreateServiceResponse": {
