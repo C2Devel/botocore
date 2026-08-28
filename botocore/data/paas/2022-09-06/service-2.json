@@ -121,6 +121,16 @@
       "output": {"shape": "ModifyBackupJobResponse"},
       "documentation": "<p>Modifies a backup job in a service.</p>"
     },
+    "RunInstantBackup": {
+      "name": "RunInstantBackup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/services/{serviceId}/backups/run"
+      },
+      "input": {"shape": "RunInstantBackupRequest"},
+      "output": {"shape": "RunInstantBackupResponse"},
+      "documentation": "<p>Runs an instant backup task immediately based on an existing backup job.</p>"
+    },
     "CreateBackupStorage": {
       "name": "CreateBackupStorage",
       "http": {
@@ -1401,7 +1411,8 @@
         "rotate": {"shape": "Integer", "documentation": "<p>Number of backups to retain (wal-g method only).</p>"},
         "schemaOnly": {"shape": "Boolean", "documentation": "<p>Dump schema only, no data (dump method only).</p>"},
         "instant": {"shape": "Boolean", "documentation": "<p>Trigger the backup immediately on next Puppet run.</p>"},
-        "nextExecution": {"shape": "Integer", "documentation": "<p>UTC timestamp of the next scheduled execution.</p>"}
+        "nextExecution": {"shape": "Integer", "documentation": "<p>UTC timestamp of the next scheduled execution.</p>"},
+        "lastBackupTime": {"shape": "Integer", "documentation": "<p>UTC timestamp of the last created backup of the job.</p>"}
       }
     },
     "BackupJobList": {
@@ -1476,6 +1487,21 @@
       "type": "structure",
       "members": {
         "backupJob": {"shape": "BackupJob", "documentation": "<p>The modified backup job.</p>"}
+      }
+    },
+    "RunInstantBackupRequest": {
+      "type": "structure",
+      "required": ["serviceId", "jobId"],
+      "members": {
+        "serviceId": {"shape": "String", "documentation": "<p>The ID of service.</p>", "location": "uri", "locationName": "serviceId"},
+        "jobId": {"shape": "String", "documentation": "<p>The ID of the backup job to run.</p>"},
+        "schemaOnly": {"shape": "Boolean", "documentation": "<p>Run a schema-only dump backup. Allowed only for the dump backup method.</p>"}
+      }
+    },
+    "RunInstantBackupResponse": {
+      "type": "structure",
+      "members": {
+        "backupTaskId": {"shape": "String", "documentation": "<p>The ID of the created backup task.</p>"}
       }
     },
     "BackupStorage": {
