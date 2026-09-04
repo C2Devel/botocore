@@ -12,6 +12,16 @@
     "uid": "paas-private-2022-09-06"
   },
   "operations": {
+    "GetMetricData":{
+      "name":"GetMetricData",
+      "http":{
+        "method": "POST",
+        "requestUri":"/v1/paas/get_metric_data"
+      },
+      "input":{"shape":"GetMetricDataInput"},
+      "output":{"shape":"GetMetricDataOutput"},
+      "documentation":"<p>Gets metric data for the specified service.</p>"
+    },
     "ListBackupsByService": {
       "name": "ListBackupsByService",
       "http": {
@@ -52,6 +62,102 @@
       "max": 1000,
       "min": 1
     },
+    "GetMetricDataInput":{
+      "type": "structure",
+      "required": [
+        "InstanceIds",
+        "ServiceId",
+        "MetricName",
+        "StartTime",
+        "EndTime",
+        "Period"
+      ],
+      "members": {
+        "InstanceIds": {
+          "shape": "StringList",
+          "documentation": "<p>The IDs of the instances to get metric data for.</p>"
+        },
+        "ServiceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of service.</p>"
+        },
+        "MetricName": {
+          "shape": "String",
+          "documentation": "<p>The name of the metric, with or without spaces.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time stamp that determines the first data point to return.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time stamp that determines the last data point to return.</p>"
+        },
+        "Period": {
+          "shape": "Integer",
+          "documentation": "<p>The granularity, in seconds, of the returned data points. </p>"
+        }
+      }
+    },
+    "GetMetricDataOutput":{
+      "type": "structure",
+      "members": {
+        "Label": {
+          "shape": "String",
+          "documentation": "<p>A label for the specified metric.</p>"
+        },
+        "Unit": {
+          "shape": "String",
+          "documentation": "<p>The unit of measurement for the metric data points.</p>"
+        },
+        "MetricData": {
+          "shape": "MetricDataList",
+          "documentation": "<p>The data points for the specified metric.</p>"
+        }
+      }
+    },
+    "MetricDataList": {
+      "type": "list",
+      "member": {
+        "shape": "MetricData",
+        "documentation": ""
+      }
+    },
+    "MetricData": {
+      "type": "structure",
+      "members": {
+        "InstanceId": {
+          "shape": "String",
+          "documentation": ""
+        },
+        "Labels": {
+          "shape": "None",
+          "documentation": "<p>The labels that tell apart several series of the same instance. Empty when the instance has a single series.</p>"
+        },
+        "Datapoints": {
+          "shape": "Datapoints",
+          "documentation": "<p>The data points for the specified metric.</p>"
+        }
+      }
+    },
+    "Datapoints": {
+      "type": "list",
+      "member": {"shape": "Datapoint"}
+    },
+    "Datapoint": {
+      "type": "structure",
+      "members": {
+        "Timestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time stamp used for the data point.</p>"
+        },
+        "Value": {
+          "shape": "DatapointValue",
+          "documentation": "<p>The number of metric values that contributed to the aggregate value of this data point.</p>"
+        }
+      }
+    },
+    "DatapointValue":{"type":"double"},
     "Backup": {
       "type": "structure",
       "members": {
