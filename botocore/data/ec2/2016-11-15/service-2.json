@@ -37043,6 +37043,11 @@
         "Password":{
           "shape":"String",
           "documentation":"<p>The login password.</p>"
+        },
+        "LazyRestore": {
+          "shape":"Boolean",
+          "documentation": "<p> The lazy restore of instance volumes.</p>",
+          "locationName": "lazyRestore"
         }
       }
     },
