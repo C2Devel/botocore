@@ -34053,6 +34053,11 @@
           "documentation":"<p>The type of the resource connected with the quota.</p>",
           "locationName":"type"
         },
+        "EntityName":{
+          "shape":"String",
+          "documentation":"<p>The name of the entity connected with the quota.</p>",
+          "locationName":"entityName"
+        },
         "Limit":{
           "shape":"String",
           "documentation":"<p>The value of the quota limit.</p>",
