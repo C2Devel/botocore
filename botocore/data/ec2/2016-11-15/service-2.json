@@ -181,6 +181,16 @@
       "output":{"shape":"AssociateIamInstanceProfileResult"},
       "documentation":"<p>Associates an IAM instance profile with a running or stopped instance. You cannot associate more than one IAM instance profile with an instance.</p>"
     },
+    "AssociateNatGatewayAddress":{
+      "name":"AssociateNatGatewayAddress",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssociateNatGatewayAddressRequest"},
+      "output":{"shape":"AssociateNatGatewayAddressResult"},
+      "documentation":"<p>Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public NAT gateway. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html\">Work with NAT gateways</a> in the <i>Amazon VPC User Guide</i>.</p> <p>By default, you can associate up to 2 Elastic IP addresses per public NAT gateway. You can increase the limit by requesting a quota adjustment. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips\">Elastic IP address quotas</a> in the <i>Amazon VPC User Guide</i>.</p> <important> <p>When you associate an EIP or secondary EIPs with a public NAT gateway, the network border group of the EIPs must match the network border group of the Availability Zone (AZ) that the public NAT gateway is in. If it's not the same, the EIP will fail to associate. You can see the network border group for the subnet's AZ by viewing the details of the subnet. Similarly, you can view the network border group of an EIP by viewing the details of the EIP address. For more information about network border groups and EIPs, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithEIPs.html\">Allocate an Elastic IP address</a> in the <i>Amazon VPC User Guide</i>. </p> </important>"
+    },
     "AssociateRouteTable":{
       "name":"AssociateRouteTable",
       "http":{
@@ -3092,6 +3102,16 @@
       "output":{"shape":"DisassociateIamInstanceProfileResult"},
       "documentation":"<p>Disassociates an IAM instance profile from a running or stopped instance.</p> <p>Use <a>DescribeIamInstanceProfileAssociations</a> to get the association ID.</p>"
     },
+    "DisassociateNatGatewayAddress":{
+      "name":"DisassociateNatGatewayAddress",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DisassociateNatGatewayAddressRequest"},
+      "output":{"shape":"DisassociateNatGatewayAddressResult"},
+      "documentation":"<p>Disassociates secondary Elastic IP addresses (EIPs) from a public NAT gateway. You cannot disassociate your primary EIP. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html#nat-gateway-edit-secondary\">Edit secondary IP address associations</a> in the <i>Amazon VPC User Guide</i>.</p> <p>While disassociating is in progress, you cannot associate/disassociate additional EIPs while the connections are being drained. You are, however, allowed to delete the NAT gateway.</p> <p>An EIP is released only at the end of MaxDrainDurationSeconds. It stays associated and supports the existing connections but does not support any new connections (new connections are distributed across the remaining associated EIPs). As the existing connections drain out, the EIPs (and the corresponding private IP addresses mapped to them) are released.</p>"
+    },
     "DisassociateRouteTable":{
       "name":"DisassociateRouteTable",
       "http":{
@@ -5836,6 +5856,56 @@
         }
       }
     },
+    "AssociateNatGatewayAddressRequest":{
+      "type":"structure",
+      "required":[
+        "NatGatewayId",
+        "AllocationIds"
+      ],
+      "members":{
+        "NatGatewayId":{
+          "shape":"NatGatewayId",
+          "documentation":"<p>The ID of the NAT gateway.</p>"
+        },
+        "AllocationIds":{
+          "shape":"AllocationIdList",
+          "documentation":"<p>The allocation IDs of EIPs that you want to associate with your NAT gateway.</p>",
+          "locationName":"AllocationId"
+        },
+        "PrivateIpAddresses":{
+          "shape":"IpList",
+          "documentation":"<p>The private IPv4 addresses that you want to assign to the NAT gateway.</p>",
+          "locationName":"PrivateIpAddress"
+        },
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "AvailabilityZone":{
+          "shape":"AvailabilityZoneName",
+          "documentation":"<p>For regional NAT gateways only: The Availability Zone where you want to associate an Elastic IP address (EIP). The regional NAT gateway uses a separate EIP in each AZ to handle outbound NAT traffic from that AZ.</p> <p>A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.</p>"
+        },
+        "AvailabilityZoneId":{
+          "shape":"AvailabilityZoneId",
+          "documentation":"<p>For regional NAT gateways only: The ID of the Availability Zone where you want to associate an Elastic IP address (EIP). The regional NAT gateway uses a separate EIP in each AZ to handle outbound NAT traffic from that AZ. Use this instead of AvailabilityZone for consistent identification of AZs across Amazon Web Services Regions. </p> <p>A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.</p>"
+        }
+      }
+    },
+    "AssociateNatGatewayAddressResult":{
+      "type":"structure",
+      "members":{
+        "NatGatewayId":{
+          "shape":"NatGatewayId",
+          "documentation":"<p>The ID of the NAT gateway.</p>",
+          "locationName":"natGatewayId"
+        },
+        "NatGatewayAddresses":{
+          "shape":"NatGatewayAddressList",
+          "documentation":"<p>The IP addresses.</p>",
+          "locationName":"natGatewayAddressSet"
+        }
+      }
+    },
     "AssociateRouteTableRequest":{
       "type":"structure",
       "required":["RouteTableId"],
@@ -6577,7 +6647,28 @@
         "off"
       ]
     },
+    "AutoProvisionZonesState":{
+      "type":"string",
+      "enum":[
+        "enabled",
+        "disabled"
+      ]
+    },
     "AutoRecoveryFlag":{"type":"boolean"},
+    "AutoScalingIpsState":{
+      "type":"string",
+      "enum":[
+        "enabled",
+        "disabled"
+      ]
+    },
+    "AvailabilityMode":{
+      "type":"string",
+      "enum":[
+        "zonal",
+        "regional"
+      ]
+    },
     "AvailabilityZone":{
       "type":"structure",
       "members":{
@@ -6639,6 +6730,40 @@
       },
       "documentation":"<p>Describes Availability Zones, Local Zones, and Wavelength Zones.</p>"
     },
+    "AvailabilityZoneAddress":{
+      "type":"structure",
+      "members":{
+        "AvailabilityZone":{
+          "shape":"AvailabilityZoneName",
+          "documentation":"<p>For regional NAT gateways only: The Availability Zone where this specific NAT gateway configuration will be active. Each AZ in a regional NAT gateway has its own configuration to handle outbound NAT traffic from that AZ. </p> <p>A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.</p>"
+        },
+        "AvailabilityZoneId":{
+          "shape":"AvailabilityZoneId",
+          "documentation":"<p>For regional NAT gateways only: The ID of the Availability Zone where this specific NAT gateway configuration will be active. Each AZ in a regional NAT gateway has its own configuration to handle outbound NAT traffic from that AZ. Use this instead of AvailabilityZone for consistent identification of AZs across Amazon Web Services Regions. </p> <p>A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.</p>"
+        },
+        "AllocationIds":{
+          "shape":"AllocationIdList",
+          "documentation":"<p>The allocation IDs of the Elastic IP addresses (EIPs) to be used for handling outbound NAT traffic in this specific Availability Zone.</p>",
+          "locationName":"AllocationId"
+        }
+      },
+      "documentation":"<p>For regional NAT gateways only: The configuration specifying which Elastic IP address (EIP) to use for handling outbound NAT traffic from a specific Availability Zone. </p> <p>A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html\">Regional NAT gateways for automatic multi-AZ expansion</a> in the <i>Amazon VPC User Guide</i>.</p>"
+    },
+    "AvailabilityZoneAddresses":{
+      "type":"list",
+      "member":{
+        "shape":"AvailabilityZoneAddress",
+        "locationName":"AvailabilityZoneAddress"
+      }
+    },
+    "AvailabilityZoneId":{"type":"string"},
+    "AvailabilityZoneIdStringList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"AvailabilityZoneId"
+      }
+    },
     "AvailabilityZoneList":{
       "type":"list",
       "member":{
@@ -6664,6 +6789,7 @@
         "locationName":"item"
       }
     },
+    "AvailabilityZoneName":{"type":"string"},
     "AvailabilityZoneOptInStatus":{
       "type":"string",
       "enum":[
@@ -8515,6 +8641,13 @@
       "type":"string",
       "enum":["Topic"]
     },
+    "ConnectivityType":{
+      "type":"string",
+      "enum":[
+        "private",
+        "public"
+      ]
+    },
     "ContainerFormat":{
       "type":"string",
       "enum":["ova"]
@@ -9874,18 +10007,18 @@
     },
     "CreateNatGatewayRequest":{
       "type":"structure",
-      "required":[
-        "AllocationId",
-        "SubnetId"
-      ],
       "members":{
+        "AvailabilityMode":{
+          "shape":"AvailabilityMode",
+          "documentation":"<p>Specifies whether to create a zonal (single-AZ) or regional (multi-AZ) NAT gateway. Defaults to <code>zonal</code>.</p> <p>A zonal NAT gateway is a NAT Gateway that provides redundancy and scalability within a single availability zone. A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html\">Regional NAT gateways for automatic multi-AZ expansion</a> in the <i>Amazon VPC User Guide</i>.</p>"
+        },
         "AllocationId":{
           "shape":"AllocationId",
-          "documentation":"<p>The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.</p>"
+          "documentation":"<p>[Public NAT gateways only] The allocation ID of an Elastic IP address to associate with the NAT gateway. You cannot specify an Elastic IP address with a private NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.</p>"
         },
         "ClientToken":{
           "shape":"String",
-          "documentation":"<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p> <p>Constraint: Maximum 64 ASCII characters.</p>",
+          "documentation":"<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency</a>.</p> <p>Constraint: Maximum 64 ASCII characters.</p>",
           "idempotencyToken":true
         },
         "DryRun":{
@@ -9894,12 +10027,43 @@
         },
         "SubnetId":{
           "shape":"SubnetId",
-          "documentation":"<p>The subnet in which to create the NAT gateway.</p>"
+          "documentation":"<p>The ID of the subnet in which to create the NAT gateway.</p>"
+        },
+        "VpcId":{
+          "shape":"VpcId",
+          "documentation":"<p>The ID of the VPC where you want to create a regional NAT gateway.</p>"
+        },
+        "AvailabilityZoneAddresses":{
+          "shape":"AvailabilityZoneAddresses",
+          "documentation":"<p>For regional NAT gateways only: Specifies which Availability Zones you want the NAT gateway to support and the Elastic IP addresses (EIPs) to use in each AZ. The regional NAT gateway uses these EIPs to handle outbound NAT traffic from their respective AZs. If not specified, the NAT gateway will automatically expand to new AZs and associate EIPs upon detection of an elastic network interface. If you specify this parameter, auto-expansion is disabled and you must manually manage AZ coverage.</p> <p>A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html\">Regional NAT gateways for automatic multi-AZ expansion</a> in the <i>Amazon VPC User Guide</i>.</p>",
+          "locationName":"AvailabilityZoneAddress"
         },
         "TagSpecifications":{
           "shape":"TagSpecificationList",
           "documentation":"<p>The tags to assign to the NAT gateway.</p>",
           "locationName":"TagSpecification"
+        },
+        "ConnectivityType":{
+          "shape":"ConnectivityType",
+          "documentation":"<p>Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.</p>"
+        },
+        "PrivateIpAddress":{
+          "shape":"String",
+          "documentation":"<p>The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.</p>"
+        },
+        "SecondaryAllocationIds":{
+          "shape":"AllocationIdList",
+          "documentation":"<p>Secondary EIP allocation IDs. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html\">Create a NAT gateway</a> in the <i>Amazon VPC User Guide</i>.</p>",
+          "locationName":"SecondaryAllocationId"
+        },
+        "SecondaryPrivateIpAddresses":{
+          "shape":"IpList",
+          "documentation":"<p>Secondary private IPv4 addresses. For more information about secondary addresses, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html\">Create a NAT gateway</a> in the <i>Amazon VPC User Guide</i>.</p>",
+          "locationName":"SecondaryPrivateIpAddress"
+        },
+        "SecondaryPrivateIpAddressCount":{
+          "shape":"PrivateIpAddressCount",
+          "documentation":"<p>[Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. For more information about secondary addresses, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html\">Create a NAT gateway</a> in the <i>Amazon VPC User Guide</i>.</p>"
         }
       }
     },
@@ -19817,6 +19981,47 @@
         }
       }
     },
+    "DisassociateNatGatewayAddressRequest":{
+      "type":"structure",
+      "required":[
+        "NatGatewayId",
+        "AssociationIds"
+      ],
+      "members":{
+        "NatGatewayId":{
+          "shape":"NatGatewayId",
+          "documentation":"<p>The ID of the NAT gateway.</p>"
+        },
+        "AssociationIds":{
+          "shape":"EipAssociationIdList",
+          "documentation":"<p>The association IDs of EIPs that have been associated with the NAT gateway.</p>",
+          "locationName":"AssociationId"
+        },
+        "MaxDrainDurationSeconds":{
+          "shape":"DrainSeconds",
+          "documentation":"<p>The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.</p>"
+        },
+        "DryRun":{
+          "shape":"Boolean",
+          "documentation":"<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DisassociateNatGatewayAddressResult":{
+      "type":"structure",
+      "members":{
+        "NatGatewayId":{
+          "shape":"NatGatewayId",
+          "documentation":"<p>The ID of the NAT gateway.</p>",
+          "locationName":"natGatewayId"
+        },
+        "NatGatewayAddresses":{
+          "shape":"NatGatewayAddressList",
+          "documentation":"<p>Information about the NAT gateway IP addresses.</p>",
+          "locationName":"natGatewayAddressSet"
+        }
+      }
+    },
     "DisassociateRouteTableRequest":{
       "type":"structure",
       "required":["AssociationId"],
@@ -20148,6 +20353,11 @@
       ]
     },
     "Double":{"type":"double"},
+    "DrainSeconds":{
+      "type":"integer",
+      "max":4000,
+      "min":1
+    },
     "EbsBlockDevice":{
       "type":"structure",
       "members":{
@@ -20364,6 +20574,13 @@
       "type":"list",
       "member":{
         "shape":"EgressOnlyInternetGateway",
+        "locationName":"item"
+      }
+    },
+    "EipAssociationIdList":{
+      "type":"list",
+      "member":{
+        "shape":"ElasticIpAssociationId",
         "locationName":"item"
       }
     },
@@ -27297,6 +27514,13 @@
         "locationName":"item"
       }
     },
+    "IpList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      }
+    },
     "IpPermission":{
       "type":"structure",
       "members":{
@@ -31586,7 +31810,7 @@
         },
         "ProvisionedBandwidth":{
           "shape":"ProvisionedBandwidth",
-          "documentation":"<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "documentation":"<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways\">documented limits</a>, contact Amazon Web Services Support.</p>",
           "locationName":"provisionedBandwidth"
         },
         "State":{
@@ -31608,6 +31832,36 @@
           "shape":"TagList",
           "documentation":"<p>The tags for the NAT gateway.</p>",
           "locationName":"tagSet"
+        },
+        "ConnectivityType":{
+          "shape":"ConnectivityType",
+          "documentation":"<p>Indicates whether the NAT gateway supports public or private connectivity.</p>",
+          "locationName":"connectivityType"
+        },
+        "AvailabilityMode":{
+          "shape":"AvailabilityMode",
+          "documentation":"<p>Indicates whether this is a zonal (single-AZ) or regional (multi-AZ) NAT gateway.</p> <p>A zonal NAT gateway is a NAT Gateway that provides redundancy and scalability within a single availability zone. A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html\">Regional NAT gateways for automatic multi-AZ expansion</a> in the <i>Amazon VPC User Guide</i>.</p>",
+          "locationName":"availabilityMode"
+        },
+        "AutoScalingIps":{
+          "shape":"AutoScalingIpsState",
+          "documentation":"<p>For regional NAT gateways only: Indicates whether Amazon Web Services automatically allocates additional Elastic IP addresses (EIPs) in an AZ when the NAT gateway needs more ports due to increased concurrent connections to a single destination from that AZ.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html\">Regional NAT gateways for automatic multi-AZ expansion</a> in the <i>Amazon VPC User Guide</i>.</p>",
+          "locationName":"autoScalingIps"
+        },
+        "AutoProvisionZones":{
+          "shape":"AutoProvisionZonesState",
+          "documentation":"<p>For regional NAT gateways only: Indicates whether Amazon Web Services automatically manages AZ coverage. When enabled, the NAT gateway associates EIPs in all AZs where your VPC has subnets to handle outbound NAT traffic, expands to new AZs when you create subnets there, and retracts from AZs where you've removed all subnets. When disabled, you must manually manage which AZs the NAT gateway supports and their corresponding EIPs.</p> <p>A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html\">Regional NAT gateways for automatic multi-AZ expansion</a> in the <i>Amazon VPC User Guide</i>.</p>",
+          "locationName":"autoProvisionZones"
+        },
+        "AttachedAppliances":{
+          "shape":"NatGatewayAttachedApplianceList",
+          "documentation":"<p>The proxy appliances attached to the NAT Gateway for filtering and inspecting traffic to prevent data exfiltration.</p>",
+          "locationName":"attachedApplianceSet"
+        },
+        "RouteTableId":{
+          "shape":"String",
+          "documentation":"<p>For regional NAT gateways only, this is the ID of the NAT gateway.</p>",
+          "locationName":"routeTableId"
         }
       },
       "documentation":"<p>Describes a NAT gateway.</p>"
@@ -31617,7 +31871,7 @@
       "members":{
         "AllocationId":{
           "shape":"String",
-          "documentation":"<p>The allocation ID of the Elastic IP address that's associated with the NAT gateway.</p>",
+          "documentation":"<p>[Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway.</p>",
           "locationName":"allocationId"
         },
         "NetworkInterfaceId":{
@@ -31627,13 +31881,43 @@
         },
         "PrivateIp":{
           "shape":"String",
-          "documentation":"<p>The private IP address associated with the Elastic IP address.</p>",
+          "documentation":"<p>The private IP address associated with the NAT gateway.</p>",
           "locationName":"privateIp"
         },
         "PublicIp":{
           "shape":"String",
-          "documentation":"<p>The Elastic IP address associated with the NAT gateway.</p>",
+          "documentation":"<p>[Public NAT gateway only] The Elastic IP address associated with the NAT gateway.</p>",
           "locationName":"publicIp"
+        },
+        "AssociationId":{
+          "shape":"String",
+          "documentation":"<p>[Public NAT gateway only] The association ID of the Elastic IP address that's associated with the NAT gateway.</p>",
+          "locationName":"associationId"
+        },
+        "IsPrimary":{
+          "shape":"Boolean",
+          "documentation":"<p>Defines if the IP address is the primary address.</p>",
+          "locationName":"isPrimary"
+        },
+        "FailureMessage":{
+          "shape":"String",
+          "documentation":"<p>The address failure message.</p>",
+          "locationName":"failureMessage"
+        },
+        "Status":{
+          "shape":"NatGatewayAddressStatus",
+          "documentation":"<p>The address status.</p>",
+          "locationName":"status"
+        },
+        "AvailabilityZone":{
+          "shape":"AvailabilityZoneName",
+          "documentation":"<p>The Availability Zone where this Elastic IP address (EIP) is being used to handle outbound NAT traffic.</p>",
+          "locationName":"availabilityZone"
+        },
+        "AvailabilityZoneId":{
+          "shape":"AvailabilityZoneId",
+          "documentation":"<p>The ID of the Availability Zone where this Elastic IP address (EIP) is being used to handle outbound NAT traffic. Use this instead of AvailabilityZone for consistent identification of AZs across Amazon Web Services Regions.</p>",
+          "locationName":"availabilityZoneId"
         }
       },
       "documentation":"<p>Describes the IP addresses and network interface associated with a NAT gateway.</p>"
@@ -31642,6 +31926,88 @@
       "type":"list",
       "member":{
         "shape":"NatGatewayAddress",
+        "locationName":"item"
+      }
+    },
+    "NatGatewayAddressStatus":{
+      "type":"string",
+      "enum":[
+        "assigning",
+        "unassigning",
+        "associating",
+        "disassociating",
+        "succeeded",
+        "failed"
+      ]
+    },
+    "NatGatewayApplianceModifyState":{
+      "type":"string",
+      "enum":[
+        "modifying",
+        "completed",
+        "failed"
+      ]
+    },
+    "NatGatewayApplianceState":{
+      "type":"string",
+      "enum":[
+        "attaching",
+        "attached",
+        "detaching",
+        "detached",
+        "attach-failed",
+        "detach-failed"
+      ]
+    },
+    "NatGatewayApplianceType":{
+      "type":"string",
+      "enum":["network-firewall-proxy"]
+    },
+    "NatGatewayAttachedAppliance":{
+      "type":"structure",
+      "members":{
+        "Type":{
+          "shape":"NatGatewayApplianceType",
+          "documentation":"<p>The type of appliance attached to the NAT Gateway. For network firewall proxy functionality, this will be \"network-firewall-proxy\".</p>",
+          "locationName":"type"
+        },
+        "ApplianceArn":{
+          "shape":"String",
+          "documentation":"<p>The Amazon Resource Name (ARN) of the attached appliance, identifying the specific proxy or security appliance resource.</p>",
+          "locationName":"applianceArn"
+        },
+        "VpcEndpointId":{
+          "shape":"String",
+          "documentation":"<p>The VPC endpoint ID used to route traffic from application VPCs to the proxy for inspection and filtering.</p>",
+          "locationName":"vpcEndpointId"
+        },
+        "AttachmentState":{
+          "shape":"NatGatewayApplianceState",
+          "documentation":"<p>The current attachment state of the appliance.</p>",
+          "locationName":"attachmentState"
+        },
+        "ModificationState":{
+          "shape":"NatGatewayApplianceModifyState",
+          "documentation":"<p>The current modification state of the appliance.</p>",
+          "locationName":"modificationState"
+        },
+        "FailureCode":{
+          "shape":"String",
+          "documentation":"<p>The failure code if the appliance attachment or modification operation failed.</p>",
+          "locationName":"failureCode"
+        },
+        "FailureMessage":{
+          "shape":"String",
+          "documentation":"<p>A descriptive message explaining the failure if the appliance attachment or modification operation failed.</p>",
+          "locationName":"failureMessage"
+        }
+      },
+      "documentation":"<p>Information about an appliance attached to a NAT Gateway, providing managed security solutions for traffic filtering and inspection.</p>"
+    },
+    "NatGatewayAttachedApplianceList":{
+      "type":"list",
+      "member":{
+        "shape":"NatGatewayAttachedAppliance",
         "locationName":"item"
       }
     },
@@ -33498,6 +33864,11 @@
         "shape":"ScheduledInstancesPrivateIpAddressConfig",
         "locationName":"PrivateIpAddressConfigSet"
       }
+    },
+    "PrivateIpAddressCount":{
+      "type":"integer",
+      "max":31,
+      "min":1
     },
     "PrivateIpAddressSpecification":{
       "type":"structure",
