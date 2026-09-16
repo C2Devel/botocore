@@ -4122,6 +4122,15 @@
         "ANY"
       ]
     },
+    "ResourcesCount": {
+      "type": "map",
+      "key": {
+        "shape": "ResourcesCountKey"
+      },
+      "value": {
+        "shape": "ResourcesCountValue"
+      }
+    },
     "ResourcesCountKey":{"type":"string"},
     "ResourcesCountValue":{"type":"long"},
     "RestoreJobId":{"type":"string"},
