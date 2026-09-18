@@ -1,0 +1,16 @@
+name: Verifying PR to merge
+
+on:
+  pull_request_target:
+    types: [ opened, reopened, edited, synchronize ]
+
+jobs:
+
+  pr-commits-message:
+    name: Check commits' messages
+    uses: c2/gha-workflows/.github/workflows/pr-commit-message-checker.yml@master
+    secrets: inherit
+
+  pr-title:
+    name: Check pull request title
+    uses: c2/gha-workflows/.github/workflows/pr-title.yml@master
