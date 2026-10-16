@@ -45,6 +45,30 @@
       "documentation": "<p>Lists backups.</p>",
       "deprecated":true,
       "deprecatedMessage": "Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "ListWarnings": {
+      "name": "ListWarnings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/paas/warnings"
+      },
+      "input": {"shape": "ListWarningsRequest"},
+      "output": {"shape": "ListWarningsResponse"},
+      "documentation": "<p>Lists PaaS warnings for a service.</p>",
+      "deprecated":true,
+      "deprecatedMessage": "Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
+    },
+    "MarkWarningAsRead": {
+      "name": "MarkWarningAsRead",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/v1/paas/warnings/{warning_id}/read"
+      },
+      "input": {"shape": "MarkWarningAsReadRequest"},
+      "output": {"shape": "MarkWarningAsReadResponse"},
+      "documentation": "<p>Marks a PaaS warning as read.</p>",
+      "deprecated":true,
+      "deprecatedMessage": "Do not use this endpoint under any circumstances. API method may be changed or removed at any moment without any notice."
     }
   },
   "shapes": {
@@ -272,6 +296,62 @@
         "size": {"shape": "Integer"},
         "status": {"shape": "String"},
         "parameters": {"shape": "None"}
+      }
+    },
+    "ListWarningsRequest": {
+      "type": "structure",
+      "members": {
+        "serviceId": {
+          "shape": "String",
+          "location": "querystring",
+          "locationName": "serviceId",
+          "documentation": "<p>The service ID filter.</p>"
+        }
+      }
+    },
+    "ListWarningsResponse": {
+      "type": "structure",
+      "members": {
+        "warnings": {
+          "shape": "PaaSWarningList",
+          "documentation": "<p>A list of PaaS warnings for the service.</p>"
+        }
+      }
+    },
+    "PaaSWarning": {
+      "type": "structure",
+      "members": {
+        "id": {"shape": "String"},
+        "isNew": {"shape": "Boolean"},
+        "type": {"shape": "String"},
+        "reason": {"shape": "String"},
+        "created": {"shape": "String"},
+        "serviceId": {"shape": "String"},
+        "serviceName": {"shape": "String"}
+      }
+    },
+    "PaaSWarningList": {
+      "type": "list",
+      "member": {"shape": "PaaSWarning"}
+    },
+    "MarkWarningAsReadRequest": {
+      "type": "structure",
+      "members": {
+        "warning_id": {
+          "shape": "String",
+          "location": "uri",
+          "locationName": "warning_id",
+          "documentation": "<p>The ID of the warning to mark as read.</p>"
+        }
+      }
+    },
+    "MarkWarningAsReadResponse": {
+      "type": "structure",
+      "members": {
+        "isNew": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the warning is still new after the operation.</p>"
+        }
       }
     }
   }
