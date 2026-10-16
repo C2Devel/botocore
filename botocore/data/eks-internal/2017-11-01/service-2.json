@@ -1073,14 +1073,14 @@
     "Capacity":{
       "type":"integer",
       "box":true,
-      "min":1
+      "min":0
     },
     "NodegroupScalingConfig":{
       "type":"structure",
       "members":{
         "minSize":{
           "shape":"Capacity",
-          "documentation":"<p>The minimum number of nodes that the managed node group can scale in to. This number must be greater than zero.</p>"
+          "documentation":"<p>The minimum number of nodes that the managed node group can scale in to. This number must be greater than or equal to zero.</p>"
         },
         "maxSize":{
           "shape":"Capacity",
