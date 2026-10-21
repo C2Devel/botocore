@@ -2415,6 +2415,10 @@
     "Nodegroup":{
       "type":"structure",
       "members":{
+        "instanceTypes":{
+          "shape":"StringList",
+          "documentation":"<p>The instance types configured for newly launched nodes in the node group.</p>"
+        },
         "diskSize":{
           "shape":"BoxedInteger",
           "documentation":"<p>The root device disk size (in GiB) for your node group instances. The default disk size is 20 GiB for Linux. If you specify <code>launchTemplate</code>, then don't specify <code>diskSize</code>, or the node group deployment will fail.</p>"
@@ -3338,6 +3342,14 @@
           "shape":"NodegroupUpdateConfig",
           "documentation":"<p>The node group update configuration.</p>"
         },
+        "instanceTypes":{
+          "shape":"StringList",
+          "documentation":"<p>The instance type for newly launched nodes. Specify exactly one value. Existing nodes are not replaced.</p>"
+        },
+        "diskSize":{
+          "shape":"BoxedInteger",
+          "documentation":"<p>The root disk size in GiB for newly launched nodes. The size must be positive, divisible by 8, and at least the image root disk size. Existing disks are not resized. This parameter cannot be used with a custom launch template.</p>"
+        },
         "clientRequestToken":{
           "shape":"String",
           "documentation":"<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
@@ -3432,7 +3444,9 @@
         "AddonVersion",
         "ServiceAccountRoleArn",
         "ResolveConflicts",
-        "KubernetesNetworkConfig"
+        "KubernetesNetworkConfig",
+        "InstanceTypes",
+        "DiskSize"
       ]
     },
     "UpdateParams":{
