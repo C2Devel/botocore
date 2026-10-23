@@ -1,0 +1,165 @@
+name: Release Hotfix botocore
+
+on:
+  workflow_dispatch:
+
+    inputs:
+      cloud_version:
+        description: Cloud version (xx.yy)
+        required: true
+        type: string
+      dep_version:
+        description: Hotfix botocore version of dependency (ex. 1.20.14-ROCKIT83_1)
+        required: true
+        type: string
+
+jobs:
+
+  validate:
+    runs-on: ${{ vars.DOCKER_RUNNER_LABEL }}
+
+    steps:
+
+    - name: Check cloud version
+      run: |
+        cloud_version="${{ github.event.inputs.cloud_version }}"
+        if [[ ! "$cloud_version" =~ ^[0-9]{2}\.[0-9]+$ ]]; then
+          echo "Invalid cloud version format. Expected xx.yy"
+          exit 1
+        fi
+
+    - name: Check allowed branches
+      if: ${{ github.ref != 'refs/heads/master' }}
+      run: |
+        echo "Error: Workflow allowed for 'master' branches"
+        exit 1
+
+  release:
+    needs:
+      - validate
+    permissions:
+      contents: write
+      pull-requests: read
+    runs-on: ${{ vars.DOCKER_RUNNER_LABEL }}
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v6
+      with:
+        token: ${{ secrets.AUTOMATION_PAT }}
+        ref: master
+        fetch-depth: 0
+
+    - id: get_latest_version
+      run: |
+        echo "latest_version=$(curl -k -H 'Accept: application/vnd.github+json' \
+        -H 'Authorization: Bearer ${{ secrets.AUTOMATION_PAT }}' \
+        ${{ github.server_url }}/api/v3/repos/${{ github.repository }}/releases/latest | jq -r '.name')" >> $GITHUB_OUTPUT
+
+    - name: Create release notes
+      id: releaseNotes
+      run: |
+        releaseNotes=$(git log --pretty='%s' ${{ steps.get_latest_version.outputs.latest_version }}..HEAD | grep -ivE '(Merge|Bump|[0-9]+\.[0-9]+\.[0-9]+)' | sort)
+        if [[ ! -z "$releaseNotes" ]]; then
+          echo -e "releaseNotes<<EOF\n$releaseNotes\nEOF" >> $GITHUB_OUTPUT
+        else
+          echo "Something went wrong"
+          exit 1
+        fi
+
+    - name: Update version in .spec
+      id: upd_version
+      run: |
+        version=$(echo ${{ github.event.inputs.dep_version }} | cut -d'-' -f1)
+        release=$(echo ${{ github.event.inputs.dep_version }} | cut -d'-' -f2)
+        specfile=$(ls *.spec | head -n 1)
+        echo "specfile=$specfile" >> $GITHUB_OUTPUT
+        sed -i "s/^\(Version:[[:space:]]*\)[0-9]\+\.[0-9]\+\.[0-9]\+$/\1${version}/" "$specfile"
+        sed -i "s/^\(Release:[[:space:]]*\)[^%]*%{?buildid}%{?byte_code_mark}%{?dist}/\1${release}%{?buildid}%{?byte_code_mark}%{?dist}/" "$specfile"
+
+    - name: Commit bump .spec
+      uses: synced-actions/stefanzweifel-git-auto-commit-action@v5.0.1
+      with:
+        file_pattern: ${{ steps.upd_version.outputs.specfile }}
+        commit_message: ${{ github.event.inputs.dep_version }}
+        commit_user_name: ${{ vars.COMMIT_USER_NAME }}
+        commit_user_email: ${{ vars.COMMIT_USER_EMAIL }}
+
+    - name: GHE release
+      uses: synced-actions/softprops--action-gh-release@v2.2.0
+      with:
+         target_commitish: master
+         name: ${{ github.event.inputs.dep_version }}
+         tag_name: ${{ github.event.inputs.dep_version }}
+         body: ${{ steps.releaseNotes.outputs.releaseNotes }}
+         draft: false
+         prerelease: false
+         make_latest: true
+         token: ${{ secrets.GITHUB_TOKEN }}
+
+  build-package:
+    needs:
+      - release
+    runs-on: ${{ vars.DOCKER_RUNNER_LABEL }}
+    strategy:
+      fail-fast: false
+      matrix:
+        dists: [ "8.4", "red7.3c" ]
+    container:
+      image: ${{ vars.REGISTRY_HOST }}/${{ vars.REGISTRY_PROJECT }}/c2cli-koji
+      credentials:
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+      env:
+        COMMITTER: ${{ secrets.COMMITTER }}
+        CONTAINER_SSH_KEY: "${{ secrets.AUTOMATION_SSH_KEY }}"
+        CLOUD_VERSION: ${{ github.event.inputs.cloud_version }}
+        RELEASE_TYPE: "RELEASE"
+        DIST: ${{ matrix.dists }}
+
+    steps:
+      - name: Checkout tagged branch
+        uses: actions/checkout@v6
+        with:
+          ref: master
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Create koji build task
+        run: entrypoint DEPENDENCIES
+
+  print-inputs:
+    name: Workflow Inputs
+    runs-on: ${{ vars.DOCKER_RUNNER_LABEL }}
+    steps:
+      - uses: custom-actions/print-workflow-dispatch-inputs@v1
+        with:
+          add_to_summary: 'true'
+
+  state-action:
+    name: Define variables for state file
+    needs:
+      - release
+    runs-on: ${{ vars.DOCKER_RUNNER_LABEL }}
+    outputs:
+      full_current_version: ${{ steps.get_current_version.outputs.full_current_version }}
+
+    steps:
+
+      - name: Get dependency version
+        id: get_current_version
+        run: |
+          full_current_version=$(curl -k -H 'Accept: application/vnd.github+json' \
+          -H 'Authorization: Bearer ${{ secrets.AUTOMATION_PAT }}' \
+          ${{ github.server_url }}/api/v3/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name')
+          echo "full_current_version=$full_current_version" >> $GITHUB_OUTPUT
+
+  change-state:
+    uses: c2/gha-workflows/.github/workflows/deps-change-state.yml@master
+    needs:
+      - state-action
+    secrets: inherit
+    with:
+      action: "hotfix"
+      version: ${{ needs.state-action.outputs.full_current_version }}
