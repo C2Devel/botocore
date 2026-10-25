@@ -1269,6 +1269,10 @@
           "shape":"RemoteAccessConfig",
           "documentation":"<p>An object representing the remote access configuration for the Kubernetes node group.</p>"
         },
+        "diskType":{
+          "shape":"String",
+          "documentation":"<p>The root disk volume type for newly launched nodes. Specify an available volume type. This parameter cannot be used with a custom launch template.</p>"
+        },
         "diskSize":{
           "shape":"BoxedInteger",
           "documentation":"<p>The root device disk size (in GiB) for your node group instances. The default disk size is 20 GiB for Linux and Bottlerocket. The default disk size is 50 GiB for Windows. If you specify <code>launchTemplate</code>, then don't specify <code>diskSize</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
@@ -2419,6 +2423,10 @@
           "shape":"StringList",
           "documentation":"<p>The instance types configured for newly launched nodes in the node group.</p>"
         },
+        "diskType":{
+          "shape":"String",
+          "documentation":"<p>The root disk volume type configured for newly launched nodes. For a custom launch template, the disk type is managed by that template.</p>"
+        },
         "diskSize":{
           "shape":"BoxedInteger",
           "documentation":"<p>The root device disk size (in GiB) for your node group instances. The default disk size is 20 GiB for Linux. If you specify <code>launchTemplate</code>, then don't specify <code>diskSize</code>, or the node group deployment will fail.</p>"
@@ -3346,6 +3354,10 @@
           "shape":"StringList",
           "documentation":"<p>The instance type for newly launched nodes. Specify exactly one value. Existing nodes are not replaced.</p>"
         },
+        "diskType":{
+          "shape":"String",
+          "documentation":"<p>The root disk volume type for newly launched nodes. Existing disks are not changed. Specify an available volume type. This parameter cannot be used with a custom launch template.</p>"
+        },
         "diskSize":{
           "shape":"BoxedInteger",
           "documentation":"<p>The root disk size in GiB for newly launched nodes. The size must be positive, divisible by 8, and at least the image root disk size. Existing disks are not resized. This parameter cannot be used with a custom launch template.</p>"
@@ -3446,7 +3458,8 @@
         "ResolveConflicts",
         "KubernetesNetworkConfig",
         "InstanceTypes",
-        "DiskSize"
+        "DiskSize",
+        "DiskType"
       ]
     },
     "UpdateParams":{
