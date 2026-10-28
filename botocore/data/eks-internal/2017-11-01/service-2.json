@@ -1232,6 +1232,8 @@
         "nodegroupName": {"shape":"String"},
         "status":{"shape":"String"},
         "instanceTypes": {"shape": "StringList"},
+        "diskSize": {"shape": "Integer"},
+        "diskType": {"shape": "String"},
         "remoteAccess":{"shape": "RemoteAccessConfig"},
         "labels": {"shape": "TagMap"},
         "launchTemplate": {"shape": "LaunchTemplateSpecification"},
