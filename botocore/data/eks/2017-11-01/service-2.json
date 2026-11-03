@@ -1247,6 +1247,10 @@
         "subnets"
       ],
       "members":{
+        "additionalSecurityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>Additional security groups for this node group. Cluster security groups remain attached. An empty list removes all additional groups.</p>"
+        },
         "clusterName":{
           "shape":"String",
           "documentation":"<p>The name of the cluster to create the node group in.</p>",
@@ -2419,6 +2423,10 @@
     "Nodegroup":{
       "type":"structure",
       "members":{
+        "additionalSecurityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>Additional security groups for this node group. Cluster security groups remain attached. An empty list removes all additional groups.</p>"
+        },
         "instanceTypes":{
           "shape":"StringList",
           "documentation":"<p>The instance types configured for newly launched nodes in the node group.</p>"
@@ -3322,6 +3330,10 @@
         "nodegroupName"
       ],
       "members":{
+        "additionalSecurityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>Additional security groups for this node group. Cluster security groups remain attached. An empty list removes all additional groups.</p>"
+        },
         "clusterName":{
           "shape":"String",
           "documentation":"<p>The name of the Amazon EKS cluster that the managed node group resides in.</p>",
@@ -3459,7 +3471,8 @@
         "KubernetesNetworkConfig",
         "InstanceTypes",
         "DiskSize",
-        "DiskType"
+        "DiskType",
+        "AdditionalSecurityGroupIds"
       ]
     },
     "UpdateParams":{
