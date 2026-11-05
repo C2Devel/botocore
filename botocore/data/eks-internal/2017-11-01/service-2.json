@@ -1456,6 +1456,9 @@
         "number": {
           "shape": "String"
         },
+        "platform_versions": {
+          "shape": "StringList"
+        },
         "visibility": {
           "shape": "VersionVisibility"
         }
