@@ -123,6 +123,39 @@ class TestEKSNodegroupLaunchConfig(unittest.TestCase):
             'eks', 'UpdateNodegroupConfig', {'update': {'params': params}})
         self.assertEqual(result['update']['params'], params)
 
+    def test_create_and_update_security_groups(self):
+        for operation in ('CreateNodegroup', 'UpdateNodegroupConfig'):
+            for groups in ([], ['sg-extra']):
+                body = self.serialize_nodegroup(
+                    {'additionalSecurityGroupIds': groups}, operation=operation)
+                self.assertEqual(body['additionalSecurityGroupIds'], groups)
+            body = self.serialize_nodegroup({}, operation=operation)
+            self.assertNotIn('additionalSecurityGroupIds', body)
+
+    def test_reject_wrong_security_group_types(self):
+        for groups in ('sg-extra', [42], None):
+            for operation in ('CreateNodegroup', 'UpdateNodegroupConfig'):
+                with self.assertRaises(ParamValidationError):
+                    self.serialize_nodegroup(
+                        {'additionalSecurityGroupIds': groups}, operation=operation)
+
+    def test_describe_keeps_security_groups(self):
+        for service in self.models:
+            for groups in ([], ['sg-extra']):
+                body = {'nodegroup': {'additionalSecurityGroupIds': groups}}
+                response = self.parse_response(service, 'DescribeNodegroup', body)
+                self.assertEqual(response['nodegroup'], body['nodegroup'])
+            response = self.parse_response(service, 'DescribeNodegroup', {'nodegroup': {}})
+            self.assertNotIn('additionalSecurityGroupIds', response['nodegroup'])
+
+    def test_security_group_update_parameter(self):
+        self.assertIn('AdditionalSecurityGroupIds',
+                      self.models['eks'].shape_for('UpdateParamType').enum)
+        params = [{'type': 'AdditionalSecurityGroupIds', 'value': '[]'}]
+        response = self.parse_response(
+            'eks', 'UpdateNodegroupConfig', {'update': {'params': params}})
+        self.assertEqual(response['update']['params'], params)
+
 
 if __name__ == '__main__':
     unittest.main()

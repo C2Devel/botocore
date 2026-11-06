@@ -1223,6 +1223,10 @@
     "Nodegroup": {
       "type": "structure",
       "members": {
+        "additionalSecurityGroupIds": {
+          "shape": "StringList",
+          "documentation": "<p>Additional security groups for this node group. Cluster security groups remain attached. An empty list removes all additional groups.</p>"
+        },
         "id": {"shape":"String"},
         "capacityType":{"shape":"String"},
         "clusterName": {"shape":"String"},
