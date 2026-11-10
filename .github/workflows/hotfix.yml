@@ -109,10 +109,10 @@ jobs:
     container:
       image: ${{ vars.REGISTRY_HOST }}/${{ vars.REGISTRY_PROJECT }}/c2cli-koji
       credentials:
-        username: ${{ secrets.REGISTRY_USERNAME }}
+        username: ${{ vars.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
       env:
-        COMMITTER: ${{ secrets.COMMITTER }}
+        COMMITTER: ${{ vars.COMMITTER }}
         CONTAINER_SSH_KEY: "${{ secrets.AUTOMATION_SSH_KEY }}"
         CLOUD_VERSION: ${{ github.event.inputs.cloud_version }}
         RELEASE_TYPE: "RELEASE"
